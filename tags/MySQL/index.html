@@ -3,7 +3,7 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>标签: 环境搭建和配置 - 贾小厨的博客</title>
+<title>标签: MySQL - 贾小厨的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
@@ -11,7 +11,7 @@
     <meta name="description" content="野生程序员：人生如逆旅，我亦是行人">
 <meta property="og:type" content="website">
 <meta property="og:title" content="贾小厨的博客">
-<meta property="og:url" content="http://yoursite.com/tags/环境搭建和配置/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/MySQL/index.html">
 <meta property="og:site_name" content="贾小厨的博客">
 <meta property="og:description" content="野生程序员：人生如逆旅，我亦是行人">
 <meta property="og:locale" content="zh-CN">
@@ -143,7 +143,7 @@
         <nav class="breadcrumb" aria-label="breadcrumbs">
         <ul>
             <li><a href="/tags">标签</a></li>
-            <li class="is-active"><a href="#" aria-current="page">环境搭建和配置</a></li>
+            <li class="is-active"><a href="#" aria-current="page">MySQL</a></li>
         </ul>
         </nav>
     </div>
@@ -155,13 +155,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-15T09:31:52.000Z">2019-07-15</time>
+                <time class="level-item has-text-grey" datetime="2019-07-15T09:53:37.000Z">2019-07-15</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    32 分钟 读完 (大约 4737 个字)
+                    1 分钟 读完 (大约 168 个字)
                 </span>
                 
                 
@@ -170,42 +170,38 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/">Vmware虚拟机Ubuntu系统的安装和配置</a>
+                <a class="has-link-black-ter" href="/2019/07/15/test-image/">test_image</a>
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>Powered by：贾志翔</p>
+            <h1 id="UBuntu16-04安装MySQL"><a href="#UBuntu16-04安装MySQL" class="headerlink" title="UBuntu16.04安装MySQL"></a>UBuntu16.04安装MySQL</h1><blockquote>
+<p>Powered by 贾志翔</p>
 </blockquote>
-<p><strong>创建带有 SCSI 控制器类型、虚拟机磁盘类型以及与旧版 VMware 产品兼容性等高级选项的虚拟机</strong></p>
-<ul>
-<li>安装前准备：<ul>
-<li>安装好VMwareWorkstation</li>
-<li>Ubuntu16.04镜像文件<ul>
-<li>（下载地址链接：<a href="https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ</a> 提取码：w6g7 ）</li>
-</ul>
-</li>
-<li>Ubuntu18.04镜像文件<ul>
-<li>（下载地址链接：链接：<a href="https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g" target="_blank" rel="noopener">https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g</a> 提取码：il08 ）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="一、Ubuntu的初步安装"><a href="#一、Ubuntu的初步安装" class="headerlink" title="一、Ubuntu的初步安装"></a>一、Ubuntu的初步安装</h3><ul>
-<li>创建新的虚拟机</li>
-</ul>
-<p><img src="images/typora-user-images/1554713786949.png" alt="1554713786949"></p>
+<h3 id="一-安装MySQl"><a href="#一-安装MySQl" class="headerlink" title="一.安装MySQl"></a>一.安装MySQl</h3><ol>
+<li>安装前先更新软件包列表：</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在终端执行如下命令：</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/Typora-image/mysql-20190518191456335.png" alt="image-20190518191456335"></p>
+<ol start="2">
+<li>在Ubuntu16.04上安装MySQL：</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在终端执行如下命令：</span><br><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
+
+<p><img src="images/Typora-image/mysql-20190518191721166.png" alt="image-20190518191721166"></p>
+<ol start="3">
+<li>在安装过程中需要你输入MySQL管理员用户（root）密码，如下图</li>
+</ol>
+<p><img src="images/Typora-image/mysql-20190518192226707.png" alt="image-20190518192226707"></p>
+<p><img src="images/Typora-image/mysql-20190518192828216.png" alt="image-20190518192828216"></p>
+<p>如上即代表安装完成</p>
+<blockquote>
+<p>由于篇幅短小和时间仓促,若你发现了错误请告知我。</p>
+<p>希望我没有误导你，而是带你看了小小的新世界。</p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
