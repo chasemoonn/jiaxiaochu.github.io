@@ -145,13 +145,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-15T09:53:37.000Z">2019-07-15</time>
+                <time class="level-item has-text-grey" datetime="2019-07-15T11:00:55.000Z">2019-07-15</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 168 个字)
+                    4 分钟 读完 (大约 655 个字)
                 </span>
                 
                 
@@ -160,249 +160,76 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/15/test-image/">test_image</a>
+                <a class="has-link-black-ter" href="/2019/07/15/Python解释器的安装与配置/">Python解释器的安装与配置</a>
             
         </h1>
         <div class="content">
-            <h1 id="UBuntu16-04安装MySQL"><a href="#UBuntu16-04安装MySQL" class="headerlink" title="UBuntu16.04安装MySQL"></a>UBuntu16.04安装MySQL</h1><blockquote>
-<p>Powered by 贾志翔</p>
-</blockquote>
-<h3 id="一-安装MySQl"><a href="#一-安装MySQl" class="headerlink" title="一.安装MySQl"></a>一.安装MySQl</h3><ol>
-<li>安装前先更新软件包列表：</li>
+            <h1 id="Python解释器的安装配置"><a href="#Python解释器的安装配置" class="headerlink" title="Python解释器的安装配置"></a>Python解释器的安装配置</h1><ol>
+<li><p>下载python解释器</p>
+<p>如下图所示，在浏览器中打开python官方网站：<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a> </p>
+<p><img src="/.com//1554190813572.png" alt="1554190813572"></p>
+</li>
+<li><p>点击Downloads进入下载页面</p>
+<p>如下图所示：</p>
+<p><img src="/.com//1554191120114.png" alt="1554191120114"></p>
+<p><img src="/.com//1554191320746.png" alt="1554191320746"></p>
+</li>
 </ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在终端执行如下命令：</span><br><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
-
-<p><img src="images/Typora-image/mysql-20190518191456335.png" alt="image-20190518191456335"></p>
-<ol start="2">
-<li>在Ubuntu16.04上安装MySQL：</li>
-</ol>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在终端执行如下命令：</span><br><span class="line">sudo apt-get install mysql-server mysql-client</span><br></pre></td></tr></table></figure>
-
-<p><img src="images/Typora-image/mysql-20190518191721166.png" alt="image-20190518191721166"></p>
+<p><img src="/.com//1554191566692.png" alt="1554191566692"></p>
+<p>注：关于Python解释器版本的选择补充说明</p>
+<p>附官方文档截图说明：</p>
+<p><img src="/.com//1554192262704.png" alt="1554192262704"></p>
 <ol start="3">
-<li>在安装过程中需要你输入MySQL管理员用户（root）密码，如下图</li>
+<li><p>下载完成后选择软件包安装路径</p>
+<p>注：路径最好不要出现中文</p>
+<p>因为我的电脑只有一个C盘，所以为了方便管理安装的软件，我创建了一个software文件夹，然后再在software文件夹里创建对应安装包的安装文件夹</p>
+<p>如下图：C:\software\python3.7</p>
+<p><img src="/.com//1554194556427.png" alt="1554194556427"></p>
+</li>
+<li><p>进行安装</p>
+<p><img src="/.com//1554194818288.png" alt="1554194818288"></p>
+</li>
 </ol>
-<p><img src="images/Typora-image/mysql-20190518192226707.png" alt="image-20190518192226707"></p>
-<p><img src="images/Typora-image/mysql-20190518192828216.png" alt="image-20190518192828216"></p>
-<p>如上即代表安装完成</p>
+<p>   ​     出现如下安装界面</p>
+<p>   <img src="/.com//1554194878760.png" alt="1554194878760"></p>
+<p>   ​        </p>
+<p>   ​     <strong>添加python解释器的环境变量</strong></p>
+<p>   <img src="/.com//1554195054771.png" alt="1554195054771"></p>
+<p>   <img src="/.com//1554195333724.png" alt="1554195333724"></p>
+<p>   ​     这里我们可以选择安装到自己指定的安装目录</p>
+<pre><code>![1554195664070](Python解释器的安装与配置/1554195664070.png)</code></pre><p>   ​        </p>
+<p>   ​        点击进入指定目录安装，勾选的选项默认就好，不需修改</p>
+<p>   <img src="/.com//1554195850833.png" alt="1554195850833"></p>
+<p>   ​     勾选的选项默认就好，不需修改</p>
+<p>   ​     点击Browse修改Python解释器的默认安装路径</p>
+<p>   <img src="/.com//1554195977148.png" alt="1554195977148"></p>
+<pre><code>![1554196126754](Python解释器的安装与配置/1554196126754.png)</code></pre><p>   ​     修改后的安装路径显示</p>
+<p>   <img src="/.com//1554196195762.png" alt="1554196195762"></p>
+<p>   ​     点击Install进行安装</p>
+<p>   ​    <img src="/.com//1554196262694.png" alt="1554196262694"></p>
+<p>   ​    </p>
+<p>   !1554196294131](/home/allen/.config/Typora/typora-user-images/1554196294131.png)            </p>
+<p>   <img src="/.com//1554196307981.png" alt="1554196307981"></p>
+<p>   ​     </p>
+<p>   ​     如图所示即安装成功</p>
+<p>​      <img src="/.com//1554196536112.png" alt="1554196536112"></p>
+<ol start="5">
+<li><p>测试是否安装成功</p>
+<p>按下 win+R 组合键打开windows系统的命令终端</p>
+<p><img src="/.com//1554197177971.png" alt="1554197177971"></p>
+</li>
+</ol>
+<p>​        命令终端如下图所示</p>
+<p>​  <img src="/.com//1554197221054.png" alt="1554197221054"></p>
+<p><img src="/.com//1554197368525.png" alt="1554197368525"></p>
+<p><img src="/.com//1554197492578.png" alt="1554197492578"></p>
 <blockquote>
-<p>由于篇幅短小和时间仓促,若你发现了错误请告知我。</p>
+<h4 id="至此Python解释器即安装成功啦"><a href="#至此Python解释器即安装成功啦" class="headerlink" title="至此Python解释器即安装成功啦"></a>至此Python解释器即安装成功啦</h4><p>由于篇幅短小和时间仓促,若你发现了错误请告知我。</p>
 <p>希望我没有误导你，而是带你看了小小的新世界。</p>
 </blockquote>
 
         </div>
         
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-15T09:52:22.000Z">2019-07-15</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 0 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/15/Hexo上传的图片在网页上无法显示的解决办法/">Hexo上传的图片在网页上无法显示的解决办法</a>
-            
-        </h1>
-        <div class="content">
-            
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-15T09:31:52.000Z">2019-07-15</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    32 分钟 读完 (大约 4737 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/">Vmware虚拟机Ubuntu系统的安装和配置</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>Powered by：贾志翔</p>
-</blockquote>
-<p><strong>创建带有 SCSI 控制器类型、虚拟机磁盘类型以及与旧版 VMware 产品兼容性等高级选项的虚拟机</strong></p>
-<ul>
-<li>安装前准备：<ul>
-<li>安装好VMwareWorkstation</li>
-<li>Ubuntu16.04镜像文件<ul>
-<li>（下载地址链接：<a href="https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ</a> 提取码：w6g7 ）</li>
-</ul>
-</li>
-<li>Ubuntu18.04镜像文件<ul>
-<li>（下载地址链接：链接：<a href="https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g" target="_blank" rel="noopener">https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g</a> 提取码：il08 ）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="一、Ubuntu的初步安装"><a href="#一、Ubuntu的初步安装" class="headerlink" title="一、Ubuntu的初步安装"></a>一、Ubuntu的初步安装</h3><ul>
-<li>创建新的虚拟机</li>
-</ul>
-<p><img src="images/typora-user-images/1554713786949.png" alt="1554713786949"></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-14T09:33:18.000Z">2019-07-14</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 511 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/14/Windows系统安装配置Pycharm/">Windows系统安装配置Pycharm</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="下载Pycharm"><a href="#下载Pycharm" class="headerlink" title="下载Pycharm"></a>下载Pycharm</h3><ol>
-<li>使用浏览器打开Pycharm官方网站：<a href="http://www.jetbrains.com/pycharm" target="_blank" rel="noopener">http://www.jetbrains.com/pycharm</a></li>
-<li>选择对应的系统安装包，点击DOWNLOAD进行下载(文档以Windows系统举例)</li>
-</ol>
-<p><img src="images/Typora-image/1554517581446.png" alt="1554517581446"></p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/14/Windows系统安装配置Pycharm/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-14T08:56:47.000Z">2019-07-14</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 493 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/07/14/Python解释器的安装与配置/">Python解释器的安装与配置</a>
-            
-        </h1>
-        <div class="content">
-            <ol>
-<li><p>下载python解释器</p>
-<p>如下图所示，在浏览器中打开python官方网站：<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a><br><img src="images/Typora-image/1554190813572.png" alt="1554190813572"></p></li></ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/14/Python解释器的安装与配置/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -553,7 +380,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        3
                     </p>
                 </div>
             </div>
@@ -573,7 +400,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        2
                     </p>
                 </div>
             </div>
@@ -669,20 +496,6 @@
             <div class="field is-grouped is-grouped-multiline">
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/MySQL/">
-                        <span class="tag">MySQL</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/Pycharm/">
-                        <span class="tag">Pycharm</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/励志/">
                         <span class="tag">励志</span>
                         <span class="tag is-grey">1</span>
@@ -690,15 +503,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/环境搭建和配置/">
-                        <span class="tag">环境搭建和配置</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/环境配置-Python/">
-                        <span class="tag">环境配置 Python</span>
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -717,7 +523,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境搭建和配置/" style="font-size: 10px;">环境搭建和配置</a> <a href="/tags/环境配置-Python/" style="font-size: 10px;">环境配置 Python</a>
+        <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
 </div>
 
@@ -731,83 +537,7 @@
         
         <article class="media">
             
-            <a href="/2019/07/15/test-image/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="test_image">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:53:37.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/test-image/" class="has-link-black-ter is-size-6">test_image</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/Hexo上传的图片在网页上无法显示的解决办法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo上传的图片在网页上无法显示的解决办法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:52:22.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/Hexo上传的图片在网页上无法显示的解决办法/" class="has-link-black-ter is-size-6">Hexo上传的图片在网页上无法显示的解决办法</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vmware虚拟机Ubuntu系统的安装和配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:31:52.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/" class="has-link-black-ter is-size-6">Vmware虚拟机Ubuntu系统的安装和配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/14/Windows系统安装配置Pycharm/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Windows系统安装配置Pycharm">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T09:33:18.000Z">2019-07-14</time></div>
-                    <a href="/2019/07/14/Windows系统安装配置Pycharm/" class="has-link-black-ter is-size-6">Windows系统安装配置Pycharm</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/14/Python解释器的安装与配置/" class="media-left">
+            <a href="/2019/07/15/Python解释器的安装与配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Python解释器的安装与配置">
                 </p>
@@ -815,8 +545,46 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T08:56:47.000Z">2019-07-14</time></div>
-                    <a href="/2019/07/14/Python解释器的安装与配置/" class="has-link-black-ter is-size-6">Python解释器的安装与配置</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T11:00:55.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/Python解释器的安装与配置/" class="has-link-black-ter is-size-6">Python解释器的安装与配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/14/种一棵树最好的时间是十年前其次是现在/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="种一棵树最好的时间是十年前其次是现在">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T08:52:00.000Z">2019-07-14</time></div>
+                    <a href="/2019/07/14/种一棵树最好的时间是十年前其次是现在/" class="has-link-black-ter is-size-6">种一棵树最好的时间是十年前其次是现在</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/14/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T07:41:53.111Z">2019-07-14</time></div>
+                    <a href="/2019/07/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -842,7 +610,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -869,7 +637,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 10px;">Pycharm</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境搭建和配置/" style="font-size: 10px;">环境搭建和配置</a> <a href="/tags/环境配置-Python/" style="font-size: 10px;">环境配置 Python</a>
+        <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
 </div>
 
@@ -883,83 +651,7 @@
         
         <article class="media">
             
-            <a href="/2019/07/15/test-image/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="test_image">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:53:37.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/test-image/" class="has-link-black-ter is-size-6">test_image</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/Hexo上传的图片在网页上无法显示的解决办法/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hexo上传的图片在网页上无法显示的解决办法">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:52:22.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/Hexo上传的图片在网页上无法显示的解决办法/" class="has-link-black-ter is-size-6">Hexo上传的图片在网页上无法显示的解决办法</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vmware虚拟机Ubuntu系统的安装和配置">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T09:31:52.000Z">2019-07-15</time></div>
-                    <a href="/2019/07/15/Vmware虚拟机Ubuntu系统的安装和配置/" class="has-link-black-ter is-size-6">Vmware虚拟机Ubuntu系统的安装和配置</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/14/Windows系统安装配置Pycharm/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Windows系统安装配置Pycharm">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T09:33:18.000Z">2019-07-14</time></div>
-                    <a href="/2019/07/14/Windows系统安装配置Pycharm/" class="has-link-black-ter is-size-6">Windows系统安装配置Pycharm</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/07/14/Python解释器的安装与配置/" class="media-left">
+            <a href="/2019/07/15/Python解释器的安装与配置/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="Python解释器的安装与配置">
                 </p>
@@ -967,8 +659,46 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T08:56:47.000Z">2019-07-14</time></div>
-                    <a href="/2019/07/14/Python解释器的安装与配置/" class="has-link-black-ter is-size-6">Python解释器的安装与配置</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-15T11:00:55.000Z">2019-07-15</time></div>
+                    <a href="/2019/07/15/Python解释器的安装与配置/" class="has-link-black-ter is-size-6">Python解释器的安装与配置</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/14/种一棵树最好的时间是十年前其次是现在/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="种一棵树最好的时间是十年前其次是现在">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T08:52:00.000Z">2019-07-14</time></div>
+                    <a href="/2019/07/14/种一棵树最好的时间是十年前其次是现在/" class="has-link-black-ter is-size-6">种一棵树最好的时间是十年前其次是现在</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/14/hello-world/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Hello World">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-14T07:41:53.111Z">2019-07-14</time></div>
+                    <a href="/2019/07/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -994,7 +724,7 @@
                     <span class="level-item">七月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
