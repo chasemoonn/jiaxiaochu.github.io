@@ -3,23 +3,25 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>归档: 2019 - 贾志翔的博客</title>
+<title>创建Python虚拟环境 - 贾志翔的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="jia jiazhixiang jiaxiaochu jiaxiaochu.github.io">
-<meta property="og:type" content="website">
-<meta property="og:title" content="贾志翔的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2019/page/2/index.html">
+    <meta name="description" content="创建虚拟环境问题： 在开发过程中，使用Python安装包时，需要使用可以使用pip install 包名或者sudo pip install 包名来安装。 问题是在开发多个项目的时候，使用的包是不一样的，这时候如果还把所有的包放到一个开发环境中，就会造成开发环境的臃肿，更甚者会是环境无法运行（被覆盖掉了）。">
+<meta name="keywords" content="环境配置,Python虚拟环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建Python虚拟环境">
+<meta property="og:url" content="http://yoursite.com/2019/07/22/创建Python虚拟环境/index.html">
 <meta property="og:site_name" content="贾志翔的博客">
-<meta property="og:description" content="jia jiazhixiang jiaxiaochu jiaxiaochu.github.io">
+<meta property="og:description" content="创建虚拟环境问题： 在开发过程中，使用Python安装包时，需要使用可以使用pip install 包名或者sudo pip install 包名来安装。 问题是在开发多个项目的时候，使用的包是不一样的，这时候如果还把所有的包放到一个开发环境中，就会造成开发环境的臃肿，更甚者会是环境无法运行（被覆盖掉了）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg">
+<meta property="og:updated_time" content="2019-07-21T17:56:58.804Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="贾志翔的博客">
-<meta name="twitter:description" content="jia jiazhixiang jiaxiaochu jiaxiaochu.github.io">
-<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+<meta name="twitter:title" content="创建Python虚拟环境">
+<meta name="twitter:description" content="创建虚拟环境问题： 在开发过程中，使用Python安装包时，需要使用可以使用pip install 包名或者sudo pip install 包名来安装。 问题是在开发多个项目的时候，使用的包是不一样的，这时候如果还把所有的包放到一个开发环境中，就会造成开发环境的臃肿，更甚者会是环境无法运行（被覆盖掉了）。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg">
 
 
 
@@ -91,7 +93,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.svg" alt="贾志翔的博客" height="28">
+                <img src="/images/logo.svg" alt="创建Python虚拟环境" height="28">
             
             </a>
         </div>
@@ -125,6 +127,10 @@
                     
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜索" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -138,119 +144,140 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg" alt="创建Python虚拟环境">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-21T17:53:25.000Z">2019-07-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分钟 读完 (大约 1022 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                创建Python虚拟环境
+            
+        </h1>
+        <div class="content">
+            <h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p><em>问题</em>：</p>
+<p>在开发过程中，使用Python安装包时，需要使用可以使用<code>pip install 包名</code>或者<code>sudo pip install 包名</code>来安装。</p>
+<p>问题是在开发多个项目的时候，使用的包是不一样的，这时候如果还把所有的包放到一个开发环境中，就会造成开发环境的臃肿，更甚者会是环境无法运行（被覆盖掉了）。</p>
+<a id="more"></a>
+<p><font color="red"><em>解决这个问题的方法有一个：</em></font></p>
+<p>使用virtualenv来创建虚拟环境，每个虚拟环境中盛放着当前操作项目的工具包。从而达到每个项目的开发环境相隔离的效果。</p>
+<h4 id="安装virtualenv"><a href="#安装virtualenv" class="headerlink" title="安装virtualenv"></a>安装virtualenv</h4><ol>
+<li><p>安装创建虚拟环境的工具包<br> <br><code>sudo pip install virtualenv</code></p>
+</li>
+<li><p>切换到你想要创建虚拟环境的目录，<br> <br><code>cd 你想要创建环境的目录</code></p>
+</li>
+<li><p>创建盛放虚拟环境的文件夹,例如workspace<br> <br><code>mkidr workspace</code></p>
+</li>
+<li><p>进入到盛放环境的文件夹中<br> <br><code>cd workspace</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">    例如：</span><br><span class="line">        在home目录下创建一个workspace目录</span><br><span class="line">        sudo mkdir ~/workspace</span><br><span class="line">        切换到刚创建的workspace目录中</span><br><span class="line">        cd ~/workspace</span><br><span class="line">        那么以后你创建虚拟环境都会以文件夹的格式存放在workspace中</span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">5. 安装了virtualenv 之后就可以创建虚拟环境了，命令如下：</span><br><span class="line">        &lt;br&gt;`virtualenv env1` ---创建一个名为env1的虚拟环境</span><br><span class="line"></span><br><span class="line">&lt;hr&gt;</span><br><span class="line"></span><br><span class="line">#### 安装virtualenvwrapper</span><br><span class="line">virtualenvwrapper是virtualenv的扩展包，可以更方便的新增、删除、复制、切换虚拟环境。</span><br><span class="line"></span><br><span class="line">1. `pip install virtualenvwrapper`或者`sudo easy_install virtualenvwrapper`</span><br><span class="line"></span><br><span class="line">2. 安装完virtualenvwrapper,需要使用`virtualenvwrapper.sh`配置一下环境变量，在Ubuntu系统中的配置文件是`~/.bashrc`,Mac系统的配置文件是`~/.bash_profile`,下面以Mac系统为例，直接把下面第2步和第3步写入配置文件中即可：</span><br><span class="line">    </span><br><span class="line">    1. `vi ~/.bash_profile`## 进入到环境变量的文件中</span><br><span class="line"></span><br><span class="line">    2. `export WORKON_HOME=&apos;~/workspace&apos;`##这个目录为创建虚拟环境是所在的目录，可以自己指定目录</span><br><span class="line">    </span><br><span class="line">    3. `source usr/local/bin/virtualenvwrapper.sh` ## 添加virtualenvwrapper的执行文件</span><br><span class="line">    </span><br><span class="line">    4. 在配置完环境变量后，执行一下如下命令时刚才的配置生效</span><br><span class="line">        &lt;br&gt;`source ~/.bash_profile`</span><br><span class="line">        </span><br><span class="line">&lt;hr&gt;</span><br><span class="line"></span><br><span class="line">#### 环境都配置好了，现在使用virtualenvwrapper来创建虚拟环境</span><br><span class="line">&gt; 下面以mac为列：</span><br><span class="line"></span><br><span class="line">1. 创建虚拟环境</span><br><span class="line">    &lt;br&gt;`virtualenv -p python2或者python3 环境名`</span><br><span class="line"></span><br><span class="line">    `-p python2或者python3`是用来指定虚拟环境解释器版本的。其实不用输入-p python2，因为默认使用python2进行创建</span><br><span class="line">    </span><br><span class="line">2. 使用虚拟环境</span><br><span class="line">   - 使用虚拟环境的命令如下:写出名称的前部分后，可以使tab键补齐</span><br></pre></td></tr></table></figure>
 
-<div class="card widget">
+<p> workon 虚拟环境名称<br> 例:<br> MacBook-Pro:~ python$ workon spider_py3 # 使 虚拟环境<br> (spider_py3) shuaigedeMacBook-Pro:~ python$</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    *注意提示符的变化*</span><br><span class="line"></span><br><span class="line">3. 退出虚拟环境</span><br><span class="line">    &lt;br&gt;`deactivate`</span><br></pre></td></tr></table></figure>
+
+<p> 例：<br> (spider_py3) MacBook-Pro:~ python$ deactivate</p>
+<h1 id="再删除"><a href="#再删除" class="headerlink" title="再删除:"></a>再删除:</h1><p> MacBook-Pro:~ python$</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. 查看所有的虚拟环境</span><br><span class="line">    &lt;br&gt;`lsvirtualenv -b` </span><br><span class="line"></span><br><span class="line">5. 删除虚拟环境</span><br><span class="line">    &lt;br&gt;`rmvirtualenv 环境名字` </span><br><span class="line">    </span><br><span class="line">    *一定要先退出虚拟环境，在进行删除*</span><br></pre></td></tr></table></figure>
+
+<p> 例：<br> (spider_py3) MacBook-Pro:~ python$</p>
+<h1 id="先退出"><a href="#先退出" class="headerlink" title="先退出:"></a>先退出:</h1><p> (spider_py3) MacBook-Pro:~ python$ deactivate</p>
+<h1 id="再删除-1"><a href="#再删除-1" class="headerlink" title="再删除:"></a>再删除:</h1><p> MacBook-Pro:~ python$ rmvirtualenv spider_py3</p>
+ <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">**注意点**</span><br><span class="line">- 创建成功后会自动使用这个虚拟环境，提示符前面会出现&quot;(虚拟环境名称)&quot; 例如：`(spider_py3) MacBook-Pro:~ python$`</span><br><span class="line">- 创建虚拟环境需要联网</span><br><span class="line">- 使用学校发的Ubuntu镜像，所有的虚拟环境，都位于/home/python/下的隐藏目录.virtualenvs下。</span><br><span class="line"></span><br><span class="line">&lt;hr&gt;</span><br><span class="line"></span><br><span class="line">#### 如何安装自己使用的安装包</span><br><span class="line"></span><br><span class="line">在虚拟环境中我们也使用pip进行安装python的工具包，安装命令如下：</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>pip install 包名称<br>注意：在虚拟环境中 也可使 sudo pip install 包名称 来安装python包，这样安装的 包实际是安装在 真实的主机环境上。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">##### 查看已经安装的python包的命令如下：</span><br></pre></td></tr></table></figure>
+
+<p>pip list<br>pip freeze #这两个命令都可已查看当前 作的虚拟环境中安装 哪些python包，只是显示的格式稍有  同。</p>
+<pre><code></code></pre>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Python虚拟环境/">Python虚拟环境</a>, <a class="has-link-grey -link" href="/tags/环境配置/">环境配置</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
     <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
                 
-                <a href="/2019/07/22/Windows系统安装配置Pycharm/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57xog2aw6j31hc0tatdt.jpg" alt="Windows系统安装配置Pycharm">
-                    </p>
-                </a>
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/Payment_code/alipay.jpg" alt="支付宝"></div>
+</a>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-21T16:30:14.000Z">2019-07-22</time>
-                        <a href="/2019/07/22/Windows系统安装配置Pycharm/" class="has-link-black-ter is-size-6">Windows系统安装配置Pycharm</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/2019/07/15/Python解释器的安装与配置/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g56t8zcj87j30we0mun2z.jpg" alt="Python解释器的安装与配置">
-                    </p>
-                </a>
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/Payment_code/wechatpay.jpg" alt="微信"></div>
+</a>
+
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-15T11:00:55.000Z">2019-07-15</time>
-                        <a href="/2019/07/15/Python解释器的安装与配置/" class="has-link-black-ter is-size-6">Python解释器的安装与配置</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-14T08:52:00.000Z">2019-07-14</time>
-                        <a href="/2019/07/14/种一棵树最好的时间是十年前其次是现在/" class="has-link-black-ter is-size-6">种一棵树最好的时间是十年前其次是现在</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-07-14T07:41:53.111Z">2019-07-14</time>
-                        <a href="/2019/07/14/hello-world/" class="has-link-black-ter is-size-6">Hello World</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
         </div>
     </div>
 </div>
 
 
 
-    
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/07/22/Ubuntu纯净卸载软件/">
+                <span class="level-item">Ubuntu纯净卸载软件</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/2019/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/2019/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/2019/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -363,6 +390,37 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                目录
+            </h3>
+            <ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#创建虚拟环境">
+        <span class="has-mr-6">1.1</span>
+        <span>创建虚拟环境</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#安装virtualenv">
+        <span class="has-mr-6">1.1.1</span>
+        <span>安装virtualenv</span>
+        </a></li></ul></li></ul><li>
+        <a class="is-flex" href="#再删除">
+        <span class="has-mr-6">2</span>
+        <span>再删除:</span>
+        </a></li><li>
+        <a class="is-flex" href="#先退出">
+        <span class="has-mr-6">3</span>
+        <span>先退出:</span>
+        </a></li><li>
+        <a class="is-flex" href="#再删除-1">
+        <span class="has-mr-6">4</span>
+        <span>再删除:</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
     
         
 <div class="card widget">
@@ -897,7 +955,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.svg" alt="贾志翔的博客" height="28">
+                    <img src="/images/logo.svg" alt="创建Python虚拟环境" height="28">
                 
                 </a>
                 <p class="is-size-7">
