@@ -3,16 +3,15 @@
 <html lang="zh">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>分类 - 贾志翔的博客</title>
+<title>标签: ChromeDriver - 贾志翔的博客</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
     <meta name="description" content="jia jiazhixiang jiaxiaochu jiaxiaochu.github.io">
-<meta name="keywords" content="环境配置,chromedriver,chrome,Deepin,ChromeDriver,MongoDB数据库,Python解释器的安装与配置,Anaconda,Pycharm,励志,谷歌输入法,系统配置,Ubuntu,VMware,虚拟机">
 <meta property="og:type" content="website">
 <meta property="og:title" content="贾志翔的博客">
-<meta property="og:url" content="http://yoursite.com/categories/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/ChromeDriver/index.html">
 <meta property="og:site_name" content="贾志翔的博客">
 <meta property="og:description" content="jia jiazhixiang jiaxiaochu jiaxiaochu.github.io">
 <meta property="og:locale" content="zh-CN">
@@ -139,35 +138,213 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-<div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                分类
-            </h3>
-            <ul class="menu-list">
-            <li>
-        <a class="level is-marginless" href="/categories/Deepin/">
-            <span class="level-start">
-                <span class="level-item">Deepin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/环境配置/">
-            <span class="level-start">
-                <span class="level-item">环境配置</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li>
-            </ul>
-        </div>
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">标签</a></li>
+            <li class="is-active"><a href="#" aria-current="page">ChromeDriver</a></li>
+        </ul>
+        </nav>
     </div>
-</div></div>
+</div>
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/07/22/Deepin中安装配置ChromeDriver/" class="image is-7by1">
+            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zgdf5cvj30dw0a274c.jpg" alt="Deepin中安装配置ChromeDriver">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-07-21T17:28:54.000Z">2019-07-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 342 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/07/22/Deepin中安装配置ChromeDriver/">Deepin中安装配置ChromeDriver</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="Deepin中安装配置ChromeDriver"><a href="#Deepin中安装配置ChromeDriver" class="headerlink" title="Deepin中安装配置ChromeDriver"></a>Deepin中安装配置ChromeDriver</h2><h3 id="查看当前的Chrome版本信息"><a href="#查看当前的Chrome版本信息" class="headerlink" title="查看当前的Chrome版本信息"></a>查看当前的Chrome版本信息</h3><p>在谷歌浏览器地址栏中输入<code>chrome://version/</code>可以查看当前的Chrome信息：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Google Chrome：	62.0.3202.62 (正式版本) （64 位）</span><br><span class="line">修订版本：	9da914b118cb0d10d715ccc4ad20575a0305a304-refs/branch-heads/3202@&#123;#700&#125;</span><br><span class="line">操作系统：	Linux</span><br><span class="line">JavaScript：	V8 6.2.414.32</span><br><span class="line">Flash：	29.0.0.113 /home/wenbin/.config/google-chrome/PepperFlash/29.0.0.113/libpepflashplayer.so</span><br><span class="line">用户代理：	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36</span><br><span class="line">命令行：	/usr/bin/google-chrome-stable --flag-switches-begin --flag-switches-end</span><br><span class="line">可执行文件路径：	/opt/google/chrome/google-chrome</span><br><span class="line">个人资料路径：	/home/wenbin/.config/google-chrome/Default</span><br><span class="line">其他变体：	c134752e-b8b72c88  </span><br><span class="line">                ..............</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>chromedriver版本</th>
+<th align="center">支持的Chrome版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v2.34</td>
+<td align="center">v61-63</td>
+</tr>
+<tr>
+<td>v2.33</td>
+<td align="center">v60-62</td>
+</tr>
+<tr>
+<td>v2.32</td>
+<td align="center">v59-61</td>
+</tr>
+<tr>
+<td>v2.31</td>
+<td align="center">v58-60</td>
+</tr>
+<tr>
+<td>v2.30</td>
+<td align="center">v58-60</td>
+</tr>
+<tr>
+<td>v2.29</td>
+<td align="center">v56-58</td>
+</tr>
+<tr>
+<td>v2.28</td>
+<td align="center">v55-57</td>
+</tr>
+<tr>
+<td>v2.27</td>
+<td align="center">v54-56</td>
+</tr>
+<tr>
+<td>v2.26</td>
+<td align="center">v53-55</td>
+</tr>
+<tr>
+<td>v2.25</td>
+<td align="center">v53-55</td>
+</tr>
+<tr>
+<td>v2.24</td>
+<td align="center">v52-54</td>
+</tr>
+<tr>
+<td>v2.23</td>
+<td align="center">v51-53</td>
+</tr>
+<tr>
+<td>v2.22</td>
+<td align="center">v49-52</td>
+</tr>
+<tr>
+<td>v2.21</td>
+<td align="center">v46-50</td>
+</tr>
+<tr>
+<td>v2.20</td>
+<td align="center">v43-48</td>
+</tr>
+<tr>
+<td>v2.19</td>
+<td align="center">v43-47</td>
+</tr>
+<tr>
+<td>v2.18</td>
+<td align="center">v43-46</td>
+</tr>
+<tr>
+<td>v2.17</td>
+<td align="center">v42-43</td>
+</tr>
+<tr>
+<td>v2.13</td>
+<td align="center">v42-45</td>
+</tr>
+<tr>
+<td>v2.15</td>
+<td align="center">v40-43</td>
+</tr>
+<tr>
+<td>v2.14</td>
+<td align="center">v39-42</td>
+</tr>
+<tr>
+<td>v2.13</td>
+<td align="center">v38-41</td>
+</tr>
+<tr>
+<td>v2.12</td>
+<td align="center">v36-40</td>
+</tr>
+<tr>
+<td>v2.11</td>
+<td align="center">v36-40</td>
+</tr>
+<tr>
+<td>v2.10</td>
+<td align="center">v33-36</td>
+</tr>
+<tr>
+<td>v2.9</td>
+<td align="center">v31-34</td>
+</tr>
+<tr>
+<td>v2.8</td>
+<td align="center">v30-33</td>
+</tr>
+<tr>
+<td>v2.7</td>
+<td align="center">v30-33</td>
+</tr>
+<tr>
+<td>v2.6</td>
+<td align="center">v29-32</td>
+</tr>
+<tr>
+<td>v2.5</td>
+<td align="center">v29-32</td>
+</tr>
+<tr>
+<td>v2.4</td>
+<td align="center">v29-32</td>
+</tr>
+</tbody></table>
+<h3 id="下载对应的Chromedriver版本"><a href="#下载对应的Chromedriver版本" class="headerlink" title="下载对应的Chromedriver版本"></a>下载对应的Chromedriver版本</h3><p>下载地址：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://npm.taobao.org/mirrors/chromedriver/</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>将下载来的ChromeDriver解压，得到一个ChromeDriver文件<br>我们只需要将ChromeDriver文件放到<code>/uer/bin/</code>路径下</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp chromedriver /usr/bin/</span><br></pre></td></tr></table></figure>
+
+<h3 id="测试安装是否成功"><a href="#测试安装是否成功" class="headerlink" title="测试安装是否成功"></a>测试安装是否成功</h3><p>编写py文件写入以下代码：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，如果能过弹出Chrome页面，就说明安装成功：<br><img src="../images/Chrome.png" alt></p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</div>
                 
 
 
