@@ -171,7 +171,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 520 个字)
+                    3 分钟 读完 (大约 521 个字)
                 </span>
                 
                 
@@ -186,48 +186,17 @@
         <div class="content">
             <h3 id="安装chrome步骤"><a href="#安装chrome步骤" class="headerlink" title="安装chrome步骤"></a>安装chrome步骤</h3><hr>
 <h6 id="一-下载chrome安装包"><a href="#一-下载chrome安装包" class="headerlink" title="一. 下载chrome安装包"></a>一. 下载chrome安装包</h6><ol>
-<li><p>使⽤ubuntu上的⽕狐浏览器打开如下地址：<br><code>http://www.google.cn/intl/zhCN/chrome/browser/desktop/index.html</code></p>
-</li>
-<li><p>选择安装版本，接受并安装<br>a. 选择64bit.deb(适⽤于Deblan/Ubuntu)</p>
-</li>
-<li><p>点击接受并安装后，选择保存到本地<br>a. ‘Save file’或者‘保存到本地’</p>
-</li>
-<li><p>下载下来后，会保存在Dowdload⽂件中<br>cd ~/Dowdload 切换到下载⽂件⽬录中<br>ls 进⾏查看</p>
-</li>
-</ol>
-<hr>
-<h3 id="二-安装chrome浏览器"><a href="#二-安装chrome浏览器" class="headerlink" title="二. 安装chrome浏览器"></a>二. 安装chrome浏览器</h3><ol>
-<li><p>打开终端，切换到root⽤户，进⼊下载⽂件夹<br>a. <code>cd ~/Dowdload</code><br>b. <code>sudo dpkg -i google-chrome-stable_current_amd64.deb</code></p>
-</li>
-<li><p>初次安装如果出现 Errors where encountered while<br>processing:google-chrome-stable 这个错误，就需要安装googlechrome-stable<br>a. <code>apt-get install google-chrome-stable</code></p>
-</li>
-<li><p>如果安装了google-chrome-stable后，还报错，错误信息为： Unmet<br>dependencies. “Try apt-get -f install” with no packages (or<br>specify ….)<br>a. 这个时候按照提示执⾏<br><code>apt-get -f install</code></p>
-</li>
-<li><p>如果中间提示”是否继续安装” 输⼊  <code>y</code></p>
-</li>
-</ol>
-<p>v. 安装完毕后，重新执⾏第⼀步的命令<br> <code>sudo dpkg -i google-chromestable_current_amd64.deb</code></p>
-<ol start="5">
-<li>如果此时没有报错就说明已经安装成功</li>
-</ol>
-<hr>
-<h3 id="三-安装chromedriver"><a href="#三-安装chromedriver" class="headerlink" title="三.安装chromedriver"></a>三.安装chromedriver</h3><ol>
-<li><p>通过百度，搜索“淘宝NPM” 寻找chromedriver下载地址，点击进⼊</p>
-</li>
-<li><p>通过百度，搜索“chrome和chromedriver的对照表”，选择⾃⼰的合适的chromedriver</p>
-</li>
-<li><p>返回第⼀步打开的chromedriver版本⽹⻚，下载适合⾃⼰浏览器的chromedriver</p>
-</li>
-<li><p>下载之后，在下载⽂件夹中找到，点击右键，选择解压到当前⽬录</p>
-</li>
-<li><p><strong>打开终端，将解压后的chromedriver执⾏程序，拷⻉到 /usr/bin ⽬录下</strong><br><code>cd~/Download</code><br><code>sudo cp chromedriver /usr/bin</code></p>
-</li>
-<li><p>运⾏程序如果没有报错，说明选择的chromedriver的版本是正确的，如果还报错<br>说明版本没有选对，删除下载⽂件夹中的chromedriver⽂件和 /usr/bin 中的<br>chromedriver，重复上述步骤，选在适合⾃⼰浏览器的chromedriver下载安装</p>
-</li>
-</ol>
-
+<li><p>使⽤ubuntu上的⽕狐浏览器打开如下地址：<br><code>http://www.google.cn/intl/zhCN/chrome/browser/desktop/index.html</code></p></li></ol>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/Ubuntu安装chrome浏览器和chromedriver/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -255,14 +224,14 @@
                 <time class="level-item has-text-grey" datetime="2019-07-21T17:29:24.000Z">2019-07-22</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 700 个字)
+                    5 分钟 读完 (大约 701 个字)
                 </span>
                 
                 
@@ -276,45 +245,16 @@
         </h1>
         <div class="content">
             <h2 id="在Deepin系统中安装Anaconda"><a href="#在Deepin系统中安装Anaconda" class="headerlink" title="在Deepin系统中安装Anaconda"></a>在Deepin系统中安装Anaconda</h2><h2 id="运行安装Anaconda"><a href="#运行安装Anaconda" class="headerlink" title="运行安装Anaconda"></a>运行安装Anaconda</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-4.3.1-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装具体步骤"><a href="#安装具体步骤" class="headerlink" title="安装具体步骤"></a>安装具体步骤</h2><p>在执行上一步骤之后会出现以下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Anaconda3 5.0.1</span><br><span class="line"></span><br><span class="line">In order to continue the installation process, please review the license</span><br><span class="line">agreement.</span><br><span class="line">Please, press ENTER to continue</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
-
-<p>按ENTER继续，然后按ENTER读取许可证。读完许可证后，系统会提示您批准许可条款：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Do you accept the license terms? [yes|no]</span><br></pre></td></tr></table></figure>
-
-<p>选择yes继续安装<br>此时，系统将提示您选择安装的位置。您可以按ENTER接受默认位置，或指定其他位置以进行修改。<br>在这里我选择了其它路径的安装，安装过程需要一些时间</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[/root/anaconda3] &gt;&gt;&gt; /home/wenbin/anaconda3</span><br><span class="line">PREFIX=/home/wenbin/anaconda3</span><br><span class="line"></span><br><span class="line">installing: python-3.6.3-hc9025b9_1 ...</span><br><span class="line">Python 3.6.3 :: Anaconda, Inc.</span><br><span class="line">installing: ca-certificates-2017.08.26-h1d4fec5_0 ...</span><br><span class="line">installing: conda-env-2.6.0-h36134e3_1 ...</span><br><span class="line">installing: intel-openmp-2018.0.0-h15fc484_7 ...</span><br><span class="line">installing: libgcc-ng-7.2.0-h7cc24e2_2 ...</span><br><span class="line">installing: libgfortran-ng-7.2.0-h9f7466a_2 ...</span><br><span class="line">installing: libstdcxx-ng-7.2.0-h7a57d05_2 ...</span><br><span class="line">installing: bzip2-1.0.6-h0376d23_1 ...</span><br><span class="line">installing: expat-2.2.4-hc00ebd1_1 ...</span><br><span class="line">installing: gmp-6.1.2-hb3b607b_0 ...</span><br><span class="line">.......................</span><br></pre></td></tr></table></figure>
-
-<p>完成后，您将收到以下输出：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">installation finished.</span><br><span class="line">Do you wish the installer to prepend the Anaconda3 install location</span><br><span class="line">to PATH in your /root/.bashrc ? [yes|no]</span><br><span class="line">[no] &gt;&gt;&gt; yes</span><br></pre></td></tr></table></figure>
-
-<p>键入yes ，以便可以使用conda命令。接下来将看到以下输出：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Appending source /home/wenbin/anaconda3/bin/activate to /root/.bashrc</span><br><span class="line">A backup will be made to: /root/.bashrc-anaconda3.bak</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">For this change to become active, you have to open a new terminal.</span><br><span class="line"></span><br><span class="line">Thank you for installing Anaconda3!</span><br></pre></td></tr></table></figure>
-
-<p>如果你选择了no，那么你就需要手动的将Anaconda3添加的环境变量当中<br>请打开文本编辑器并从主目录打开文件.bashrc或.bash_profile。添加该行。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=&quot;/&lt;path to anaconda&gt;/bin:$PATH&quot;</span><br></pre></td></tr></table></figure>
-
-<p>注意：将<code>&lt;path-to-anaconda&gt;</code>替换为安装的anaconda文件的实际路径。<br>保存文件。如果您打开任何终端窗口，请关闭它们，然后打开一个新窗口。您可能需要重新启动计算机才能使PATH更改生效。</p>
-<p>为了激活安装，你应该来源~/.bashrc文件：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>之后你可以验证你的安装通过使用conda命令，例如与list ：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wenbin@wenbin:~$ conda list</span><br><span class="line"># packages in environment at /home/wenbin/anaconda3:</span><br><span class="line">#</span><br><span class="line">_ipyw_jlab_nb_ext_conf    0.1.0            py36he11e457_0  </span><br><span class="line">alabaster                 0.7.10           py36h306e16b_0  </span><br><span class="line">anaconda                  5.0.1            py36hd30a520_1  </span><br><span class="line">anaconda-client           1.6.5            py36h19c0dcd_0  </span><br><span class="line">anaconda-navigator        1.6.9            py36h11ddaaa_0 </span><br><span class="line">..............</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置Anaconda环境"><a href="#设置Anaconda环境" class="headerlink" title="设置Anaconda环境"></a>设置Anaconda环境</h2><p>查看可用的Python解释器版本：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda search &quot;^python$&quot;</span><br></pre></td></tr></table></figure>
-
-<p>使用最新版本的Python 3创建一个环境。我们可以通过将版本3分配给python参数来实现。 我们将调用环境my_python ，但是您可能希望为您的环境使用更具描述性的名称，特别是如果您使用环境来访问多个版本的Python。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name my_python python=3</span><br></pre></td></tr></table></figure>
-
-<p>通过一下命令来激活环境</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source activate my_python</span><br></pre></td></tr></table></figure>
-
-<p>通过一下命令添加其他包，比如requests</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install --name my_python requests</span><br></pre></td></tr></table></figure>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/在Deepin系统下安装Anaconda/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -342,14 +282,14 @@
                 <time class="level-item has-text-grey" datetime="2019-07-21T17:28:54.000Z">2019-07-22</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 342 个字)
+                    2 分钟 读完 (大约 343 个字)
                 </span>
                 
                 
@@ -363,153 +303,16 @@
         </h1>
         <div class="content">
             <h2 id="Deepin中安装配置ChromeDriver"><a href="#Deepin中安装配置ChromeDriver" class="headerlink" title="Deepin中安装配置ChromeDriver"></a>Deepin中安装配置ChromeDriver</h2><h3 id="查看当前的Chrome版本信息"><a href="#查看当前的Chrome版本信息" class="headerlink" title="查看当前的Chrome版本信息"></a>查看当前的Chrome版本信息</h3><p>在谷歌浏览器地址栏中输入<code>chrome://version/</code>可以查看当前的Chrome信息：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Google Chrome：	62.0.3202.62 (正式版本) （64 位）</span><br><span class="line">修订版本：	9da914b118cb0d10d715ccc4ad20575a0305a304-refs/branch-heads/3202@&#123;#700&#125;</span><br><span class="line">操作系统：	Linux</span><br><span class="line">JavaScript：	V8 6.2.414.32</span><br><span class="line">Flash：	29.0.0.113 /home/wenbin/.config/google-chrome/PepperFlash/29.0.0.113/libpepflashplayer.so</span><br><span class="line">用户代理：	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.62 Safari/537.36</span><br><span class="line">命令行：	/usr/bin/google-chrome-stable --flag-switches-begin --flag-switches-end</span><br><span class="line">可执行文件路径：	/opt/google/chrome/google-chrome</span><br><span class="line">个人资料路径：	/home/wenbin/.config/google-chrome/Default</span><br><span class="line">其他变体：	c134752e-b8b72c88  </span><br><span class="line">                ..............</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>chromedriver版本</th>
-<th align="center">支持的Chrome版本</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>v2.34</td>
-<td align="center">v61-63</td>
-</tr>
-<tr>
-<td>v2.33</td>
-<td align="center">v60-62</td>
-</tr>
-<tr>
-<td>v2.32</td>
-<td align="center">v59-61</td>
-</tr>
-<tr>
-<td>v2.31</td>
-<td align="center">v58-60</td>
-</tr>
-<tr>
-<td>v2.30</td>
-<td align="center">v58-60</td>
-</tr>
-<tr>
-<td>v2.29</td>
-<td align="center">v56-58</td>
-</tr>
-<tr>
-<td>v2.28</td>
-<td align="center">v55-57</td>
-</tr>
-<tr>
-<td>v2.27</td>
-<td align="center">v54-56</td>
-</tr>
-<tr>
-<td>v2.26</td>
-<td align="center">v53-55</td>
-</tr>
-<tr>
-<td>v2.25</td>
-<td align="center">v53-55</td>
-</tr>
-<tr>
-<td>v2.24</td>
-<td align="center">v52-54</td>
-</tr>
-<tr>
-<td>v2.23</td>
-<td align="center">v51-53</td>
-</tr>
-<tr>
-<td>v2.22</td>
-<td align="center">v49-52</td>
-</tr>
-<tr>
-<td>v2.21</td>
-<td align="center">v46-50</td>
-</tr>
-<tr>
-<td>v2.20</td>
-<td align="center">v43-48</td>
-</tr>
-<tr>
-<td>v2.19</td>
-<td align="center">v43-47</td>
-</tr>
-<tr>
-<td>v2.18</td>
-<td align="center">v43-46</td>
-</tr>
-<tr>
-<td>v2.17</td>
-<td align="center">v42-43</td>
-</tr>
-<tr>
-<td>v2.13</td>
-<td align="center">v42-45</td>
-</tr>
-<tr>
-<td>v2.15</td>
-<td align="center">v40-43</td>
-</tr>
-<tr>
-<td>v2.14</td>
-<td align="center">v39-42</td>
-</tr>
-<tr>
-<td>v2.13</td>
-<td align="center">v38-41</td>
-</tr>
-<tr>
-<td>v2.12</td>
-<td align="center">v36-40</td>
-</tr>
-<tr>
-<td>v2.11</td>
-<td align="center">v36-40</td>
-</tr>
-<tr>
-<td>v2.10</td>
-<td align="center">v33-36</td>
-</tr>
-<tr>
-<td>v2.9</td>
-<td align="center">v31-34</td>
-</tr>
-<tr>
-<td>v2.8</td>
-<td align="center">v30-33</td>
-</tr>
-<tr>
-<td>v2.7</td>
-<td align="center">v30-33</td>
-</tr>
-<tr>
-<td>v2.6</td>
-<td align="center">v29-32</td>
-</tr>
-<tr>
-<td>v2.5</td>
-<td align="center">v29-32</td>
-</tr>
-<tr>
-<td>v2.4</td>
-<td align="center">v29-32</td>
-</tr>
-</tbody></table>
-<h3 id="下载对应的Chromedriver版本"><a href="#下载对应的Chromedriver版本" class="headerlink" title="下载对应的Chromedriver版本"></a>下载对应的Chromedriver版本</h3><p>下载地址：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://npm.taobao.org/mirrors/chromedriver/</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>将下载来的ChromeDriver解压，得到一个ChromeDriver文件<br>我们只需要将ChromeDriver文件放到<code>/uer/bin/</code>路径下</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp chromedriver /usr/bin/</span><br></pre></td></tr></table></figure>
-
-<h3 id="测试安装是否成功"><a href="#测试安装是否成功" class="headerlink" title="测试安装是否成功"></a>测试安装是否成功</h3><p>编写py文件写入以下代码：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line"></span><br><span class="line">driver = webdriver.Chrome()</span><br><span class="line">driver.get(&quot;https://www.baidu.com&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>运行之后，如果能过弹出Chrome页面，就说明安装成功：<br><img src="../images/Chrome.png" alt></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/Deepin中安装配置ChromeDriver/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -544,7 +347,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分钟 读完 (大约 1903 个字)
+                    13 分钟 读完 (大约 1904 个字)
                 </span>
                 
                 
@@ -559,64 +362,16 @@
         <div class="content">
             <p>本博文介绍了MongoDB，并详细指引读者在Ubuntu下MongoDB的安装和使用。本教程在Ubuntu14.04下测试通过。 </p>
 <h2 id="一、MongoDB介绍"><a href="#一、MongoDB介绍" class="headerlink" title="一、MongoDB介绍"></a>一、MongoDB介绍</h2><p>MongoDB 是一个是一个基于分布式文件存储的数据库，介于关系数据库和非关系数据库之间，是非关系数据库当中功能最丰富，最像关系数据库的。他支持的数据结构非常松散，是类似json的bson格式，因此可以存储比较复杂的数据类型。Mongo最大的特点是他支持的查询语言非常强大，其语法有点类似于面向对象的查询语言，几乎可以实现类似关系数据库单表查询的绝大部分功能，而且还支持对数据建立索引。</p>
-<h2 id="二、安装MongoDB"><a href="#二、安装MongoDB" class="headerlink" title="二、安装MongoDB"></a>二、安装MongoDB</h2><p>MongoDB安装很简单，无需下载源文件，可以直接用apt-get命令进行安装。<br>打开终端，输入以下命令：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mongodb</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://upload-images.jianshu.io/upload_images/9135759-3cb41a51c148257b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>1.安装完成后，在终端输入以下命令查看MongoDB版本：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo -version</span><br></pre></td></tr></table></figure>
-
-<p>输出版本信息，表明安装成功，截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-8887c3331cd9528f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>2.启动和关闭mongodb命令如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service mongodb start</span><br><span class="line">service mongodb stop</span><br></pre></td></tr></table></figure>
-
-<p>截图如下：<br> <img src="https://upload-images.jianshu.io/upload_images/9135759-39cb7f47b78e2337.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>3.默认设置MongoDB是随Ubuntu启动自动启动的。<br>输入以下命令查看是否启动成功：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgrep mongo -l   #注意：-l是英文字母l，不是阿拉伯数字1</span><br></pre></td></tr></table></figure>
-
-<p>截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-f7a5306aeaed8158.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>卸载MongoDB</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get --purge remove mongodb mongodb-clients mongodb-server</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、使用MongoDB"><a href="#三、使用MongoDB" class="headerlink" title="三、使用MongoDB"></a>三、使用MongoDB</h2><h3 id="shell命令模式"><a href="#shell命令模式" class="headerlink" title="shell命令模式"></a>shell命令模式</h3><p>输入<code>mongo</code>进入shell命令模式，默认连接的数据库是test数据库，在此之前一定要确保你已经启动了MongoDB，否则会出现错误，启动之后运行成功，如下截图：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-47a98bbf23b2cfc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>常用操作命令：<br>数据库相关 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">show dbs:显示数据库列表 </span><br><span class="line">show collections：显示当前数据库中的集合（类似关系数据库中的表table） </span><br><span class="line">show users：显示所有用户 </span><br><span class="line">use yourDB：切换当前数据库至yourDB </span><br><span class="line">db.help() ：显示数据库操作命令 </span><br><span class="line">db.yourCollection.help() ：显示集合操作命令，yourCollection是集合名</span><br></pre></td></tr></table></figure>
-
-<p>MongoDB没有创建数据库的命令，如果你想创建一个“School”的数据库，先运行use School命令，之后做一些操作（如：创建聚集集合db.createCollection(‘teacher’)）,这样就可以创建一个名叫“School”的数据库。<br>截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-378e2b1d94454111.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h3 id="下面以一个School数据库为例，在School数据库中创建两个集合teacher和student，并对student集合中的数据进行增删改查基本操作（集合Collection相当于关系型数据库中的表table）。"><a href="#下面以一个School数据库为例，在School数据库中创建两个集合teacher和student，并对student集合中的数据进行增删改查基本操作（集合Collection相当于关系型数据库中的表table）。" class="headerlink" title="下面以一个School数据库为例，在School数据库中创建两个集合teacher和student，并对student集合中的数据进行增删改查基本操作（集合Collection相当于关系型数据库中的表table）。"></a>下面以一个School数据库为例，在School数据库中创建两个集合teacher和student，并对student集合中的数据进行增删改查基本操作（集合Collection相当于关系型数据库中的表table）。</h3><p>1、切换到School数据库</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use School #切换到School数据库。MongoDB 无需预创建School数据库，在使用时会自动创建</span><br></pre></td></tr></table></figure>
-
-<p>2、创建Collection</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&apos;teacher&apos;) #创建一个聚集集合。MongoDB 其实在插入数据的时候，也会自动创建对应的集合，无需预定义集合</span><br></pre></td></tr></table></figure>
-
-<p>截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-81643b44864ee245.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>3、插入数据<br>与数据库创建类似，插入数据时也会自动创建集合。<br>插入数据有两种方式：insert和save。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">db.student.insert(&#123;_id:1, sname: &apos;zhangsan&apos;, sage: 20&#125;) #_id可选</span><br><span class="line">db.student.save(&#123;_id:1, sname: &apos;zhangsan&apos;, sage: 22&#125;) #_id可选</span><br></pre></td></tr></table></figure>
-
-<p>这两种方式，其插入的数据中_id字段均可不写，会自动生成一个唯一的_id来标识本条数据。而insert和save不同之处在于：在手动插入_id字段时，如果_id已经存在，insert不做操作，save做更新操作；如果不加_id字段，两者作用相同都是插入数据。<br>截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-f266803fccc124ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>添加的数据其结构是松散的，只要是bson格式均可，列属性均不固定，根据添加的数据为准。先定义数据再插入，就可以一次性插入多条数据，截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-6a2feadc2cbe01c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>运行完以上例子，student 已自动创建，这也说明 MongoDB 不需要预先定义 collection ，在第一次插入数据后，collection 会自动的创建。<br>截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-d56b0ffb7ecc980a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>4、查找数据 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.youCollection.find(criteria, filterDisplay)</span><br></pre></td></tr></table></figure>
-
-<p>criteria ：查询条件，可选<br>filterDisplay：筛选显示部分数据，如显示指定列数据，可选（当选择时，第一个参数不可省略，若查询条件为空，可用{}做占位符，如下例第三句）</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.student.find()  #查询所有记录。相当于：select * from student</span><br><span class="line">db.student.find(&#123;sname: &apos;lisi&apos;&#125;)  #查询sname=&apos;lisi&apos;的记录。相当于： select * from student where sname=&apos;lisi&apos;</span><br><span class="line">db.student.find(&#123;&#125;,&#123;sname:1, sage:1&#125;) #查询指定列sname、sage数据。相当于：select sname,sage from student。sname:1表示返回sname列，默认_id字段也是返回的，可以添加_id:0（意为不返回_id）写成&#123;sname: 1, sage: 1,_id:0&#125;，就不会返回默认的_id字段了</span><br><span class="line">db.student.find(&#123;sname: &apos;zhangsan&apos;, sage: 22&#125;) #and 与条件查询。相当于：select * from student where sname = &apos;zhangsan&apos; and sage = 22</span><br><span class="line">db.student.find(&#123;$or: [&#123;sage: 22&#125;, &#123;sage: 25&#125;]&#125;) #or 条件查询。相当于：select * from student where sage = 22 or sage = 25</span><br></pre></td></tr></table></figure>
-
-<p>查询操作类似，这里只给出db.student.find({sname: ‘lisi’})<br>查询的截图，如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-75add83f6cda14bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>5、修改数据 </p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.youCollection.update(criteria, objNew, upsert, multi ) </span><br><span class="line">criteria: update的查询条件，类似sql update查询内where后面的 </span><br><span class="line">objNew : update的对象和一些更新的操作符（如$set）等，也可以理解为sql update查询内set后面的。 </span><br><span class="line">upsert : 如果不存在update的记录，是否插入objNew，true为插入，默认是false，不插入。 </span><br><span class="line">multi: mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。默认false，只修改匹配到的第一条数据。 </span><br><span class="line">其中criteria和objNew是必选参数，upsert和multi可选参数</span><br></pre></td></tr></table></figure>
-
-<p>举例如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.student.update(&#123;sname: &apos;lisi&apos;&#125;, &#123;$set: &#123;sage: 30&#125;&#125;, false, true) #相当于：update student set sage =30 where sname = &apos;lisi&apos;;</span><br></pre></td></tr></table></figure>
-
-<p>操作截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-9a33162889a67bd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>6、删除数据</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.student.remove(&#123;sname: &apos;chenliu&apos;&#125;) #相当于：delete from student where sname=&apos;chenliu&apos;</span><br></pre></td></tr></table></figure>
-
-<p>操作截图如下：<br><img src="https://upload-images.jianshu.io/upload_images/9135759-bb17d02c7a2f0f8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>7、退出shell命令模式<br>输入exit或者Ctrl+C退出shell命令模式</p>
-<hr>
-<p>参考MongoDB官方文档：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://docs.mongodb.com/master/tutorial/install-mongodb-on-ubuntu/?_ga=2.38644067.1704633038.1522762185-1747967431.1522762185</span><br></pre></td></tr></table></figure>
-
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/Ubuntu安装MongoDB和使用/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -651,7 +406,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 179 个字)
+                    1 分钟 读完 (大约 180 个字)
                 </span>
                 
                 
@@ -668,15 +423,16 @@
 <li>.通过命令添加PPA存储库：<br><code>sudo add-apt-repository ppa:mystic-mirage/pycharm</code></li>
 </ol>
 <hr>
-<p>2.如果您安装了以前的版本，请通过软件更新程序升级PyCharm。</p>
-<h5 id="运行命令来检查更新并安装IDE（社区版本）"><a href="#运行命令来检查更新并安装IDE（社区版本）" class="headerlink" title="运行命令来检查更新并安装IDE（社区版本）"></a>运行命令来检查更新并安装IDE（社区版本）</h5><p><code>sudo apt update</code><br><code>sudo apt install pycharm-professional</code></p>
-<hr>
-<h5 id="或运行命令来检查更新并安装IDE（社区版本）："><a href="#或运行命令来检查更新并安装IDE（社区版本）：" class="headerlink" title="或运行命令来检查更新并安装IDE（社区版本）："></a>或运行命令来检查更新并安装IDE（社区版本）：</h5><p><code>sudo apt update</code><br><code>sudo apt install pycharm</code></p>
-<hr>
-<p>3.卸载PyCharm：<br>要卸载PyCharm Python IDE，只需运行命令：<br>专业版:  <code>sudo apt remove --autoremove pycharm pycharm-professional</code><br>社区版:   <code>sudo apt remove --autoremove pycharm pycharm-community</code>  </p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/ubuntu-安装pycharm，简单粗暴的方法，三行命令行/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -711,7 +467,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 224 个字)
+                    2 分钟 读完 (大约 225 个字)
                 </span>
                 
                 
@@ -726,23 +482,16 @@
         <div class="content">
             <p>linux下面的中文输入法一直不给力，Ubuntu里正常使用的搜狗输入法经常突然无法输出中文（具体现象是，可以呼出搜狗输入法界面，但是候选词列表无显示）虽然用惯了搜狗输入法但是实在忍不了啦，于是痛定思痛果断换掉。</p>
 <p>现在,google拼音输入法可以用了！</p>
-<p>这得感谢下面这个项目： libgooglepinyin ( A fork from google pinyin on android)</p>
-<blockquote>
-<p>项目地址：<a href="http://code.google.com/p/libgooglepinyin/" target="_blank" rel="noopener">http://code.google.com/p/libgooglepinyin/</a></p>
-</blockquote>
-<p>安装之后记录了下来，希望能为同样遇到输入法问题的人提供参考</p>
-<h3 id="一、"><a href="#一、" class="headerlink" title="一、"></a>一、</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install fcitx-googlepinyin</span><br></pre></td></tr></table></figure>
-
-<h3 id="二、"><a href="#二、" class="headerlink" title="二、"></a>二、</h3><blockquote>
-<p>在settings-&gt;Language Support里将keyboard input method system设置为fcitx</p>
-</blockquote>
-<h3 id="三-、"><a href="#三-、" class="headerlink" title="三 、"></a>三 、</h3><p>注销系统，再登录</p>
-<blockquote>
-<p>在settings-&gt;Text Entry里，添加输入源，搜索google-pinyin添加即可。</p>
-</blockquote>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/22/安装谷歌拼音/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -777,7 +526,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分钟 读完 (大约 1330 个字)
+                    9 分钟 读完 (大约 1331 个字)
                 </span>
                 
                 
@@ -791,7 +540,6 @@
         </h1>
         <div class="content">
             <h3 id="Ubuntu-16-04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。"><a href="#Ubuntu-16-04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。" class="headerlink" title="Ubuntu 16.04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。"></a>Ubuntu 16.04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。</h3><h3 id="1-删除libreoffice"><a href="#1-删除libreoffice" class="headerlink" title="1.删除libreoffice"></a>1.删除libreoffice</h3><p>libreoffice虽然是开源的，但是Java写出来的office执行效率实在不敢恭维，装完系统后果断删掉</p>
-<p><code>sudo apt-get remove libreoffice-common</code></p>
         </div>
         
         
@@ -1055,7 +803,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        1
                     </p>
                 </div>
             </div>
@@ -1124,20 +872,12 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/categories/Deepin/">
-            <span class="level-start">
-                <span class="level-item">Deepin</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/环境配置/">
             <span class="level-start">
                 <span class="level-item">环境配置</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li>
             </ul>
@@ -1316,7 +1056,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:29:24.000Z">2019-07-22</time></div>
                     <a href="/2019/07/22/在Deepin系统下安装Anaconda/" class="has-link-black-ter is-size-6">在Deepin系统下安装Anaconda</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
                 </div>
             </div>
@@ -1335,7 +1075,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:28:54.000Z">2019-07-22</time></div>
                     <a href="/2019/07/22/Deepin中安装配置ChromeDriver/" class="has-link-black-ter is-size-6">Deepin中安装配置ChromeDriver</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
                 </div>
             </div>
@@ -1507,7 +1247,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:29:24.000Z">2019-07-22</time></div>
                     <a href="/2019/07/22/在Deepin系统下安装Anaconda/" class="has-link-black-ter is-size-6">在Deepin系统下安装Anaconda</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
                 </div>
             </div>
@@ -1526,7 +1266,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:28:54.000Z">2019-07-22</time></div>
                     <a href="/2019/07/22/Deepin中安装配置ChromeDriver/" class="has-link-black-ter is-size-6">Deepin中安装配置ChromeDriver</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Deepin/">Deepin</a>
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
                 </div>
             </div>
