@@ -141,17 +141,11 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2019/07/22/创建Python虚拟环境/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg" alt="创建Python虚拟环境">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-07-21T17:53:25.000Z">2019-07-22</time>
+                <time class="level-item has-text-grey" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
@@ -161,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1022 个字)
+                    7 分钟 读完 (大约 1121 个字)
                 </span>
                 
                 
@@ -170,23 +164,107 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/07/22/创建Python虚拟环境/">创建Python虚拟环境</a>
+                <a class="has-link-black-ter" href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/">Ubuntu系统搭建配置Python虚拟开发环境</a>
             
         </h1>
         <div class="content">
-            <h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><p><em>问题</em>：</p>
-<p>在开发过程中，使用Python安装包时，需要使用可以使用<code>pip install 包名</code>或者<code>sudo pip install 包名</code>来安装。</p>
-<p>问题是在开发多个项目的时候，使用的包是不一样的，这时候如果还把所有的包放到一个开发环境中，就会造成开发环境的臃肿，更甚者会是环境无法运行（被覆盖掉了）。</p>
+            <p><strong>我们知道使用Python的过程中会安装各种库、包，甚至有时候还需要Python2和Python3两种环境混合使用，慢慢的你的Python运行环境会越来越臃肿，这倒还是其次，最可怕的是，有些应用会使用到某个Python包的特定版本，我们知道同一个Python运行环境里面是不能存在同一个包的不同版本的。所有这些都是你为什么要使用<br>Virtualenv的理由。</strong></p>
+<p>Virtualenv给你一个<strong>干净的Python运行环境</strong>，并能让你不同的应用,使用不同版本的包文件提供了可能，甚至使 用<br>它可以让Python2和Python3和谐地共存。对于我们来说，我们用它的原因主要有以下几点：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.我们需要一个干净的Python环境，这个环境只针对我目前开发的应用；</span><br><span class="line">2.我们不希望多安装一个和项目无关的包，也不希望出现和其它应用有包版本冲突的问题；</span><br><span class="line">3.我们还需要生成一个requirements.txt用来告诉其他人我项目的依赖；</span><br><span class="line">4.我们不希望使用pyinstaller打包发布的过程中，给我加进来一堆没有用处的文件。</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.搭建虚拟环境主要是为了保证环境得统一性，对于不同得应用建立专属得python环境，比如针对后台开发</span><br><span class="line">得django可以建立一个虚拟环境，针对爬虫开发得应用可以在建立一个虚拟环境，避免环境之间产生冲突。</span><br><span class="line">2.可以避免一个环境造成得安装包过的多，导致环境加载缓慢.</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建寻开发环境详细步骤"><a href="#搭建寻开发环境详细步骤" class="headerlink" title="搭建寻开发环境详细步骤"></a>搭建寻开发环境详细步骤</h2><ol>
+<li>首先检查系统是否有安装pip</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在终端输入如下命令：</span><br><span class="line">pip # 查看是否安装有pip</span><br><span class="line">pip --version# 查看安装的pip版本</span><br><span class="line">___________________________________</span><br><span class="line">pip3 # 查看是否安装有pip</span><br><span class="line">pip3 --version # 查看安装的pip3版本</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557328279385.png" alt="1557328279385"></p>
+<ul>
+<li>安装pip<ul>
+<li><code>sudo apt install python-pip</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557330160105.png" alt="1557330160105"></p>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557330201495.png" alt="1557330201495"></p>
+<ul>
+<li>安装pip3<ul>
+<li><code>sudo apt install python3-pip</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557330305508.png" alt="1557330305508"></p>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557330371783.png" alt="1557330371783"></p>
+<ol start="2">
+<li>安装 virtualenv 和 virtualenvwrapper</li>
+</ol>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">在终端输入如下命令：</span><br><span class="line">pip install virtualenv</span><br><span class="line">pip install virtualenvwrapper</span><br><span class="line"># 如果python2和python3共存，则需要同时安装</span><br><span class="line">pip3 install virtualenv</span><br><span class="line">pip3 install virtualenvwrapper</span><br><span class="line"># virtualenvwrapper是virtualenv的扩展包，可以更⽅便的新增、删除、复制、切换虚 拟环境。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Python2的安装</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557337352791.png" alt="1557337352791"></p>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557337386266.png" alt="1557337386266"></p>
+<ul>
+<li>Python3的安装</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339330517.png" alt="1557339330517"></p>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339362845.png" alt="1557339362845"></p>
+<ul>
+<li>找到 <code>virtualenvwrapper.sh</code> 的路径</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557337564417.png" alt="1557337564417"></p>
+<ul>
+<li>修改<code>virtualenvwrapper.sh</code>的路径</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339703369.png" alt="1557339703369"></p>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339743410.png" alt="1557339743410"></p>
+<ul>
+<li>测试 python3 解释器能否正常导入 <code>virtualenvwrapper</code><ul>
+<li>如下图所示即代表成功</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339461944.png" alt="1557339461944"></p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><ul>
+<li>修改 <code>.bashrc</code> 文件（mac电脑是 <code>.bash_profile</code>文件）</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557339743410.png" alt="1557337634587"></p>
+<ul>
+<li>将下列内容添加到<code>~/.bashrc</code> 文件中</li>
+</ul>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#Setting virtualenv PATH for python3</span><br><span class="line">VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3</span><br><span class="line">source /usr/local/bin/virtualenvwrapper.sh # virtualenvwrapper.sh的路径</span><br><span class="line">export WORKON_HOME=&quot;/home/python/workspace&quot;  # workspace是盛放虚拟环境的文件夹（根据自己的修改）</span><br><span class="line"># export WORKON_HOME=$HOME/.virtualenvs    # 盛放虚拟环境的文件夹也可以设置为.virtualenvs</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557342578512.png" alt="1557342578512"></p>
+<ul>
+<li>更新环境变量<ul>
+<li>执行<code>source ~/.bashrc</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557342603329.png" alt="1557342603329"></p>
+<h3 id="创建虚拟开发环境"><a href="#创建虚拟开发环境" class="headerlink" title="创建虚拟开发环境"></a>创建虚拟开发环境</h3><ul>
+<li>Django虚拟环境<ul>
+<li><code>mkvitualenv -p python3 django_py3</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557342747600.png" alt="1557342747600"></p>
+<ul>
+<li>AI虚拟环境</li>
+</ul>
+<p><img src="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/1557342797321.png" alt="1557342797321"></p>
+<ul>
+<li>如此，虚拟环境即创建成功</li>
+</ul>
+<blockquote>
+<p>由于篇幅短小和时间仓促,若你发现了错误请告知我。</p>
+<p>希望我没有误导你，而是带你看了小小的新世界。</p>
+</blockquote>
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/07/22/创建Python虚拟环境/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -938,13 +1016,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/Python虚拟环境/">
-                        <span class="tag">Python虚拟环境</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
                         <span class="tag">Python解释器的安装与配置</span>
                         <span class="tag is-grey">3</span>
@@ -1008,6 +1079,13 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/tags/谷歌输入法/">
                         <span class="tag">谷歌输入法</span>
                         <span class="tag is-grey">1</span>
@@ -1028,7 +1106,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 13.33px;">Deepin</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/Pycharm/" style="font-size: 13.33px;">Pycharm</a> <a href="/tags/Python虚拟环境/" style="font-size: 10px;">Python虚拟环境</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 16.67px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 13.33px;">Deepin</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/Pycharm/" style="font-size: 13.33px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 16.67px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1042,16 +1120,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/22/创建Python虚拟环境/" class="media-left">
+            <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg" alt="创建Python虚拟环境">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu系统搭建配置Python虚拟开发环境">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:53:25.000Z">2019-07-22</time></div>
-                    <a href="/2019/07/22/创建Python虚拟环境/" class="has-link-black-ter is-size-6">创建Python虚拟环境</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time></div>
+                    <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="has-link-black-ter is-size-6">Ubuntu系统搭建配置Python虚拟开发环境</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
@@ -1219,7 +1297,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 13.33px;">Deepin</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/Pycharm/" style="font-size: 13.33px;">Pycharm</a> <a href="/tags/Python虚拟环境/" style="font-size: 10px;">Python虚拟环境</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 16.67px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 13.33px;">Deepin</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/Pycharm/" style="font-size: 13.33px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 16.67px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1233,16 +1311,16 @@
         
         <article class="media">
             
-            <a href="/2019/07/22/创建Python虚拟环境/" class="media-left">
+            <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zxzhbfpj30u00k03z4.jpg" alt="创建Python虚拟环境">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Ubuntu系统搭建配置Python虚拟开发环境">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-21T17:53:25.000Z">2019-07-22</time></div>
-                    <a href="/2019/07/22/创建Python虚拟环境/" class="has-link-black-ter is-size-6">创建Python虚拟环境</a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time></div>
+                    <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="has-link-black-ter is-size-6">Ubuntu系统搭建配置Python虚拟开发环境</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
                     </p>
