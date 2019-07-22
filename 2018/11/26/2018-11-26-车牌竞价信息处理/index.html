@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<script src="/js/src/clicklove.js"></script>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>函数程序设计实验十：车牌竞价信息处理 - 贾志翔的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;-文件bids_201711.txt 是广州市某月车牌竞价信息，包含若干行，每行形如“1234198004118085   29570”，表示一位竞价人的身份证号和出价。假设本月有10个车牌">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数程序设计实验十：车牌竞价信息处理">
+<meta property="og:url" content="http://yoursite.com/2018/11/26/2018-11-26-车牌竞价信息处理/index.html">
+<meta property="og:site_name" content="贾志翔的博客">
+<meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;-文件bids_201711.txt 是广州市某月车牌竞价信息，包含若干行，每行形如“1234198004118085   29570”，表示一位竞价人的身份证号和出价。假设本月有10个车牌">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-10T16:08:06.383Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数程序设计实验十：车牌竞价信息处理">
+<meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354&amp;#123;-文件bids_201711.txt 是广州市某月车牌竞价信息，包含若干行，每行形如“1234198004118085   29570”，表示一位竞价人的身份证号和出价。假设本月有10个车牌">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="函数程序设计实验十：车牌竞价信息处理" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">主页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/about">支持</a>
+                
+                <a class="navbar-item" href="http://www.tripwiremagazine.com/wp-content/uploads/images/stories/Articles/9_Funniest_JavaScript_effects/Unclosable%20Window.html">别点·有毒</a>
+                
+                <a class="navbar-item" href="http://fanfou.com/">饭否</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-26T03:30:00.000Z">2018-11-26</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 453 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                函数程序设计实验十：车牌竞价信息处理
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">文件bids_201711.txt 是广州市某月车牌竞价信息，包含若干行，每行形如“1234198004118085   29570”，表示一位竞价人的身份证号和出价。</span></span><br><span class="line"><span class="hljs-comment">假设本月有10个车牌竞拍。你的任务是统计相关信息，包括最高成交价、最低成交价、平均成交价、按照出价从高到低列车前十位出价人身份证号和出价，并存入另一个文件bidResults.txt中。例如，统计结果可能如文件bidResults1.txt  所示。</span></span><br><span class="line"><span class="hljs-comment">要求：</span></span><br><span class="line"><span class="hljs-comment">1. 提交你的代码文件；</span></span><br><span class="line"><span class="hljs-comment">2. 提交统计结果文件，或者将结果粘贴在提交窗口。</span></span><br><span class="line"><span class="hljs-comment">提示：需要排序函数，请hoogle :: [a] -&gt; [a]，或者自定义排序。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-comment">--代码写的太丑了，以后重写吧……</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> Data.Char</span><br><span class="line"><span class="hljs-keyword">import</span> System.IO</span><br><span class="line"><span class="hljs-keyword">import</span> Text.Printf</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">main</span>::<span class="hljs-type">IO</span>()</span><br><span class="line"><span class="hljs-title">main</span>= <span class="hljs-keyword">do</span></span><br><span class="line">    txt&lt;-readFile <span class="hljs-string">"bids_201711.txt"</span></span><br><span class="line">    <span class="hljs-keyword">let</span> dat=lines txt</span><br><span class="line">    <span class="hljs-keyword">let</span> mi=getmin dat</span><br><span class="line">    <span class="hljs-keyword">let</span> ma=getmax dat</span><br><span class="line">    <span class="hljs-keyword">let</span> sum=getsum dat</span><br><span class="line">    <span class="hljs-keyword">let</span> len=length dat</span><br><span class="line">    <span class="hljs-keyword">let</span> aftersort=getsort dat</span><br><span class="line">    writeFile <span class="hljs-string">"bidResults.txt"</span> </span><br><span class="line">        (printf <span class="hljs-string">"最高成交价：%d\n最低成交价：%d\n平均成交价：%d\n总共有%d参与竞价成交名单：\n%s"</span></span><br><span class="line">            ma mi (div sum len) len (unlines (take <span class="hljs-number">10</span> aftersort)))</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">digit</span>::<span class="hljs-type">String</span>-&gt;<span class="hljs-type">Int</span>-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">digit</span> s n=(ord (s!!n))-(ord '<span class="hljs-number">0</span>')</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">getval</span>::<span class="hljs-type">String</span>-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">getval</span> s=(digit s <span class="hljs-number">23</span>)*<span class="hljs-number">10000</span>+(digit s <span class="hljs-number">24</span>)*<span class="hljs-number">1000</span>+(digit s <span class="hljs-number">25</span>)*<span class="hljs-number">100</span>+(digit s <span class="hljs-number">26</span>)*<span class="hljs-number">10</span>+(digit s <span class="hljs-number">27</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">getmin</span>::[<span class="hljs-type">String</span>]-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">getmin</span> [a]=getval a</span><br><span class="line"><span class="hljs-title">getmin</span> (x:xs)=<span class="hljs-keyword">if</span> a&lt;b <span class="hljs-keyword">then</span> a <span class="hljs-keyword">else</span> b</span><br><span class="line">    <span class="hljs-keyword">where</span></span><br><span class="line">        a=getmin [x]</span><br><span class="line">        b=getmin xs</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">getmax</span>::[<span class="hljs-type">String</span>]-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">getmax</span> [a]=getval a</span><br><span class="line"><span class="hljs-title">getmax</span> (x:xs)=<span class="hljs-keyword">if</span> a&gt;b <span class="hljs-keyword">then</span> a <span class="hljs-keyword">else</span> b</span><br><span class="line">    <span class="hljs-keyword">where</span></span><br><span class="line">        a=getmax [x]</span><br><span class="line">        b=getmax xs</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">getsum</span>::[<span class="hljs-type">String</span>]-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">getsum</span> [a]=getval a</span><br><span class="line"><span class="hljs-title">getsum</span> (x:xs)=(getmax [x])+(getmax xs)</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">getsort</span>::[<span class="hljs-type">String</span>]-&gt;[<span class="hljs-type">String</span>]</span><br><span class="line"><span class="hljs-title">getsort</span> []=[]</span><br><span class="line"><span class="hljs-title">getsort</span> (x:xs)=(getsort [y|y&lt;-xs,(getval y)&gt;(getval x)])++[x]++(getsort [y|y&lt;-xs,(getval y)&lt;(getval x)])</span><br></pre></td></tr></table></figure>
+
+<p>下面是<code>bidResults.txt</code>的内容。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">最高成交价：29995</span><br><span class="line">最低成交价：10008</span><br><span class="line">平均成交价：111</span><br><span class="line">总共有491参与竞价成交名单：</span><br><span class="line">1234198610248103       29995</span><br><span class="line">1535198004062143       29948</span><br><span class="line">1334197907229015       29922</span><br><span class="line">1435198110019109       29916</span><br><span class="line">1535198412072052       29822</span><br><span class="line">1533198811246245       29820</span><br><span class="line">1633197706227256       29815</span><br><span class="line">1234198205229019       29799</span><br><span class="line">1533198710186071       29777</span><br><span class="line">1536198405206083       29727</span><br></pre></td></tr></table></figure>
+
+<p>下面是<code>bids_201711.txt</code>的内容。</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br></pre></td><td class="code"><pre><span class="line">1230197812061080       24596</span><br><span class="line">1230197210049047       11293</span><br><span class="line">1331197708184092       26387</span><br><span class="line">1331198509014173       21991</span><br><span class="line">1331198702174176       13778</span><br><span class="line">1333197808181338       29686</span><br><span class="line">1333197812025146       27955</span><br><span class="line">1333198709276233       12495</span><br><span class="line">1334197907229015       29922</span><br><span class="line">1334197205049158       10416</span><br><span class="line">1430198708181002       25186</span><br><span class="line">1430197102201027       24090</span><br><span class="line">1430197912121030       19367</span><br><span class="line">1431198402182064       11682</span><br><span class="line">1431197303143010       20660</span><br><span class="line">1431197711224092       13196</span><br><span class="line">1431197512184190       12069</span><br><span class="line">1432197703132181       28424</span><br><span class="line">1433197902071057       11985</span><br><span class="line">1433198810041098       18754</span><br><span class="line">1433198111221148       25994</span><br><span class="line">1433197311121198       25065</span><br><span class="line">1433197711041206       21115</span><br><span class="line">1433197412131354       13146</span><br><span class="line">1434199006226012       17399</span><br><span class="line">1434198808016016       25430</span><br><span class="line">1434198112246017       26006</span><br><span class="line">1434197106257001       12193</span><br><span class="line">1434199012017087       22698</span><br><span class="line">1434198612107099       27705</span><br><span class="line">1434197910097116       20944</span><br><span class="line">1434198205257149       23445</span><br><span class="line">1434197105058037       14507</span><br><span class="line">1434197511068057       23953</span><br><span class="line">1434197410198061       15966</span><br><span class="line">1434199001168083       21456</span><br><span class="line">1434197712158085       25448</span><br><span class="line">1434198912018117       20420</span><br><span class="line">1434198807048125       25469</span><br><span class="line">1435198609050022       12447</span><br><span class="line">1435198409016106       23101</span><br><span class="line">1435198110019109       29916</span><br><span class="line">1436198306186113       10806</span><br><span class="line">1436197501287048       13904</span><br><span class="line">1530198810111127       16078</span><br><span class="line">1530199002261200       15993</span><br><span class="line">1530198304086034       26630</span><br><span class="line">1530198411268038       14159</span><br><span class="line">1530197408019037       21750</span><br><span class="line">1530199002079054       10057</span><br><span class="line">1531198401270053       24736</span><br><span class="line">1531198101252040       26514</span><br><span class="line">1531198110182065       12418</span><br><span class="line">1531197704223007       13175</span><br><span class="line">1531198708234191       25275</span><br><span class="line">1532198206021061       12352</span><br><span class="line">1532197309044084       21131</span><br><span class="line">1532198206094108       20076</span><br><span class="line">1533198402091046       16392</span><br><span class="line">1533197405231092       25507</span><br><span class="line">1533197510141097       13482</span><br><span class="line">1533199006061403       22390</span><br><span class="line">1533197905261404       22059</span><br><span class="line">1533198303111443       25906</span><br><span class="line">1533198508036001       18009</span><br><span class="line">1533197512086002       27627</span><br><span class="line">1533197906156007       25881</span><br><span class="line">1533197504206011       13898</span><br><span class="line">1533198007276012       27095</span><br><span class="line">1533198004256027       27761</span><br><span class="line">1533197606026083       18785</span><br><span class="line">1533197702066114       18618</span><br><span class="line">1533197910176205       12649</span><br><span class="line">1533198811246245       29820</span><br><span class="line">1534198403103001       25702</span><br><span class="line">1534198403183043       18033</span><br><span class="line">1534197007193054       28238</span><br><span class="line">1534199004133073       22004</span><br><span class="line">1534198701103076       26811</span><br><span class="line">1534198606093104       12159</span><br><span class="line">1534199008033108       19285</span><br><span class="line">1534197412013119       21302</span><br><span class="line">1534198610178012       11210</span><br><span class="line">1534198406018015       22246</span><br><span class="line">1534198507278026       19547</span><br><span class="line">1534198702279031       22679</span><br><span class="line">1534198002219036       29597</span><br><span class="line">1534198605189050       11796</span><br><span class="line">1534198007209121       19654</span><br><span class="line">1535198702061054       25342</span><br><span class="line">1535198212101059       22819</span><br><span class="line">1535197503131117       19377</span><br><span class="line">1535198803255119       22937</span><br><span class="line">1535197608028311       15710</span><br><span class="line">1535197501128369       24591</span><br><span class="line">1536197405270013       15526</span><br><span class="line">1536198402134004       18326</span><br><span class="line">1536197312034015       21755</span><br><span class="line">1536197901275016       29158</span><br><span class="line">1536198405206083       29727</span><br><span class="line">1234199004029001       14620</span><br><span class="line">1234198002169002       12831</span><br><span class="line">1234198611199003       13283</span><br><span class="line">1234198012199004       12402</span><br><span class="line">1234198706219005       24886</span><br><span class="line">1234197812129006       23230</span><br><span class="line">1234197701239007       19611</span><br><span class="line">1234197906209008       13897</span><br><span class="line">1234197304129009       10231</span><br><span class="line">1234197003259010       24607</span><br><span class="line">1234198701079011       29518</span><br><span class="line">1234198405169012       21416</span><br><span class="line">1234198610119013       24790</span><br><span class="line">1234198907069014       13158</span><br><span class="line">1234198405109015       22260</span><br><span class="line">1234198106179016       24818</span><br><span class="line">1234198107099017       24940</span><br><span class="line">1234197708199018       16961</span><br><span class="line">1234198708199019       15929</span><br><span class="line">1234198201239020       18482</span><br><span class="line">1234198207069021       13467</span><br><span class="line">1234197312119022       22046</span><br><span class="line">1234198912069023       29357</span><br><span class="line">1234198311129024       13816</span><br><span class="line">1234198811099025       22464</span><br><span class="line">1234197104079026       10351</span><br><span class="line">1234197512268070       26906</span><br><span class="line">1234197504178071       18504</span><br><span class="line">1234197301168073       25673</span><br><span class="line">1234198605098074       16561</span><br><span class="line">1234198509118075       23956</span><br><span class="line">1234197511198076       15831</span><br><span class="line">1234198302028077       26572</span><br><span class="line">1234198708238078       23611</span><br><span class="line">1234197312088079       28083</span><br><span class="line">1234197406148080       14268</span><br><span class="line">1234197703048081       11723</span><br><span class="line">1234198001208082       20541</span><br><span class="line">1234198510168083       20543</span><br><span class="line">1234197608078084       22597</span><br><span class="line">1234199001118085       25643</span><br><span class="line">1234198203158086       16879</span><br><span class="line">1234197110178087       25850</span><br><span class="line">1234199003188088       27679</span><br><span class="line">1234197405268089       10967</span><br><span class="line">1234197311178090       10646</span><br><span class="line">1234198204058091       24014</span><br><span class="line">1234198603198092       13800</span><br><span class="line">1234199012078093       26813</span><br><span class="line">1234197006098094       11138</span><br><span class="line">1234197108058095       24278</span><br><span class="line">1234198505268096       23281</span><br><span class="line">1234197809078097       17968</span><br><span class="line">1234198012038098       22295</span><br><span class="line">1234198508078099       16772</span><br><span class="line">1234197907098100       20025</span><br><span class="line">1234197707098101       11314</span><br><span class="line">1234198808118102       27658</span><br><span class="line">1234198610248103       29995</span><br><span class="line">1234197409128104       27286</span><br><span class="line">1234197303158105       20618</span><br><span class="line">1234198311088106       27155</span><br><span class="line">1234198701048107       28656</span><br><span class="line">1234198304078108       13494</span><br><span class="line">1234198401198109       10978</span><br><span class="line">1234197611088110       21760</span><br><span class="line">1234198602148111       11563</span><br><span class="line">1234198311048112       22574</span><br><span class="line">1234197701268113       12725</span><br><span class="line">1234198802128114       26076</span><br><span class="line">1234197303028115       26401</span><br><span class="line">1234197509058116       28388</span><br><span class="line">1234198410288117       27558</span><br><span class="line">1234199007158118       16683</span><br><span class="line">1234197510248119       15552</span><br><span class="line">1234197208068120       13256</span><br><span class="line">1234197201068121       20977</span><br><span class="line">1234197712098122       13404</span><br><span class="line">1234197912258123       21381</span><br><span class="line">1234197307058124       27165</span><br><span class="line">1234197811128125       25232</span><br><span class="line">1234197003078126       23424</span><br><span class="line">1234197907048127       21859</span><br><span class="line">1234197807218128       26843</span><br><span class="line">1234197303148130       16550</span><br><span class="line">1234198609288131       18064</span><br><span class="line">1234198501128132       23214</span><br><span class="line">1234197005068133       14521</span><br><span class="line">1234197508028134       12830</span><br><span class="line">1234198402278135       11977</span><br><span class="line">1234197504218136       28962</span><br><span class="line">1234197709228137       13377</span><br><span class="line">1234198107108138       26220</span><br><span class="line">1230197405203218       26698</span><br><span class="line">1233197007050058       24942</span><br><span class="line">1233198104060178       21090</span><br><span class="line">1233198811040364       27434</span><br><span class="line">1233197412030414       11319</span><br><span class="line">1236198803025088       12697</span><br><span class="line">1234197906138139       28617</span><br><span class="line">1234198102238140       20104</span><br><span class="line">1234198709218141       14266</span><br><span class="line">1234198503118142       25458</span><br><span class="line">1234198207178143       12879</span><br><span class="line">1234197612018144       25047</span><br><span class="line">1234197702038145       12443</span><br><span class="line">1234197107148146       26526</span><br><span class="line">1234198710258147       27844</span><br><span class="line">1234198103128148       21973</span><br><span class="line">1234197207278149       29673</span><br><span class="line">1234197310038150       25735</span><br><span class="line">1234197512218151       22471</span><br><span class="line">1234197211258152       11752</span><br><span class="line">1234199004238153       28643</span><br><span class="line">1234198009078154       27158</span><br><span class="line">1234198911248155       10311</span><br><span class="line">1234198611138156       16654</span><br><span class="line">1234197808048157       24494</span><br><span class="line">1234197510278158       21539</span><br><span class="line">1234197506208159       13743</span><br><span class="line">1234197309158160       12802</span><br><span class="line">1234198505258161       12126</span><br><span class="line">1234198302098162       10694</span><br><span class="line">1234197710248163       12944</span><br><span class="line">1234198610148164       12065</span><br><span class="line">1234197005198165       10008</span><br><span class="line">1234197404238166       10634</span><br><span class="line">1234198007278167       21425</span><br><span class="line">1234197001168168       22861</span><br><span class="line">1234197303168169       27418</span><br><span class="line">1234197307178170       22362</span><br><span class="line">1234197905168171       19947</span><br><span class="line">1234197903208172       11690</span><br><span class="line">1234198106068173       11265</span><br><span class="line">1234198904278174       10389</span><br><span class="line">1234198903268175       26515</span><br><span class="line">1234197304078176       17138</span><br><span class="line">1234197402198177       18844</span><br><span class="line">1234197207068178       20639</span><br><span class="line">1234198205098179       16327</span><br><span class="line">1234198902268180       27563</span><br><span class="line">1234198102138181       10179</span><br><span class="line">1131198902092008       27936</span><br><span class="line">1131197304108030       28446</span><br><span class="line">1233198109040089       17461</span><br><span class="line">1233198508200203       10012</span><br><span class="line">1235197601273174       12751</span><br><span class="line">1235198209173224       23275</span><br><span class="line">1235198609203285       22081</span><br><span class="line">1236197907235026       16804</span><br><span class="line">1234198801289001       27786</span><br><span class="line">1234199006189002       19019</span><br><span class="line">1234197205039003       28672</span><br><span class="line">1234198810089004       15417</span><br><span class="line">1234197703039005       24318</span><br><span class="line">1234197409279006       19974</span><br><span class="line">1234199002139007       27919</span><br><span class="line">1234197506069008       11759</span><br><span class="line">1234197205049009       16736</span><br><span class="line">1234198002269010       17838</span><br><span class="line">1234198402049011       13050</span><br><span class="line">1234199006149012       28597</span><br><span class="line">1234198503069013       22384</span><br><span class="line">1234199004229014       10673</span><br><span class="line">1234198903089015       11229</span><br><span class="line">1234198711169016       23558</span><br><span class="line">1234197910059017       16595</span><br><span class="line">1234198402219018       17832</span><br><span class="line">1234198205229019       29799</span><br><span class="line">1234197411019020       25989</span><br><span class="line">1234198410169021       18688</span><br><span class="line">1234197905169022       18017</span><br><span class="line">1234198507059023       11564</span><br><span class="line">1234198002149024       18723</span><br><span class="line">1234198303269025       14515</span><br><span class="line">1234199005239026       14559</span><br><span class="line">1330198201289011       20717</span><br><span class="line">1331198702114240       23112</span><br><span class="line">1332198107013008       11228</span><br><span class="line">1431198511154103       24890</span><br><span class="line">1432198409062084       22022</span><br><span class="line">1432197202204037       13256</span><br><span class="line">1433198009085060       23635</span><br><span class="line">1433198709255216       14348</span><br><span class="line">1434197611098044       12396</span><br><span class="line">1434197504148184       21570</span><br><span class="line">1435197411122073       11990</span><br><span class="line">1435198202033142       11009</span><br><span class="line">1435198406073430       27399</span><br><span class="line">1530197111248009       10433</span><br><span class="line">1530199005108029       24867</span><br><span class="line">1530197411288030       26199</span><br><span class="line">1530198312158054       24154</span><br><span class="line">1531198209102002       14123</span><br><span class="line">1531197802104121       18770</span><br><span class="line">1531197002204204       23400</span><br><span class="line">1533198607241042       13904</span><br><span class="line">1533197706121311       13904</span><br><span class="line">1533198407216057       29164</span><br><span class="line">1533197507106058       20537</span><br><span class="line">1533198710186071       29777</span><br><span class="line">1533198307256264       27122</span><br><span class="line">1533199004286269       19516</span><br><span class="line">1534197908203047       15104</span><br><span class="line">1534199009228014       19371</span><br><span class="line">1534198602109107       12243</span><br><span class="line">1534197608149108       10478</span><br><span class="line">1535198607190037       12904</span><br><span class="line">1535198704112045       25296</span><br><span class="line">1535197511282065       22632</span><br><span class="line">1535197707192081       12537</span><br><span class="line">1535197602022083       11064</span><br><span class="line">1535198407222087       15885</span><br><span class="line">1535198002172088       28172</span><br><span class="line">1535198802082089       24058</span><br><span class="line">1535198909192091       12171</span><br><span class="line">1535199012282144       22735</span><br><span class="line">1535199008232161       25474</span><br><span class="line">1535198603242229       24408</span><br><span class="line">1535198503042296       26162</span><br><span class="line">1535197811082354       26763</span><br><span class="line">1535198609192434       17675</span><br><span class="line">1535198808143011       28201</span><br><span class="line">1536198105154006       27690</span><br><span class="line">1630197409082111       24052</span><br><span class="line">1630198811038030       25783</span><br><span class="line">1630198205108032       27212</span><br><span class="line">1630198603098044       26489</span><br><span class="line">1630199008068110       28112</span><br><span class="line">1630197410128114       19099</span><br><span class="line">1630198607238144       22138</span><br><span class="line">1630199006139005       14612</span><br><span class="line">1631198907150001       19596</span><br><span class="line">1631197601170011       18218</span><br><span class="line">1631198401250022       15989</span><br><span class="line">1631199003230055       17874</span><br><span class="line">1631198711140072       24781</span><br><span class="line">1631198203040077       28717</span><br><span class="line">1631197809172009       16202</span><br><span class="line">1631198708074019       11821</span><br><span class="line">1631197202127017       14173</span><br><span class="line">1631199008057090       20210</span><br><span class="line">1631198001288124       19047</span><br><span class="line">1631197802238243       12079</span><br><span class="line">1631198709038263       20999</span><br><span class="line">1631198508158280       26914</span><br><span class="line">1632198506218013       24126</span><br><span class="line">1632198707018035       10931</span><br><span class="line">1633198412267019       26385</span><br><span class="line">1633198611277075       19148</span><br><span class="line">1633198101057101       25844</span><br><span class="line">1633197504057210       12773</span><br><span class="line">1633197307177216       11246</span><br><span class="line">1633197202067229       17580</span><br><span class="line">1633197706227256       29815</span><br><span class="line">1633198908247269       19364</span><br><span class="line">1633197607047270       27994</span><br><span class="line">1633197310259025       17967</span><br><span class="line">1633198004039028       16854</span><br><span class="line">1633198805169035       16606</span><br><span class="line">1633198707129053       16645</span><br><span class="line">1634197601010006       17806</span><br><span class="line">1634197906140030       27674</span><br><span class="line">1634198202280069       18967</span><br><span class="line">1634197202120078       18059</span><br><span class="line">1634197606150098       19578</span><br><span class="line">1634197501180121       23982</span><br><span class="line">1634197501210147       28722</span><br><span class="line">1634198406230150       16101</span><br><span class="line">1634197304190152       15267</span><br><span class="line">1634198707190170       12856</span><br><span class="line">1634197409120218       15195</span><br><span class="line">1635197407271010       27869</span><br><span class="line">1636198202023012       29285</span><br><span class="line">1636198112105041       15066</span><br><span class="line">1636198811265174       19174</span><br><span class="line">1535198109102012       15411</span><br><span class="line">1535199008052069       25931</span><br><span class="line">1535197407192001       16598</span><br><span class="line">1535198509162002       16051</span><br><span class="line">1535198009242004       10939</span><br><span class="line">1535199003172005       11552</span><br><span class="line">1535197510072006       14208</span><br><span class="line">1535197405222007       16981</span><br><span class="line">1535198412282008       23446</span><br><span class="line">1535197511042009       14307</span><br><span class="line">1535198404182010       11877</span><br><span class="line">1535197812232011       14899</span><br><span class="line">1535198403162013       26055</span><br><span class="line">1535197012092014       15800</span><br><span class="line">1535197612022015       16039</span><br><span class="line">1535197104142016       19642</span><br><span class="line">1535198905182017       13293</span><br><span class="line">1535197610112018       25428</span><br><span class="line">1535197502022019       27111</span><br><span class="line">1535198904032020       25213</span><br><span class="line">1535198111102021       28999</span><br><span class="line">1535198310102022       13916</span><br><span class="line">1535198112272023       17217</span><br><span class="line">1535197208162047       11613</span><br><span class="line">1535198406272048       13450</span><br><span class="line">1535197312272049       21779</span><br><span class="line">1535197902132050       10635</span><br><span class="line">1535197106262051       18108</span><br><span class="line">1535198412072052       29822</span><br><span class="line">1535197408102053       23618</span><br><span class="line">1535198402212054       18687</span><br><span class="line">1535199012262055       28832</span><br><span class="line">1535197408082056       11569</span><br><span class="line">1535198206132057       25421</span><br><span class="line">1535198604132058       22643</span><br><span class="line">1535198904032059       29229</span><br><span class="line">1535198101022060       26379</span><br><span class="line">1535197002222061       14390</span><br><span class="line">1535197902082062       22243</span><br><span class="line">1535198903102063       22734</span><br><span class="line">1535198808062064       18847</span><br><span class="line">1535197203162065       16216</span><br><span class="line">1535198507172066       17110</span><br><span class="line">1535197509042067       18021</span><br><span class="line">1535198612162068       24746</span><br><span class="line">1535198203182093       18266</span><br><span class="line">1535198010192094       16164</span><br><span class="line">1535197607212095       15046</span><br><span class="line">1535198404092096       25556</span><br><span class="line">1535198108172097       18403</span><br><span class="line">1535198308012098       12940</span><br><span class="line">1535197510222099       29560</span><br><span class="line">1535197512162100       17683</span><br><span class="line">1535198805042101       12112</span><br><span class="line">1535198807282102       23389</span><br><span class="line">1535198310102103       11622</span><br><span class="line">1535198407272104       11065</span><br><span class="line">1535197507192105       15675</span><br><span class="line">1535198503152106       15769</span><br><span class="line">1535198307062107       20625</span><br><span class="line">1535198106262108       29649</span><br><span class="line">1535197903262109       28689</span><br><span class="line">1535198204132110       13639</span><br><span class="line">1535198808202111       27614</span><br><span class="line">1535197603152112       18166</span><br><span class="line">1535198612242113       12361</span><br><span class="line">1535197010172114       17072</span><br><span class="line">1535198802232115       15397</span><br><span class="line">1535198301082139       13214</span><br><span class="line">1535198202242140       18728</span><br><span class="line">1535199002222141       16027</span><br><span class="line">1535197208212142       28702</span><br><span class="line">1535198004062143       29948</span><br><span class="line">1535197005102144       16407</span><br><span class="line">1535197301202145       18538</span><br><span class="line">1535198407192146       11567</span><br><span class="line">1535198012082147       23755</span><br><span class="line">1535198007192148       19494</span><br><span class="line">1535197812202149       14265</span><br><span class="line">1535198803082150       22251</span><br><span class="line">1535197904252151       20512</span><br><span class="line">1535197709052152       21623</span><br><span class="line">1535197106102153       14812</span><br><span class="line">1535198906052154       20807</span><br><span class="line">1535198702182155       12771</span><br><span class="line">1535198606092156       22696</span><br><span class="line">1535198905172157       25593</span><br><span class="line">1535197807262158       27720</span><br><span class="line">1535197911262159       24090</span><br><span class="line">1535197204142160       13328</span><br><span class="line">1535198004112161       14277</span><br><span class="line">1535197106272186       27998</span><br><span class="line">1535197306042188       12492</span><br><span class="line">1535198512242189       15235</span><br><span class="line">1535198308152190       20690</span><br><span class="line">1535198106072191       19163</span><br><span class="line">1535198903072192       16872</span><br><span class="line">1535198811022193       15760</span><br><span class="line">1535198301262194       15536</span><br><span class="line">1535198801212195       12584</span><br><span class="line">1535198908052197       13597</span><br><span class="line">1535198901142198       29418</span><br><span class="line">1535199004132199       16650</span><br><span class="line">1535197411172200       29393</span><br><span class="line">1535198309082201       23186</span><br><span class="line">1535197508192202       10021</span><br><span class="line">1535198911232203       15774</span><br><span class="line">1535197808032204       17627</span><br><span class="line">1535197812152205       28673</span><br><span class="line">1535197204162206       27991</span><br><span class="line">1535198808112207       18116</span><br><span class="line">1535197411142208       29056</span><br><span class="line">1535197409232003       14656</span><br><span class="line">1535197012152187       11778</span><br><span class="line">1535198107162196       17291</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/Payment_code/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/Payment_code/wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/11/29/2018-11-29-引言/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">第一章：引言(Introduction)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/25/2018-11-25-检查信用卡号是否合法/">
+                <span class="level-item">函数程序设计实验九：检查信用卡号是否合法</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/cat/color_cat.jpg" alt="贾小厨">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        贾小厨
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        当前，你无法预测未来会怎样，但你可以选择跟靠谱的人一同工作，选择做正确的事。
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing.China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        158
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/jiaxiaochu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/jiaxiaochu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/ACM/">
+            <span class="level-start">
+                <span class="level-item">ACM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">84</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/ACM/Template/">
+            <span class="level-start">
+                <span class="level-item">Template</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/算法竞赛入门经典训练指南/">
+            <span class="level-start">
+                <span class="level-item">算法竞赛入门经典训练指南</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">50</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/函数程序设计实验/">
+            <span class="level-start">
+                <span class="level-item">函数程序设计实验</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/博客搭建/">
+            <span class="level-start">
+                <span class="level-item">博客搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
+            <span class="level-start">
+                <span class="level-item">吴恩达机器学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/学习笔记/">
+            <span class="level-start">
+                <span class="level-item">学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/小工具/">
+            <span class="level-start">
+                <span class="level-item">小工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/并行与分布式计算/">
+            <span class="level-start">
+                <span class="level-item">并行与分布式计算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/操作系统/">
+            <span class="level-start">
+                <span class="level-item">操作系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数字电路与逻辑设计/">
+            <span class="level-start">
+                <span class="level-item">数字电路与逻辑设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/机器学习/">
+            <span class="level-start">
+                <span class="level-item">机器学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/环境配置/">
+            <span class="level-start">
+                <span class="level-item">环境配置</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序设计/">
+            <span class="level-start">
+                <span class="level-item">程序设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机组成原理/">
+            <span class="level-start">
+                <span class="level-item">计算机组成原理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机网络/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
+            <span class="level-start">
+                <span class="level-item">超级计算机原理与操作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g592mgpd7mg30ot0ea7d5.gif" alt="pymysql远程连接被拒绝问题解决方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T16:08:33.000Z">2019-07-23</time></div>
+                    <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="has-link-black-ter is-size-6">pymysql远程连接被拒绝问题解决方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g590mpqs2ej30gg08c3ym.jpg" alt="Ubuntu系统搭建配置Python虚拟开发环境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time></div>
+                    <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="has-link-black-ter is-size-6">Ubuntu系统搭建配置Python虚拟开发环境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Northwestern Europe Regional Contest (NWERC) 2018">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="has-link-black-ter is-size-6">Northwestern Europe Regional Contest (NWERC) 2018</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ACM/">ACM</a> / <a class="has-link-grey -link" href="/categories/ACM/题解/">题解</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-应用层实验/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-应用层实验/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="函数程序设计实验十：车牌竞价信息处理" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 jiazhixiang&nbsp;
+                Powered &#10084; YH · Lin
+                </p>
+            </div>
+            
+            <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+            
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("4/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+            <div align="center">
+            <span id="busuanzi_container_site_pv" class="theme-info">本站总访问量-<span id="busuanzi_value_site_pv"></span>-次|
+              </span>
+              <span id="busuanzi_container_site_uv" class="theme-info">您是第-<span id="busuanzi_value_site_uv"></span>-位小伙伴</span>
+
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            </div>
+        </div>
+        <span>
+        <script type="text/javascript" src="//rf.revolvermaps.com/0/0/0.js?i=0xetp0d4rdh&amp;d=2&amp;p=1&amp;b=8&amp;w=193&amp;g=2&amp;f=arial&amp;fs=12&amp;r=0&amp;c0=000000&amp;c1=00a99d&amp;c2=000000&amp;ic0=0&amp;ic1=0" async="async"></script>
+        </span>
+        </div>
+
+    </div>
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            bp.src = '//push.zhanzhang.baidu.com/push.js';
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+        <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+    <script src="//code.tidio.co/wgmwb2zlxrcti0crizzmumshwbxpums2.js"></script>
+    
+</body>
+</html>

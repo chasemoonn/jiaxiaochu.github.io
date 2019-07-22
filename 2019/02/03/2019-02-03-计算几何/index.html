@@ -1,0 +1,2073 @@
+<!DOCTYPE html>
+<script src="/js/src/clicklove.js"></script>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>计算几何 - 贾志翔的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="二维点和向量化为坐标Coord进行运算，使用stl中的complex实现。 复数相乘的几何意义为长度相乘，极角相加。 用直线上的一点p和方向向量v表示一条经过p的直线，直线上的所有点q满足q=p+t*v，其中t是参数；当限制t≥0时，该参数方程表示射线；限制0≤t≤1时，该参数方程表示线段。 此外，如果已知线段端点a1和a2，可以通过Line(a1,a2-a1)来得到对应的参数形式。 Morley">
+<meta name="keywords" content="ICPC模板">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算几何">
+<meta property="og:url" content="http://yoursite.com/2019/02/03/2019-02-03-计算几何/index.html">
+<meta property="og:site_name" content="贾志翔的博客">
+<meta property="og:description" content="二维点和向量化为坐标Coord进行运算，使用stl中的complex实现。 复数相乘的几何意义为长度相乘，极角相加。 用直线上的一点p和方向向量v表示一条经过p的直线，直线上的所有点q满足q=p+t*v，其中t是参数；当限制t≥0时，该参数方程表示射线；限制0≤t≤1时，该参数方程表示线段。 此外，如果已知线段端点a1和a2，可以通过Line(a1,a2-a1)来得到对应的参数形式。 Morley">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-10T16:08:06.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算几何">
+<meta name="twitter:description" content="二维点和向量化为坐标Coord进行运算，使用stl中的complex实现。 复数相乘的几何意义为长度相乘，极角相加。 用直线上的一点p和方向向量v表示一条经过p的直线，直线上的所有点q满足q=p+t*v，其中t是参数；当限制t≥0时，该参数方程表示射线；限制0≤t≤1时，该参数方程表示线段。 此外，如果已知线段端点a1和a2，可以通过Line(a1,a2-a1)来得到对应的参数形式。 Morley">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="计算几何" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">主页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/about">支持</a>
+                
+                <a class="navbar-item" href="http://www.tripwiremagazine.com/wp-content/uploads/images/stories/Articles/9_Funniest_JavaScript_effects/Unclosable%20Window.html">别点·有毒</a>
+                
+                <a class="navbar-item" href="http://fanfou.com/">饭否</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-02-03T10:00:02.000Z">2019-02-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ACM/Template/">Template</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    26 分钟 读完 (大约 3963 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                计算几何
+            
+        </h1>
+        <div class="content">
+            <h2 id="二维"><a href="#二维" class="headerlink" title="二维"></a>二维</h2><p>点和向量化为坐标Coord进行运算，使用stl中的complex实现。</p>
+<p>复数相乘的几何意义为长度相乘，极角相加。</p>
+<p>用直线上的一点p和方向向量v表示一条经过p的直线，直线上的所有点q满足q=p+t*v，其中t是参数；当限制t≥0时，该参数方程表示射线；限制0≤t≤1时，该参数方程表示线段。</p>
+<p>此外，如果已知线段端点a1和a2，可以通过Line(a1,a2-a1)来得到对应的参数形式。</p>
+<p>Morley定理：三角形每个内角的三等分线相交成等边三角形。</p>
+<p>欧拉定理：平面图的点数V、边数E和面数F满足V+F-E=2。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> lf;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">complex</span>&lt;lf&gt; Coord;</span><br><span class="line"><span class="hljs-keyword">const</span> lf EPS = <span class="hljs-number">1e-9</span>, PI = <span class="hljs-built_in">acos</span>(<span class="hljs-number">-1</span>);</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> X real()</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> Y imag()</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Line</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	Coord p, v;</span><br><span class="line">	Line(Coord p = Coord(), Coord v = Coord()) : p(p), v(v) &#123;&#125;</span><br><span class="line">	<span class="hljs-function">Coord <span class="hljs-title">point</span><span class="hljs-params">(lf t)</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> p + v * t; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Circle</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	Coord c;</span><br><span class="line">	lf r;</span><br><span class="line">	Circle(Coord c = Coord(), lf r = <span class="hljs-number">0</span>) : c(c), r(r) &#123;&#125;</span><br><span class="line">	<span class="hljs-function">Coord <span class="hljs-title">point</span><span class="hljs-params">(lf t)</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> c + polar(r, t); &#125; <span class="hljs-comment">//t为参数，幅角</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">Coord(lf x=0,lf y=0);//构造函数</span></span><br><span class="line"><span class="hljs-comment">lf real(Coord a);//a的实部（复平面的横坐标）,也可写作a.real()</span></span><br><span class="line"><span class="hljs-comment">lf imag(Coord a);//a的虚部（复平面的纵坐标）,也可写作a.imag()</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">lf abs(Coord a);//向量a的模长，或是点a到原点的距离</span></span><br><span class="line"><span class="hljs-comment">lf norm(Coord a);//abs的平方，比abs快，但是要注意浮点数精度溢出</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">lf arg(Coord a);//a的幅角，与atan2(a.real(),a.imag())等价</span></span><br><span class="line"><span class="hljs-comment">Coord polar(lf r,lf t);//极坐标生成方式，r为幅值，t为幅角</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">//运算符重载+、-、*、/（以及对应的赋值运算，但是赋值运算不能写在表达式中，详见参考地址）、&lt;&lt;、&gt;&gt;（输出括号形式的坐标）</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sgn</span><span class="hljs-params">(lf d)</span> </span>&#123; <span class="hljs-keyword">return</span> (d &gt; EPS) - (d &lt; -EPS); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>!=(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B) &#123; <span class="hljs-keyword">return</span> sgn(A.X - B.X) || sgn(A.Y - B.Y); &#125; <span class="hljs-comment">//不等运算符，涉及到浮点数比较要重写</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>==(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B) &#123; <span class="hljs-keyword">return</span> !(A != B); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpCoord</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> sgn(A.X - B.X) ? sgn(A.X - B.X) &lt; <span class="hljs-number">0</span> : sgn(A.Y - B.Y) &lt; <span class="hljs-number">0</span>; &#125; <span class="hljs-comment">//复数没有小于运算，只能这样定义一个比较函数</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmpLine</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Line &amp;A, <span class="hljs-keyword">const</span> Line &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> sgn(arg(A.v) - arg(B.v)) &lt; <span class="hljs-number">0</span>; &#125; <span class="hljs-comment">//按极角排序，求凸包中使用</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">Dot</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> A.X * B.X + A.Y * B.Y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">Cross</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> A.X * B.Y - B.X * A.Y; &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">Angle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">acos</span>(Dot(A, B) / <span class="hljs-built_in">abs</span>(A) / <span class="hljs-built_in">abs</span>(B)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">Area2</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B, <span class="hljs-keyword">const</span> Coord &amp;C)</span> </span>&#123; <span class="hljs-keyword">return</span> Cross(B - A, C - A); &#125; <span class="hljs-comment">//三角形ABC有向面积的两倍</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">Rotate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A, lf rad)</span> </span>&#123; <span class="hljs-keyword">return</span> A * polar(<span class="hljs-number">1.0</span>, rad);&#125; <span class="hljs-comment">//向量A逆时针旋转rad弧度</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">Normal</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A)</span> <span class="hljs-comment">//A的法向量，把A逆时针旋转九十度并长度化为1</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf L = <span class="hljs-built_in">abs</span>(A);</span><br><span class="line">	<span class="hljs-keyword">return</span> Coord(-A.Y / L, A.X / L);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">onLeft</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Line &amp;L)</span> </span>&#123; <span class="hljs-keyword">return</span> sgn(Cross(L.v, P - L.p)) &gt; <span class="hljs-number">0</span>; &#125; <span class="hljs-comment">//p是否在有向直线L左侧，不含线上</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">DistanceToLine</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Line &amp;L)</span> </span>&#123; <span class="hljs-keyword">return</span> Cross(L.v, P - L.p) / <span class="hljs-built_in">abs</span>(L.v); &#125; <span class="hljs-comment">//点到直线距离（有向）</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">DistanceToLine</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> DistanceToLine(P, Line(A, B - A)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">DistanceToSegment</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> <span class="hljs-comment">//点到线段的距离（无向）</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (A == B)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(P - A);</span><br><span class="line">	Coord v1 = B - A, v2 = P - A, v3 = P - B;</span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(Dot(v1, v2)) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(v2);</span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(Dot(v1, v3)) &gt; <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(v3);</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-built_in">fabs</span>(DistanceToLine(P, Line(A, B - A)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getLineProjection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Line &amp;L)</span> </span>&#123; <span class="hljs-keyword">return</span> L.point(Dot(L.v, P - L.p) / norm(L.v)); &#125; <span class="hljs-comment">//点在直线上的投影</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getLineProjection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> getLineProjection(P, Line(A, B - A)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getSymmetry</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Coord &amp;O)</span> </span>&#123; <span class="hljs-keyword">return</span> O + O - P; &#125; <span class="hljs-comment">//P关于O的对称点</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getSymmetry</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Line &amp;L)</span> </span>&#123; <span class="hljs-keyword">return</span> getSymmetry(P, getLineProjection(P, L)); &#125; <span class="hljs-comment">//P关于L的对称点</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getLineIntersection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Line &amp;L1, <span class="hljs-keyword">const</span> Line &amp;L2)</span> </span>&#123; <span class="hljs-keyword">return</span> L1.point(Cross(L2.v, L1.p - L2.p) / Cross(L1.v, L2.v)); &#125; <span class="hljs-comment">//直线交点,须确保两直线相交</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getLineIntersection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A1, <span class="hljs-keyword">const</span> Coord &amp;A2, <span class="hljs-keyword">const</span> Coord &amp;B1, <span class="hljs-keyword">const</span> Coord &amp;B2)</span> </span>&#123; <span class="hljs-keyword">return</span> getLineIntersection(Line(A1, A2 - A1), Line(B1, B2 - B1)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">SegmentProperIntersection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;A1, <span class="hljs-keyword">const</span> Coord &amp;A2, <span class="hljs-keyword">const</span> Coord &amp;B1, <span class="hljs-keyword">const</span> Coord &amp;B2)</span> <span class="hljs-comment">//线段相交判定，交点不在一条线段的端点</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf C1 = Cross(A2 - A1, B1 - A1), C2 = Cross(A2 - A1, B2 - A1),</span><br><span class="line">	   C3 = Cross(B2 - B1, A1 - B1), C4 = Cross(B2 - B1, A2 - B1);</span><br><span class="line">	<span class="hljs-keyword">return</span> sgn(C1) * sgn(C2) &lt; <span class="hljs-number">0</span> &amp;&amp; sgn(C3) * sgn(C4) &lt; <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">onSegment</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;P, <span class="hljs-keyword">const</span> Coord &amp;A1, <span class="hljs-keyword">const</span> Coord &amp;A2)</span> </span>&#123; <span class="hljs-keyword">return</span> sgn(Dot(A1 - P, A2 - P)) &lt; <span class="hljs-number">0</span> &amp;&amp; !sgn(Cross(A1 - P, A2 - P)); &#125; <span class="hljs-comment">//判断点是否在线段上，不包含端点</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">PolygonArea</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;p)</span> <span class="hljs-comment">//计算多边形的有向面积，凸多边形即为面积</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf s = <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt; p.size(); ++i)</span><br><span class="line">		s += Area2(p[<span class="hljs-number">0</span>], p[i - <span class="hljs-number">1</span>], p[i]);</span><br><span class="line">	<span class="hljs-keyword">return</span> s / <span class="hljs-number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">inPolygon</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;p, <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;poly)</span> <span class="hljs-comment">//点在多边形内的判定，转角法，正值为内部，0为外部，-1在边界上</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, k, d1, d2, n = poly.size(); i != n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (onSegment(p, poly[i], poly[(i + <span class="hljs-number">1</span>) % n]))</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; <span class="hljs-comment">//在边界上</span></span><br><span class="line">		k = sgn(Cross(poly[(i + <span class="hljs-number">1</span>) % n] - poly[i], p - poly[i]));</span><br><span class="line">		d1 = sgn(poly[i].Y - p.Y);</span><br><span class="line">		d2 = sgn(poly[(i + <span class="hljs-number">1</span>) % n].Y - p.Y);</span><br><span class="line">		<span class="hljs-keyword">if</span> (k &gt; <span class="hljs-number">0</span> &amp;&amp; d1 &lt;= <span class="hljs-number">0</span> &amp;&amp; d2 &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			++ans;</span><br><span class="line">		<span class="hljs-keyword">if</span> (k &lt; <span class="hljs-number">0</span> &amp;&amp; d2 &lt;= <span class="hljs-number">0</span> &amp;&amp; d1 &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			--ans;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;Coord&gt; ConvexHull(<span class="hljs-built_in">vector</span>&lt;Coord&gt; p, <span class="hljs-keyword">int</span> collineation = <span class="hljs-number">1</span>) <span class="hljs-comment">//获得凸包，不希望凸包的边上有输入点第二个参数传0</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Coord&gt; ans;</span><br><span class="line">	sort(p.begin(), p.end(), cmpCoord); <span class="hljs-comment">//先比横坐标再比纵坐标</span></span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; p.size(); ++i)  <span class="hljs-comment">//求出下凸包</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">while</span> (ans.size() &gt; <span class="hljs-number">1</span> &amp;&amp; sgn(Area2(ans[ans.size() - <span class="hljs-number">2</span>], ans[ans.size() - <span class="hljs-number">1</span>], p[i])) &lt; collineation)</span><br><span class="line">			ans.pop_back();</span><br><span class="line">		ans.push_back(p[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = p.size() - <span class="hljs-number">2</span>, k = ans.size(); i &gt;= <span class="hljs-number">0</span>; --i) <span class="hljs-comment">//求出上凸包</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">while</span> (ans.size() &gt; k &amp;&amp; -sgn(Area2(ans[ans.size() - <span class="hljs-number">1</span>], ans[ans.size() - <span class="hljs-number">2</span>], p[i])) &lt; collineation)</span><br><span class="line">			ans.pop_back();</span><br><span class="line">		ans.push_back(p[i]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">if</span> (p.size() &gt; <span class="hljs-number">1</span>)</span><br><span class="line">		ans.pop_back();</span><br><span class="line">	<span class="hljs-keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;Coord&gt; cutPolygon(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;poly, <span class="hljs-keyword">const</span> Coord &amp;A, <span class="hljs-keyword">const</span> Coord &amp;B) <span class="hljs-comment">//用有向直线A-&gt;B切割多边形poly， 返回“左侧”。 如果退化，可能会返回一个单点或者线段，复杂度O(n^2)</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Coord&gt; newpoly;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, n = poly.size(); i != n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		Coord C = poly[i], D = poly[(i + <span class="hljs-number">1</span>) % n];</span><br><span class="line">		<span class="hljs-keyword">if</span> (sgn(Cross(B - A, C - A)) &gt;= <span class="hljs-number">0</span>)</span><br><span class="line">			newpoly.push_back(C);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!sgn(Cross(B - A, C - D)))</span><br><span class="line">		&#123;</span><br><span class="line">			Coord ip = getLineIntersection(Line(A, B - A), Line(C, D - C));</span><br><span class="line">			<span class="hljs-keyword">if</span> (onSegment(ip, C, D))</span><br><span class="line">				newpoly.push_back(ip);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> newpoly;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;Coord&gt; getHalfPlaneIntersection(<span class="hljs-built_in">vector</span>&lt;Line&gt; L) <span class="hljs-comment">//半平面交</span></span><br><span class="line">&#123;</span><br><span class="line">	sort(L.begin(), L.end(), cmpLine);  <span class="hljs-comment">//按极角排序</span></span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Coord&gt; p(L.size(), Coord()); <span class="hljs-comment">//p[i]为q[i]和q[i+1]的交点</span></span><br><span class="line">	<span class="hljs-keyword">int</span> first = <span class="hljs-number">0</span>, last = <span class="hljs-number">0</span>;			<span class="hljs-comment">//双端队列的第一个元素和最后一个元素</span></span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Line&gt; q(L.size(), Line());   <span class="hljs-comment">//双端队列</span></span><br><span class="line">	q[<span class="hljs-number">0</span>] = L[<span class="hljs-number">0</span>];						<span class="hljs-comment">//队列初始化为只有一个半平面L[0]</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, n = L.size(); i != n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">while</span> (first &lt; last &amp;&amp; !onLeft(p[last - <span class="hljs-number">1</span>], L[i]))</span><br><span class="line">			--last;</span><br><span class="line">		<span class="hljs-keyword">while</span> (first &lt; last &amp;&amp; !onLeft(p[first], L[i]))</span><br><span class="line">			++first;</span><br><span class="line"></span><br><span class="line">		q[++last] = L[i];</span><br><span class="line">		<span class="hljs-keyword">if</span> (!sgn(Cross(q[last].v, q[last - <span class="hljs-number">1</span>].v)))</span><br><span class="line">		&#123;</span><br><span class="line">			--last;</span><br><span class="line">			<span class="hljs-keyword">if</span> (onLeft(L[i].p, q[last]))</span><br><span class="line">				q[last] = L[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">if</span> (first &lt; last)</span><br><span class="line">			p[last - <span class="hljs-number">1</span>] = getLineIntersection(q[last - <span class="hljs-number">1</span>], q[last]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">while</span> (first &lt; last &amp;&amp; !onLeft(p[last - <span class="hljs-number">1</span>], q[first]))</span><br><span class="line">		--last; <span class="hljs-comment">//删除无用平面</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (last - first &lt;= <span class="hljs-number">1</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt;(); <span class="hljs-comment">//空集</span></span><br><span class="line">	p[last] = getLineIntersection(q[last], q[first]);</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt;(p.begin() + first, p.begin() + last + <span class="hljs-number">1</span>); <span class="hljs-comment">//从deque复制到输出中</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getLineCircleIntersection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Line &amp;L, <span class="hljs-keyword">const</span> Circle &amp;C, <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;sol)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf a = L.v.X,</span><br><span class="line">	   b = L.p.X - C.c.X,</span><br><span class="line">	   c = L.v.Y,</span><br><span class="line">	   d = L.p.Y - C.c.Y,</span><br><span class="line">	   e = a * a + c * c,</span><br><span class="line">	   f = <span class="hljs-number">2</span> * (a * b + c * d),</span><br><span class="line">	   g = b * b + d * d - C.r * C.r,</span><br><span class="line">	   delta = f * f - <span class="hljs-number">4</span> * e * g;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(delta) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(delta))</span><br><span class="line">		<span class="hljs-keyword">return</span> sol.push_back(L.point(-f / (<span class="hljs-number">2</span> * e))), <span class="hljs-number">1</span>;</span><br><span class="line">	sol.push_back(L.point((-f - <span class="hljs-built_in">sqrt</span>(delta)) / (<span class="hljs-number">2</span> * e)));</span><br><span class="line">	sol.push_back(L.point((-f + <span class="hljs-built_in">sqrt</span>(delta)) / (<span class="hljs-number">2</span> * e)));</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getCircleIntersection</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Circle &amp;C1, <span class="hljs-keyword">const</span> Circle &amp;C2, <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;sol)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf d = <span class="hljs-built_in">abs</span>(C1.c - C2.c);</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(d))</span><br><span class="line">		<span class="hljs-keyword">return</span> sgn(C1.r - C2.r) ? <span class="hljs-number">0</span> : <span class="hljs-number">-1</span>; <span class="hljs-comment">//重合返回-1</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(C1.r + C2.r - d) &lt; <span class="hljs-number">0</span> || sgn(<span class="hljs-built_in">fabs</span>(C1.r - C2.r) - d) &gt; <span class="hljs-number">0</span>) <span class="hljs-comment">//外离或内含</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">	lf a = arg(C2.c - C1.c),</span><br><span class="line">	   da = <span class="hljs-built_in">acos</span>((C1.r * C1.r + d * d - C2.r * C2.r) / (<span class="hljs-number">2</span> * C1.r * d));</span><br><span class="line"></span><br><span class="line">	Coord p1 = C1.point(a - da), p2 = C1.point(a + da);</span><br><span class="line"></span><br><span class="line">	sol.push_back(p1);</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (p1 == p2)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; <span class="hljs-comment">//相切</span></span><br><span class="line">	<span class="hljs-keyword">return</span> sol.push_back(p2), <span class="hljs-number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Line <span class="hljs-title">getTangent</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;C, <span class="hljs-keyword">const</span> Coord &amp;P)</span> </span>&#123; <span class="hljs-keyword">return</span> Line(P, Normal(C - P)); &#125; <span class="hljs-comment">//圆心C，圆上一点P处切线</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getTangents</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord &amp;p, <span class="hljs-keyword">const</span> Circle &amp;C, <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;sol)</span> <span class="hljs-comment">//点到圆的切点，返回个数</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	Coord u = p - C.c;</span><br><span class="line">	lf d = <span class="hljs-built_in">abs</span>(u);</span><br><span class="line">	<span class="hljs-keyword">if</span> (d &lt; C.r)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;	  <span class="hljs-comment">//点在圆内</span></span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(d - C.r)) <span class="hljs-comment">//点在圆上</span></span><br><span class="line">		<span class="hljs-keyword">return</span> sol.push_back(p), <span class="hljs-number">1</span>;</span><br><span class="line">	lf base = arg(u), ang = <span class="hljs-built_in">acos</span>(C.r / d);</span><br><span class="line">	sol.push_back(C.point(base + ang));</span><br><span class="line">	sol.push_back(C.point(base - ang));</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getTangents</span><span class="hljs-params">(Circle A, Circle &amp;B, <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;a, <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;b)</span> <span class="hljs-comment">//公共切线的切点</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (A.r &lt; B.r)</span><br><span class="line">		swap(A, B), swap(a, b); <span class="hljs-comment">//有时需标记交换</span></span><br><span class="line"></span><br><span class="line">	lf d = <span class="hljs-built_in">abs</span>(A.c - B.c),</span><br><span class="line">	   rdiff = A.r - B.r,</span><br><span class="line">	   rsum = A.r + B.r;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(d - rdiff) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; <span class="hljs-comment">//内含</span></span><br><span class="line"></span><br><span class="line">	lf base = arg(B.c - A.c);</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(d) &amp;&amp; !sgn(rdiff))</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; <span class="hljs-comment">//重合，无穷多条切线</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(d - rdiff)) <span class="hljs-comment">//内切，外公切线</span></span><br><span class="line">	&#123;</span><br><span class="line">		a.push_back(A.point(base));</span><br><span class="line">		b.push_back(B.point(base));</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-comment">//有外公切线的情形</span></span><br><span class="line">	lf ang = <span class="hljs-built_in">acos</span>(rdiff / d);</span><br><span class="line">	a.push_back(A.point(base + ang));</span><br><span class="line">	b.push_back(B.point(base + ang));</span><br><span class="line">	a.push_back(A.point(base - ang));</span><br><span class="line">	b.push_back(B.point(base - ang));</span><br><span class="line">	cnt += <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (!sgn(d - rsum))</span><br><span class="line">	&#123;</span><br><span class="line">		a.push_back(A.point(base));</span><br><span class="line">		b.push_back(B.point(base + PI));</span><br><span class="line">		++cnt;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sgn(d - rsum) &gt; <span class="hljs-number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		lf ang_in = <span class="hljs-built_in">acos</span>(rsum / d);</span><br><span class="line">		a.push_back(A.point(base + ang_in));</span><br><span class="line">		b.push_back(B.point(base + ang_in + PI));</span><br><span class="line">		a.push_back(A.point(base - ang_in));</span><br><span class="line">		b.push_back(B.point(base - ang_in + PI));</span><br><span class="line">		cnt += <span class="hljs-number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">AreaCircleWithTriangle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Circle &amp;C, Coord A, Coord B)</span> <span class="hljs-comment">//C和三角形OAB的相交面积，如果三角形顶点不在O上则把圆和三角形同时平移，直到有一个顶点在O上</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> sg = sgn(Cross(A, B));</span><br><span class="line">	<span class="hljs-keyword">if</span> (!sg || A == C.c || B == C.c)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line">	lf OA = <span class="hljs-built_in">abs</span>(A - C.c), OB = <span class="hljs-built_in">abs</span>(B - C.c), angle = Angle(A, B),</span><br><span class="line">	   d = DistanceToLine(Coord(), A, B);</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(OA - C.r) &lt;= <span class="hljs-number">0</span> &amp;&amp; sgn(OB - C.r) &lt;= <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> Cross(A, B) / <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(OA - C.r) &gt;= <span class="hljs-number">0</span> &amp;&amp; sgn(OB - C.r) &gt;= <span class="hljs-number">0</span> &amp;&amp; sgn(d - C.r) &gt;= <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> sg * C.r * C.r * angle / <span class="hljs-number">2</span>;</span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(OA - C.r) &gt;= <span class="hljs-number">0</span> &amp;&amp; sgn(OB - C.r) &gt;= <span class="hljs-number">0</span> &amp;&amp; sgn(d - C.r) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		Coord prj = getLineProjection(Coord(), A, B);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!onSegment(prj, A, B))</span><br><span class="line">			<span class="hljs-keyword">return</span> sg * C.r * C.r * angle / <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">		<span class="hljs-built_in">vector</span>&lt;Coord&gt; p;</span><br><span class="line">		Line L = Line(A, B - A);</span><br><span class="line">		getLineCircleIntersection(L, C, p);</span><br><span class="line"></span><br><span class="line">		lf s1 = C.r * C.r * angle / <span class="hljs-number">2</span>,</span><br><span class="line">		   s2 = C.r * C.r * Angle(p[<span class="hljs-number">0</span>], p[<span class="hljs-number">1</span>]) / <span class="hljs-number">2</span>;</span><br><span class="line">		s2 -= <span class="hljs-built_in">fabs</span>(Cross(p[<span class="hljs-number">0</span>], p[<span class="hljs-number">1</span>]) / <span class="hljs-number">2</span>);</span><br><span class="line">		s1 = s1 - s2;</span><br><span class="line"></span><br><span class="line">		<span class="hljs-keyword">return</span> sg * s1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">if</span> (sgn(OB - C.r) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">		swap(A, B);</span><br><span class="line"></span><br><span class="line">	Line L = Line(A, B - A);</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Coord&gt; inter;</span><br><span class="line">	getLineCircleIntersection(L, C, inter);</span><br><span class="line">	Coord inter_point = inter[!onSegment(inter[<span class="hljs-number">0</span>], A, B)];</span><br><span class="line"></span><br><span class="line">	lf s = <span class="hljs-built_in">fabs</span>(Cross(inter_point, A) / <span class="hljs-number">2</span>);</span><br><span class="line">	s += C.r * C.r * Angle(inter_point, B) / <span class="hljs-number">2</span>;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">return</span> s * sg;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">AreaCircleWithPolygon</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Circle &amp;C, <span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;p)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf ans = <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; p.size(); ++i)</span><br><span class="line">		ans += AreaCircleWithTriangle(C, p[i], p[(i + <span class="hljs-number">1</span>) % p.size()]);</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-built_in">fabs</span>(ans);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Coord <span class="hljs-title">getGravityCenter</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord&gt; &amp;p)</span> <span class="hljs-comment">//多边形重心</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-function">Coord <span class="hljs-title">a</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>)</span></span>;</span><br><span class="line">	lf am = <span class="hljs-number">0</span>, mj;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; p.size(); ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		mj = Cross(p[i], p[(i + <span class="hljs-number">1</span>) % p.size()]);</span><br><span class="line">		a += mj * (p[i] + p[(i + <span class="hljs-number">1</span>) % p.size()]);</span><br><span class="line">		am += mj;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> a / am / <span class="hljs-number">3.0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三维"><a href="#三维" class="headerlink" title="三维"></a>三维</h2><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">double</span> lf;</span><br><span class="line"><span class="hljs-keyword">const</span> lf EPS = <span class="hljs-number">1e-9</span>, INF = <span class="hljs-number">1e9</span>, PI = <span class="hljs-built_in">acos</span>(<span class="hljs-number">-1</span>);</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">sgn</span><span class="hljs-params">(lf d)</span> </span>&#123; <span class="hljs-keyword">return</span> (d &gt; EPS) - (d &lt; -EPS); &#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Coord3</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	lf X, Y, Z;</span><br><span class="line">	<span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>!=(<span class="hljs-keyword">const</span> Coord3 &amp;a, <span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> sgn(a.X - b.X) || sgn(a.Y - b.Y) || sgn(a.Z - b.Z); &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span>==(<span class="hljs-keyword">const</span> Coord3 &amp;a, <span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> !(a != b); &#125;</span><br><span class="line">	Coord3 &amp;<span class="hljs-keyword">operator</span>+=(<span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> X += b.X, Y += b.Y, Z += b.Z, *<span class="hljs-keyword">this</span>; &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> Coord3 <span class="hljs-keyword">operator</span>+(Coord3 a, <span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> a += b; &#125;</span><br><span class="line">	Coord3 &amp;<span class="hljs-keyword">operator</span>-=(<span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> X -= b.X, Y -= b.Y, Z -= b.Z, *<span class="hljs-keyword">this</span>; &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> Coord3 <span class="hljs-keyword">operator</span>-(Coord3 a, <span class="hljs-keyword">const</span> Coord3 &amp;b) &#123; <span class="hljs-keyword">return</span> a -= b; &#125;</span><br><span class="line">	Coord3 &amp;<span class="hljs-keyword">operator</span>*=(lf d) &#123; <span class="hljs-keyword">return</span> X *= d, Y *= d, Z *= d, *<span class="hljs-keyword">this</span>; &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> Coord3 <span class="hljs-keyword">operator</span>*(Coord3 a, lf d) &#123; <span class="hljs-keyword">return</span> a *= d; &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> Coord3 <span class="hljs-keyword">operator</span>*(lf d, Coord3 a) &#123; <span class="hljs-keyword">return</span> a *= d; &#125;</span><br><span class="line">	Coord3 &amp;<span class="hljs-keyword">operator</span>/=(lf d) &#123; <span class="hljs-keyword">return</span> X /= d, Y /= d, Z /= d, *<span class="hljs-keyword">this</span>; &#125;</span><br><span class="line">	<span class="hljs-keyword">friend</span> Coord3 <span class="hljs-keyword">operator</span>/(Coord3 a, lf d) &#123; <span class="hljs-keyword">return</span> a /= d; &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">Dot</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord3 &amp;A, <span class="hljs-keyword">const</span> Coord3 &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> A.X * B.X + A.Y * B.Y + A.Z * B.Z; &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> Coord3 <span class="hljs-title">Cross</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord3 &amp;A, <span class="hljs-keyword">const</span> Coord3 &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> &#123;A.Y * B.Z - A.Z * B.Y, A.Z * B.X - A.X * B.Z, A.X * B.Y - A.Y * B.X&#125;; &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">norm</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord3 &amp;A)</span> </span>&#123; <span class="hljs-keyword">return</span> Dot(A, A); &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">abs</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord3 &amp;A)</span> </span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">sqrt</span>(norm(A)); &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">Angle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Coord3 &amp;A, <span class="hljs-keyword">const</span> Coord3 &amp;B)</span> </span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">acos</span>(Dot(A, B) / <span class="hljs-built_in">abs</span>(A) / <span class="hljs-built_in">abs</span>(B)); &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">Area2</span><span class="hljs-params">(Coord3 A, Coord3 B, Coord3 C)</span> </span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(Cross(B - A, C - A)); &#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">Volume6</span><span class="hljs-params">(Coord3 A, Coord3 B, Coord3 C, Coord3 D)</span> </span>&#123; <span class="hljs-keyword">return</span> Dot(D - A, Cross(B - A, C - A)); &#125;	 <span class="hljs-comment">//四面体体积</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> Coord3 <span class="hljs-title">Centroid</span><span class="hljs-params">(Coord3 A, Coord3 B, Coord3 C, Coord3 D)</span> </span>&#123; <span class="hljs-keyword">return</span> (A + B + C + D) / <span class="hljs-number">4.0</span>; &#125;		  <span class="hljs-comment">//四面体的重心</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">DistanceToPlane</span><span class="hljs-params">(Coord3 p, Coord3 p0, <span class="hljs-keyword">const</span> Coord3 &amp;n)</span> </span>&#123; <span class="hljs-keyword">return</span> Dot(p - p0, n) / <span class="hljs-built_in">abs</span>(n); &#125;		  <span class="hljs-comment">//点p到平面p0-n的有向距离</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> Coord3 <span class="hljs-title">getPlaneProjection</span><span class="hljs-params">(Coord3 p, Coord3 p0, <span class="hljs-keyword">const</span> Coord3 &amp;n)</span> </span>&#123; <span class="hljs-keyword">return</span> p - n * Dot(p - p0, n); &#125; <span class="hljs-comment">//点p在平面p0-n上的投影。n必须为单位向量</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> Coord3 <span class="hljs-title">LinePlaneIntersection</span><span class="hljs-params">(Coord3 p1, Coord3 p2, Coord3 p0, Coord3 n)</span>							  <span class="hljs-comment">//直线p1-p2 与平面p0-n的交点，假设交点唯一存在</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 v = p2 - p1;</span><br><span class="line">		lf t = Dot(n, p0 - p1) / Dot(n, p2 - p1); <span class="hljs-comment">//分母为0，直线与平面平行或在平面上</span></span><br><span class="line">		<span class="hljs-keyword">return</span> p1 + v * t;						  <span class="hljs-comment">//如果是线段 判断t是否在0~1之间</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">DistanceToLine</span><span class="hljs-params">(Coord3 P, Coord3 A, Coord3 B)</span> <span class="hljs-comment">//点P到直线AB的距离</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 v1 = B - A, v2 = P - A;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(Cross(v1, v2)) / <span class="hljs-built_in">abs</span>(v1);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">DistanceToSeg</span><span class="hljs-params">(Coord3 P, Coord3 A, Coord3 B)</span> <span class="hljs-comment">//点到线段的距离</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (A == B)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(P - A);</span><br><span class="line">		Coord3 v1 = B - A, v2 = P - A, v3 = P - B;</span><br><span class="line">		<span class="hljs-keyword">if</span> (sgn(Dot(v1, v2)) &lt; <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(v2);</span><br><span class="line">		<span class="hljs-keyword">if</span> (sgn(Dot(v1, v3)) &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-built_in">abs</span>(v3);</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">fabs</span>(DistanceToLine(P, A, B));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">LineDistance3D</span><span class="hljs-params">(Coord3 p1, Coord3 u, Coord3 p2, Coord3 v, lf &amp;s)</span> <span class="hljs-comment">//求异面直线 p1+s*u与p2+t*v的公垂线对应的s，如果平行|重合，返回0</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		lf b = Dot(u, u) * Dot(v, v) - Dot(u, v) * Dot(u, v);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!sgn(b))</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">		lf a = Dot(u, v) * Dot(v, p1 - p2) - Dot(v, v) * Dot(u, p1 - p2);</span><br><span class="line">		<span class="hljs-keyword">return</span> s = a / b, <span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">SameSide</span><span class="hljs-params">(Coord3 p1, Coord3 p2, Coord3 a, Coord3 b)</span> </span>&#123; <span class="hljs-keyword">return</span> sgn(Dot(Cross(b - a, p1 - a), Cross(b - a, p2 - a))) &gt;= <span class="hljs-number">0</span>; &#125; <span class="hljs-comment">//p1和p2是否在线段a-b的同侧</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">PointInTri</span><span class="hljs-params">(Coord3 PP, Coord3 P[<span class="hljs-number">3</span>])</span>																						 <span class="hljs-comment">//点P在三角形P0,P1,p中</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> SameSide(PP, P[<span class="hljs-number">0</span>], P[<span class="hljs-number">1</span>], P[<span class="hljs-number">2</span>]) &amp;&amp;</span><br><span class="line">			   SameSide(PP, P[<span class="hljs-number">1</span>], P[<span class="hljs-number">0</span>], P[<span class="hljs-number">2</span>]) &amp;&amp;</span><br><span class="line">			   SameSide(PP, P[<span class="hljs-number">2</span>], P[<span class="hljs-number">0</span>], P[<span class="hljs-number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">TriSegIntersection</span><span class="hljs-params">(Coord3 P[<span class="hljs-number">3</span>], Coord3 A, Coord3 B, Coord3 &amp;PP)</span> <span class="hljs-comment">//三角形P0P1p是否和线段AB相交，如有则为PP</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 n = Cross(P[<span class="hljs-number">1</span>] - P[<span class="hljs-number">0</span>], P[<span class="hljs-number">2</span>] - P[<span class="hljs-number">0</span>]);</span><br><span class="line">		<span class="hljs-keyword">if</span> (sgn(Dot(n, B - A)) == <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;						 <span class="hljs-comment">//线段A-B和平面P0P1p平行或共面</span></span><br><span class="line">		lf t = Dot(n, P[<span class="hljs-number">0</span>] - A) / Dot(n, B - A); <span class="hljs-comment">//平面A和直线P1-p有惟一交点</span></span><br><span class="line">		<span class="hljs-keyword">if</span> (sgn(t) &lt; <span class="hljs-number">0</span> || sgn(t - <span class="hljs-number">1</span>) &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">//不在线段AB上</span></span><br><span class="line">		<span class="hljs-keyword">return</span> PointInTri(PP = A + (B - A) * t, P);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">TriTriIntersection</span><span class="hljs-params">(Coord3 T1[<span class="hljs-number">3</span>], Coord3 T2[<span class="hljs-number">3</span>])</span> <span class="hljs-comment">//空间两三角形是否相交</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 P;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span> (TriSegIntersection(T1, T2[i], T2[(i + <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>], P) ||</span><br><span class="line">				TriSegIntersection(T2, T1[i], T1[(i + <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>], P))</span><br><span class="line">				<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> lf <span class="hljs-title">SegSegDistance</span><span class="hljs-params">(Coord3 a1, Coord3 b1, Coord3 a2, Coord3 b2, Coord3 &amp;ans1, Coord3 &amp;ans2)</span> <span class="hljs-comment">//空间两直线上最近点对 返回最近距离 点对保存在ans1 ans2中</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 v1 = (a1 - b1), v2 = (a2 - b2);</span><br><span class="line">		Coord3 N = Cross(v1, v2);</span><br><span class="line">		Coord3 ab = (a1 - a2);</span><br><span class="line">		lf ans = Dot(N, ab) / <span class="hljs-built_in">abs</span>(N);</span><br><span class="line">		Coord3 d1 = b1 - a1, d2 = b2 - a2, cd = Cross(d1, d2);</span><br><span class="line">		lf nd = norm(cd), t1 = Dot(Cross(a2 - a1, d2), cd) / nd, t2 = Dot(Cross(a2 - a1, d1), cd) / nd;</span><br><span class="line">		<span class="hljs-keyword">return</span> ans1 = a1 + (b1 - a1) * t1, ans2 = a2 + (b2 - a2) * t2, <span class="hljs-built_in">fabs</span>(ans);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">friend</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">InsideWithMinDistance</span><span class="hljs-params">(Coord3 PP, Coord3 *P, lf dist)</span> <span class="hljs-comment">//判断PP是否在三角形P中，并且到三条边的距离都至少为dist。保证P,A,B,C共面</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> PointInTri(PP, P) &amp;&amp;</span><br><span class="line">				   DistanceToLine(PP, P[<span class="hljs-number">0</span>], P[<span class="hljs-number">1</span>]) &gt;= dist ||</span><br><span class="line">			   DistanceToLine(PP, P[<span class="hljs-number">1</span>], P[<span class="hljs-number">2</span>]) &gt;= dist ||</span><br><span class="line">			   DistanceToLine(PP, P[<span class="hljs-number">2</span>], P[<span class="hljs-number">0</span>]) &gt;= dist;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Sphere</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	Coord3 o;</span><br><span class="line">	lf r;</span><br><span class="line">	<span class="hljs-function">Coord3 <span class="hljs-title">point</span><span class="hljs-params">(lf lat, lf lng)</span> <span class="hljs-keyword">const</span> <span class="hljs-comment">//经纬度确定球面上一点</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		lat *= PI / <span class="hljs-number">180</span>;</span><br><span class="line">		lng *= PI / <span class="hljs-number">180</span>;</span><br><span class="line">		<span class="hljs-keyword">return</span> o + r * Coord3&#123;<span class="hljs-built_in">cos</span>(lat) * <span class="hljs-built_in">cos</span>(lng), <span class="hljs-built_in">cos</span>(lat) * <span class="hljs-built_in">sin</span>(lng), <span class="hljs-built_in">sin</span>(lat)&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ConvexPolyhedron</span> //空间多边形和凸包问题</span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Face</span></span></span><br><span class="line"><span class="hljs-class">	&#123;</span></span><br><span class="line">		<span class="hljs-keyword">int</span> v[<span class="hljs-number">3</span>];</span><br><span class="line">		Face(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> c) &#123; v[<span class="hljs-number">0</span>] = a, v[<span class="hljs-number">1</span>] = b, v[<span class="hljs-number">2</span>] = c; &#125;</span><br><span class="line">		<span class="hljs-function">Coord3 <span class="hljs-title">Normal</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord3&gt; &amp;P)</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> Cross(P[v[<span class="hljs-number">1</span>]] - P[v[<span class="hljs-number">0</span>]], P[v[<span class="hljs-number">2</span>]] - P[v[<span class="hljs-number">0</span>]]); &#125;</span><br><span class="line">		<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">CanSee</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">vector</span>&lt;Coord3&gt; &amp;P, <span class="hljs-keyword">int</span> i)</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> Dot(P[i] - P[v[<span class="hljs-number">0</span>]], Normal(P)) &gt; <span class="hljs-number">0</span>; &#125; <span class="hljs-comment">//f是否能看见P[i]</span></span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Face&gt; faces;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Coord3&gt; p;</span><br><span class="line">	ConvexPolyhedron(<span class="hljs-built_in">vector</span>&lt;Coord3&gt; P) : p(P)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; p.size(); ++i)</span><br><span class="line">			P[i] += Coord3&#123;randEPS(), randEPS(), randEPS()&#125;;</span><br><span class="line">		<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; vis(P.size(), <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;(P.size()));</span><br><span class="line">		faces.push_back(Face(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)); <span class="hljs-comment">//由于已经进行扰动，前三个点不共线</span></span><br><span class="line">		faces.push_back(Face(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>));</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt; P.size(); ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-built_in">vector</span>&lt;Face&gt; next;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; faces.size(); ++j) <span class="hljs-comment">//计算每条边的“左面”的可见性</span></span><br><span class="line">			&#123;</span><br><span class="line">				Face &amp;f = faces[j];</span><br><span class="line">				<span class="hljs-keyword">int</span> res = f.CanSee(P, i);</span><br><span class="line">				<span class="hljs-keyword">if</span> (!res)</span><br><span class="line">					next.push_back(f);</span><br><span class="line">				<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">3</span>; ++k)</span><br><span class="line">					vis[f.v[k]][f.v[(k + <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>]] = res;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; faces.size(); ++j)</span><br><span class="line">				<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">3</span>; ++k)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="hljs-keyword">int</span> a = faces[j].v[k], b = faces[j].v[(k + <span class="hljs-number">1</span>) % <span class="hljs-number">3</span>];</span><br><span class="line">					<span class="hljs-keyword">if</span> (vis[a][b] != vis[b][a] &amp;&amp; vis[a][b]) <span class="hljs-comment">//(a,b)是分界线，左边对P[i]可见</span></span><br><span class="line">						next.push_back(Face(a, b, i));</span><br><span class="line">				&#125;</span><br><span class="line">			swap(faces, next);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">lf <span class="hljs-title">randEPS</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-keyword">return</span> (rand() / lf(RAND_MAX) - <span class="hljs-number">0.5</span>) * EPS; &#125;</span><br><span class="line">	<span class="hljs-function">Coord3 <span class="hljs-title">centroid</span><span class="hljs-params">()</span> <span class="hljs-comment">//三维凸包重心</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		Coord3 C = p[<span class="hljs-number">0</span>], tot&#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;</span><br><span class="line">		lf totv = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; faces.size(); ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			Coord3 p1 = p[faces[i].v[<span class="hljs-number">0</span>]], p2 = p[faces[i].v[<span class="hljs-number">1</span>]], p3 = p[faces[i].v[<span class="hljs-number">2</span>]];</span><br><span class="line">			lf v = -Volume6(p1, p2, p3, C);</span><br><span class="line">			totv += v;</span><br><span class="line">			tot += v * Centroid(p1, p2, p3, C);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">return</span> tot / totv;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">lf <span class="hljs-title">dist</span><span class="hljs-params">(Coord3 C)</span> <span class="hljs-comment">//凸包内一点到表面最近距离</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		lf ans = INF;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; faces.size(); ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			Coord3 p1 = p[faces[i].v[<span class="hljs-number">0</span>]], p2 = p[faces[i].v[<span class="hljs-number">1</span>]], p3 = p[faces[i].v[<span class="hljs-number">2</span>]];</span><br><span class="line">			ans = min(ans, <span class="hljs-built_in">fabs</span>(-Volume6(p1, p2, p3, C) / Area2(p1, p2, p3)));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">return</span> ans;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/ICPC模板/">ICPC模板</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/Payment_code/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/Payment_code/wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/02/03/2019-02-03-数学分析/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">数学分析</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/02/03/2019-02-03-高精度/">
+                <span class="level-item">高精度</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/cat/color_cat.jpg" alt="贾小厨">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        贾小厨
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        当前，你无法预测未来会怎样，但你可以选择跟靠谱的人一同工作，选择做正确的事。
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing.China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        158
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/jiaxiaochu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/jiaxiaochu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/ACM/">
+            <span class="level-start">
+                <span class="level-item">ACM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">84</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/ACM/Template/">
+            <span class="level-start">
+                <span class="level-item">Template</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/算法竞赛入门经典训练指南/">
+            <span class="level-start">
+                <span class="level-item">算法竞赛入门经典训练指南</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">50</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/函数程序设计实验/">
+            <span class="level-start">
+                <span class="level-item">函数程序设计实验</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/博客搭建/">
+            <span class="level-start">
+                <span class="level-item">博客搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
+            <span class="level-start">
+                <span class="level-item">吴恩达机器学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/学习笔记/">
+            <span class="level-start">
+                <span class="level-item">学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/小工具/">
+            <span class="level-start">
+                <span class="level-item">小工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/并行与分布式计算/">
+            <span class="level-start">
+                <span class="level-item">并行与分布式计算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/操作系统/">
+            <span class="level-start">
+                <span class="level-item">操作系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数字电路与逻辑设计/">
+            <span class="level-start">
+                <span class="level-item">数字电路与逻辑设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/机器学习/">
+            <span class="level-start">
+                <span class="level-item">机器学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/环境配置/">
+            <span class="level-start">
+                <span class="level-item">环境配置</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序设计/">
+            <span class="level-start">
+                <span class="level-item">程序设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机组成原理/">
+            <span class="level-start">
+                <span class="level-item">计算机组成原理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机网络/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
+            <span class="level-start">
+                <span class="level-item">超级计算机原理与操作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g592mgpd7mg30ot0ea7d5.gif" alt="pymysql远程连接被拒绝问题解决方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T16:08:33.000Z">2019-07-23</time></div>
+                    <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="has-link-black-ter is-size-6">pymysql远程连接被拒绝问题解决方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g590mpqs2ej30gg08c3ym.jpg" alt="Ubuntu系统搭建配置Python虚拟开发环境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time></div>
+                    <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="has-link-black-ter is-size-6">Ubuntu系统搭建配置Python虚拟开发环境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Northwestern Europe Regional Contest (NWERC) 2018">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="has-link-black-ter is-size-6">Northwestern Europe Regional Contest (NWERC) 2018</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ACM/">ACM</a> / <a class="has-link-grey -link" href="/categories/ACM/题解/">题解</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-应用层实验/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-应用层实验/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="计算几何" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 jiazhixiang&nbsp;
+                Powered &#10084; YH · Lin
+                </p>
+            </div>
+            
+            <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+            
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("4/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+            <div align="center">
+            <span id="busuanzi_container_site_pv" class="theme-info">本站总访问量-<span id="busuanzi_value_site_pv"></span>-次|
+              </span>
+              <span id="busuanzi_container_site_uv" class="theme-info">您是第-<span id="busuanzi_value_site_uv"></span>-位小伙伴</span>
+
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            </div>
+        </div>
+        <span>
+        <script type="text/javascript" src="//rf.revolvermaps.com/0/0/0.js?i=0xetp0d4rdh&amp;d=2&amp;p=1&amp;b=8&amp;w=193&amp;g=2&amp;f=arial&amp;fs=12&amp;r=0&amp;c0=000000&amp;c1=00a99d&amp;c2=000000&amp;ic0=0&amp;ic1=0" async="async"></script>
+        </span>
+        </div>
+
+    </div>
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            bp.src = '//push.zhanzhang.baidu.com/push.js';
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+        <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+    <script src="//code.tidio.co/wgmwb2zlxrcti0crizzmumshwbxpums2.js"></script>
+    
+</body>
+</html>

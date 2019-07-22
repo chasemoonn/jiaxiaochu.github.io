@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<script src="/js/src/clicklove.js"></script>
+<html lang="zh">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>贾志翔的博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="实验题目Echo实验 实验目的掌握套节字的基本使用方法 参考资料 https://www.cnblogs.com/hgwang/p/6074038.html  （套接字） https://www.jb51.net/article/37410.htm  （字符串） https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view">
+<meta property="og:type" content="article">
+<meta property="og:title" content="贾志翔的博客">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/2019-03-11-Echo实验/index.html">
+<meta property="og:site_name" content="贾志翔的博客">
+<meta property="og:description" content="实验题目Echo实验 实验目的掌握套节字的基本使用方法 参考资料 https://www.cnblogs.com/hgwang/p/6074038.html  （套接字） https://www.jb51.net/article/37410.htm  （字符串） https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/og_image.png">
+<meta property="og:updated_time" content="2019-04-10T16:08:06.397Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="贾志翔的博客">
+<meta name="twitter:description" content="实验题目Echo实验 实验目的掌握套节字的基本使用方法 参考资料 https://www.cnblogs.com/hgwang/p/6074038.html  （套接字） https://www.jb51.net/article/37410.htm  （字符串） https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view">
+<meta name="twitter:image" content="http://yoursite.com/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">主页</a>
+                
+                <a class="navbar-item" href="/archives">归档</a>
+                
+                <a class="navbar-item" href="/tags">标签</a>
+                
+                <a class="navbar-item" href="/about">支持</a>
+                
+                <a class="navbar-item" href="http://www.tripwiremagazine.com/wp-content/uploads/images/stories/Articles/9_Funniest_JavaScript_effects/Unclosable%20Window.html">别点·有毒</a>
+                
+                <a class="navbar-item" href="http://fanfou.com/">饭否</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.397Z">2019-04-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    19 分钟 读完 (大约 2780 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                
+            
+        </h1>
+        <div class="content">
+            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>Echo实验</p>
+<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>掌握套节字的基本使用方法</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="https://www.cnblogs.com/hgwang/p/6074038.html" target="_blank" rel="noopener">https://www.cnblogs.com/hgwang/p/6074038.html</a>  （套接字）</li>
+<li><a href="https://www.jb51.net/article/37410.htm" target="_blank" rel="noopener">https://www.jb51.net/article/37410.htm</a>  （字符串）</li>
+<li><a href="https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view=vs-2017" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view=vs-2017</a>  （字符串）</li>
+<li><a href="https://docs.microsoft.com/en-us/c/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/c/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s</a>   （字符串）</li>
+<li><a href="http://www.runoob.com/cprogramming/" target="_blank" rel="noopener">http://www.runoob.com/cprogramming/</a>  （字符串）</li>
+</ul>
+<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><ul>
+<li>Windows + VS 2012  <a href="http://172.18.187.9/netdisk/default.aspx?vm=17net" target="_blank" rel="noopener">http://172.18.187.9/netdisk/default.aspx?vm=17net</a></li>
+<li>对于VS2015和VS2017默认使用安全周期检查，如果不关闭VS的安全周期检查，很多字符串函数都不能用。</li>
+<li>Linux + gcc</li>
+</ul>
+<p>这里我使用的环境是Windows 10 + VSCode + gcc version 8.1.0 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project)</p>
+<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><h2 id="编写TCP-Echo增强程序"><a href="#编写TCP-Echo增强程序" class="headerlink" title="编写TCP Echo增强程序"></a>编写TCP Echo增强程序</h2><h3 id="实验要求："><a href="#实验要求：" class="headerlink" title="实验要求："></a>实验要求：</h3><p>服务器把客户端发送来的任何消息都返回给客户端，返回的消息前面要加上服务器的当前时间。客户端把返回的消息显示出来。客户端每输入一条消息就建立TCP连接，并把消息发送给服务器，在收到服务器回应后关闭连接。在这一基础上，服务器在收到客户端的消息时显示服务器的当前时间、客户端的IP地址、客户端的端口号和客户端发来的信息，并把它们一并返回给客户端。客户端在发送消息后把服务器发回给它的消息显示出来。要求服务器直接从accept()的参数fsin中得到客户端的IP地址和端口号。服务器获取IP地址后要求直接使用s_un_b的四个分量得到IP地址，不能使用函数inet_ntoa()转换IP地址。</p>
+<h3 id="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。"><a href="#只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。" class="headerlink" title="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。"></a>只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-1.png" alt><br>如图，退出了服务器程序后再运行客户端程序，得到了10057的报错。</p>
+<h3 id="服务器如何可以退出循环？"><a href="#服务器如何可以退出循环？" class="headerlink" title="服务器如何可以退出循环？"></a>服务器如何可以退出循环？</h3><p>kbhit()在执行时,检测是否有按键按下,有按下返回非0值，没有按下则返回0，是非阻塞函数；因此，预期在监听的过程中将服务器程序从后台激活并按下键盘按键即可退出循环。</p>
+<p>然而，在实际运行中这样是失效的，正是因为他是非阻塞函数，而下面收发信息却是阻塞的。因此退出循环只有我们在命令行中手动按Ctrl+C了。</p>
+<h3 id="截屏（ctrl-alt-PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）"><a href="#截屏（ctrl-alt-PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）" class="headerlink" title="截屏（ctrl+alt+PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）"></a>截屏（ctrl+alt+PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）</h3><p>客户端：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-2.png" alt><br>服务器：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-3.png" alt></p>
+<h3 id="服务器的全部源代码（或自选主要代码）"><a href="#服务器的全部源代码（或自选主要代码）" class="headerlink" title="服务器的全部源代码（或自选主要代码）"></a>服务器的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">//使用winsock 2.2 library</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span>   <span class="hljs-comment">// argc: 命令行参数个数，例如：C:\&gt; TCPServer 8080 argc=2 argv[0]=“TCPServer", argv[1]="8080"</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">fsin</span>;</span> <span class="hljs-comment">// the from address of a client</span></span><br><span class="line">	SOCKET msock, ssock;	 <span class="hljs-comment">// master &amp; slave sockets</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>							   <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> alen;										   <span class="hljs-comment">// from-address length</span></span><br><span class="line">	<span class="hljs-keyword">char</span> pts[BUFLEN + <span class="hljs-number">1</span>];							   <span class="hljs-comment">// pointer to time string</span></span><br><span class="line">	<span class="hljs-keyword">time_t</span> now;										   <span class="hljs-comment">// current time</span></span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);					   <span class="hljs-comment">// 加载winsock library，WSVERS为请求版本，wsadata返回系统实际支持的最高版本</span></span><br><span class="line">	msock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP); <span class="hljs-comment">// 创建套接字。 参数：因特网协议簇(family)，字节流，TCP协议号。 返回：要监听套接字的描述符或INVALID_SOCKET</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));					   <span class="hljs-comment">//从&amp;sin开始的长度为sizeof(sin)的内存清0 , sin为一个地址结构</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;						   <span class="hljs-comment">//因特网地址簇(INET-Internet)</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = INADDR_ANY;				   <span class="hljs-comment">//监听所有(接口的)IP地址(32位)，// 0.0.0.0</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service));	  <span class="hljs-comment">//监听的端口号(16位) 。atoi--把ascii转化为int，htons—主机序到网络序</span></span><br><span class="line">	bind(msock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 通过sin把要监听的IP地址和端口号绑定到套接字上</span></span><br><span class="line">	listen(msock, <span class="hljs-number">5</span>);								   <span class="hljs-comment">// 建立长度为5的连接请求队列，并开始监听是否有连接请求到来，来了则放入队列</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Server Start to listen.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">while</span> (!_kbhit()) <span class="hljs-comment">// 检测是否有按键 (什么时候执行？)</span></span><br><span class="line">	&#123;</span><br><span class="line">		alen = <span class="hljs-keyword">sizeof</span>(struct sockaddr);</span><br><span class="line">		ssock = accept(msock, (struct sockaddr *)&amp;fsin, &amp;alen); <span class="hljs-comment">// accept：如果有新的连接请求，返回连接套接字，否则，被阻塞，fsin包含客户端IP地址和端口号</span></span><br><span class="line">		time(&amp;now);												<span class="hljs-comment">// 取得系统时间</span></span><br><span class="line">		<span class="hljs-keyword">int</span> cnt = <span class="hljs-built_in">sprintf</span>(pts, <span class="hljs-string">"Accept Time:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%s"</span></span><br><span class="line">							   <span class="hljs-string">"sin_port:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%u\n"</span></span><br><span class="line">							   <span class="hljs-string">"sin_addr:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%d.%d.%d.%d\n"</span></span><br><span class="line">							   <span class="hljs-string">"Receive Message:\n"</span>,</span><br><span class="line">						  ctime(&amp;now),</span><br><span class="line">						  fsin.sin_port,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b1,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b2,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b3,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b4); <span class="hljs-comment">// 把时间转换为字符串</span></span><br><span class="line">		<span class="hljs-keyword">int</span> cc = recv(ssock, pts + cnt, BUFLEN - cnt, <span class="hljs-number">0</span>);</span><br><span class="line">		pts[cnt + cc] = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n%s\n"</span>, pts);</span><br><span class="line">		send(ssock, pts, cnt + cc, <span class="hljs-number">0</span>);</span><br><span class="line">		closesocket(ssock); <span class="hljs-comment">//  关闭连接套接字</span></span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(msock);</span><br><span class="line">	WSACleanup();</span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端的全部源代码（或自选主要代码）"><a href="#客户端的全部源代码（或自选主要代码）" class="headerlink" title="客户端的全部源代码（或自选主要代码）"></a>客户端的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>;			   <span class="hljs-comment">// server IP to connect，127.0.0.1指本机</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;			   <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>				   <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>], msg[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;						   <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;								   <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);</span><br><span class="line">	sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));				  <span class="hljs-comment">// sin的内存清0</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;					  <span class="hljs-comment">// 因特网地址簇</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = inet_addr(host);		  <span class="hljs-comment">// 服务器IP地址(32位)</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service)); <span class="hljs-comment">// 服务器端口号(16位)</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send the Message:\n"</span>);</span><br><span class="line">	gets(msg);</span><br><span class="line">	<span class="hljs-keyword">int</span> ret = connect(sock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 连接到服务器.无错时，返回0， // 否则，返回SOCKET_ERROR ，可以调用 //    函数WSAGetLastError取得错误代码</span></span><br><span class="line">	cc = send(sock, msg, <span class="hljs-built_in">strlen</span>(msg), <span class="hljs-number">0</span>);						   <span class="hljs-comment">//把缓冲区pts的数据发送出去，len为要发送的字节数， // 返回值：(&gt;0) 实际发送的字节数(≤len), (=0) 对方正常关闭， //    （=SOCKET_ERROR) 出错，用函数WSAGetLastError取错误码。</span></span><br><span class="line">	cc = recv(sock, buf, BUFLEN, <span class="hljs-number">0</span>);							   <span class="hljs-comment">// BUFLEN为缓冲区buf的长度。 // 返回值：接收的字符数(&gt;0)、对方已关闭(=0) 或连接出错(&lt;0)</span></span><br><span class="line">	<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error:\n%d.\n"</span>, GetLastError());</span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Server closed.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc &gt; <span class="hljs-number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		buf[cc] = <span class="hljs-string">'\0'</span>;		   <span class="hljs-comment">//  ensure null-termination</span></span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n%s\n"</span>, buf); <span class="hljs-comment">// 显示所接收的字符串</span></span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock); <span class="hljs-comment">// 关闭套接字</span></span><br><span class="line">	WSACleanup();	  <span class="hljs-comment">//  卸载winsock library</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="编写UDP-Echo增强程序"><a href="#编写UDP-Echo增强程序" class="headerlink" title="编写UDP Echo增强程序"></a>编写UDP Echo增强程序</h2><h3 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h3><p>修改UDP例程，完成Echo功能，即当客户端发来消息时，服务器显示出服务器的当前时间、客户端的IP、客户端的端口号和客户发来的信息，并把它们一并发回给客户端，客户端然后把它们显示出来。<br>服务器可以直接从recvfrom()的参数from中得到客户端的IP地址和端口号，并且服务器用sendto()发回给客户端消息时可以直接用该参数from作为参数toAddr。可以使用inet_ntoa()转换客户端IP地址。<br>客户端程序的recvfrom()可以直接使用原来sendto使用的sock。该sock已经绑定了客户端的IP地址和端口号，客户端可以直接用来接收数据。</p>
+<h3 id="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因"><a href="#只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因" class="headerlink" title="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因"></a>只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-4.png" alt><br>如图，在发送时没有报错，但是试图从服务器获得信息时获得了10054的报错。</p>
+<h3 id="截屏服务器和客户端的运行结果（注明客户端和服务器）"><a href="#截屏服务器和客户端的运行结果（注明客户端和服务器）" class="headerlink" title="截屏服务器和客户端的运行结果（注明客户端和服务器）"></a>截屏服务器和客户端的运行结果（注明客户端和服务器）</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-5.png" alt><br>服务器：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-6.png" alt></p>
+<h3 id="服务器的全部源代码（或自选主要代码）-1"><a href="#服务器的全部源代码（或自选主要代码）-1" class="headerlink" title="服务器的全部源代码（或自选主要代码）"></a>服务器的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000				   <span class="hljs-comment">// 缓冲区大小</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 2)	  <span class="hljs-comment">// 指明版本2.2</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">// 加载winsock 2.2 Llibrary</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>; <span class="hljs-comment">// server IP Address to connect</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;  <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>	<span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">from</span>;</span>   <span class="hljs-comment">// sender address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> fromsize = <span class="hljs-keyword">sizeof</span>(from);</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>], pts[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;						   <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;								   <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);					 <span class="hljs-comment">// 加载winsock library，WSVERS为请求版本,wsadata返回系统实际支持的最高版本。</span></span><br><span class="line">	sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP); <span class="hljs-comment">// 创建UDP套接字, 参数：因特网协议簇(family)，数据报套接字，UDP协议号， 返回：要监听套接字的描述符或INVALID_SOCKET</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = INADDR_ANY;				  <span class="hljs-comment">// 绑定(监听)所有的接口。</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service));	 <span class="hljs-comment">// 绑定指定接口。atoi--把ascii转化为int，htons -- 主机序(host)转化为网络序(network), 为short类型。</span></span><br><span class="line">	bind(sock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 绑定本地端口号（和本地IP地址)</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"UDPServer Start.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">while</span> (!_kbhit())</span><br><span class="line">	&#123;																	   <span class="hljs-comment">//检测是否有按键</span></span><br><span class="line">		cc = recvfrom(sock, buf, BUFLEN, <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, &amp;fromsize); <span class="hljs-comment">//接收客户数据。返回结果：cc为接收的字符数，from中将包含客户IP地址和端口号。</span></span><br><span class="line">		<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"recvfrom() failed; %d\n"</span>, WSAGetLastError());</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			buf[cc] = <span class="hljs-number">0</span>;</span><br><span class="line">			<span class="hljs-keyword">time_t</span> now;</span><br><span class="line">			time(&amp;now); <span class="hljs-comment">// 取得系统时间</span></span><br><span class="line">			<span class="hljs-built_in">sprintf</span>(pts,</span><br><span class="line">					<span class="hljs-string">"Accept Time:\n"</span></span><br><span class="line">					<span class="hljs-string">"%s"</span></span><br><span class="line">					<span class="hljs-string">"sin_port:\n"</span></span><br><span class="line">					<span class="hljs-string">"%u\n"</span></span><br><span class="line">					<span class="hljs-string">"sin_addr:\n"</span></span><br><span class="line">					<span class="hljs-string">"%d.%d.%d.%d\n"</span></span><br><span class="line">					<span class="hljs-string">"Receive Message:\n"</span></span><br><span class="line">					<span class="hljs-string">"%s\n"</span>,</span><br><span class="line">					ctime(&amp;now),</span><br><span class="line">					from.sin_port,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b1,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b2,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b3,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b4,</span><br><span class="line">					buf);</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, pts);</span><br><span class="line">			cc = sendto(sock, pts, <span class="hljs-built_in">strlen</span>(pts), <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, fromsize);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock);</span><br><span class="line">	WSACleanup(); <span class="hljs-comment">// 卸载某版本的DLL</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="客户端的全部源代码（或自选主要代码）-1"><a href="#客户端的全部源代码（或自选主要代码）-1" class="headerlink" title="客户端的全部源代码（或自选主要代码）"></a>客户端的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000				   <span class="hljs-comment">// 缓冲区大小</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 2)	  <span class="hljs-comment">// 指明版本2.2</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">// 加载winsock 2.2 Llibrary</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>;		 <span class="hljs-comment">// server IP to connect</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;		 <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">toAddr</span>, <span class="hljs-title">from</span>;</span> <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> fromsize = <span class="hljs-keyword">sizeof</span>(from);</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;		  <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;				  <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata); <span class="hljs-comment">// 启动某版本Socket的DLL</span></span><br><span class="line">	sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);</span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;toAddr, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(toAddr));</span><br><span class="line">	toAddr.sin_family = AF_INET;</span><br><span class="line">	toAddr.sin_port = htons((u_short)atoi(service)); <span class="hljs-comment">//atoi：把ascii转化为int. htons：主机序(host)转化为网络序(network), s--short</span></span><br><span class="line">	toAddr.sin_addr.s_addr = inet_addr(host);		 <span class="hljs-comment">//如果host为域名，需要先用函数gethostbyname把域名转化为IP地址</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send the Message:\n"</span>);</span><br><span class="line">	gets(buf);</span><br><span class="line">	cc = sendto(sock, buf, <span class="hljs-built_in">strlen</span>(buf), <span class="hljs-number">0</span>, (SOCKADDR *)&amp;toAddr, <span class="hljs-keyword">sizeof</span>(toAddr));</span><br><span class="line">	<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error:\n%d\n"</span>, WSAGetLastError());</span><br><span class="line">	<span class="hljs-keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		cc = recvfrom(sock, buf, BUFLEN, <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, &amp;fromsize);</span><br><span class="line">		<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Receive Error:\n%d\n"</span>, WSAGetLastError());</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf);</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock);</span><br><span class="line">	WSACleanup(); <span class="hljs-comment">// 卸载某版本的DLL</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h1><p>在Windows下使用gcc编译，需要加编译指令-lwsock32来引入套接字的库，于是写了如下脚本帮助编译：</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc TCPServer.c -o TCPServer -lwsock32</span><br><span class="line">gcc TCPClient.c -o TCPClient -lwsock32</span><br></pre></td></tr></table></figure>
+
+<p>节省了不少时间。</p>
+<p>服务器对收到的消息进行处理这里使用了sprintf这个函数，感觉相比别的方法简化了很多代码。</p>
+<p>想当然的认为服务器程序只需要按下键盘就会退出，说明一开始对阻塞的理解还不透彻啊。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<a class="button is-info donate">
+    <span class="icon is-small">
+        <i class="fab fa-alipay"></i>
+    </span>
+    <span>支付宝</span>
+    <div class="qrcode"><img src="/images/Payment_code/alipay.jpg" alt="支付宝"></div>
+</a>
+
+                
+                
+<a class="button is-success donate">
+    <span class="icon is-small">
+        <i class="fab fa-weixin"></i>
+    </span>
+    <span>微信</span>
+    <div class="qrcode"><img src="/images/Payment_code/wechatpay.jpg" alt="微信"></div>
+</a>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/04/11/2019-03-23-ACM-ICPC World Finals 2018/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">ACM-ICPC World Finals 2018</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/04/11/2019-03-13-裸机控制权与引导程序/">
+                <span class="level-item"></span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/cat/color_cat.jpg" alt="贾小厨">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        贾小厨
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        当前，你无法预测未来会怎样，但你可以选择跟靠谱的人一同工作，选择做正确的事。
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Beijing.China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        158
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        46
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/jiaxiaochu" target="_blank">
+                关注我</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Github" href="https://github.com/jiaxiaochu">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="Dribbble" href="https://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank" title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分类
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/ACM/">
+            <span class="level-start">
+                <span class="level-item">ACM</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">84</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/ACM/Template/">
+            <span class="level-start">
+                <span class="level-item">Template</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/算法竞赛入门经典训练指南/">
+            <span class="level-start">
+                <span class="level-item">算法竞赛入门经典训练指南</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/ACM/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">50</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Linux/">
+            <span class="level-start">
+                <span class="level-item">Linux</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/函数程序设计实验/">
+            <span class="level-start">
+                <span class="level-item">函数程序设计实验</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/博客搭建/">
+            <span class="level-start">
+                <span class="level-item">博客搭建</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
+            <span class="level-start">
+                <span class="level-item">吴恩达机器学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/学习笔记/">
+            <span class="level-start">
+                <span class="level-item">学习笔记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/小工具/">
+            <span class="level-start">
+                <span class="level-item">小工具</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/并行与分布式计算/">
+            <span class="level-start">
+                <span class="level-item">并行与分布式计算</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/操作系统/">
+            <span class="level-start">
+                <span class="level-item">操作系统</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/数字电路与逻辑设计/">
+            <span class="level-start">
+                <span class="level-item">数字电路与逻辑设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/机器学习/">
+            <span class="level-start">
+                <span class="level-item">机器学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/环境配置/">
+            <span class="level-start">
+                <span class="level-item">环境配置</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/程序设计/">
+            <span class="level-start">
+                <span class="level-item">程序设计</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机组成原理/">
+            <span class="level-start">
+                <span class="level-item">计算机组成原理</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计算机网络/">
+            <span class="level-start">
+                <span class="level-item">计算机网络</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
+            <span class="level-start">
+                <span class="level-item">超级计算机原理与操作</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g592mgpd7mg30ot0ea7d5.gif" alt="pymysql远程连接被拒绝问题解决方法">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T16:08:33.000Z">2019-07-23</time></div>
+                    <a href="/2019/07/23/pymysql远程连接被拒绝问题解决方法/" class="has-link-black-ter is-size-6">pymysql远程连接被拒绝问题解决方法</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g590mpqs2ej30gg08c3ym.jpg" alt="Ubuntu系统搭建配置Python虚拟开发环境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-07-22T14:57:27.000Z">2019-07-22</time></div>
+                    <a href="/2019/07/22/Ubuntu系统搭建配置Python虚拟开发环境/" class="has-link-black-ter is-size-6">Ubuntu系统搭建配置Python虚拟开发环境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Northwestern Europe Regional Contest (NWERC) 2018">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-Northwestern Europe Regional Contest (NWERC) 2018/" class="has-link-black-ter is-size-6">Northwestern Europe Regional Contest (NWERC) 2018</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/ACM/">ACM</a> / <a class="has-link-grey -link" href="/categories/ACM/题解/">题解</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-应用层实验/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-应用层实验/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt>
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            标签云
+        </h3>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            归档
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">四月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/02/">
+                <span class="level-start">
+                    <span class="level-item">二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">27</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">13</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">21</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">九月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/08/">
+                <span class="level-start">
+                    <span class="level-item">八月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">19</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/07/">
+                <span class="level-start">
+                    <span class="level-item">七月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/06/">
+                <span class="level-start">
+                    <span class="level-item">六月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">4</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/03/">
+                <span class="level-start">
+                    <span class="level-item">三月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                标签
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Anaconda/">
+                        <span class="tag">Anaconda</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Bug/">
+                        <span class="tag">Bug</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ChromeDriver/">
+                        <span class="tag">ChromeDriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/DP/">
+                        <span class="tag">DP</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Deepin/">
+                        <span class="tag">Deepin</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/ICPC模板/">
+                        <span class="tag">ICPC模板</span>
+                        <span class="tag is-grey">10</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/LCA/">
+                        <span class="tag">LCA</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MongoDB数据库/">
+                        <span class="tag">MongoDB数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/MySQL/">
+                        <span class="tag">MySQL</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/NTT/">
+                        <span class="tag">NTT</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Pycharm/">
+                        <span class="tag">Pycharm</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Python解释器的安装与配置/">
+                        <span class="tag">Python解释器的安装与配置</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/Ubuntu/">
+                        <span class="tag">Ubuntu</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/VMware/">
+                        <span class="tag">VMware</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chrome/">
+                        <span class="tag">chrome</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/chromedriver/">
+                        <span class="tag">chromedriver</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/pymysql/">
+                        <span class="tag">pymysql</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/三维计算几何/">
+                        <span class="tag">三维计算几何</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/主席树/">
+                        <span class="tag">主席树</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二分/">
+                        <span class="tag">二分</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/二维计算几何/">
+                        <span class="tag">二维计算几何</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/动态开点/">
+                        <span class="tag">动态开点</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/励志/">
+                        <span class="tag">励志</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调栈/">
+                        <span class="tag">单调栈</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/单调队列/">
+                        <span class="tag">单调队列</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/原根/">
+                        <span class="tag">原根</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/可持久化/">
+                        <span class="tag">可持久化</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/扫描线/">
+                        <span class="tag">扫描线</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/拓扑排序/">
+                        <span class="tag">拓扑排序</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/搜索/">
+                        <span class="tag">搜索</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据库/">
+                        <span class="tag">数据库</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数据结构/">
+                        <span class="tag">数据结构</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/数论/">
+                        <span class="tag">数论</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/无旋Treap/">
+                        <span class="tag">无旋Treap</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最大流/">
+                        <span class="tag">最大流</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/最短路/">
+                        <span class="tag">最短路</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/树状数组/">
+                        <span class="tag">树状数组</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/环境配置/">
+                        <span class="tag">环境配置</span>
+                        <span class="tag is-grey">14</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/珂朵莉树/">
+                        <span class="tag">珂朵莉树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/系统配置/">
+                        <span class="tag">系统配置</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/线段树/">
+                        <span class="tag">线段树</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/老司机树/">
+                        <span class="tag">老司机树</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
+                        <span class="tag">莫比乌斯反演</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟机/">
+                        <span class="tag">虚拟机</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/虚拟环境/">
+                        <span class="tag">虚拟环境</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/谷歌输入法/">
+                        <span class="tag">谷歌输入法</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            链接
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://www.jianshu.com/u/bf4c0b4a8c83" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">简书</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">www.jianshu.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/jiaxiaochu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 jiazhixiang&nbsp;
+                Powered &#10084; YH · Lin
+                </p>
+            </div>
+            
+            <script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+            
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/jiaxiaochu/jiaxiaochu.github.io">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        <div align="center">
+            <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+            <script>
+                var now = new Date(); 
+                function createtime() { 
+                    var grt= new Date("4/1/2019 12:49:00");//此处修改你的建站时间或者网站上线时间 
+                    now.setTime(now.getTime()+250); 
+                    days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+                    hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+                    if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+                    mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+                    seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+                    snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+                    document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+                    document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+                } 
+            setInterval("createtime()",250);
+            </script>
+            <div align="center">
+            <span id="busuanzi_container_site_pv" class="theme-info">本站总访问量-<span id="busuanzi_value_site_pv"></span>-次|
+              </span>
+              <span id="busuanzi_container_site_uv" class="theme-info">您是第-<span id="busuanzi_value_site_uv"></span>-位小伙伴</span>
+
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            </div>
+        </div>
+        <span>
+        <script type="text/javascript" src="//rf.revolvermaps.com/0/0/0.js?i=0xetp0d4rdh&amp;d=2&amp;p=1&amp;b=8&amp;w=193&amp;g=2&amp;f=arial&amp;fs=12&amp;r=0&amp;c0=000000&amp;c1=00a99d&amp;c2=000000&amp;ic0=0&amp;ic1=0" async="async"></script>
+        </span>
+        </div>
+
+    </div>
+
+    <script>
+        (function(){
+            var bp = document.createElement('script');
+            bp.src = '//push.zhanzhang.baidu.com/push.js';
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/meting@1.1.0/dist/Meting.min.js"></script>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+        <!-- 雪花特效 -->
+    <script type="text/javascript">
+      var windowWidth = $(window).width();
+      if (windowWidth > 480) {
+        document.write('<script type="text/javascript" src="/js/src/snow.js"><\/script>');
+      }
+    </script>
+
+    <script src="//code.tidio.co/wgmwb2zlxrcti0crizzmumshwbxpums2.js"></script>
+    
+</body>
+</html>
