@@ -155,141 +155,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-18T00:58:15.000Z">2018-10-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 443 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/18/2018-10-18-HYSBZ-1251/">序列终结者</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://vjudge.net/problem/HYSBZ-1251" target="_blank" rel="noopener">题目链接</a><br>说是终结者其实是<a href="https://wu-kan.github.io/posts/acm/OpenJ_Bailian-4090" target="_blank" rel="noopener">这题</a>的真子集…</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ll;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FhqTreap</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span></span></span><br><span class="line"><span class="hljs-class">	&#123;</span></span><br><span class="line">		<span class="hljs-keyword">int</span> ch[<span class="hljs-number">2</span>],siz,rev;</span><br><span class="line">		ll key,val,max,add;</span><br><span class="line">		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">REV</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">		</span>&#123;</span><br><span class="line">			rev^=<span class="hljs-number">1</span>,swap(ch[<span class="hljs-number">0</span>],ch[<span class="hljs-number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ADD</span><span class="hljs-params">(ll v)</span></span></span><br><span class="line"><span class="hljs-function">		</span>&#123;</span><br><span class="line">			val+=v,max+=v,add+=v;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Node&gt; v;</span><br><span class="line">	<span class="hljs-keyword">int</span> root;</span><br><span class="line">	FhqTreap():v(<span class="hljs-number">1</span>),root(<span class="hljs-number">0</span>) &#123;&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_down</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!k)<span class="hljs-keyword">return</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,*ch=v[k].ch; i&lt;<span class="hljs-number">2</span>; ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span>(ch[i])</span><br><span class="line">			&#123;</span><br><span class="line">				v[ch[i]].ADD(v[k].add);</span><br><span class="line">				<span class="hljs-keyword">if</span>(v[k].rev)v[ch[i]].REV();</span><br><span class="line">			&#125;</span><br><span class="line">		v[k].add=v[k].rev=<span class="hljs-number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!k)<span class="hljs-keyword">return</span>;</span><br><span class="line">		v[k].siz=<span class="hljs-number">1</span>,v[k].max=v[k].val;</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,*ch=v[k].ch; i&lt;<span class="hljs-number">2</span>; ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span>(ch[i])</span><br><span class="line">				v[k].siz+=v[ch[i]].siz,v[k].max=max(v[k].max,v[ch[i]].max);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!a||!b)<span class="hljs-keyword">return</span> a+b;</span><br><span class="line">		<span class="hljs-keyword">if</span>(v[a].key&lt;v[b].key)</span><br><span class="line">			<span class="hljs-keyword">return</span> push_down(a),v[a].ch[<span class="hljs-number">1</span>]=merge(v[a].ch[<span class="hljs-number">1</span>],b),push_up(a),a;</span><br><span class="line">		<span class="hljs-keyword">return</span> push_down(b),v[b].ch[<span class="hljs-number">0</span>]=merge(a,v[b].ch[<span class="hljs-number">0</span>]),push_up(b),b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> &amp;l,<span class="hljs-keyword">int</span> &amp;r)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!s)l=<span class="hljs-number">0</span>,r=a;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(v[v[a].ch[<span class="hljs-number">0</span>]].siz&lt;s)</span><br><span class="line">			push_down(a),split(v[a].ch[<span class="hljs-number">1</span>],s-v[v[a].ch[<span class="hljs-number">0</span>]].siz<span class="hljs-number">-1</span>,v[a].ch[<span class="hljs-number">1</span>],r),push_up(l=a);</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			push_down(a),split(v[a].ch[<span class="hljs-number">0</span>],s,l,v[a].ch[<span class="hljs-number">0</span>]),push_up(r=a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_back</span><span class="hljs-params">(ll d)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		v.push_back(Node &#123; &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,rand(),d,d,d&#125;);</span><br><span class="line">		root=merge(root,v.size()<span class="hljs-number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,ll d)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,c;</span><br><span class="line">		split(root,r,b,c),split(b,l<span class="hljs-number">-1</span>,a,b),v[b].ADD(d),root=merge(merge(a,b),c);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">Node <span class="hljs-title">ask</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,c;</span><br><span class="line">		split(root,r,b,c),split(b,l<span class="hljs-number">-1</span>,a,b);</span><br><span class="line">		Node ret=v[b];</span><br><span class="line">		<span class="hljs-keyword">return</span> root=merge(merge(a,b),c),ret;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,c;</span><br><span class="line">		split(root,r,b,c),split(b,l<span class="hljs-number">-1</span>,a,b),v[b].REV(),root=merge(merge(a,b),c);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> n,k,l,r;</span><br><span class="line">	FhqTreap t;</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n); n--;)t.push_back(<span class="hljs-number">0</span>);</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n); n--;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>,&amp;k,&amp;l,&amp;r);</span><br><span class="line">		<span class="hljs-keyword">if</span>(k==<span class="hljs-number">1</span>)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;k),t.add(l,r,k);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(k==<span class="hljs-number">2</span>)t.reverse(l,r);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,t.ask(l,r).max);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-18T00:58:13.000Z">2018-10-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 270 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/18/2018-10-18-HYSBZ-3224/">Tyvj 1728 普通平衡树</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://vjudge.net/problem/HYSBZ-3224" target="_blank" rel="noopener">题目链接</a></p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ll;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FhqTreap</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span></span></span><br><span class="line"><span class="hljs-class">	&#123;</span></span><br><span class="line">		<span class="hljs-keyword">int</span> ch[<span class="hljs-number">2</span>],siz;</span><br><span class="line">		ll key,val;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Node&gt; v;</span><br><span class="line">	<span class="hljs-keyword">int</span> root;</span><br><span class="line">	FhqTreap():v(<span class="hljs-number">1</span>),root(<span class="hljs-number">0</span>) &#123;&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		v[k].siz=v[v[k].ch[<span class="hljs-number">0</span>]].siz+v[v[k].ch[<span class="hljs-number">1</span>]].siz+<span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!a||!b)<span class="hljs-keyword">return</span> a+b;</span><br><span class="line">		<span class="hljs-keyword">if</span>(v[a].key&lt;v[b].key)</span><br><span class="line">			<span class="hljs-keyword">return</span> v[a].ch[<span class="hljs-number">1</span>]=merge(v[a].ch[<span class="hljs-number">1</span>],b),push_up(a),a;</span><br><span class="line">		<span class="hljs-keyword">return</span> v[b].ch[<span class="hljs-number">0</span>]=merge(a,v[b].ch[<span class="hljs-number">0</span>]),push_up(b),b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">splitVal</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,ll w,<span class="hljs-keyword">int</span> &amp;l,<span class="hljs-keyword">int</span> &amp;r)</span><span class="hljs-comment">//按值将树划分，使得左子树上的值恰小于w</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!a)l=r=<span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(v[a].val&gt;w)splitVal(v[a].ch[<span class="hljs-number">0</span>],w,l,v[a].ch[<span class="hljs-number">0</span>]),push_up(r=a);</span><br><span class="line">		<span class="hljs-keyword">else</span> splitVal(v[a].ch[<span class="hljs-number">1</span>],w,v[a].ch[<span class="hljs-number">1</span>],r),push_up(l=a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(ll x)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b;</span><br><span class="line">		v.push_back(Node &#123; &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;,<span class="hljs-number">1</span>,rand(),x&#125;);</span><br><span class="line">		splitVal(root,x,a,b),root=merge(merge(a,v.size()<span class="hljs-number">-1</span>),b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">erase</span><span class="hljs-params">(ll x)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,c;</span><br><span class="line">		splitVal(root,x,a,b),splitVal(a,x<span class="hljs-number">-1</span>,a,c);</span><br><span class="line">		root=merge(merge(a,merge(v[c].ch[<span class="hljs-number">0</span>],v[c].ch[<span class="hljs-number">1</span>])),b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">ll <span class="hljs-title">kth</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> u=root,ls;;)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-keyword">if</span>(ls=v[v[u].ch[<span class="hljs-number">0</span>]].siz,ls+<span class="hljs-number">1</span>==k)</span><br><span class="line">				<span class="hljs-keyword">return</span> v[u].val;</span><br><span class="line">			<span class="hljs-keyword">if</span>(ls&lt;k)k-=ls+<span class="hljs-number">1</span>,u=v[u].ch[<span class="hljs-number">1</span>];</span><br><span class="line">			<span class="hljs-keyword">else</span> u=v[u].ch[<span class="hljs-number">0</span>];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lower_bound</span><span class="hljs-params">(ll x)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> upper_bound(x<span class="hljs-number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">upper_bound</span><span class="hljs-params">(ll x)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,ret;</span><br><span class="line">		<span class="hljs-keyword">return</span> splitVal(root,x,a,b),ret=v[a].siz+<span class="hljs-number">1</span>,root=merge(a,b),ret;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> n,o,x;</span><br><span class="line">	FhqTreap t;</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;n); n--;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;o,&amp;x);</span><br><span class="line">		<span class="hljs-keyword">if</span>(o==<span class="hljs-number">1</span>)t.insert(x);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(o==<span class="hljs-number">2</span>)t.erase(x);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>,o==<span class="hljs-number">3</span>?t.lower_bound(x):</span><br><span class="line">						t.kth(o==<span class="hljs-number">4</span>?x:</span><br><span class="line">							  o==<span class="hljs-number">5</span>?t.lower_bound(x)<span class="hljs-number">-1</span>:</span><br><span class="line">							  t.upper_bound(x)));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-18T00:58:12.000Z">2018-10-18</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 324 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/10/18/2018-10-18-HYSBZ-3223/">Tyvj 1729 文艺平衡树</a>
-            
-        </h1>
-        <div class="content">
-            <p><a href="https://vjudge.net/problem/HYSBZ-3223" target="_blank" rel="noopener">题目链接</a></p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">int</span> ll;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">FhqTreap</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span></span></span><br><span class="line"><span class="hljs-class">	&#123;</span></span><br><span class="line">		<span class="hljs-keyword">int</span> ch[<span class="hljs-number">2</span>],siz,rev;</span><br><span class="line">		ll key,val;</span><br><span class="line">		<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">REV</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">		</span>&#123;</span><br><span class="line">			rev^=<span class="hljs-number">1</span>,swap(ch[<span class="hljs-number">0</span>],ch[<span class="hljs-number">1</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="hljs-built_in">vector</span>&lt;Node&gt; v;</span><br><span class="line">	<span class="hljs-keyword">int</span> root;</span><br><span class="line">	FhqTreap():v(<span class="hljs-number">1</span>),root(<span class="hljs-number">0</span>) &#123;&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_down</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!k)<span class="hljs-keyword">return</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,*ch=v[k].ch; i&lt;<span class="hljs-number">2</span>; ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span>(ch[i]&amp;&amp;v[k].rev)v[ch[i]].REV();</span><br><span class="line">		v[k].rev=<span class="hljs-number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_up</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!k)<span class="hljs-keyword">return</span>;</span><br><span class="line">		v[k].siz=<span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>,*ch=v[k].ch; i&lt;<span class="hljs-number">2</span>; ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span>(ch[i])</span><br><span class="line">				v[k].siz+=v[ch[i]].siz;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!a||!b)<span class="hljs-keyword">return</span> a+b;</span><br><span class="line">		<span class="hljs-keyword">if</span>(v[a].key&lt;v[b].key)</span><br><span class="line">			<span class="hljs-keyword">return</span> push_down(a),v[a].ch[<span class="hljs-number">1</span>]=merge(v[a].ch[<span class="hljs-number">1</span>],b),push_up(a),a;</span><br><span class="line">		<span class="hljs-keyword">return</span> push_down(b),v[b].ch[<span class="hljs-number">0</span>]=merge(a,v[b].ch[<span class="hljs-number">0</span>]),push_up(b),b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">split</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> s,<span class="hljs-keyword">int</span> &amp;l,<span class="hljs-keyword">int</span> &amp;r)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!s)l=<span class="hljs-number">0</span>,r=a;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(v[v[a].ch[<span class="hljs-number">0</span>]].siz&lt;s)</span><br><span class="line">			push_down(a),split(v[a].ch[<span class="hljs-number">1</span>],s-v[v[a].ch[<span class="hljs-number">0</span>]].siz<span class="hljs-number">-1</span>,v[a].ch[<span class="hljs-number">1</span>],r),push_up(l=a);</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			push_down(a),split(v[a].ch[<span class="hljs-number">0</span>],s,l,v[a].ch[<span class="hljs-number">0</span>]),push_up(r=a);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push_back</span><span class="hljs-params">(ll d)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		v.push_back(Node &#123; &#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,rand(),d&#125;);</span><br><span class="line">		root=merge(root,v.size()<span class="hljs-number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reverse</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> a,b,c;</span><br><span class="line">		split(root,r,b,c),split(b,l<span class="hljs-number">-1</span>,a,b),v[b].REV(),root=merge(merge(a,b),c);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span>(!u)<span class="hljs-keyword">return</span>;</span><br><span class="line">		push_down(u);</span><br><span class="line">		print(v[u].ch[<span class="hljs-number">0</span>]);</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,v[u].val);</span><br><span class="line">		print(v[u].ch[<span class="hljs-number">1</span>]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> n,m;</span><br><span class="line">	FhqTreap t;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i)t.push_back(i);</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>,l,r; i&lt;=m; ++i)<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;l,&amp;r),t.reverse(l,r);</span><br><span class="line">	t.print(t.root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-10-18T00:58:12.000Z">2018-10-18</time>
                 
                 <div class="level-item">
@@ -372,7 +237,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        139
+                        102
                     </p>
                 </div>
             </div>
@@ -382,7 +247,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        27
+                        24
                     </p>
                 </div>
             </div>
@@ -392,7 +257,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        46
+                        38
                     </p>
                 </div>
             </div>
@@ -456,7 +321,7 @@
                 <span class="level-item">ACM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">76</span>
+                <span class="level-item tag">39</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/ACM/Template/">
@@ -472,7 +337,7 @@
                 <span class="level-item">算法竞赛入门经典训练指南</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/ACM/题解/">
@@ -480,7 +345,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">42</span>
+                <span class="level-item tag">18</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
@@ -723,7 +588,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -775,7 +640,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">27</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -819,18 +684,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">12</span>
                 </span>
             </a>
         </li>
@@ -841,7 +695,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -885,7 +739,7 @@
                     <span class="level-item">三月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -896,7 +750,7 @@
                     <span class="level-item">十二月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1000,13 +854,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/NTT/">
-                        <span class="tag">NTT</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Pycharm/">
                         <span class="tag">Pycharm</span>
                         <span class="tag is-grey">2</span>
@@ -1056,13 +903,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/三维计算几何/">
-                        <span class="tag">三维计算几何</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/主席树/">
                         <span class="tag">主席树</span>
                         <span class="tag is-grey">1</span>
@@ -1098,27 +938,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/单调栈/">
-                        <span class="tag">单调栈</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/单调队列/">
-                        <span class="tag">单调队列</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/原根/">
-                        <span class="tag">原根</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/可持久化/">
                         <span class="tag">可持久化</span>
                         <span class="tag is-grey">2</span>
@@ -1133,20 +952,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/拓扑排序/">
-                        <span class="tag">拓扑排序</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/搜索/">
-                        <span class="tag">搜索</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
                         <span class="tag is-grey">1</span>
@@ -1156,27 +961,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据结构/">
                         <span class="tag">数据结构</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数论/">
                         <span class="tag">数论</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/无旋Treap/">
                         <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最大流/">
-                        <span class="tag">最大流</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1319,7 +1117,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1371,7 +1169,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">27</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1415,18 +1213,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/09/">
-                <span class="level-start">
-                    <span class="level-item">九月 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">12</span>
                 </span>
             </a>
         </li>
@@ -1437,7 +1224,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1481,7 +1268,7 @@
                     <span class="level-item">三月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">2</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1492,7 +1279,7 @@
                     <span class="level-item">十二月 2017</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1596,13 +1383,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/NTT/">
-                        <span class="tag">NTT</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Pycharm/">
                         <span class="tag">Pycharm</span>
                         <span class="tag is-grey">2</span>
@@ -1652,13 +1432,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/三维计算几何/">
-                        <span class="tag">三维计算几何</span>
-                        <span class="tag is-grey">3</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/主席树/">
                         <span class="tag">主席树</span>
                         <span class="tag is-grey">1</span>
@@ -1694,27 +1467,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/单调栈/">
-                        <span class="tag">单调栈</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/单调队列/">
-                        <span class="tag">单调队列</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/原根/">
-                        <span class="tag">原根</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/可持久化/">
                         <span class="tag">可持久化</span>
                         <span class="tag is-grey">2</span>
@@ -1729,20 +1481,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/拓扑排序/">
-                        <span class="tag">拓扑排序</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/搜索/">
-                        <span class="tag">搜索</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/数据库/">
                         <span class="tag">数据库</span>
                         <span class="tag is-grey">1</span>
@@ -1752,27 +1490,20 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数据结构/">
                         <span class="tag">数据结构</span>
-                        <span class="tag is-grey">8</span>
+                        <span class="tag is-grey">4</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/数论/">
                         <span class="tag">数论</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/tags/无旋Treap/">
                         <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最大流/">
-                        <span class="tag">最大流</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
