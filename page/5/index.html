@@ -141,27 +141,21 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2018/07/22/Ubuntu安装chrome浏览器和chromedriver/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zrb1uecg30go07fnpg.gif" alt="Ubuntu安装chrome浏览器和chromedriver">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-21T17:30:11.000Z">2018-07-22</time>
+                <time class="level-item has-text-grey" datetime="2019-02-03T10:00:00.000Z">2019-02-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ACM/Template/">Template</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    3 分钟 读完 (大约 521 个字)
+                    3 分钟 读完 (大约 415 个字)
                 </span>
                 
                 
@@ -170,23 +164,25 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/07/22/Ubuntu安装chrome浏览器和chromedriver/">Ubuntu安装chrome浏览器和chromedriver</a>
+                <a class="has-link-black-ter" href="/2019/02/03/2019-02-03-C++语言相关/">C++语言相关</a>
             
         </h1>
         <div class="content">
-            <h3 id="安装chrome步骤"><a href="#安装chrome步骤" class="headerlink" title="安装chrome步骤"></a>安装chrome步骤</h3><hr>
-<h6 id="一-下载chrome安装包"><a href="#一-下载chrome安装包" class="headerlink" title="一. 下载chrome安装包"></a>一. 下载chrome安装包</h6><ol>
-<li><p>使⽤ubuntu上的⽕狐浏览器打开如下地址：<br><code>http://www.google.cn/intl/zhCN/chrome/browser/desktop/index.html</code></p></li></ol>
+            <h2 id="GCC内置位运算"><a href="#GCC内置位运算" class="headerlink" title="GCC内置位运算"></a>GCC内置位运算</h2><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> __builtin_clz(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x);      <span class="hljs-comment">//求前缀0的个数</span></span><br><span class="line"><span class="hljs-keyword">int</span> __builtin_ctz(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x);      <span class="hljs-comment">//求后缀0的个数</span></span><br><span class="line"><span class="hljs-keyword">int</span> __builtin_ffs(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x);      <span class="hljs-comment">//x的二进制末尾最后一个1的位置，从1开始</span></span><br><span class="line"><span class="hljs-keyword">int</span> __builtin_popcount(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x); <span class="hljs-comment">//x二进制中1的个数，相当于bitset::count()</span></span><br><span class="line"><span class="hljs-keyword">int</span> __builtin_parity(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> x);   <span class="hljs-comment">//判断x的二进制中1的个数的奇（1）偶（0）性，这些函数都有相应的usigned long和usigned long long版本，只需要在函数名后面加上l或ll就可以了，比如__builtin_clzll</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="开栈"><a href="#开栈" class="headerlink" title="开栈"></a>开栈</h2><h3 id="For-C"><a href="#For-C" class="headerlink" title="For C++"></a>For C++</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(linker, <span class="hljs-meta-string">"/STACK:102400000,102400000"</span>) <span class="hljs-comment">//For C++</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="For-G"><a href="#For-G" class="headerlink" title="For G++"></a>For G++</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> <span class="hljs-comment">//For G++</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> size = <span class="hljs-number">256</span> &lt;&lt; <span class="hljs-number">20</span>; <span class="hljs-comment">//256MB</span></span><br><span class="line">	<span class="hljs-keyword">char</span> *p = (<span class="hljs-keyword">char</span> *)<span class="hljs-built_in">malloc</span>(size) + size;</span><br><span class="line">	__asm__ __volatile__(<span class="hljs-string">"movq %0, %%rsp\n"</span> ::<span class="hljs-string">"r"</span>(p)); <span class="hljs-comment">//64bit，一定要最后写一句`exit(0);`退出程序，否则会得到非零退出的错误，可能RE。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="读入优化"><a href="#读入优化" class="headerlink" title="读入优化"></a>读入优化</h2><h3 id="C文件指针版"><a href="#C文件指针版" class="headerlink" title="C文件指针版"></a>C文件指针版</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">ll <span class="hljs-title">getll</span><span class="hljs-params">(FILE *in = <span class="hljs-built_in">stdin</span>)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	ll val = <span class="hljs-number">0</span>, sgn = <span class="hljs-number">1</span>, ch = getc(in);</span><br><span class="line">	<span class="hljs-keyword">for</span> (; !<span class="hljs-built_in">isdigit</span>(ch) &amp;&amp; ch != EOF; ch = getc(in))</span><br><span class="line">		<span class="hljs-keyword">if</span> (ch == <span class="hljs-string">'-'</span>)</span><br><span class="line">			sgn = -sgn;</span><br><span class="line">	<span class="hljs-keyword">for</span> (; <span class="hljs-built_in">isdigit</span>(ch); ch = getc(in))</span><br><span class="line">		val = val * <span class="hljs-number">10</span> + ch - <span class="hljs-string">'0'</span>;</span><br><span class="line">	<span class="hljs-keyword">return</span> ungetc(ch, in), sgn * val;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function">lf <span class="hljs-title">getlf</span><span class="hljs-params">(FILE *in = <span class="hljs-built_in">stdin</span>)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	lf val = getll(in), p = val &lt; <span class="hljs-number">0</span> ? <span class="hljs-number">-1</span> : <span class="hljs-number">1</span>;</span><br><span class="line">	ll ch = getc(in);</span><br><span class="line">	<span class="hljs-keyword">if</span> (ch == <span class="hljs-string">'.'</span>)</span><br><span class="line">		<span class="hljs-keyword">for</span> (ch = getc(in); <span class="hljs-built_in">isdigit</span>(ch); ch = getc(in))</span><br><span class="line">			val += (p /= <span class="hljs-number">10</span>) * (ch - <span class="hljs-string">'0'</span>);</span><br><span class="line">	<span class="hljs-keyword">return</span> ungetc(ch, in), val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="仿C-IO流沙雕版"><a href="#仿C-IO流沙雕版" class="headerlink" title="仿C++IO流沙雕版"></a>仿C++IO流沙雕版</h3><p><a href="https://vjudge.net/solution/14388745" target="_blank" rel="noopener">使用前</a></p>
+<p><a href="https://vjudge.net/solution/14388713" target="_blank" rel="noopener">使用后</a></p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> cin kin</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Istream</span></span></span><br><span class="line"><span class="hljs-class">&#123;</span></span><br><span class="line">	<span class="hljs-keyword">char</span> b[<span class="hljs-number">20</span> &lt;&lt; <span class="hljs-number">20</span>], *i, *e; <span class="hljs-comment">//20MB</span></span><br><span class="line">	Istream(FILE *in) : i(b), e(b + fread(b, <span class="hljs-keyword">sizeof</span>(*b), <span class="hljs-keyword">sizeof</span>(b) - <span class="hljs-number">1</span>, in)) &#123;&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">eof</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> i == e;</span><br><span class="line">	&#125;</span><br><span class="line">	Istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> &amp;val)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> val = strtoll(i, &amp;i, <span class="hljs-number">10</span> <span class="hljs-comment">/*进制，取值2~36*/</span>), *<span class="hljs-keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(ll &amp;val) <span class="hljs-comment">//极限快</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">while</span> (*i &lt; <span class="hljs-string">'0'</span>)</span><br><span class="line">			++i; <span class="hljs-comment">//无符号</span></span><br><span class="line">		<span class="hljs-keyword">for</span> (val = <span class="hljs-number">0</span>; *i &gt;= <span class="hljs-string">'0'</span>; ++i)</span><br><span class="line">			val = (val &lt;&lt; <span class="hljs-number">3</span>) + (val &lt;&lt; <span class="hljs-number">1</span>) + *i - <span class="hljs-string">'0'</span>;</span><br><span class="line">		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(<span class="hljs-keyword">double</span> &amp;val)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">return</span> val = strtod(i, &amp;i), *<span class="hljs-keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	Istream &amp;<span class="hljs-keyword">operator</span>&gt;&gt;(<span class="hljs-built_in">string</span> &amp;s)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">while</span> (!eof() &amp;&amp; <span class="hljs-built_in">isspace</span>(*i))</span><br><span class="line">			++i;</span><br><span class="line">		<span class="hljs-keyword">for</span> (s.clear(); !eof() &amp;&amp; !<span class="hljs-built_in">isspace</span>(*i); ++i)</span><br><span class="line">			s += *i;</span><br><span class="line">		<span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; kin(<span class="hljs-built_in">stdin</span>);</span><br></pre></td></tr></table></figure>
+
+
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/22/Ubuntu安装chrome浏览器和chromedriver/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -205,17 +201,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-07-21T17:26:02.000Z">2018-07-22</time>
+                <time class="level-item has-text-grey" datetime="2018-12-11T03:00:00.000Z">2018-12-11</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 180 个字)
+                    8 分钟 读完 (大约 1159 个字)
                 </span>
                 
                 
@@ -224,24 +220,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/07/22/ubuntu-安装pycharm，简单粗暴的方法，三行命令行/">ubuntu-安装Pycharm，简单粗暴的方法，三行命令行</a>
+                <a class="has-link-black-ter" href="/2018/12/11/2018-12-11-带变量的布尔表达式/">函数程序设计实验十二：带变量的布尔表达式</a>
             
         </h1>
         <div class="content">
-            <h3 id="对于Ubuntu-16-10和Ubuntu-17-04，通过Ctrl-Alt-T打开终端，或通过从应用启动器搜索“terminal”，打开后，执行以下步骤："><a href="#对于Ubuntu-16-10和Ubuntu-17-04，通过Ctrl-Alt-T打开终端，或通过从应用启动器搜索“terminal”，打开后，执行以下步骤：" class="headerlink" title="对于Ubuntu 16.10和Ubuntu 17.04，通过Ctrl + Alt + T打开终端，或通过从应用启动器搜索“terminal”，打开后，执行以下步骤："></a>对于Ubuntu 16.10和Ubuntu 17.04，通过Ctrl + Alt + T打开终端，或通过从应用启动器搜索“terminal”，打开后，执行以下步骤：</h3><ol>
-<li>.通过命令添加PPA存储库：<br><code>sudo add-apt-repository ppa:mystic-mirage/pycharm</code></li>
-</ol>
-<hr>
+            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> Lab3 <span class="hljs-keyword">where</span></span><br><span class="line"><span class="hljs-keyword">import</span> Data.List</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">一个布尔表达式就像一个算术表达式，只是这里的值都是布尔值True和False，</span></span><br><span class="line"><span class="hljs-comment">其中的变量也只能代入布尔值，各种运算用运算表给出。</span></span><br><span class="line"><span class="hljs-comment">布尔表达式的另一种解读是表示命题，如文件lab3.pdf所讲。</span></span><br><span class="line"><span class="hljs-comment">如果不理解命题，就看作布尔表达式好了。</span></span><br><span class="line"><span class="hljs-comment">本作业要求判断一个布尔表达式是不是永真式：即无论将变量代入什么值，其结果总是True。</span></span><br><span class="line"><span class="hljs-comment">一、定义命题类型及其Show特例</span></span><br><span class="line"><span class="hljs-comment">命题的集合可以如下定义</span></span><br><span class="line"><span class="hljs-comment">-真命题(记作T)和假命题(记作F)是命题；</span></span><br><span class="line"><span class="hljs-comment">-由一个字母表示的命题变元是一个命题；</span></span><br><span class="line"><span class="hljs-comment">-如果P是命题,则它的否定是一个命题,记作~P；"~"称为否定联结词；</span></span><br><span class="line"><span class="hljs-comment">-如果p,q是命题,则它们的合取是一个命题,记作p&amp;&amp;q; "&amp;&amp;"称为合取联结词；</span></span><br><span class="line"><span class="hljs-comment">-如果p,q是命题,则它们的析取是一个命题,记作p||q; "||"称为析取联结词；</span></span><br><span class="line"><span class="hljs-comment">-如果p,q是命题,则它们的蕴含是一个命题,记作p=&gt;q; "=&gt;"称为蕴含联结词；</span></span><br><span class="line"><span class="hljs-comment">-所有的命题由以上规则经过有限步生成。</span></span><br><span class="line"><span class="hljs-comment">所以,命题的集合是一个归纳定义的集合,可以用代数类型描述：</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">data</span> <span class="hljs-type">Prop</span>=<span class="hljs-type">Const</span> <span class="hljs-type">Bool</span></span></span><br><span class="line">    | <span class="hljs-type">Var</span> <span class="hljs-type">Char</span></span><br><span class="line">    | <span class="hljs-type">Not</span> <span class="hljs-type">Prop</span></span><br><span class="line">    | <span class="hljs-type">And</span> <span class="hljs-type">Prop</span> <span class="hljs-type">Prop</span></span><br><span class="line">    | <span class="hljs-type">Or</span> <span class="hljs-type">Prop</span> <span class="hljs-type">Prop</span></span><br><span class="line">    | <span class="hljs-type">Imply</span> <span class="hljs-type">Prop</span> <span class="hljs-type">Prop</span></span><br><span class="line">    <span class="hljs-keyword">deriving</span> <span class="hljs-type">Eq</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">习题1</span></span><br><span class="line"><span class="hljs-comment">试将类型Prop定义成类Show的特例,使得Prop中元素能够显示成定义中我们习惯的表示。</span></span><br><span class="line"><span class="hljs-comment">例如,Var 'A',And (Var 'P') (Var 'Q')分别显示成A和P&amp;&amp;Q等。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">instance</span> <span class="hljs-type">Show</span> <span class="hljs-type">Prop</span> <span class="hljs-keyword">where</span></span></span><br><span class="line">    show (<span class="hljs-type">Const</span> <span class="hljs-type">True</span>)=<span class="hljs-string">"True"</span></span><br><span class="line">    show (<span class="hljs-type">Const</span> <span class="hljs-type">False</span>)=<span class="hljs-string">"False"</span></span><br><span class="line">    show (<span class="hljs-type">Var</span> x)=[x]</span><br><span class="line">    show (<span class="hljs-type">Not</span> x)=<span class="hljs-string">"~"</span>++show x</span><br><span class="line">    show (<span class="hljs-type">And</span> x y)=(show x)++<span class="hljs-string">"&amp;&amp;"</span>++(show y)</span><br><span class="line">    show (<span class="hljs-type">Or</span> x y)=(show x)++<span class="hljs-string">"||"</span>++(show y)</span><br><span class="line">    show (<span class="hljs-type">Imply</span> x y)=(show x)++<span class="hljs-string">"=&gt;"</span>++(show y)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">习题2</span></span><br><span class="line"><span class="hljs-comment">定义下列值p1,p2,p3::Prop</span></span><br><span class="line"><span class="hljs-comment">使得它们个表示下列命题:</span></span><br><span class="line"><span class="hljs-comment">A&amp;&amp;~A</span></span><br><span class="line"><span class="hljs-comment">A||~A</span></span><br><span class="line"><span class="hljs-comment">A=&gt;(A&amp;&amp;B)</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">p1</span>=<span class="hljs-type">And</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>) (<span class="hljs-type">Not</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>))</span><br><span class="line"><span class="hljs-title">p2</span>=<span class="hljs-type">Or</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>) (<span class="hljs-type">Not</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>))</span><br><span class="line"><span class="hljs-title">p3</span>=<span class="hljs-type">Imply</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>) (<span class="hljs-type">And</span> (<span class="hljs-type">Var</span> '<span class="hljs-type">A'</span>) (<span class="hljs-type">Var</span> '<span class="hljs-type">B'</span>))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">二、命题真值表</span></span><br><span class="line"><span class="hljs-comment">一个命题或者真,或者假。</span></span><br><span class="line"><span class="hljs-comment">例如,不包含变元的命题T表示真命题,命 题F表示假命题。</span></span><br><span class="line"><span class="hljs-comment">包含变元的命题的真假依赖于变元表示命题的真假,</span></span><br><span class="line"><span class="hljs-comment">所以,一个命题可以看作它包含的变元的函数,称为真值函数,</span></span><br><span class="line"><span class="hljs-comment">其中每个变元的取 值为真或者假,分别用TVue和False表示。</span></span><br><span class="line"><span class="hljs-comment">每个命题的取值和其中变元的关系可以用一个表来表示,称之为命题函数的真值表。</span></span><br><span class="line"><span class="hljs-comment">以下是命题联结词的真值表：</span></span><br><span class="line"><span class="hljs-comment">对应任意的命题函数，给定变元的一个代换，根据上述真值表可计算相应的真值。</span></span><br><span class="line"><span class="hljs-comment">例如,命题p3:A=&gt;(A &amp;&amp; B)在代换[('A',True),('B',False)]的真值是False。</span></span><br><span class="line"><span class="hljs-comment">我们可以用下列类型表示代换：</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Subst</span>=[(<span class="hljs-type">Char</span>,<span class="hljs-type">Bool</span>)]</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">习题3</span></span><br><span class="line"><span class="hljs-comment">试根据以上解释定义函数:</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">eval</span>::<span class="hljs-type">Subst</span>-&gt;<span class="hljs-type">Prop</span>-&gt;<span class="hljs-type">Bool</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">例如</span></span><br><span class="line"><span class="hljs-comment">&gt;eval [('A',True),('B',False)] p3</span></span><br><span class="line"><span class="hljs-comment">False</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">Const</span> p)=p</span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">Var</span> p)=(getBool sub p) <span class="hljs-keyword">where</span></span><br><span class="line">    getBool sub x=</span><br><span class="line">        <span class="hljs-keyword">if</span> length xs &gt;<span class="hljs-number">1</span></span><br><span class="line">            <span class="hljs-keyword">then</span> error <span class="hljs-string">"Variable has more than 2 values."</span></span><br><span class="line">            <span class="hljs-keyword">else</span> head xs</span><br><span class="line">        <span class="hljs-keyword">where</span> xs=[k|(y,k)&lt;-sub,x==y]</span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">Not</span> p)=not (eval sub p)</span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">And</span> p q)=(eval sub p)&amp;&amp;(eval sub q)</span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">Or</span> p q)=(eval sub p)||(eval sub q)</span><br><span class="line"><span class="hljs-title">eval</span> sub (<span class="hljs-type">Imply</span> p q)=((eval sub p)&amp;&amp;(eval sub q))||(not (eval sub p))</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">习题4</span></span><br><span class="line"><span class="hljs-comment">试定义下列函数：</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">vars</span>::<span class="hljs-type">Prop</span>-&gt;[<span class="hljs-type">Char</span>]</span><br><span class="line"><span class="hljs-title">substs</span>::<span class="hljs-type">Prop</span>-&gt;[<span class="hljs-type">Subst</span>]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">其中vars p给出命题p中出现的所有不同变元,substs p给出命题p中变元的所有可能代换。例如</span></span><br><span class="line"><span class="hljs-comment">vars p3=['A','B']</span></span><br><span class="line"><span class="hljs-comment">substs p3=</span></span><br><span class="line"><span class="hljs-comment">    [</span></span><br><span class="line"><span class="hljs-comment">        [('A',True),('B',True)],</span></span><br><span class="line"><span class="hljs-comment">        [('A',True),('B',False)],</span></span><br><span class="line"><span class="hljs-comment">        [('A',False),('B',True)],</span></span><br><span class="line"><span class="hljs-comment">        [('A',False),('B',False)]</span></span><br><span class="line"><span class="hljs-comment">    ]</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">Const</span> x)=[]</span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">Var</span> x)=[x]</span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">Not</span> p)=vars p</span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">And</span> p q)=nub((vars p)++(vars q))</span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">Or</span> p q)=nub((vars p)++(vars q))</span><br><span class="line"><span class="hljs-title">vars</span> (<span class="hljs-type">Imply</span> p q)=nub((vars p)++(vars q))</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">substs</span> p=getsub (vars p) <span class="hljs-keyword">where</span></span><br><span class="line">    getsub []=[]</span><br><span class="line">    getsub [x]=[[(x,<span class="hljs-type">True</span>)]]++[[(x,<span class="hljs-type">False</span>)]]</span><br><span class="line">    getsub (x:xs)=[(x,<span class="hljs-type">True</span>):a|a&lt;-getsub(xs)]++[(x,<span class="hljs-type">False</span>):a|a&lt;-getsub(xs)]</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">三、定义一个判断命题是否永真的函数</span></span><br><span class="line"><span class="hljs-comment">如果一个命题函数在变元的任意代换下真值是True,则称之为永真式。</span></span><br><span class="line"><span class="hljs-comment">例如,命题p2是永真式。</span></span><br><span class="line"><span class="hljs-comment">试定义判定一个命题是否永真式的函数,并说明你的函 数定义的正确性：</span></span><br><span class="line"><span class="hljs-comment">习题5</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">isTaut</span>::<span class="hljs-type">Prop</span>-&gt;<span class="hljs-type">Bool</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">例如</span></span><br><span class="line"><span class="hljs-comment">&gt;isTaut p1</span></span><br><span class="line"><span class="hljs-comment">False</span></span><br><span class="line"><span class="hljs-comment">&gt;isTaut p2</span></span><br><span class="line"><span class="hljs-comment">True</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">isTaut</span> p=testisTaut p (substs p) <span class="hljs-keyword">where</span></span><br><span class="line">    testisTaut p [x]=(eval x p)</span><br><span class="line">    testisTaut p (x:xs)=<span class="hljs-keyword">if</span> (eval x p) <span class="hljs-keyword">then</span> testisTaut p xs <span class="hljs-keyword">else</span> <span class="hljs-type">False</span></span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/07/22/ubuntu-安装pycharm，简单粗暴的方法，三行命令行/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -256,27 +241,21 @@
 
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2018/06/22/Deepin中安装配置ChromeDriver/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zgdf5cvj30dw0a274c.jpg" alt="Deepin中安装配置ChromeDriver">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-21T17:28:54.000Z">2018-06-22</time>
+                <time class="level-item has-text-grey" datetime="2018-12-03T15:00:00.000Z">2018-12-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 336 个字)
+                    4 分钟 读完 (大约 546 个字)
                 </span>
                 
                 
@@ -285,21 +264,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/22/Deepin中安装配置ChromeDriver/">Deepin中安装配置ChromeDriver</a>
+                <a class="has-link-black-ter" href="/2018/12/03/2018-12-03-词频统计/">函数程序设计实验十一：词频统计</a>
             
         </h1>
         <div class="content">
-            <h3 id="查看当前的Chrome版本信息"><a href="#查看当前的Chrome版本信息" class="headerlink" title="查看当前的Chrome版本信息"></a>查看当前的Chrome版本信息</h3><p>在谷歌浏览器地址栏中输入<code>chrome://version/</code>可以查看当前的Chrome信息：</p>
+            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">给定一个文本文件，构建文件中所有单词及其出现次数的词频表，并将词频表按照格式要求写到一个文件中。</span></span><br><span class="line"><span class="hljs-comment">词频表按照单词出现次数从高到低次序排列，出现次数相同的按照字典序排列。第十四周上课提交。</span></span><br><span class="line"><span class="hljs-comment">输入文件样例（见text0.txt ）：</span></span><br><span class="line"><span class="hljs-comment">Mind-controlled Mouse</span></span><br><span class="line"><span class="hljs-comment">The three study participants are part of a clinical trial to test a brain-computer interface (BCI) called BrainGate. BrainGate translates participant’s brain activity into commands that a computer can understand. In the new study, researchers first implanted microelectrode arrays into the area of the brain that governs hand movement. The participants trained the system by thinking about moving their hands, something the BCI learned to translate into actions on the screen.</span></span><br><span class="line"><span class="hljs-comment">输出文件样例（见text0Fre.txt ）：</span></span><br><span class="line"><span class="hljs-comment">the:8</span></span><br><span class="line"><span class="hljs-comment">a:3</span></span><br><span class="line"><span class="hljs-comment">into:3</span></span><br><span class="line"><span class="hljs-comment">bci:2</span></span><br><span class="line"><span class="hljs-comment">brain:2</span></span><br><span class="line"><span class="hljs-comment">braingate:2</span></span><br><span class="line"><span class="hljs-comment">of:2</span></span><br><span class="line"><span class="hljs-comment">participants:2</span></span><br><span class="line"><span class="hljs-comment">study:2</span></span><br><span class="line"><span class="hljs-comment">that:2</span></span><br><span class="line"><span class="hljs-comment">to:2</span></span><br><span class="line"><span class="hljs-comment">about:1</span></span><br><span class="line"><span class="hljs-comment">actions:1</span></span><br><span class="line"><span class="hljs-comment">activity:1</span></span><br><span class="line"><span class="hljs-comment">are:1</span></span><br><span class="line"><span class="hljs-comment">area:1</span></span><br><span class="line"><span class="hljs-comment">arrays:1</span></span><br><span class="line"><span class="hljs-comment">brain-computer:1</span></span><br><span class="line"><span class="hljs-comment">by:1</span></span><br><span class="line"><span class="hljs-comment">called:1</span></span><br><span class="line"><span class="hljs-comment">can:1</span></span><br><span class="line"><span class="hljs-comment">clinical:1</span></span><br><span class="line"><span class="hljs-comment">commands:1</span></span><br><span class="line"><span class="hljs-comment">computer:1</span></span><br><span class="line"><span class="hljs-comment">first:1</span></span><br><span class="line"><span class="hljs-comment">governs:1</span></span><br><span class="line"><span class="hljs-comment">hand:1</span></span><br><span class="line"><span class="hljs-comment">hands:1</span></span><br><span class="line"><span class="hljs-comment">implanted:1</span></span><br><span class="line"><span class="hljs-comment">in:1</span></span><br><span class="line"><span class="hljs-comment">interface:1</span></span><br><span class="line"><span class="hljs-comment">learned:1</span></span><br><span class="line"><span class="hljs-comment">microelectrode:1</span></span><br><span class="line"><span class="hljs-comment">mind-controlled:1</span></span><br><span class="line"><span class="hljs-comment">mouse:1</span></span><br><span class="line"><span class="hljs-comment">movement:1</span></span><br><span class="line"><span class="hljs-comment">moving:1</span></span><br><span class="line"><span class="hljs-comment">new:1</span></span><br><span class="line"><span class="hljs-comment">on:1</span></span><br><span class="line"><span class="hljs-comment">part:1</span></span><br><span class="line"><span class="hljs-comment">participant:1</span></span><br><span class="line"><span class="hljs-comment">researchers:1</span></span><br><span class="line"><span class="hljs-comment">screen:1</span></span><br><span class="line"><span class="hljs-comment">something:1</span></span><br><span class="line"><span class="hljs-comment">system:1</span></span><br><span class="line"><span class="hljs-comment">test:1</span></span><br><span class="line"><span class="hljs-comment">their:1</span></span><br><span class="line"><span class="hljs-comment">thinking:1</span></span><br><span class="line"><span class="hljs-comment">three:1</span></span><br><span class="line"><span class="hljs-comment">trained:1</span></span><br><span class="line"><span class="hljs-comment">translate:1</span></span><br><span class="line"><span class="hljs-comment">translates:1</span></span><br><span class="line"><span class="hljs-comment">trial:1</span></span><br><span class="line"><span class="hljs-comment">understand:1</span></span><br><span class="line"><span class="hljs-comment">建议：</span></span><br><span class="line"><span class="hljs-comment">main ::IO </span></span><br><span class="line"><span class="hljs-comment">main = do</span></span><br><span class="line"><span class="hljs-comment">   ls &lt;- readFile inputfile</span></span><br><span class="line"><span class="hljs-comment">   let result = string2listofpairs ls</span></span><br><span class="line"><span class="hljs-comment">   let formatedResult = formatting result</span></span><br><span class="line"><span class="hljs-comment">   writeFile formatedResult</span></span><br><span class="line"><span class="hljs-comment">其中</span></span><br><span class="line"><span class="hljs-comment">string2listofpairs :: String -&gt;[(String, Int)]  -- 计算输入串中所有单词及其频率，并排序</span></span><br><span class="line"><span class="hljs-comment">formatting :: [(String, Int)] -&gt;String  -- 按照要求将词频列表转换为输出格式串</span></span><br><span class="line"><span class="hljs-comment">几点注意事项：</span></span><br><span class="line"><span class="hljs-comment">1. 大小写不敏感，所有结果用小写字母；</span></span><br><span class="line"><span class="hljs-comment">2. It's 视为单词 it；</span></span><br><span class="line"><span class="hljs-comment">3. brain-computer 视为一个单词。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-keyword">import</span> System.IO</span><br><span class="line"><span class="hljs-keyword">import</span> Text.Printf</span><br><span class="line"><span class="hljs-keyword">import</span> Data.Char</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">inputfile</span>=<span class="hljs-string">"text0.txt"</span></span><br><span class="line"><span class="hljs-title">outputfile</span>=<span class="hljs-string">"text0Fre.txt"</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-title">main</span>::<span class="hljs-type">IO</span>()</span><br><span class="line"><span class="hljs-title">main</span>=<span class="hljs-keyword">do</span></span><br><span class="line">   ls&lt;-readFile inputfile</span><br><span class="line">   <span class="hljs-keyword">let</span> result = string2listofpairs ls</span><br><span class="line">   <span class="hljs-keyword">let</span> formatedResult=formatting result</span><br><span class="line">   writeFile outputfile formatedResult</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-title">string2listofpairs</span>::<span class="hljs-type">String</span>-&gt;[(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)]</span><br><span class="line"><span class="hljs-title">string2listofpairs</span> s=sortG(cal(group(sortS(words(tolow s)))))</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">sortS</span>::[<span class="hljs-type">String</span>]-&gt;[<span class="hljs-type">String</span>]</span><br><span class="line"><span class="hljs-title">sortS</span> []=[]</span><br><span class="line"><span class="hljs-title">sortS</span> (x:xs)=(sortS[y|y&lt;-xs,y&lt;x])++[x]++(sortS[y|y&lt;-xs,x&lt;=y])</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">cmp</span>::(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)-&gt;(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)-&gt;<span class="hljs-type">Bool</span></span><br><span class="line"><span class="hljs-title">cmp</span> (a,b) (c,d)=</span><br><span class="line">    <span class="hljs-keyword">if</span> b/=d</span><br><span class="line">        <span class="hljs-keyword">then</span> b&gt;d</span><br><span class="line">        <span class="hljs-keyword">else</span> a&lt;c</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">sortG</span>::[(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)]-&gt;[(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)]</span><br><span class="line"><span class="hljs-title">sortG</span> []=[]</span><br><span class="line"><span class="hljs-title">sortG</span> (x:xs)=(sortG[y|y&lt;-xs,cmp y x])++[x]++(sortG[y|y&lt;-xs,cmp y x==<span class="hljs-type">False</span>])</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">group</span>::[<span class="hljs-type">String</span>]-&gt;[[<span class="hljs-type">String</span>]]</span><br><span class="line"><span class="hljs-title">group</span> []=[]</span><br><span class="line"><span class="hljs-title">group</span> (x:xs)=[[x]++[y|y&lt;-xs,y==x]]++(group[y|y&lt;-xs,y/=x])</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">tolow</span>::<span class="hljs-type">String</span>-&gt;<span class="hljs-type">String</span></span><br><span class="line"><span class="hljs-title">tolow</span> []=[]</span><br><span class="line"><span class="hljs-title">tolow</span> (x:xs)=</span><br><span class="line">    <span class="hljs-keyword">if</span> (isSpace x)||(isAlphaNum x)||(x=='-')</span><br><span class="line">        <span class="hljs-keyword">then</span> ((toLower x):(tolow xs))</span><br><span class="line">        <span class="hljs-keyword">else</span> tolow xs</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">cal</span>::[[<span class="hljs-type">String</span>]]-&gt;[(<span class="hljs-type">String</span>,<span class="hljs-type">Int</span>)]</span><br><span class="line"><span class="hljs-title">cal</span> []=[]</span><br><span class="line"><span class="hljs-title">cal</span> (x:xs)=((x!!<span class="hljs-number">0</span>,length x):(cal xs))</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">formatting</span> :: [(<span class="hljs-type">String</span>, <span class="hljs-type">Int</span>)] -&gt;<span class="hljs-type">String</span>  <span class="hljs-comment">-- 按照要求将词频列表转换为输出格式串</span></span><br><span class="line"><span class="hljs-title">formatting</span> []=[]</span><br><span class="line"><span class="hljs-title">formatting</span> ((a,b):xs)=(printf <span class="hljs-string">"%s:%d\n"</span> a b)++(formatting xs)</span><br></pre></td></tr></table></figure>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/22/Deepin中安装配置ChromeDriver/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -314,27 +285,21 @@
 
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2018/06/22/安装谷歌拼音/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zcena1wj30hs09zt8v.jpg" alt="安装谷歌拼音">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-21T17:24:59.000Z">2018-06-22</time>
+                <time class="level-item has-text-grey" datetime="2018-12-03T00:30:00.000Z">2018-12-03</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
+                <a class="has-link-grey -link" href="/categories/学习笔记/">学习笔记</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    2 分钟 读完 (大约 225 个字)
+                    44 分钟 读完 (大约 6659 个字)
                 </span>
                 
                 
@@ -343,326 +308,242 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/06/22/安装谷歌拼音/">安装谷歌拼音</a>
+                <a class="has-link-black-ter" href="/2018/12/03/2018-12-03-概率论与数理统计/">概率论与数理统计</a>
             
         </h1>
         <div class="content">
-            <p>linux下面的中文输入法一直不给力，Ubuntu里正常使用的搜狗输入法经常突然无法输出中文（具体现象是，可以呼出搜狗输入法界面，但是候选词列表无显示）虽然用惯了搜狗输入法但是实在忍不了啦，于是痛定思痛果断换掉。</p>
-<p>现在,google拼音输入法可以用了！</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/22/安装谷歌拼音/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/06/22/安装Ubuntu后要做的事/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57yxi0h7hj30dw08vq2v.jpg" alt="安装Ubuntu后要做的事">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-21T17:02:42.000Z">2018-06-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分钟 读完 (大约 1331 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/22/安装Ubuntu后要做的事/">安装Ubuntu后要做的事</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="Ubuntu-16-04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。"><a href="#Ubuntu-16-04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。" class="headerlink" title="Ubuntu 16.04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。"></a>Ubuntu 16.04安装完成后，还需要做一些配置才能愉快的使用，所以装完系统后还要进行一系列的优化。</h3><h3 id="1-删除libreoffice"><a href="#1-删除libreoffice" class="headerlink" title="1.删除libreoffice"></a>1.删除libreoffice</h3><p>libreoffice虽然是开源的，但是Java写出来的office执行效率实在不敢恭维，装完系统后果断删掉</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/22/安装Ubuntu后要做的事/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/06/12/在Deepin系统下安装Anaconda/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57zi4li2gj318g0m8wfk.jpg" alt="在Deepin系统下安装Anaconda">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-06-11T17:29:24.000Z">2018-06-12</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 693 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/06/12/在Deepin系统下安装Anaconda/">在Deepin系统下安装Anaconda</a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="运行安装Anaconda"><a href="#运行安装Anaconda" class="headerlink" title="运行安装Anaconda"></a>运行安装Anaconda</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash Anaconda3-4.3.1-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/06/12/在Deepin系统下安装Anaconda/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/05/22/Vmware虚拟机安装和配置Ubuntu系统/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57y869akaj30m80go7a0.jpg" alt="Vmware虚拟机安装和配置Ubuntu系统">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-05-21T16:46:01.000Z">2018-05-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    41 分钟 读完 (大约 6208 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/05/22/Vmware虚拟机安装和配置Ubuntu系统/">Vmware虚拟机安装和配置Ubuntu系统</a>
-            
-        </h1>
-        <div class="content">
-            <p><strong>创建带有 SCSI 控制器类型、虚拟机磁盘类型以及与旧版 VMware 产品兼容性等高级选项的虚拟机</strong></p>
+            <blockquote>
+<p><strong>参考</strong><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank" rel="noopener">斯坦福大学2014（吴恩达）机器学习教程中文笔记</a>，感谢编者黄海广博士。</p>
+</blockquote>
+<h1 id="概率论的基本概念"><a href="#概率论的基本概念" class="headerlink" title="概率论的基本概念"></a>概率论的基本概念</h1><h2 id="随机试验"><a href="#随机试验" class="headerlink" title="随机试验"></a>随机试验</h2><p>在概率论中，将具有以下三个特点的事件称为<strong>随机试验</strong>：</p>
 <ul>
-<li><p>安装前准备：</p>
+<li>可以在相同的条件下重复进行</li>
+<li>每次试验的可能结果不止一个，并且事先能够明确事件的所有可能结果</li>
+<li>进行一次试验前不能确定哪个结果会出现</li>
+</ul>
+<h2 id="样本空间、随机事件"><a href="#样本空间、随机事件" class="headerlink" title="样本空间、随机事件"></a>样本空间、随机事件</h2><h3 id="样本空间"><a href="#样本空间" class="headerlink" title="样本空间"></a>样本空间</h3><p>随机事件$E$的所有基本结果组成的集合为$E$的<strong>样本空间</strong>，记为$S$。样本空间的元素，即$E$的每个结果，称为样本点或基本事件，有时记为$\omega$。</p>
+<h3 id="随机事件"><a href="#随机事件" class="headerlink" title="随机事件"></a>随机事件</h3><p>称试验$E$的样本空间$S$的子集为$E$的<strong>随机事件</strong>，简称<strong>事件</strong>。在每次试验中，当且仅当这一子集中的一个样本点出现时，称这一<strong>事件发生</strong>。<br>特别地，由一个样本点组成的单点集，称为<strong>基本事件</strong>；样本空间$S$包含所有的基本点，每次试验中总是发生，称为<strong>必然事件</strong>，记为$\Omega$；空集$\varnothing$每次都不可能发生，称为<strong>不可能事件</strong>。</p>
+<h3 id="事件间的关系与事件的运算"><a href="#事件间的关系与事件的运算" class="headerlink" title="事件间的关系与事件的运算"></a>事件间的关系与事件的运算</h3><h4 id="子事件"><a href="#子事件" class="headerlink" title="子事件"></a>子事件</h4><p>$A \subset B$，若$A$发生，则$B$发生。</p>
+<h4 id="相等事件"><a href="#相等事件" class="headerlink" title="相等事件"></a>相等事件</h4><p>$A = B$，即$A \subset B$，且$B \subset A$ 。</p>
+<h4 id="和事件"><a href="#和事件" class="headerlink" title="和事件"></a>和事件</h4><p>$A\bigcup B$（或$A + B$），$A$与$B$中至少有一个发生。</p>
+<h4 id="差事件"><a href="#差事件" class="headerlink" title="差事件"></a>差事件</h4><p>$A - B={x|x\in A,x\not\in B}$，$A$发生但$B$不发生。</p>
+<h4 id="积事件"><a href="#积事件" class="headerlink" title="积事件"></a>积事件</h4><p>$A\bigcap B$（或${AB}$），$A$与$B$同时发生。</p>
+<h4 id="互斥事件（互不相容）"><a href="#互斥事件（互不相容）" class="headerlink" title="互斥事件（互不相容）"></a>互斥事件（互不相容）</h4><p>$A\bigcap B$=$\varnothing$。基本事件是两两互斥的。</p>
+<h4 id="互逆事件（对立事件）"><a href="#互逆事件（对立事件）" class="headerlink" title="互逆事件（对立事件）"></a>互逆事件（对立事件）</h4><p>$A\bigcap B=\varnothing ,A\bigcup B=\Omega ,A=\overline{B},B=\overline{A}$</p>
+<h4 id="完全事件组"><a href="#完全事件组" class="headerlink" title="完全事件组"></a>完全事件组</h4><p>${ {A}<em>{1} }{ {A}</em>{2} }\cdots { {A}<em>{n} }$两两互斥，且和事件为必然事件，即$A_i\bigcap A_j=\varnothing,i\ne j,\bigcap</em>{i=1}^n=\Omega$</p>
+<h4 id="交换律"><a href="#交换律" class="headerlink" title="交换律"></a>交换律</h4><p>$A\bigcup B=B\bigcup A,A\bigcap B=B\bigcap A$</p>
+<h4 id="结合律"><a href="#结合律" class="headerlink" title="结合律"></a>结合律</h4><p>$(A\bigcup B)\bigcup C=A\bigcup (B\bigcup C)$</p>
+<h4 id="分配律"><a href="#分配律" class="headerlink" title="分配律"></a>分配律</h4><p>$(A\bigcap B)\bigcap C=A\bigcap (B\bigcap C)$</p>
+<h4 id="德·摩根律"><a href="#德·摩根律" class="headerlink" title="德·摩根律"></a>德·摩根律</h4><p>$\overline{A\bigcup B}=\overline{A}\bigcap \overline{B}$<br>$\overline{A\bigcap B}=\overline{A}\bigcup \overline{B}$</p>
+<h2 id="频率与概率"><a href="#频率与概率" class="headerlink" title="频率与概率"></a>频率与概率</h2><h3 id="频率"><a href="#频率" class="headerlink" title="频率"></a>频率</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>相同条件下进行了n次试验，在这n次试验当中，事件A发生的频率$n_A$称为事件A的频数，比值$f_n(A)=\frac{n_A}{n}$称为事件A发生的频率。</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ul>
+<li>$0\leq f_n(A)\leq 1$</li>
+<li>$f_n(S)=1$</li>
+<li>有限可加性：若$A_1,A_2,\ldots,a_k$是两两互不相容的事件，则$f_n(A_1\bigcup A_2\bigcup\ldots\bigcup A_k)=f_n(A_1)+f_n(A_2)+\ldots+f_n(A_k)$</li>
+</ul>
+<h3 id="概率"><a href="#概率" class="headerlink" title="概率"></a>概率</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>设E是随机试验，S是它的样本空间，对于E的每一事件A赋予一个实数$P(A)$，称为事件A的概率，如果集合函数$P(\cdot)$满足下列条件：</p>
+<h5 id="非负性"><a href="#非负性" class="headerlink" title="非负性"></a>非负性</h5><p>对于每一事件A，有$P(A)\ge 0$</p>
+<h5 id="规范性"><a href="#规范性" class="headerlink" title="规范性"></a>规范性</h5><p>对于必然事件S，有$P(S)=1$</p>
+<h5 id="可列可加性"><a href="#可列可加性" class="headerlink" title="可列可加性"></a>可列可加性</h5><p>设$A_1,A_2,\ldots$是两两互不相容的事件，则$P(A_1\bigcup A_2\bigcup\ldots)=P(A_1)+P(A_2)+\ldots$</p>
+<h4 id="性质-1"><a href="#性质-1" class="headerlink" title="性质"></a>性质</h4><ul>
+<li>$P(\varnothing)=0$</li>
+<li>有限可加性：$P(A_1\bigcup A_2\bigcup\ldots\bigcup A_n)=P(A_1)+P(A_2)+\ldots+P(A_n)$，可由上一条性质和可列可加性推出。</li>
+<li>若$A\subset B$，则$P(B-A)=P(B)-P(A)\ge 0$</li>
+<li>$P(A)\le 1$</li>
+<li>逆事件的概率：$P(\overline{A})=1-P(A)$</li>
+<li>加法公式：$P(A\bigcup B)=P(A)+P(B)-P(AB)$，推广到三元：$P(A\bigcup B\bigcup C)=P(A)+P(B)+P(C)-P(AB)-P(BC)-P(AC)+P(ABC)$</li>
+<li>$P(A-B)=P(A)-P(AB)$</li>
+<li>$P(A\overline{B})=P(A)-P(AB)$</li>
+<li>$P(A)=P(AB)+P(A\overline{B})$</li>
+<li>$P(A\bigcup B)=P(A)+P(\overline{A}B)=P(AB)+P(A\overline{B})+P(\overline{A}B)$</li>
+</ul>
+<h2 id="等可能概型（古典概型）"><a href="#等可能概型（古典概型）" class="headerlink" title="等可能概型（古典概型）"></a>等可能概型（古典概型）</h2><p>具备以下两个特点的试验被称作等可能概型（古典概型）：</p>
 <ul>
-<li>安装好VMwareWorkstation</li>
-<li>Ubuntu16.04镜像文件<ul>
-<li>（下载地址链接：<a href="https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ" target="_blank" rel="noopener">https://pan.baidu.com/s/1MSBBv9NOh7_cFgTMUQPEhQ</a> 提取码：w6g7 ）</li>
+<li>试验的样本空间只包含有限个元素</li>
+<li>试验中每个基本事件发生的可能性相同</li>
+</ul>
+<h3 id="古典概型计算公式"><a href="#古典概型计算公式" class="headerlink" title="古典概型计算公式"></a>古典概型计算公式</h3><p>$P(A)=\frac{A包含的基本事件数}{S包含的事件数}$</p>
+<h3 id="实际推断原理"><a href="#实际推断原理" class="headerlink" title="实际推断原理"></a>实际推断原理</h3><p>概率很小的事件在一次试验中实际上几乎是不发生的。</p>
+<h2 id="条件概率"><a href="#条件概率" class="headerlink" title="条件概率"></a>条件概率</h2><h3 id="条件概率-1"><a href="#条件概率-1" class="headerlink" title="条件概率"></a>条件概率</h3><p>$P(B|A)=\frac{P(AB)}{P(A)}$,表示$A$发生的条件下，$B$发生的概率。<br>条件概率$P(\centerdot |B)$满足概率的所有性质，例如：</p>
+<ul>
+<li>$P({ {\overline{A} }<em>{1} }|B)=1-P({ {A}</em>{1} }|B)$</li>
+<li>$P({ {A}<em>{1} }\bigcup { {A}</em>{2} }|B)=P({ {A}<em>{1} }|B)+P({ {A}</em>{2} }|B)-P({ {A}<em>{1} }{ {A}</em>{2} }|B)$</li>
+<li>$P({ {A}<em>{1} }{ {A}</em>{2} }|B)=P({ {A}<em>{1} }|B)P({ {A}</em>{2} }|{ {A}_{1} }B)$</li>
+</ul>
+<h4 id="非负性-1"><a href="#非负性-1" class="headerlink" title="非负性"></a>非负性</h4><p>对于每一事件$B$，有$P(B|A)\ge 0$</p>
+<h4 id="规范性-1"><a href="#规范性-1" class="headerlink" title="规范性"></a>规范性</h4><p>对于必然事件$S$，有$P(S|A)=1$</p>
+<h4 id="可列可加性-1"><a href="#可列可加性-1" class="headerlink" title="可列可加性"></a>可列可加性</h4><p>$P(\underset{i=1}{\overset{\infty}{\mathop{\bigcup } } },{ {B}<em>{i} }|A)=\sum</em>{i=1}^\infty P(B_i|A)$</p>
+<h3 id="乘法定理"><a href="#乘法定理" class="headerlink" title="乘法定理"></a>乘法定理</h3><p>$P({ {A}<em>{1} }{ {A}</em>{2} })=P({ {A}<em>{1} })P({ {A}</em>{2} }|{ {A}<em>{1} })=P({ {A}</em>{2} })P({ {A}<em>{1} }|{ {A}</em>{2} })$<br>$P({ {A}<em>{1} }{ {A}</em>{2} }\cdots { {A}<em>{n} })=P({ {A}</em>{1} })P({ {A}<em>{2} }|{ {A}</em>{1} })P({ {A}<em>{3} }|{ {A}</em>{1} }{ {A}<em>{2} })\cdots P({ {A}</em>{n} }|{ {A}<em>{1} }{ {A}</em>{2} }\cdots { {A}_{n-1} })$</p>
+<h3 id="全概率公式和贝叶斯公式"><a href="#全概率公式和贝叶斯公式" class="headerlink" title="全概率公式和贝叶斯公式"></a>全概率公式和贝叶斯公式</h3><h4 id="全概率公式"><a href="#全概率公式" class="headerlink" title="全概率公式"></a>全概率公式</h4><p>$P(A)=\sum\limits_{i=1}^{n}{P(A|{ {B}<em>{i} })P({ {B}</em>{i} }),{ {B}<em>{i} }{ {B}</em>{j} } }=\varnothing ,i\ne j,\underset{i=1}{\overset{n}{\mathop{\bigcup } } },{ {B}_{i} }=\Omega$</p>
+<h4 id="Bayes（贝叶斯）公式"><a href="#Bayes（贝叶斯）公式" class="headerlink" title="Bayes（贝叶斯）公式"></a>Bayes（贝叶斯）公式</h4><p>$P({ {B}<em>{j} }|A)=\frac{P(A|{ {B}</em>{j} })P({ {B}<em>{j} })}{\sum\limits</em>{i=1}^{n}{P(A|{ {B}<em>{i} })P({ {B}</em>{i} })} },j=1,2,\cdots ,n$<br>上述公式中事件${ {B}_{i} }$的个数可为可列个。</p>
+<h2 id="独立性"><a href="#独立性" class="headerlink" title="独立性"></a>独立性</h2><p>若干个事件，如果对于其中任意个事件，它们的积事件的概率都等于各事件概率的积，则称这几个事件相互独立。</p>
+<ul>
+<li>$A$与$B$相互独立$\Leftrightarrow P(AB)=P(A)P(B)$</li>
+<li>$A$，$B$，$C$两两独立$\Leftrightarrow P(AB)=P(A)P(B)$;$P(BC)=P(B)P(C)$;$P(AC)=P(A)P(C)$;</li>
+<li>$A$，$B$，$C$相互独立$\Leftrightarrow P(AB)=P(A)P(B)$;$P(BC)=P(B)P(C)$;$P(AC)=P(A)P(C)$;$P(ABC)=P(A)P(B)P(C)$</li>
+</ul>
+<h3 id="独立重复试验"><a href="#独立重复试验" class="headerlink" title="独立重复试验"></a>独立重复试验</h3><p>将某试验独立重复$n$次，若每次试验中事件A发生的概率为$p$，则$n$次试验中$A$发生$k$次的概率为：$P{X=k}=C_{n}^{k}{ {p}^{k} }{ {(1-p)}^{n-k} }$</p>
+<h3 id="性质-2"><a href="#性质-2" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>若${ {A}<em>{1} },{ {A}</em>{2} },\cdots ,{ {A}<em>{n} }$相互独立，则$P(\bigcap\limits</em>{i=1}^{n}{ { {A}<em>{i} } })=\prod\limits</em>{i=1}^{n}{P({ {A}<em>{i} })},$<br>$P(\bigcup\limits</em>{i=1}^{n}{ { {A}<em>{i} } })=\prod\limits</em>{i=1}^{n}{(1-P({ {A}_{i} }))}$</li>
+<li>若${ {A}<em>{1} },{ {A}</em>{2} },\cdots ,{ {A}<em>{m} },{ {B}</em>{1} },{ {B}<em>{2} },\cdots ,{ {B}</em>{n} }$相互独立，则$f({ {A}<em>{1} },{ {A}</em>{2} },\cdots ,{ {A}<em>{m} })$与$g({ {B}</em>{1} },{ {B}<em>{2} },\cdots ,{ {B}</em>{n} })$也相互独立，其中$f(\centerdot ),g(\centerdot )$分别表示对相应事件做任意事件运算后所得的事件，另外，概率为1（或0）的事件与任何事件相互独立。</li>
+</ul>
+<h3 id="互斥、互逆与独立性之间的关系"><a href="#互斥、互逆与独立性之间的关系" class="headerlink" title="互斥、互逆与独立性之间的关系"></a>互斥、互逆与独立性之间的关系</h3><p>$A$与$B$互逆$\Rightarrow$ $A$与$B$互斥，但反之不成立，$A$与$B$互斥（或互逆）且均非零概率事件$\Rightarrow$ $A$与$B$不独立。</p>
+<h1 id="随机变量及其分布"><a href="#随机变量及其分布" class="headerlink" title="随机变量及其分布"></a>随机变量及其分布</h1><h2 id="随机变量"><a href="#随机变量" class="headerlink" title="随机变量"></a>随机变量</h2><p>设随机试验的样本空间为$S={e}$，称定义在样本空间$S$上的实值单值函数$X=X(e)$为随机变量。</p>
+<h2 id="离散型随机变量及其分布律"><a href="#离散型随机变量及其分布律" class="headerlink" title="离散型随机变量及其分布律"></a>离散型随机变量及其分布律</h2><p>取值有限或可列无限的随机变量称为<strong>离散型随机变量</strong>。<br>设X的所有取值为$x_k(k=1,2,\ldots)$，称X取各个事件的概率$P{X=x_k}=p_k,k=1,2,\ldots$为离散型随机变量X的分布律，也可以写成表格形式：</p>
+<table>
+<thead>
+<tr>
+<th>$X$</th>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$\ldots$</th>
+<th>$x_n$</th>
+<th>$\ldots$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$p_k$</td>
+<td>$p_1$</td>
+<td>$p_2$</td>
+<td>$\ldots$</td>
+<td>$p_n$</td>
+<td>$\ldots$</td>
+</tr>
+</tbody></table>
+<p>其中，$p_k$满足：</p>
+<ul>
+<li>$p_k\ge 0,k=1,2,\ldots$</li>
+<li>$\sum_{k=1}^\infty p_k=1$</li>
+</ul>
+<h3 id="0-1分布（两点分布）"><a href="#0-1分布（两点分布）" class="headerlink" title="0-1分布（两点分布）"></a>0-1分布（两点分布）</h3><p>$P{X=k} = p^{k}{(1 - p)}^{1 - k},k = 0,1$，则称X服从以p为参数的0-1分布（两点分布）</p>
+<h3 id="伯努利试验、二项分布"><a href="#伯努利试验、二项分布" class="headerlink" title="伯努利试验、二项分布"></a>伯努利试验、二项分布</h3><h4 id="Binomial-Distribution（二项分布）"><a href="#Binomial-Distribution（二项分布）" class="headerlink" title="Binomial Distribution（二项分布）"></a>Binomial Distribution（二项分布）</h4><p>背景：n重Bernoulli 试验中，每次试验感兴趣的事件A 在 n 次试验中发生的次数 —— X是一离散型随机变量。<br>若$P(A)=p$,则$P_n(k)=P{X=k}=C_n^kp^k(1-p)^{n-k},k=0,1\ldots n$称X服从参数为$n, p$的二项分布，记作$X\sim B(n,p)$<br>特别地，$0 – 1$分布是$n=1$的二项分布.</p>
+<h4 id="Poisson-（泊松）分布"><a href="#Poisson-（泊松）分布" class="headerlink" title="Poisson （泊松）分布"></a>Poisson （泊松）分布</h4><p>背景：已知某事发生速率为每单位时间b次，观察时间为T时间单位，X为该观察时间内发生该事的总次数$\lambda=bT$<br>设随机变量X的所有可能值是全体非负整数，若$P{X=k}=e^{-\lambda}\frac{\lambda^k}{k!},k=0,1,\ldots$其中$\lambda&gt;0$是常数，则称 X 服从参数为$\lambda$的Poisson 分布，记作$\pi(\lambda)$或$P(\lambda)$</p>
+<h5 id="泊松定理"><a href="#泊松定理" class="headerlink" title="泊松定理"></a>泊松定理</h5><p>可用于泊松分布逼近二项分布。设随机变量X服从二项分布，其分布律为$P{X=K}=C_n^kp^k(1-p)^{n-k}$,又设$np=\lambda$是常数，则有$\lim_{n\to\infty}P{X=K}=e^{-\lambda}\frac{\lambda^k}{k!}$<br>在实际计算中,当$n\ge 20,p\leq 0.05$时，可用上述公式近似计算；而当$n\ge 100,np\leq 10$时，精度更好。</p>
+<h4 id="几何分布"><a href="#几何分布" class="headerlink" title="几何分布"></a>几何分布</h4><p>在n次伯努利试验中，试验k次才得到第一次成功的机率。<br>$G(p):P{X=k} = {(1 - p)}^{k - 1}p,0 &lt; p &lt; 1,k = 1,2,\cdots,P{X = m + k|X &gt; m} = P{X=k}$</p>
+<h4 id="超几何分布"><a href="#超几何分布" class="headerlink" title="超几何分布"></a>超几何分布</h4><p>设有产品N件，其中次品D件，其余为正品，从中随机地抽取n件。记X为抽到的的次品件数，求X的分布律.<br>此时抽到k件次品的概率为$H(N,M,n):P{X=k} = \frac{C_{M}^{k}C_{N - M}^{n -k} }{C_{N}^{n} },k =0,1,\cdots,min(n,M)$，称X服从超几何分布. 可以证明超几何分布的极限分布就是二项分布.</p>
+<h4 id="负二项分布-Pascal分布"><a href="#负二项分布-Pascal分布" class="headerlink" title="负二项分布(Pascal分布)"></a>负二项分布(Pascal分布)</h4><h4 id="离散均匀分布"><a href="#离散均匀分布" class="headerlink" title="离散均匀分布"></a>离散均匀分布</h4><h2 id="随机变量的分布函数"><a href="#随机变量的分布函数" class="headerlink" title="随机变量的分布函数"></a>随机变量的分布函数</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>$F(x) = P(X \leq x), - \infty &lt; x &lt; + \infty$</p>
+<h3 id="性质-3"><a href="#性质-3" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>$0 \leq F(x) \leq 1$</li>
+<li>$F(x)$单调不减</li>
+<li>右连续$F(x) = F(x+0)$</li>
+<li>$F( - \infty) = 0,F( + \infty) = 1$</li>
+</ul>
+<h2 id="连续型随机变量及其概率密度"><a href="#连续型随机变量及其概率密度" class="headerlink" title="连续型随机变量及其概率密度"></a>连续型随机变量及其概率密度</h2><p>概率密度$f(x)$非负可积，且:</p>
+<ul>
+<li>$f(x) \geq 0$</li>
+<li>$\int_{- \infty}^{+\infty}{f(x){dx} = 1}$</li>
+<li>$x$为$f(x)$的连续点，则:<br>$f(x) = F’(x)$分布函数$F(x) = \int_{- \infty}^{x}{f(t){dt} }$</li>
+</ul>
+<h3 id="均匀分布"><a href="#均匀分布" class="headerlink" title="均匀分布"></a>均匀分布</h3><p>设连续型随机变量X具有概率密度<br>$p(x)=\begin{cases}\frac{1}{b-a},a\leq x\leq b,\0,其它\end{cases}$则称X在$(a,b)$上服从均匀分布，记作$X\sim U(a,b)$<br>分布函数$F(x)=\begin{cases}0,x&lt;a\ \frac{x-a}{b-a},a\leq x&lt; b\1,x\ge b\end{cases}$</p>
+<h3 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h3><p>设连续型随机变量X具有概率密度<br>$p(X)=\begin{cases}\lambda e^{-\lambda x},x\ge 0,\0,x&lt;0\end{cases}$，其中$\lambda &gt;0$为常数，则称X在$(a,b)$上服从指数分布。<br>分布函数$F(x)=\begin{cases}1-e^{-\frac{x}{\theta}},x&gt;0\0,x\le 0\end{cases}$<br><strong>无记忆性</strong>：$\forall s,t&gt;0$，$P{x&gt;s+t|x&gt;s}=p{x&gt;t}$，即，如果T是某一元件的寿命，已知元件使用了s小时，它总共使用至少s+t小时的条件概率，与从开始使用时算起它使用至少t小时的概率相等。</p>
+<h3 id="正态分布（高斯分布，Gauss）"><a href="#正态分布（高斯分布，Gauss）" class="headerlink" title="正态分布（高斯分布，Gauss）"></a>正态分布（高斯分布，Gauss）</h3><p>设连续型随机变量X具有概率密度<br>$p(X)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2} }$则称X服从参数为$\mu,\sigma$的正态分布或高斯分布，记作$X\sim N(\mu,\sigma^2)$<br>$\mu$是位置参数，即固定$\sigma$，对于不同的$\mu$，对应的f(x)的形状不变化，只是位置不同。<br>$\sigma$是形状参数，即固定$\mu$，对于不同的$\sigma$，对应f(x)位置不变化，只是$\sigma$越小，靠近$\mu$附近取值的概率越大，相应拐点越接近于ox轴。$\sigma$大小与曲线陡峭程度成反比（几何意义），与数据分散程度成正比（数据意义）。</p>
+<h4 id="标准正态分布N-0-1"><a href="#标准正态分布N-0-1" class="headerlink" title="标准正态分布N(0,1)"></a>标准正态分布N(0,1)</h4><p>密度函数$\varphi(x)=\frac{1}{\sqrt{2\pi} }e^{-\frac{x^2}{2} }$是偶函数，其分布函数为$\Phi(x)=\frac{1}{\sqrt{2\pi} }\int_{-\infty}^xe^{-\frac{t^2}{2} },dt$，其值可查表。<br><img src="https://www.mianfeiwendang.com/pic/e18309c08f2600f948bb1837/1-1344-jpg_6_0_______-929-0-0-929.jpg" alt="正态分布表"><br>$\varphi(0) = \frac{1}{\sqrt{2\pi} },\Phi(0) =\frac{1}{2},$ $\Phi( - a) = P(X \leq - a) = 1 - \Phi(a)$<br>$X\sim N\left( \mu,\sigma^{2} \right) \Rightarrow \frac{X -\mu}{\sigma}\sim N\left( 0,1 \right),P(X \leq a) = \Phi(\frac{a -\mu}{\sigma})$</p>
+<h2 id="随机变量的函数的分布"><a href="#随机变量的函数的分布" class="headerlink" title="随机变量的函数的分布"></a>随机变量的函数的分布</h2><ul>
+<li>离散型：$P(X = x_{1}) = p_{i},Y = g(X)$，则: $P(Y = y_{j}) = \sum_{g(x_{i}) = y_{i} }^{}{P(X = x_{i})}$</li>
+<li>连续型：$X\sim f_{X}(x),Y = g(x)$，则:$F_{y}(y) = P(Y \leq y) = P(g(X) \leq y) = \int_{g(x) \leq y}^{}{f_{x}(x)dx}$， $f_{Y}(y) = F’_{Y}(y)$</li>
+<li>离散型随机变量的分布函数为阶梯间断函数；连续型随机变量的分布函数为连续函数，但不一定为处处可导函数。</li>
+<li>存在既非离散也非连续型随机变量。</li>
+</ul>
+<h1 id="多维随机变量及其分布"><a href="#多维随机变量及其分布" class="headerlink" title="多维随机变量及其分布"></a>多维随机变量及其分布</h1><h2 id="二维随机变量"><a href="#二维随机变量" class="headerlink" title="二维随机变量"></a>二维随机变量</h2><p>由两个随机变量构成的随机向量$(X,Y)$， 联合分布为$F(x,y) = P{X \le x,Y \le y}$<br>$P{ X = x_{i},Y = y_{j}} = p_{ {ij} };i,j =1,2,\cdots$<br>$f(x,y) \geq 0$<br>$\int_{- \infty}^{+ \infty}{\int_{- \infty}^{+ \infty}{f(x,y)dxdy} } = 1$<br>$F(x,y) = \int_{- \infty}^{x}{\int_{- \infty}^{y}{f(u,v)dudv} }$</p>
+<h2 id="边缘分布"><a href="#边缘分布" class="headerlink" title="边缘分布"></a>边缘分布</h2><p>$p_{i \cdot} = \sum_{j = 1}^{\infty}p_{ {ij} },i =1,2,\cdots$ $p_{\cdot j} = \sum_{i}^{\infty}p_{ {ij} },j = 1,2,\cdots$<br>$f_{X}\left( x \right) = \int_{- \infty}^{+ \infty}{f\left( x,y \right){dy} }$ $f_{Y}(y) = \int_{- \infty}^{+ \infty}{f(x,y)dx}$</p>
+<h2 id="条件分布"><a href="#条件分布" class="headerlink" title="条件分布"></a>条件分布</h2><p>$P{ X = x_{i}|Y = y_{j}} = \frac{p_{ {ij} } }{p_{\cdot j} }$<br>$P{ Y = y_{j}|X = x_{i}} = \frac{p_{ {ij} } }{p_{i \cdot} }$<br>$f_{X|Y}\left( x \middle| y \right) = \frac{f\left( x,y \right)}{f_{Y}\left( y \right)}$<br>$f_{Y|X}(y|x) = \frac{f(x,y)}{f_{X}(x)}$</p>
+<h2 id="相互独立的随机变量"><a href="#相互独立的随机变量" class="headerlink" title="相互独立的随机变量"></a>相互独立的随机变量</h2><p>若$P{X\le x,Y\le y}=P{X\le x}P{Y\le y}$，即$F(x,y)=F_X(x)F_Y(y)$，则称随机变量$X,Y$是相互独立的。<br>对于连续型随机变量，即$f(x,y)=f_X(x)f_Y(y)$在平面上几乎（除去面积为0的集合外）处处成立。<br>对于离散型随机变量，即$P{X=x_i,Y=y_i}=P{X=x_i}P{Y=y_i}$。<br>对于二维正态随机变量$(X,Y)$，$X,Y$相互独立的充要条件是参数$\rho=0$。</p>
+<h2 id="两个随机变量的函数的分布"><a href="#两个随机变量的函数的分布" class="headerlink" title="两个随机变量的函数的分布"></a>两个随机变量的函数的分布</h2><h3 id="二维均匀分布"><a href="#二维均匀分布" class="headerlink" title="二维均匀分布"></a>二维均匀分布</h3><p>$(x,y) \sim U(D)$ ,$f(x,y) = \begin{cases} \frac{1}{S(D)},(x,y) \in D \   0,其他  \end{cases}$</p>
+<h3 id="二维正态分布"><a href="#二维正态分布" class="headerlink" title="二维正态分布"></a>二维正态分布</h3><p>$(X,Y)\sim N(\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2},\rho)$,$(X,Y)\sim N(\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2},\rho)$<br>$f(x,y) = \frac{1}{2\pi\sigma_{1}\sigma_{2}\sqrt{1 - \rho^{2} } }.\exp\left{ \frac{- 1}{2(1 - \rho^{2})}\lbrack\frac{ {(x - \mu_{1})}^{2} }{\sigma_{1}^{2} } - 2\rho\frac{(x - \mu_{1})(y - \mu_{2})}{\sigma_{1}\sigma_{2} } + \frac{ {(y - \mu_{2})}^{2} }{\sigma_{2}^{2} }\rbrack \right}$</p>
+<h2 id="随机变量的独立性和相关性"><a href="#随机变量的独立性和相关性" class="headerlink" title="随机变量的独立性和相关性"></a>随机变量的独立性和相关性</h2><p>$X$和$Y$的相互独立:$\Leftrightarrow F\left( x,y \right) = F_{X}\left( x \right)F_{Y}\left( y \right)$:<br>$\Leftrightarrow p_{ {ij} } = p_{i \cdot} \cdot p_{\cdot j}$（离散型）<br>$\Leftrightarrow f\left( x,y \right) = f_{X}\left( x \right)f_{Y}\left( y \right)$（连续型）<br>$X$和$Y$的相关性：</p>
+<p>相关系数$\rho_{ {XY} } = 0$时，称$X$和$Y$不相关，<br>否则称$X$和$Y$相关</p>
+<h2 id="两个随机变量的函数的分布-1"><a href="#两个随机变量的函数的分布-1" class="headerlink" title="两个随机变量的函数的分布"></a>两个随机变量的函数的分布</h2><h3 id="Z-X-Y-的分布"><a href="#Z-X-Y-的分布" class="headerlink" title="$Z=X+Y$的分布"></a>$Z=X+Y$的分布</h3><p>$f_{X+Y}(z)=\int_{-\infty}^\infty f(x,z-x)dx$</p>
+<h3 id="Z-frac-Y-X-的分布、-Z-XY-的分布"><a href="#Z-frac-Y-X-的分布、-Z-XY-的分布" class="headerlink" title="$Z=\frac{Y}{X}$的分布、$Z=XY$的分布"></a>$Z=\frac{Y}{X}$的分布、$Z=XY$的分布</h3><p>$f_{Y/X}(z)=\int_{-\infty}^\infty |x|f(x,xz)dx$<br>$f_{XY}(z)=\int_{-\infty}^\infty \frac{1}{|x|}f(x,\frac{z}{x})dx$</p>
+<h3 id="M-max-X-Y-的分布、-N-min-X-Y-的分布"><a href="#M-max-X-Y-的分布、-N-min-X-Y-的分布" class="headerlink" title="$M=\max{X,Y}$的分布、$N=\min{X,Y}$的分布"></a>$M=\max{X,Y}$的分布、$N=\min{X,Y}$的分布</h3><p>$F_{max}(z)=\Pi F_{x_i}(z)$<br>$F_{min}(z)=1-\Pi (1-F_{x_i}(z))$</p>
+<h3 id="离散型"><a href="#离散型" class="headerlink" title="离散型"></a>离散型</h3><p>$P\left( X = x_{i},Y = y_{i} \right) = p_{ {ij} },Z = g\left( X,Y \right)$ 则：<br>$P(Z = z_{k}) = P\left{ g\left( X,Y \right) = z_{k} \right} = \sum_{g\left( x_{i},y_{i} \right) = z_{k} }^{}{P\left( X = x_{i},Y = y_{j} \right)}$</p>
+<h3 id="连续型"><a href="#连续型" class="headerlink" title="连续型"></a>连续型</h3><p>$\left( X,Y \right) \sim f\left( x,y \right),Z = g\left( X,Y \right)$<br>则：<br>$F_{z}\left( z \right) = P\left{ g\left( X,Y \right) \leq z \right} = \iint_{g(x,y) \leq z}^{}{f(x,y)dxdy}$，$f_{z}(z) = F’_{z}(z)$</p>
+<h3 id="重要公式与结论"><a href="#重要公式与结论" class="headerlink" title="重要公式与结论"></a>重要公式与结论</h3><p>$f_{X}(x) = \int_{- \infty}^{+ \infty}{f(x,y)dy,}$<br>$f_{Y}(y) = \int_{- \infty}^{+ \infty}{f(x,y)dx}$<br>$P\left{ \left( X,Y \right) \in D \right} = \iint_{D}^{}{f\left( x,y \right){dxdy} }$<br>若$(X,Y)$服从二维正态分布$N(\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2},\rho)$<br>则有：</p>
+<ul>
+<li>$X\sim N\left( \mu_{1},\sigma_{1}^{2} \right),Y\sim N(\mu_{2},\sigma_{2}^{2}).$</li>
+<li>$X$与$Y$相互独立$\Leftrightarrow \rho = 0$，即$X$与$Y$不相关。</li>
+<li>$C_{1}X + C_{2}Y\sim N(C_{1}\mu_{1} + C_{2}\mu_{2},C_{1}^{2}\sigma_{1}^{2} + C_{2}^{2}\sigma_{2}^{2} + 2C_{1}C_{2}\sigma_{1}\sigma_{2}\rho)$</li>
+<li>${\ X}$关于$Y=y$的条件分布为： $N(\mu_{1} + \rho\frac{\sigma_{1} }{\sigma_{2} }(y - \mu_{2}),\sigma_{1}^{2}(1 - \rho^{2}))$</li>
+<li>$Y$关于$X = x$的条件分布为： $N(\mu_{2} + \rho\frac{\sigma_{2} }{\sigma_{1} }(x - \mu_{1}),\sigma_{2}^{2}(1 - \rho^{2}))$</li>
+</ul>
+<p>若$X$与$Y$独立，且分别服从$N(\mu_{1},\sigma_{1}^{2}),N(\mu_{1},\sigma_{2}^{2}),$<br>则：$\left( X,Y \right)\sim N(\mu_{1},\mu_{2},\sigma_{1}^{2},\sigma_{2}^{2},0),$</p>
+<p>$C_{1}X + C_{2}Y\sim{\ }N(C_{1}\mu_{1} + C_{2}\mu_{2},C_{1}^{2}\sigma_{1}^{2} C_{2}^{2}\sigma_{2}^{2}).$</p>
+<p>若$X$与$Y$相互独立，$f\left( x \right)$和$g\left( x \right)$为连续函数， 则$f\left( X \right)$和$g(Y)$也相互独立。</p>
+<h1 id="随机变量的数字特征"><a href="#随机变量的数字特征" class="headerlink" title="随机变量的数字特征"></a>随机变量的数字特征</h1><h2 id="数学期望"><a href="#数学期望" class="headerlink" title="数学期望"></a>数学期望</h2><p>数学期望简称期望，又称均值。数学期望完全由概率分布决定。</p>
+<h3 id="离散型-1"><a href="#离散型-1" class="headerlink" title="离散型"></a>离散型</h3><p>若离散型随机变量$X$的分布律为$P\left{ X = x_{i} \right} = p_{i}$ ，且级数$E(X) = \sum_{i}^{}{x_{i}p_{i} }$绝对收敛，则称$E(x)$为随机变量$X$的数学期望。</p>
+<h3 id="连续型-1"><a href="#连续型-1" class="headerlink" title="连续型"></a>连续型</h3><p>$X\sim f(x),E(X) = \int_{- \infty}^{+ \infty}{xf(x)dx}$</p>
+<h3 id="性质-4"><a href="#性质-4" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>$E(C) = C,E\lbrack E(X)\rbrack = E(X)$</li>
+<li>$E(C_{1}X + C_{2}Y) = C_{1}E(X) + C_{2}E(Y)$</li>
+<li>若$X$和$Y$独立，则$E(XY) = E(X)E(Y)$</li>
+<li>$\left\lbrack E(XY) \right\rbrack^{2} \leq E(X^{2})E(Y^{2})$</li>
+</ul>
+<h3 id="随机变量函数的数学期望"><a href="#随机变量函数的数学期望" class="headerlink" title="随机变量函数的数学期望"></a>随机变量函数的数学期望</h3><p>对于函数$Y = g(x)$</p>
+<h4 id="X-为离散型"><a href="#X-为离散型" class="headerlink" title="$X$为离散型"></a>$X$为离散型</h4><p>$P{ X = x_{i}} = p_{i},E(Y) = \sum_{i}^{}{g(x_{i})p_{i} }$；</p>
+<h4 id="X-为连续型"><a href="#X-为连续型" class="headerlink" title="$X$为连续型"></a>$X$为连续型</h4><p>$X\sim f(x),E(Y) = \int_{- \infty}^{+ \infty}{g(x)f(x)dx}$<br>扩展到多维函数：$Z = g(X,Y)$;$\left( X,Y \right)\sim P{ X = x_{i},Y = y_{j}} = p_{ {ij} }$;$E(Z) = \sum_{i}^{}{\sum_{j}^{}{g(x_{i},y_{j})p_{ {ij} } } }$ $\left( X,Y \right)\sim f(x,y)$;$E(Z) = \int_{- \infty}^{+ \infty}{\int_{- \infty}^{+ \infty}{g(x,y)f(x,y)dxdy} }$</p>
+<h2 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h2><p>$D(X) = E\left\lbrack X - E(X) \right\rbrack^{2} = E(X^{2}) - \left\lbrack E(X) \right\rbrack^{2}$，有时也记作$Var(X)$。<br>同时引入标准差（均方差）$\sigma (x)=\sqrt{D(X)}$。</p>
+<h3 id="离散型-2"><a href="#离散型-2" class="headerlink" title="离散型"></a>离散型</h3><p>$D(X) = \sum_{i}^{}{\left\lbrack x_{i} - E(X) \right\rbrack^{2}p_{i} }$</p>
+<h3 id="连续型-2"><a href="#连续型-2" class="headerlink" title="连续型"></a>连续型</h3><p>$D(X) = {\int_{- \infty}^{+ \infty}\left\lbrack x - E(X) \right\rbrack}^{2}f(x)dx$</p>
+<h3 id="性质-5"><a href="#性质-5" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>$\ D(X) = E(X^{2}) - E^{2}(X)$</li>
+<li>$\ D(C) = 0,D\lbrack E(X)\rbrack = 0,D\lbrack D(X)\rbrack = 0$<ul>
+<li>$\ D\left( C_{1}X + C_{2} \right) = C_{1}^{2}D\left( X \right)$</li>
 </ul>
 </li>
-<li>Ubuntu18.04镜像文件<ul>
-<li>（下载地址链接：链接：<a href="https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g" target="_blank" rel="noopener">https://pan.baidu.com/s/1uhPj0ttM9M7QxpR3Z4LI5g</a> 提取码：il08 ）</li></ul></li></ul></li></ul>
+<li>$X$与$Y$相互独立，则$D(X \pm Y) = D(X) + D(Y)$</li>
+<li>$\ D(X) = 0 \Leftrightarrow P\left{ X = C \right} = 1$</li>
+<li>$\ D\left( X \right) &lt; E\left( X - C \right)^{2},C \neq E\left( X \right)$</li>
+</ul>
+<h3 id="Chebyshev（切比雪夫）不等式"><a href="#Chebyshev（切比雪夫）不等式" class="headerlink" title="Chebyshev（切比雪夫）不等式"></a>Chebyshev（切比雪夫）不等式</h3><p>若随机变量$X$满足$E(X)=\mu$，方差$D(x)=\sigma^2$，则对于任意正数$\varepsilon$，有切比雪夫不等式$P{|X-\mu|\ge\varepsilon}\leq\frac{\sigma^2}{\varepsilon^2}$成立。</p>
+<h2 id="协方差及相关系数"><a href="#协方差及相关系数" class="headerlink" title="协方差及相关系数"></a>协方差及相关系数</h2><p>$Cov(X,Y) = E\left\lbrack (X - E(X)(Y - E(Y)) \right\rbrack$称为随机变量$X,Y$的协方差，$\rho_{ {XY} } = \frac{Cov(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)} }$称为他们的相关系数。</p>
+<h3 id="性质-6"><a href="#性质-6" class="headerlink" title="性质"></a>性质</h3><ul>
+<li>$\ Cov(X,Y) = Cov(Y,X)$</li>
+<li>$\ Cov(aX,bY) = abCov(Y,X)$</li>
+<li>$\ Cov(X_{1} + X_{2},Y) = Cov(X_{1},Y) + Cov(X_{2},Y)$</li>
+<li>$\ \left| \rho\left( X,Y \right) \right| \leq 1$</li>
+<li>$\ \rho\left( X,Y \right) = 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$ ，其中$a &gt; 0$</li>
+<li>$\rho\left( X,Y \right) = - 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$，其中$a &lt; 0$</li>
+<li>一般有 $D(X \pm Y) = D(X) + D(Y) \pm 2Cov(X,Y) = D(X) + D(Y) \pm 2\rho\sqrt{D(X)}\sqrt{D(Y)}$</li>
+</ul>
+<h3 id="重要公式与结论-1"><a href="#重要公式与结论-1" class="headerlink" title="重要公式与结论"></a>重要公式与结论</h3><ul>
+<li>$\ Cov(X,Y) = E(XY) - E(X)E(Y)$</li>
+<li>$\left| \rho\left( X,Y \right) \right| \leq 1,$且 $\rho\left( X,Y \right) = 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$，其中$a &gt; 0$</li>
+<li>$\rho\left( X,Y \right) = - 1 \Leftrightarrow P\left( Y = aX + b \right) = 1$，其中$a &lt; 0$</li>
+<li>下面5个条件互为充要条件：$\rho(X,Y) = 0$ $\Leftrightarrow Cov(X,Y) = 0$ $\Leftrightarrow E(X,Y) = E(X)E(Y)$ $\Leftrightarrow D(X + Y) = D(X) + D(Y)$ $\Leftrightarrow  D(X - Y) = D(X) + D(Y)$。注：$X$与$Y$独立为上述5个条件中任何一个成立的充分条件，但非必要条件。</li>
+</ul>
+<h2 id="矩、协方差矩阵（待补充）"><a href="#矩、协方差矩阵（待补充）" class="headerlink" title="矩、协方差矩阵（待补充）"></a>矩、协方差矩阵（待补充）</h2><p>$E(X^{k})$称为$X$的$k$阶原点矩，简称$k$阶矩。<br>$E\left{ {\lbrack X - E(X)\rbrack}^{k} \right},k=2,3,\ldots$称为$X$的$k$阶中心矩。<br>$E(X^{k}Y^{l})$称为$X,Y$的$k+l$阶混合矩。<br>$E\left{ {\lbrack X - E(X)\rbrack}^{k}  {\lbrack Y - E(Y)\rbrack}^{l}\right},k,l=2,3,\ldots$称为$X,Y$的$k+l$阶混合中心矩。<br>显然，$E(X)$是$X的一阶原点矩，$D(X)$是$X的二阶中心矩，$Cov(X,Y)$是$X,Y$的二阶混合中心矩。</p>
+<h1 id="大数定律及中心极限定理"><a href="#大数定律及中心极限定理" class="headerlink" title="大数定律及中心极限定理"></a>大数定律及中心极限定理</h1><h2 id="大数定律"><a href="#大数定律" class="headerlink" title="大数定律"></a>大数定律</h2><h3 id="辛钦大数定理（弱大数定理）"><a href="#辛钦大数定理（弱大数定理）" class="headerlink" title="辛钦大数定理（弱大数定理）"></a>辛钦大数定理（弱大数定理）</h3><p>设随机变量$X_1,X_2,\ldots,X_n,\ldots$相互独立，服从同一分布且具有数学期望$E(X_k)=\mu,(k=1,2,\ldots)$，则序列$\overline{X}=\frac{1}{n}\sum_{k=1}^nX_k$依概率收敛于$\mu$。</p>
+<h3 id="伯努利大数定理"><a href="#伯努利大数定理" class="headerlink" title="伯努利大数定理"></a>伯努利大数定理</h3><p>伯努利大数定理是辛钦大数定理的一个重要推论，它表明：试验次数很大时，可用事件的频率代替事件的概率。<br>设$f_A$是n次独立重复试验中事件A发生的次数，$p$是事件A在每次试验中发生的概率，则对于任意的正数$\varepsilon$，有$\lim_{n\to\infty}P{|\frac{f_A}{n}-p|&lt;\varepsilon}=1$，$\lim_{n\to\infty}P{|\frac{f_A}{n}-p|\ge\varepsilon}=0$。</p>
+<h2 id="中心极限定理"><a href="#中心极限定理" class="headerlink" title="中心极限定理"></a>中心极限定理</h2><h3 id="独立同分布的中心极限定理"><a href="#独立同分布的中心极限定理" class="headerlink" title="独立同分布的中心极限定理"></a>独立同分布的中心极限定理</h3><p>设随机变量$X_1,X_2,\ldots,X_n,\ldots$相互独立，服从同一分布且具有数学期望和方差$E(X_k)=\mu,D(X_k)=\sigma^2&gt;0,(k=1,2,\ldots)$，则随机变量之和$\sum_{k=1}^nX_k$的标准化变量$Y_n=\frac{\sum_{k=1}^nX_k-n\mu}{\sqrt{n}\sigma}$的分布函数$F_n(x)$对任意x满足$\lim_{n\to\infty}F_n(x)=\Phi(x)$。<br>这就是说，n足够大的时候，近似地有$\frac{\sum_{k=1}^nX_k-n\mu}{\sqrt{n}\sigma}\sim N(0,1)$或$\overline{X}~N(\mu,\frac{\sigma^2}{n})$</p>
+<h3 id="Lyapunov（李雅普诺夫）定理"><a href="#Lyapunov（李雅普诺夫）定理" class="headerlink" title="Lyapunov（李雅普诺夫）定理"></a>Lyapunov（李雅普诺夫）定理</h3><p>设随机变量$X_1,X_2,\ldots,X_n,\ldots$相互独立，具有数学期望和方差$E(X_k)=\mu_k,D(X_k)=\sigma_k^2&gt;0,(k=1,2,\ldots)$，记$B_n=\sum_{k=1}^n\sigma_k^2$，若存在正数$\delta$，使得当$n\to\infty$时，$\frac{1}{B_n^{2+\delta}}\sum_{k=1}^nE{|X_k-\mu_k|^{2+\delta}}\to 0$，则随机化变量之和$\sum_{k=1}^nX_k$的标准化变量$Z_n=\frac{\sum_{k=1}^nX_k-\sum_{k=1}^n\mu_k}{B_n}$的分布函数$F_n(x)$对于任意x满足$\lim_{n\to\infty}F_n(x)=\Phi(x)$。<br>该定理表明，n足够大的时候，近似地有$Z_n\sim N(0,1)$。</p>
+<h3 id="De-Moivre-Laplace（棣莫弗-拉普拉斯）定理"><a href="#De-Moivre-Laplace（棣莫弗-拉普拉斯）定理" class="headerlink" title="De Moivre-Laplace（棣莫弗-拉普拉斯）定理"></a>De Moivre-Laplace（棣莫弗-拉普拉斯）定理</h3><p>独立同分布的中心极限定理的特殊情况，设随机变量$\eta_n(n=1,2,\ldots)$服从参数为$n,p(0 &lt; p &lt; 1) $的二项分布，则对于任意x，有$\lim_{n\to\infty}P{\frac{\eta_n-np}{\sqrt{np(1-p)}}\leq x}=\Phi(x)$。</p>
+<h1 id="样本及抽样分布"><a href="#样本及抽样分布" class="headerlink" title="样本及抽样分布"></a>样本及抽样分布</h1><h2 id="随机样本"><a href="#随机样本" class="headerlink" title="随机样本"></a>随机样本</h2><h3 id="总体"><a href="#总体" class="headerlink" title="总体"></a>总体</h3><p>研究对象的全体，它是一个随机变量，用$X$表示。</p>
+<h3 id="个体"><a href="#个体" class="headerlink" title="个体"></a>个体</h3><p>组成总体的每个基本元素。</p>
+<h3 id="简单随机样本"><a href="#简单随机样本" class="headerlink" title="简单随机样本"></a>简单随机样本</h3><p>来自总体$X$的$n$个相互独立且与总体同分布的随机变量$X_{1},X_{2}\cdots,X_{n}$，称为容量为$n$的简单随机样本，简称样本。</p>
+<h2 id="直方图和箱线图"><a href="#直方图和箱线图" class="headerlink" title="直方图和箱线图"></a>直方图和箱线图</h2><h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><h3 id="箱线图"><a href="#箱线图" class="headerlink" title="箱线图"></a>箱线图</h3><h4 id="样本分位数"><a href="#样本分位数" class="headerlink" title="样本分位数"></a>样本分位数</h4><p>若$P(X \leq x_{\alpha}) = \alpha,$则称$x_{\alpha}$为$X$的$\alpha$分位数</p>
+<h2 id="抽样分布"><a href="#抽样分布" class="headerlink" title="抽样分布"></a>抽样分布</h2><h3 id="统计量"><a href="#统计量" class="headerlink" title="统计量"></a>统计量</h3><p>设$X_{1},X_{2}\cdots,X_{n},$是来自总体$X$的一个样本，$g(X_{1},X_{2}\cdots,X_{n})$）是样本的连续函数，且$g()$中不含任何未知参数，则称$g(X_{1},X_{2}\cdots,X_{n})$为统计量。</p>
+<h4 id="样本均值"><a href="#样本均值" class="headerlink" title="样本均值"></a>样本均值</h4><p>$\overline{X} = \frac{1}{n}\sum_{i = 1}^{n}X_{i}$</p>
+<h4 id="样本方差"><a href="#样本方差" class="headerlink" title="样本方差"></a>样本方差</h4><p>$S^{2} = \frac{1}{n - 1}\sum_{i = 1}^{n}{(X_{i} - \overline{X})}^{2}$</p>
+<h4 id="样本矩"><a href="#样本矩" class="headerlink" title="样本矩"></a>样本矩</h4><p>样本$k$阶原点矩：$A_{k} = \frac{1}{n}\sum_{i = 1}^{n}X_{i}^{k},k = 1,2,\cdots$</p>
+<h4 id="样本k阶中心矩"><a href="#样本k阶中心矩" class="headerlink" title="样本k阶中心矩"></a>样本k阶中心矩</h4><p>$B_{k} = \frac{1}{n}\sum_{i = 1}^{n}{(X_{i} - \overline{X})}^{k},k = 1,2,\cdots$</p>
+<h3 id="常用统计量分布"><a href="#常用统计量分布" class="headerlink" title="常用统计量分布"></a>常用统计量分布</h3><h4 id="chi-2-分布"><a href="#chi-2-分布" class="headerlink" title="$\chi^{2}$分布"></a>$\chi^{2}$分布</h4><p>$\chi^{2} = X_{1}^{2} + X_{2}^{2} + \cdots + X_{n}^{2}\sim\chi^{2}(n)$，其中$X_{1},X_{2}\cdots,X_{n},$相互独立，且同服从$N(0,1)$</p>
+<h4 id="t-分布"><a href="#t-分布" class="headerlink" title="$t$分布"></a>$t$分布</h4><p>$T = \frac{X}{\sqrt{Y/n} }\sim t(n)$ ，其中$X\sim N\left( 0,1 \right),Y\sim\chi^{2}(n),$且$X$，$Y$ 相互独立。</p>
+<h4 id="F-分布"><a href="#F-分布" class="headerlink" title="$F$分布"></a>$F$分布</h4><p>$F = \frac{X/n_{1} }{Y/n_{2} }\sim F(n_{1},n_{2})$，其中$X\sim\chi^{2}\left( n_{1} \right),Y\sim\chi^{2}(n_{2}),$且$X$，$Y$相互独立。</p>
+<h4 id="正态总体的常用样本分布"><a href="#正态总体的常用样本分布" class="headerlink" title="正态总体的常用样本分布"></a>正态总体的常用样本分布</h4><p>设$X_{1},X_{2}\cdots,X_{n}$为来自正态总体$N(\mu,\sigma^{2})$的样本，$\overline{X} = \frac{1}{n}\sum_{i = 1}^{n}X_{i},S^{2} = \frac{1}{n - 1}\sum_{i = 1}^{n}{ {(X_{i} - \overline{X})}^{2} }$，则：</p>
+<ul>
+<li>$\overline{X}\sim N\left( \mu,\frac{\sigma^{2} }{n} \right){\ \ }$或者$\frac{\overline{X} - \mu}{\frac{\sigma}{\sqrt{n} } }\sim N(0,1)$</li>
+<li>$\frac{(n - 1)S^{2} }{\sigma^{2} } = \frac{1}{\sigma^{2} }\sum_{i = 1}^{n}{ {(X_{i} - \overline{X})}^{2}\sim\chi^{2}(n - 1)}$</li>
+<li>$\frac{1}{\sigma^{2} }\sum_{i = 1}^{n}{ {(X_{i} - \mu)}^{2}\sim\chi^{2}(n)}$</li>
+<li>${\ \ }\frac{\overline{X} - \mu}{S/\sqrt{n} }\sim t(n - 1)$</li>
+</ul>
+<h4 id="重要公式与结论-2"><a href="#重要公式与结论-2" class="headerlink" title="重要公式与结论"></a>重要公式与结论</h4><ul>
+<li>对于$\chi^{2}\sim\chi^{2}(n)$，有$E(\chi^{2}(n)) = n,D(\chi^{2}(n)) = 2n$；</li>
+<li>对于$T\sim t(n)$，有$E(T) = 0,D(T) = \frac{n}{n - 2}(n &gt; 2)$；</li>
+<li>对于$F\sim{\ }F(m,n)$，有 $\frac{1}{F}\sim F(n,m),F_{a/2}(m,n) = \frac{1}{F_{1 - a/2}(n,m)}$；</li>
+<li>对于任意总体$X$，有 $E(\overline{X}) = E(X),E(S^{2}) = D(X),D(\overline{X}) = \frac{D(X)}{n}$</li>
+</ul>
+<h1 id="参数估计"><a href="#参数估计" class="headerlink" title="参数估计"></a>参数估计</h1><h2 id="点估计"><a href="#点估计" class="headerlink" title="点估计"></a>点估计</h2><h3 id="矩估计法"><a href="#矩估计法" class="headerlink" title="矩估计法"></a>矩估计法</h3><h3 id="最大似然估计法"><a href="#最大似然估计法" class="headerlink" title="最大似然估计法"></a>最大似然估计法</h3><h2 id="基于截尾样本的最大似然估计"><a href="#基于截尾样本的最大似然估计" class="headerlink" title="基于截尾样本的最大似然估计"></a>基于截尾样本的最大似然估计</h2><h2 id="估计量的评选标准"><a href="#估计量的评选标准" class="headerlink" title="估计量的评选标准"></a>估计量的评选标准</h2><h3 id="无偏性"><a href="#无偏性" class="headerlink" title="无偏性"></a>无偏性</h3><h3 id="有效性"><a href="#有效性" class="headerlink" title="有效性"></a>有效性</h3><h3 id="相和性"><a href="#相和性" class="headerlink" title="相和性"></a>相和性</h3><h2 id="区间估计"><a href="#区间估计" class="headerlink" title="区间估计"></a>区间估计</h2><h2 id="正态总体均值与方差的区间估计"><a href="#正态总体均值与方差的区间估计" class="headerlink" title="正态总体均值与方差的区间估计"></a>正态总体均值与方差的区间估计</h2><h2 id="0-1-分布参数的区间估计"><a href="#0-1-分布参数的区间估计" class="headerlink" title="(0-1)分布参数的区间估计"></a>(0-1)分布参数的区间估计</h2><h2 id="单侧置信区间"><a href="#单侧置信区间" class="headerlink" title="单侧置信区间"></a>单侧置信区间</h2><h1 id="假设试验"><a href="#假设试验" class="headerlink" title="假设试验"></a>假设试验</h1><h2 id="假设检验"><a href="#假设检验" class="headerlink" title="假设检验"></a>假设检验</h2><h2 id="正态总体均值的假设检验"><a href="#正态总体均值的假设检验" class="headerlink" title="正态总体均值的假设检验"></a>正态总体均值的假设检验</h2><h3 id="单个总体-N-mu-sigma-2-均值-mu-的检验"><a href="#单个总体-N-mu-sigma-2-均值-mu-的检验" class="headerlink" title="单个总体$N(\mu,\sigma^2)$均值$\mu$的检验"></a>单个总体$N(\mu,\sigma^2)$均值$\mu$的检验</h3><h4 id="sigma-2-已知，关于-mu-的检验（Z检验）"><a href="#sigma-2-已知，关于-mu-的检验（Z检验）" class="headerlink" title="$\sigma^2$已知，关于$\mu$的检验（Z检验）"></a>$\sigma^2$已知，关于$\mu$的检验（Z检验）</h4><h4 id="mu-已知，关于-sigma-2-的检验（t检验）"><a href="#mu-已知，关于-sigma-2-的检验（t检验）" class="headerlink" title="$\mu$已知，关于$\sigma^2$的检验（t检验）"></a>$\mu$已知，关于$\sigma^2$的检验（t检验）</h4><h3 id="两个正态总体均值差的检验（t检验）"><a href="#两个正态总体均值差的检验（t检验）" class="headerlink" title="两个正态总体均值差的检验（t检验）"></a>两个正态总体均值差的检验（t检验）</h3><h3 id="基于成对数据的检验（t检验）"><a href="#基于成对数据的检验（t检验）" class="headerlink" title="基于成对数据的检验（t检验）"></a>基于成对数据的检验（t检验）</h3><h2 id="正态总体方差的假设检验"><a href="#正态总体方差的假设检验" class="headerlink" title="正态总体方差的假设检验"></a>正态总体方差的假设检验</h2><h3 id="单个总体的情况"><a href="#单个总体的情况" class="headerlink" title="单个总体的情况"></a>单个总体的情况</h3><h3 id="两个总体的情况"><a href="#两个总体的情况" class="headerlink" title="两个总体的情况"></a>两个总体的情况</h3><h2 id="置信区间与假设检验之间的关系"><a href="#置信区间与假设检验之间的关系" class="headerlink" title="置信区间与假设检验之间的关系"></a>置信区间与假设检验之间的关系</h2><h2 id="样本容量的选取"><a href="#样本容量的选取" class="headerlink" title="样本容量的选取"></a>样本容量的选取</h2><h2 id="分布拟合检验"><a href="#分布拟合检验" class="headerlink" title="分布拟合检验"></a>分布拟合检验</h2><h3 id="单个分布的-chi-2-拟合检验法"><a href="#单个分布的-chi-2-拟合检验法" class="headerlink" title="单个分布的$\chi^2$拟合检验法"></a>单个分布的$\chi^2$拟合检验法</h3><h3 id="分布族的-chi-2-拟合检验"><a href="#分布族的-chi-2-拟合检验" class="headerlink" title="分布族的$\chi^2$拟合检验"></a>分布族的$\chi^2$拟合检验</h3><h3 id="偏度、峰度检验"><a href="#偏度、峰度检验" class="headerlink" title="偏度、峰度检验"></a>偏度、峰度检验</h3><h2 id="秩和检验"><a href="#秩和检验" class="headerlink" title="秩和检验"></a>秩和检验</h2><h2 id="假设检验问题的p值检验法"><a href="#假设检验问题的p值检验法" class="headerlink" title="假设检验问题的p值检验法"></a>假设检验问题的p值检验法</h2>
         </div>
         
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/05/22/Vmware虚拟机安装和配置Ubuntu系统/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/05/22/Windows系统安装配置Pycharm/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g57xog2aw6j31hc0tatdt.jpg" alt="Windows系统安装配置Pycharm">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-05-21T16:30:14.000Z">2018-05-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    5 分钟 读完 (大约 756 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/05/22/Windows系统安装配置Pycharm/">Windows系统安装配置Pycharm</a>
-            
-        </h1>
-        <div class="content">
-            <h3 id="下载Pycharm"><a href="#下载Pycharm" class="headerlink" title="下载Pycharm"></a>下载Pycharm</h3><ol>
-<li>使用浏览器打开Pycharm官方网站：<a href="http://www.jetbrains.com/pycharm" target="_blank" rel="noopener">http://www.jetbrains.com/pycharm</a></li>
-<li>选择对应的系统安装包，点击DOWNLOAD进行下载(文档以Windows系统举例)</li></ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/05/22/Windows系统安装配置Pycharm/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-image">
-        <a href="/2018/05/15/Python解释器的安装与配置/" class="image is-7by1">
-            <img class="thumbnail" src="https://ws1.sinaimg.cn/large/0065l1jqly1g56t8zcj87j30we0mun2z.jpg" alt="Python解释器的安装与配置">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-05-15T11:00:55.000Z">2018-05-15</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/环境配置/">环境配置</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    4 分钟 读完 (大约 657 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/05/15/Python解释器的安装与配置/">Python解释器的安装与配置</a>
-            
-        </h1>
-        <div class="content">
-            <ol>
-<li><p>下载python解释器</p>
-<p>如下图所示，在浏览器中打开python官方网站：<a href="https://www.python.org/" target="_blank" rel="noopener">https://www.python.org/</a> </p></li></ol>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/05/15/Python解释器的安装与配置/#more">阅读更多</a>
-                </div>
-            </div>
-        </div>
         
         
     </div>
@@ -681,13 +562,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-03-14T08:52:00.000Z">2018-03-14</time>
+                <time class="level-item has-text-grey" datetime="2018-12-03T00:00:00.000Z">2018-12-03</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/学习笔记/">学习笔记</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 118 个字)
+                    7 分钟 读完 (大约 1039 个字)
                 </span>
                 
                 
@@ -696,13 +581,156 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/03/14/种一棵树最好的时间是十年前其次是现在/">种一棵树最好的时间是十年前其次是现在</a>
+                <a class="has-link-black-ter" href="/2018/12/03/2018-12-03-线性代数基础/">线性代数</a>
             
         </h1>
         <div class="content">
-            <p>“随着年龄的增长，你会失去很多东西，你的爱人，你的工作，你的头发，你的视力。</p>
-<p>但当你开始学习新东西的时候，不管是编程还是弹钢琴，这些都是一种加分，是一种激励”</p>
-<p>　　　　　　　　　　　　　　　　　　　　　　　　　　　　——若宫雅子，82岁程序员。</p>
+            <blockquote>
+<p><strong>转载自</strong><a href="https://github.com/fengdu78/Coursera-ML-AndrewNg-Notes" target="_blank" rel="noopener">斯坦福大学2014（吴恩达）机器学习教程中文笔记</a>，感谢编者黄海广博士。</p>
+</blockquote>
+<h1 id="线性代数"><a href="#线性代数" class="headerlink" title="线性代数"></a>线性代数</h1><h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><p><strong>1.行列式按行（列）展开定理</strong></p>
+<p>(1) 设$A = ( a_{ {ij} } )<em>{n \times n}$，则：$a</em>{i1}A_{j1} +a_{i2}A_{j2} + \cdots + a_{ {in} }A_{ {jn} } = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$</p>
+<p>或$a_{1i}A_{1j} + a_{2i}A_{2j} + \cdots + a_{ {ni} }A_{ {nj} } = \begin{cases}|A|,i=j\ 0,i \neq j\end{cases}$即 $AA^{<em>} = A^{</em>}A = \left| A \right|E,$其中：$A^{*} = \begin{pmatrix} A_{11} &amp; A_{12} &amp; \ldots &amp; A_{1n} \ A_{21} &amp; A_{22} &amp; \ldots &amp; A_{2n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ A_{n1} &amp; A_{n2} &amp; \ldots &amp; A_{ {nn} } \ \end{pmatrix} = (A_{ {ji} }) = {(A_{ {ij} })}^{T}$</p>
+<p>$D_{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x_{1} &amp; x_{2} &amp; \ldots &amp; x_{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x_{1}^{n - 1} &amp; x_{2}^{n - 1} &amp; \ldots &amp; x_{n}^{n - 1} \ \end{vmatrix} = \prod_{1 \leq j &lt; i \leq n}^{},(x_{i} - x_{j})$</p>
+<p>(2) 设$A,B$为$n$阶方阵，则$\left| {AB} \right| = \left| A \right|\left| B \right| = \left| B \right|\left| A \right| = \left| {BA} \right|$，但$\left| A \pm B \right| = \left| A \right| \pm \left| B \right|$不一定成立。</p>
+<p>(3) $\left| {kA} \right| = k^{n}\left| A \right|$,$A$为$n$阶方阵。</p>
+<p>(4) 设$A$为$n$阶方阵，$|A^{T}| = |A|;|A^{- 1}| = |A|^{- 1}$（若$A$可逆），$|A^{*}| = |A|^{n - 1}$</p>
+<p>$n \geq 2$</p>
+<p>(5) $\left| \begin{matrix}  &amp; {A\quad O} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad C} \  &amp; {O\quad B} \ \end{matrix} \right| = \left| \begin{matrix}  &amp; {A\quad O} \  &amp; {C\quad B} \ \end{matrix} \right| =| A||B|$<br>，$A,B$为方阵，但$\left| \begin{matrix} {O} &amp; A_{m \times m} \  B_{n \times n} &amp; { O} \ \end{matrix} \right| = ({- 1)}^{ {mn} }|A||B|$ 。</p>
+<p>(6) 范德蒙行列式$D_{n} = \begin{vmatrix} 1 &amp; 1 &amp; \ldots &amp; 1 \ x_{1} &amp; x_{2} &amp; \ldots &amp; x_{n} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ x_{1}^{n - 1} &amp; x_{2}^{n 1} &amp; \ldots &amp; x_{n}^{n - 1} \ \end{vmatrix} =  \prod_{1 \leq j &lt; i \leq n}^{},(x_{i} - x_{j})$</p>
+<p>设$A$是$n$阶方阵，$\lambda_{i}(i = 1,2\cdots,n)$是$A$的$n$个特征值，则<br>$|A| = \prod_{i = 1}^{n}\lambda_{i}​$</p>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><p>矩阵：$m \times n$个数$a_{ {ij} }$排成$m$行$n$列的表格$\begin{bmatrix}  a_{11}\quad a_{12}\quad\cdots\quad a_{1n} \ a_{21}\quad a_{22}\quad\cdots\quad a_{2n} \ \quad\cdots\cdots\cdots\cdots\cdots \  a_{m1}\quad a_{m2}\quad\cdots\quad a_{ {mn} } \ \end{bmatrix}$ 称为矩阵，简记为$A$，或者$\left( a_{ {ij} } \right)_{m \times n}$ 。若$m = n$，则称$A$是$n$阶矩阵或$n$阶方阵。</p>
+<p><strong>矩阵的线性运算</strong></p>
+<p><strong>1.矩阵的加法</strong></p>
+<p>设$A = (a_{ {ij} }),B = (b_{ {ij} })$是两个$m \times n$矩阵，则$m \times n$ 矩阵$C = c_{ {ij} }) = a_{ {ij} } + b_{ {ij} }$称为矩阵$A$与$B$的和，记为$A + B = C$ 。</p>
+<p><strong>2.矩阵的数乘</strong></p>
+<p>设$A = (a_{ {ij} })$是$m \times n$矩阵，$k$是一个常数，则$m \times n$矩阵$(ka_{ {ij} })$称为数$k$与矩阵$A$的数乘，记为${kA}$。</p>
+<p><strong>3.矩阵的乘法</strong></p>
+<p>设$A = (a_{ {ij} })$是$m \times n$矩阵，$B = (b_{ {ij} })$是$n \times s$矩阵，那么$m \times s$矩阵$C = (c_{ {ij} })$，其中$c_{ {ij} } = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{ {in} }b_{ {nj} } = \sum_{k =1}^{n}{a_{ {ik} }b_{ {kj} } }$称为${AB}$的乘积，记为$C = AB$ 。</p>
+<p><strong>4.</strong> $\mathbf{A}^{\mathbf{T} }$<strong>、</strong>$\mathbf{A}^{\mathbf{-1} }$<strong>、</strong>$\mathbf{A}^{\mathbf{<em>} }$*</em>三者之间的关系**</p>
+<p>(1) ${(A^{T})}^{T} = A,{(AB)}^{T} = B^{T}A^{T},{(kA)}^{T} = kA^{T},{(A \pm B)}^{T} = A^{T} \pm B^{T}$</p>
+<p>(2) $\left( A^{- 1} \right)^{- 1} = A,\left( {AB} \right)^{- 1} = B^{- 1}A^{- 1},\left( {kA} \right)^{- 1} = \frac{1}{k}A^{- 1},$</p>
+<p>但 ${(A \pm B)}^{- 1} = A^{- 1} \pm B^{- 1}$不一定成立。</p>
+<p>(3) $\left( A^{<em>} \right)^{</em>} = |A|^{n - 2}\ A\ \ (n \geq 3)$，$\left({AB} \right)^{<em>} = B^{</em>}A^{<em>},$ $\left( {kA} \right)^{</em>} = k^{n -1}A^{*}{\ \ }\left( n \geq 2 \right)$</p>
+<p>但$\left( A \pm B \right)^{<em>} = A^{</em>} \pm B^{*}$不一定成立。</p>
+<p>(4) ${(A^{- 1})}^{T} = {(A^{T})}^{- 1},\ \left( A^{- 1} \right)^{<em>} ={(AA^{</em>})}^{- 1},{(A^{<em>})}^{T} = \left( A^{T} \right)^{</em>}$</p>
+<p><strong>5.有关</strong>$\mathbf{A}^{\mathbf{<em>} }$*</em>的结论**</p>
+<p>(1) $AA^{<em>} = A^{</em>}A = |A|E$</p>
+<p>(2) $|A^{<em>}| = |A|^{n - 1}\ (n \geq 2),\ \ \ \ {(kA)}^{</em>} = k^{n -1}A^{<em>},{ {\ \ }\left( A^{</em>} \right)}^{*} = |A|^{n - 2}A(n \geq 3)$</p>
+<p>(3) 若$A$可逆，则$A^{<em>} = |A|A^{- 1},{(A^{</em>})}^{*} = \frac{1}{|A|}A$</p>
+<p>(4) 若$A​$为$n​$阶方阵，则：</p>
+<p>$r(A^*)=\begin{cases}n,\quad r(A)=n\ 1,\quad r(A)=n-1\ 0,\quad r(A)&lt;n-1\end{cases}$</p>
+<p><strong>6.有关</strong>$\mathbf{A}^{\mathbf{- 1} }$<strong>的结论</strong></p>
+<p>$A$可逆$\Leftrightarrow AB = E; \Leftrightarrow |A| \neq 0; \Leftrightarrow r(A) = n;$</p>
+<p>$\Leftrightarrow A$可以表示为初等矩阵的乘积；$\Leftrightarrow A;\Leftrightarrow Ax = 0$。</p>
+<p><strong>7.有关矩阵秩的结论</strong></p>
+<p>(1) 秩$r(A)$=行秩=列秩；</p>
+<p>(2) $r(A_{m \times n}) \leq \min(m,n);$</p>
+<p>(3) $A \neq 0 \Rightarrow r(A) \geq 1$；</p>
+<p>(4) $r(A \pm B) \leq r(A) + r(B);$</p>
+<p>(5) 初等变换不改变矩阵的秩</p>
+<p>(6) $r(A) + r(B) - n \leq r(AB) \leq \min(r(A),r(B)),$特别若$AB = O$<br>则：$r(A) + r(B) \leq n$</p>
+<p>(7) 若$A^{- 1}$存在$\Rightarrow r(AB) = r(B);$ 若$B^{- 1}$存在<br>$\Rightarrow r(AB) = r(A);$</p>
+<p>若$r(A_{m \times n}) = n \Rightarrow r(AB) = r(B);$ 若$r(A_{m \times s}) = n\Rightarrow r(AB) = r\left( A \right)$。</p>
+<p>(8) $r(A_{m \times s}) = n \Leftrightarrow Ax = 0$只有零解</p>
+<p><strong>8.分块求逆公式</strong></p>
+<p>$\begin{pmatrix} A &amp; O \ O &amp; B \ \end{pmatrix}^{- 1} = \begin{pmatrix} A^{-1} &amp; O \ O &amp; B^{- 1} \ \end{pmatrix}$； $\begin{pmatrix} A &amp; C \ O &amp; B \\end{pmatrix}^{- 1} = \begin{pmatrix} A^{- 1}&amp; - A^{- 1}CB^{- 1} \ O &amp; B^{- 1} \ \end{pmatrix}$；</p>
+<p>$\begin{pmatrix} A &amp; O \ C &amp; B \ \end{pmatrix}^{- 1} = \begin{pmatrix}  A^{- 1}&amp;{O} \   - B^{- 1}CA^{- 1} &amp; B^{- 1} \\end{pmatrix}$； $\begin{pmatrix} O &amp; A \ B &amp; O \ \end{pmatrix}^{- 1} =\begin{pmatrix} O &amp; B^{- 1} \ A^{- 1} &amp; O \ \end{pmatrix}$</p>
+<p>这里$A$，$B$均为可逆方阵。</p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><p><strong>1.有关向量组的线性表示</strong></p>
+<p>(1)$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性相关$\Leftrightarrow$至少有一个向量可以用其余向量线性表示。</p>
+<p>(2)$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性无关，$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$，$\beta$线性相关$\Leftrightarrow \beta$可以由$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$唯一线性表示。</p>
+<p>(3) $\beta$可以由$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性表示<br>$\Leftrightarrow r(\alpha_{1},\alpha_{2},\cdots,\alpha_{s}) =r(\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta)$ 。</p>
+<p><strong>2.有关向量组的线性相关性</strong></p>
+<p>(1)部分相关，整体相关；整体无关，部分无关.</p>
+<p>(2) ① $n$个$n$维向量<br>$\alpha_{1},\alpha_{2}\cdots\alpha_{n}$线性无关$\Leftrightarrow \left|\left\lbrack \alpha_{1}\alpha_{2}\cdots\alpha_{n} \right\rbrack \right| \neq0$， $n$个$n$维向量$\alpha_{1},\alpha_{2}\cdots\alpha_{n}$线性相关<br>$\Leftrightarrow |\lbrack\alpha_{1},\alpha_{2},\cdots,\alpha_{n}\rbrack| = 0$<br>。</p>
+<p>② $n + 1$个$n$维向量线性相关。</p>
+<p>③ 若$\alpha_{1},\alpha_{2}\cdots\alpha_{S}$线性无关，则添加分量后仍线性无关；或一组向量线性相关，去掉某些分量后仍线性相关。</p>
+<p><strong>3.有关向量组的线性表示</strong></p>
+<p>(1) $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性相关$\Leftrightarrow$至少有一个向量可以用其余向量线性表示。</p>
+<p>(2) $\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性无关，$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$，$\beta$线性相关$\Leftrightarrow\beta$ 可以由$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$唯一线性表示。</p>
+<p>(3) $\beta$可以由$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性表示<br>$\Leftrightarrow r(\alpha_{1},\alpha_{2},\cdots,\alpha_{s}) =r(\alpha_{1},\alpha_{2},\cdots,\alpha_{s},\beta)$</p>
+<p><strong>4.向量组的秩与矩阵的秩之间的关系</strong></p>
+<p>设$r(A_{m \times n}) =r$，则$A$的秩$r(A)$与$A$的行列向量组的线性相关性关系为：</p>
+<p>(1) 若$r(A_{m \times n}) = r = m$，则$A$的行向量组线性无关。</p>
+<p>(2) 若$r(A_{m \times n}) = r &lt; m$，则$A$的行向量组线性相关。</p>
+<p>(3) 若$r(A_{m \times n}) = r = n$，则$A$的列向量组线性无关。</p>
+<p>(4) 若$r(A_{m \times n}) = r &lt; n$，则$A$的列向量组线性相关。</p>
+<p><strong>5.</strong>$\mathbf{n}$<strong>维向量空间的基变换公式及过渡矩阵</strong></p>
+<p>若$\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$与$\beta_{1},\beta_{2},\cdots,\beta_{n}$是向量空间$V$的两组基，则基变换公式为：</p>
+<p>$(\beta_{1},\beta_{2},\cdots,\beta_{n}) = (\alpha_{1},\alpha_{2},\cdots,\alpha_{n})\begin{bmatrix}  c_{11}&amp; c_{12}&amp; \cdots &amp; c_{1n} \  c_{21}&amp; c_{22}&amp;\cdots &amp; c_{2n} \ \cdots &amp; \cdots &amp; \cdots &amp; \cdots \  c_{n1}&amp; c_{n2} &amp; \cdots &amp; c_{ {nn} } \\end{bmatrix} = (\alpha_{1},\alpha_{2},\cdots,\alpha_{n})C$</p>
+<p>其中$C$是可逆矩阵，称为由基$\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$到基$\beta_{1},\beta_{2},\cdots,\beta_{n}$的过渡矩阵。</p>
+<p><strong>6.坐标变换公式</strong></p>
+<p>若向量$\gamma$在基$\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$与基$\beta_{1},\beta_{2},\cdots,\beta_{n}$的坐标分别是<br>$X = {(x_{1},x_{2},\cdots,x_{n})}^{T}$，</p>
+<p>$Y = \left( y_{1},y_{2},\cdots,y_{n} \right)^{T}$ 即： $\gamma =x_{1}\alpha_{1} + x_{2}\alpha_{2} + \cdots + x_{n}\alpha_{n} = y_{1}\beta_{1} +y_{2}\beta_{2} + \cdots + y_{n}\beta_{n}$，则向量坐标变换公式为$X = CY$ 或$Y = C^{- 1}X$，其中$C$是从基$\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$到基$\beta_{1},\beta_{2},\cdots,\beta_{n}$的过渡矩阵。</p>
+<p><strong>7.向量的内积</strong></p>
+<p>$(\alpha,\beta) = a_{1}b_{1} + a_{2}b_{2} + \cdots + a_{n}b_{n} = \alpha^{T}\beta = \beta^{T}\alpha$</p>
+<p><strong>8.Schmidt正交化</strong></p>
+<p>若$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$线性无关，则可构造$\beta_{1},\beta_{2},\cdots,\beta_{s}$使其两两正交，且$\beta_{i}$仅是$\alpha_{1},\alpha_{2},\cdots,\alpha_{i}$的线性组合$(i= 1,2,\cdots,n)$，再把$\beta_{i}$单位化，记$\gamma_{i} =\frac{\beta_{i} }{\left| \beta_{i}\right|}$，则$\gamma_{1},\gamma_{2},\cdots,\gamma_{i}$是规范正交向量组。其中<br>$\beta_{1} = \alpha_{1}$， $\beta_{2} = \alpha_{2} -\frac{(\alpha_{2},\beta_{1})}{(\beta_{1},\beta_{1})}\beta_{1}$ ， $\beta_{3} =\alpha_{3} - \frac{(\alpha_{3},\beta_{1})}{(\beta_{1},\beta_{1})}\beta_{1} -\frac{(\alpha_{3},\beta_{2})}{(\beta_{2},\beta_{2})}\beta_{2}$ ，</p>
+<p>…………</p>
+<p>$\beta_{s} = \alpha_{s} - \frac{(\alpha_{s},\beta_{1})}{(\beta_{1},\beta_{1})}\beta_{1} - \frac{(\alpha_{s},\beta_{2})}{(\beta_{2},\beta_{2})}\beta_{2} - \cdots - \frac{(\alpha_{s},\beta_{s - 1})}{(\beta_{s - 1},\beta_{s - 1})}\beta_{s - 1}$</p>
+<p><strong>9.正交基及规范正交基</strong></p>
+<p>向量空间一组基中的向量如果两两正交，就称为正交基；若正交基中每个向量都是单位向量，就称其为规范正交基。</p>
+<h2 id="线性方程组"><a href="#线性方程组" class="headerlink" title="线性方程组"></a>线性方程组</h2><p><strong>1．克莱姆法则</strong></p>
+<p>线性方程组$\begin{cases}  a_{11}x_{1} + a_{12}x_{2} + \cdots +a_{1n}x_{n} = b_{1} \   a_{21}x_{1} + a_{22}x_{2} + \cdots + a_{2n}x_{n} =b_{2} \   \quad\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots\cdots \ a_{n1}x_{1} + a_{n2}x_{2} + \cdots + a_{ {nn} }x_{n} = b_{n} \ \end{cases}$，如果系数行列式$D = \left| A \right| \neq 0$，则方程组有唯一解，$x_{1} = \frac{D_{1} }{D},x_{2} = \frac{D_{2} }{D},\cdots,x_{n} =\frac{D_{n} }{D}$，其中$D_{j}$是把$D$中第$j$列元素换成方程组右端的常数列所得的行列式。</p>
+<p><strong>2.</strong> $n$阶矩阵$A$可逆$\Leftrightarrow Ax = 0$只有零解。$\Leftrightarrow\forall b,Ax = b$总有唯一解，一般地，$r(A_{m \times n}) = n \Leftrightarrow Ax= 0$只有零解。</p>
+<p><strong>3.非奇次线性方程组有解的充分必要条件，线性方程组解的性质和解的结构</strong></p>
+<p>(1) 设$A$为$m \times n$矩阵，若$r(A_{m \times n}) = m$，则对$Ax =b$而言必有$r(A) = r(A \vdots b) = m$，从而$Ax = b$有解。</p>
+<p>(2) 设$x_{1},x_{2},\cdots x_{s}$为$Ax = b$的解，则$k_{1}x_{1} + k_{2}x_{2}\cdots + k_{s}x_{s}$当$k_{1} + k_{2} + \cdots + k_{s} = 1$时仍为$Ax =b$的解；但当$k_{1} + k_{2} + \cdots + k_{s} = 0$时，则为$Ax =0$的解。特别$\frac{x_{1} + x_{2} }{2}$为$Ax = b$的解；$2x_{3} - (x_{1} +x_{2})$为$Ax = 0$的解。</p>
+<p>(3) 非齐次线性方程组${Ax} = b$无解$\Leftrightarrow r(A) + 1 =r(\overline{A}) \Leftrightarrow b$不能由$A$的列向量$\alpha_{1},\alpha_{2},\cdots,\alpha_{n}$线性表示。</p>
+<p><strong>4.奇次线性方程组的基础解系和通解，解空间，非奇次线性方程组的通解</strong></p>
+<p>(1) 齐次方程组${Ax} = 0$恒有解(必有零解)。当有非零解时，由于解向量的任意线性组合仍是该齐次方程组的解向量，因此${Ax}= 0$的全体解向量构成一个向量空间，称为该方程组的解空间，解空间的维数是$n - r(A)$，解空间的一组基称为齐次方程组的基础解系。</p>
+<p>(2) $\eta_{1},\eta_{2},\cdots,\eta_{t}$是${Ax} = 0$的基础解系，即：</p>
+<p>1) $\eta_{1},\eta_{2},\cdots,\eta_{t}$是${Ax} = 0$的解；</p>
+<p>2) $\eta_{1},\eta_{2},\cdots,\eta_{t}$线性无关；</p>
+<p>3) ${Ax} = 0$的任一解都可以由$\eta_{1},\eta_{2},\cdots,\eta_{t}$线性表出.<br>$k_{1}\eta_{1} + k_{2}\eta_{2} + \cdots + k_{t}\eta_{t}$是${Ax} = 0$的通解，其中$k_{1},k_{2},\cdots,k_{t}$是任意常数。</p>
+<h2 id="矩阵的特征值和特征向量"><a href="#矩阵的特征值和特征向量" class="headerlink" title="矩阵的特征值和特征向量"></a>矩阵的特征值和特征向量</h2><p><strong>1.矩阵的特征值和特征向量的概念及性质</strong></p>
+<p>(1) 设$\lambda$是$A$的一个特征值，则 ${kA},{aA} + {bE},A^{2},A^{m},f(A),A^{T},A^{- 1},A^{*}$有一个特征值分别为<br>${kλ},{aλ} + b,\lambda^{2},\lambda^{m},f(\lambda),\lambda,\lambda^{- 1},\frac{|A|}{\lambda},$且对应特征向量相同（$A^{T}$ 例外）。</p>
+<p>(2)若$\lambda_{1},\lambda_{2},\cdots,\lambda_{n}$为$A$的$n$个特征值，则$\sum_{i= 1}^{n}\lambda_{i} = \sum_{i = 1}^{n}a_{ {ii} },\prod_{i = 1}^{n}\lambda_{i}= |A|$ ,从而$|A| \neq 0 \Leftrightarrow A$没有特征值。</p>
+<p>(3)设$\lambda_{1},\lambda_{2},\cdots,\lambda_{s}$为$A$的$s$个特征值，对应特征向量为$\alpha_{1},\alpha_{2},\cdots,\alpha_{s}$，</p>
+<p>若: $\alpha = k_{1}\alpha_{1} + k_{2}\alpha_{2} + \cdots + k_{s}\alpha_{s}$ ,</p>
+<p>则: $A^{n}\alpha = k_{1}A^{n}\alpha_{1} + k_{2}A^{n}\alpha_{2} + \cdots +k_{s}A^{n}\alpha_{s} = k_{1}\lambda_{1}^{n}\alpha_{1} +k_{2}\lambda_{2}^{n}\alpha_{2} + \cdots k_{s}\lambda_{s}^{n}\alpha_{s}$ 。</p>
+<p><strong>2.相似变换、相似矩阵的概念及性质</strong></p>
+<p>(1) 若$A \sim B$，则</p>
+<p>1) $A^{T} \sim B^{T},A^{- 1} \sim B^{- 1},,A^{<em>} \sim B^{</em>}$</p>
+<p>2) $|A| = |B|,\sum_{i = 1}^{n}A_{ {ii} } = \sum_{i =1}^{n}b_{ {ii} },r(A) = r(B)$</p>
+<p>3) $|\lambda E - A| = |\lambda E - B|$，对$\forall\lambda$成立</p>
+<p><strong>3.矩阵可相似对角化的充分必要条件</strong></p>
+<p>(1)设$A$为$n$阶方阵，则$A$可对角化$\Leftrightarrow$对每个$k_{i}$重根特征值$\lambda_{i}$，有$n-r(\lambda_{i}E - A) = k_{i}$</p>
+<p>(2) 设$A$可对角化，则由$P^{- 1}{AP} = \Lambda,$有$A = {PΛ}P^{-1}$，从而$A^{n} = P\Lambda^{n}P^{- 1}$</p>
+<p>(3) 重要结论</p>
+<p>1) 若$A \sim B,C \sim D​$，则$\begin{bmatrix}  A &amp; O \ O &amp; C \\end{bmatrix} \sim \begin{bmatrix} B &amp; O \  O &amp; D \\end{bmatrix}​$.</p>
+<p>2) 若$A \sim B$，则$f(A) \sim f(B),\left| f(A) \right| \sim \left| f(B)\right|$，其中$f(A)$为关于$n$阶方阵$A$的多项式。</p>
+<p>3) 若$A$为可对角化矩阵，则其非零特征值的个数(重根重复计算)＝秩($A$)</p>
+<p><strong>4.实对称矩阵的特征值、特征向量及相似对角阵</strong></p>
+<p>(1)相似矩阵：设$A,B$为两个$n$阶方阵，如果存在一个可逆矩阵$P$，使得$B =P^{- 1}{AP}$成立，则称矩阵$A$与$B$相似，记为$A \sim B$。</p>
+<p>(2)相似矩阵的性质：如果$A \sim B$则有：</p>
+<p>1) $A^{T} \sim B^{T}$</p>
+<p>2) $A^{- 1} \sim B^{- 1}$ （若$A$，$B$均可逆）</p>
+<p>3) $A^{k} \sim B^{k}$ （$k$为正整数）</p>
+<p>4) $\left| {λE} - A \right| = \left| {λE} - B \right|$，从而$A,B$<br>有相同的特征值</p>
+<p>5) $\left| A \right| = \left| B \right|$，从而$A,B$同时可逆或者不可逆</p>
+<p>6) 秩$\left( A \right) =$秩$\left( B \right),\left| {λE} - A \right| =\left| {λE} - B \right|$，$A,B$不一定相似</p>
+<h2 id="二次型"><a href="#二次型" class="headerlink" title="二次型"></a>二次型</h2><p><strong>1.</strong>$\mathbf{n}$<strong>个变量</strong>$\mathbf{x}<em>{\mathbf{1} }\mathbf{,}\mathbf{x}</em>{\mathbf{2} }\mathbf{,\cdots,}\mathbf{x}_{\mathbf{n} }$<strong>的二次齐次函数</strong></p>
+<p>$f(x_{1},x_{2},\cdots,x_{n}) = \sum_{i = 1}^{n}{\sum_{j =1}^{n}{a_{ {ij} }x_{i}y_{j} } }$，其中$a_{ {ij} } = a_{ {ji} }(i,j =1,2,\cdots,n)$，称为$n$元二次型，简称二次型. 若令$x = \ \begin{bmatrix}x_{1} \ x_{1} \  \vdots \ x_{n} \ \end{bmatrix},A = \begin{bmatrix}  a_{11}&amp; a_{12}&amp; \cdots &amp; a_{1n} \  a_{21}&amp; a_{22}&amp; \cdots &amp; a_{2n} \ \cdots &amp;\cdots &amp;\cdots &amp;\cdots \  a_{n1}&amp; a_{n2} &amp; \cdots &amp; a_{ {nn} } \\end{bmatrix}$,这二次型$f$可改写成矩阵向量形式$f =x^{T}{Ax}$。其中$A$称为二次型矩阵，因为$a_{ {ij} } =a_{ {ji} }(i,j =1,2,\cdots,n)$，所以二次型矩阵均为对称矩阵，且二次型与对称矩阵一一对应，并把矩阵$A$的秩称为二次型的秩。</p>
+<p><strong>2.惯性定理，二次型的标准形和规范形</strong></p>
+<p>(1) 惯性定理</p>
+<p>对于任一二次型，不论选取怎样的合同变换使它化为仅含平方项的标准型，其正负惯性指数与所选变换无关，这就是所谓的惯性定理。</p>
+<p>(2) 标准形</p>
+<p>二次型$f = \left( x_{1},x_{2},\cdots,x_{n} \right) =x^{T}{Ax}$经过合同变换$x = {Cy}$化为$f = x^{T}{Ax} =y^{T}C^{T}{AC}$</p>
+<p>$y = \sum_{i = 1}^{r}{d_{i}y_{i}^{2} }$称为 $f(r \leq n)$的标准形。在一般的数域内，二次型的标准形不是唯一的，与所作的合同变换有关，但系数不为零的平方项的个数由$r(A)$唯一确定。</p>
+<p>(3) 规范形</p>
+<p>任一实二次型$f$都可经过合同变换化为规范形$f = z_{1}^{2} + z_{2}^{2} + \cdots z_{p}^{2} - z_{p + 1}^{2} - \cdots -z_{r}^{2}$，其中$r$为$A$的秩，$p$为正惯性指数，$r -p$为负惯性指数，且规范型唯一。</p>
+<p><strong>3.用正交变换和配方法化二次型为标准形，二次型及其矩阵的正定性</strong></p>
+<p>设$A$正定$\Rightarrow {kA}(k &gt; 0),A^{T},A^{- 1},A^{*}$正定；$|A| &gt;0$,$A$可逆；$a_{ {ii} } &gt; 0$，且$|A_{ {ii} }| &gt; 0$</p>
+<p>$A$，$B$正定$\Rightarrow A +B$正定，但${AB}$，${BA}$不一定正定</p>
+<p>$A$正定$\Leftrightarrow f(x) = x^{T}{Ax} &gt; 0,\forall x \neq 0$</p>
+<p>$\Leftrightarrow A$的各阶顺序主子式全大于零</p>
+<p>$\Leftrightarrow A$的所有特征值大于零</p>
+<p>$\Leftrightarrow A$的正惯性指数为$n$</p>
+<p>$\Leftrightarrow$存在可逆阵$P$使$A = P^{T}P$</p>
+<p>$\Leftrightarrow$存在正交矩阵$Q$，使$Q^{T}{AQ} = Q^{- 1}{AQ} =\begin{pmatrix} \lambda_{1} &amp; &amp; \ \begin{matrix}  &amp; \  &amp; \ \end{matrix} &amp;\ddots &amp; \  &amp; &amp; \lambda_{n} \ \end{pmatrix},$</p>
+<p>其中$\lambda_{i} &gt; 0,i = 1,2,\cdots,n.$正定$\Rightarrow {kA}(k &gt;0),A^{T},A^{- 1},A^{*}$正定； $|A| &gt; 0,A$可逆；$a_{ {ii} } &gt;0$，且$|A_{ {ii} }| &gt; 0$ 。</p>
 
         </div>
         
@@ -739,6 +767,10 @@
             <li><a class="pagination-link is-current" href="/page/5/">5</a></li>
             
             <li><a class="pagination-link has-text-black-ter" href="/page/6/">6</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/11/">11</a></li>
             
         </ul>
     </nav>
