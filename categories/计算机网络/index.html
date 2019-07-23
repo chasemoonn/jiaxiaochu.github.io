@@ -156,346 +156,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2113 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-31-应用层实验/"></a>
-            
-        </h1>
-        <div class="content">
-            <h2 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h2><p>应用层实验</p>
-<h2 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h2><p>掌握应用层的基本工作原理和实现方法</p>
-<h2 id="实验工具"><a href="#实验工具" class="headerlink" title="实验工具"></a>实验工具</h2><h3 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h3><p>如果在命令行不能运行telnet，则需要安装telnet客户端程序。<br>telnet的安装方法见<a href="https://jingyan.baidu.com/article/3ea51489ba79e252e61bba97.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/3ea51489ba79e252e61bba97.html</a><br>在控制台可以采用鼠标右键菜单粘贴,拷贝要点击图标菜单“编辑/标记”<br>控制台修改缓冲区：属性/布局/屏幕缓冲区大小/高度:9999<br>窗口大小的宽度：200</p>
-<h3 id="SecureCRT"><a href="#SecureCRT" class="headerlink" title="SecureCRT"></a>SecureCRT</h3><ul>
-<li>SecureCRT 下载: <a href="http://172.18.187.9/netdisk/default.aspx?vm=17net" target="_blank" rel="noopener">http://172.18.187.9/netdisk/default.aspx?vm=17net</a> (软件下载)<br>SecureCRT下载解压后直接可以使用。</li>
-<li>采用SecureCRT中的telnet：连接/sessions/点击右键/新建会话/协议：telnet/下一步/主机名:域名或IP地址 端口号:80或21或110或25/下一步/取名会话/完成。</li>
-<li>SecureCRT设置中文显示：选项/会话选项/外观/字体：新宋体；字符集：中文GB2312  字符编码：utf-8</li>
-<li>为了可以看到更多的响应信息，需要增加缓冲区大小。</li>
-<li>secureCRT:会话选项/终端/仿真/回滚缓冲区：10000</li>
-<li>控制台:属性/布局/屏幕缓冲区大小/高度：9000</li>
-<li>SecureCRT的SSL配置–在SecureCRT中会话配置/连接/协议：Telnet/SSL</li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ul>
-<li>截屏时注意遮盖掉自己的邮箱密码</li>
-<li>sina.com的邮箱的客户端访问设置：</li>
-<li>QQ邮箱需要在Web访问方式下开启POP3和SMTP服务才允许在客户端访问(设置/账号/开启POP3/SMTP)，否则会出现错误“454 Authentication failed, please open smtp flag first!”<br>要在客户端访问，QQ邮箱可能还会要求设置独立密码，即可以设置与QQ登录不同的密码。<br>QQ Web邮箱查看源码的方法：<br>QQ邮箱编程必须使用Telnet/SSL协议(加密模式)：<br>SecureCRT的SSL配置–在SecureCRT中会话配置/连接/协议：Telnet/SSL<br>QQ邮箱的接收邮件服务器：pop.qq.com，端口号为995<br>QQ邮箱的发送邮件服务器：smtp.qq.com，端口号为465<br>客户端登录的用户名为QQ号的base64编码<br>客户端登录的密码也采用base64编码</li>
-</ul>
-<h2 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h2><p>先认真阅读课件“Chapter2-applicaton-layer.pdf”,再完成下面内容。注意：协议标准可以查阅RFC；选取的内容不要与课件相同；响应内容太长时自己选取截取前后部分以及其中重点部分。</p>
-<p>参考视频：<a href="http://172.18.187.9/video/" target="_blank" rel="noopener">http://172.18.187.9/video/</a></p>
-<p>使用自己编写的TcpClient，采用聊天程序的客户端。该客户端采用两个进程实现：一个输入和发送线程，一个接收线程。（选做）如果不自己编写TcpClient，可以尝试使用老师给的TcpClient.exe完成步骤一~步骤四，如果不愿意尝试，可以使用telnet来完成实验。<br>源代码：</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ws2tcpip.h&gt; //gcc Client.c -lWs2_32 -o Client</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 20 &lt;&lt; 20 <span class="hljs-comment">//20MB</span></span></span><br><span class="line"><span class="hljs-keyword">int</span> finish = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">unsigned</span> __<span class="hljs-function">stdcall <span class="hljs-title">recvMessage</span><span class="hljs-params">(SOCKET *p)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[BUFLEN];</span><br><span class="line">	<span class="hljs-keyword">while</span> (!finish)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> c = recv(*p, buf, BUFLEN, <span class="hljs-number">0</span>);</span><br><span class="line">		<span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			buf[c] = <span class="hljs-number">0</span>, <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!c)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Recv connect closed.\n"</span>), finish = <span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Recv Error:\n%d\n"</span>, GetLastError());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (argc &lt; <span class="hljs-number">3</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(MAKEWORD(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>), &amp;wsadata);</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">addrinfo</span> *<span class="hljs-title">host</span>;</span></span><br><span class="line">	getaddrinfo(argv[<span class="hljs-number">1</span>], argv[<span class="hljs-number">2</span>], <span class="hljs-literal">NULL</span>, &amp;host);</span><br><span class="line">	SOCKET sock = socket(host-&gt;ai_family, host-&gt;ai_socktype, host-&gt;ai_protocol);</span><br><span class="line">	<span class="hljs-keyword">if</span> (connect(sock, host-&gt;ai_addr, host-&gt;ai_addrlen))</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Connect unsuccessfully.\n"</span>);</span><br><span class="line">	HANDLE h = _beginthreadex(<span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, &amp;recvMessage, &amp;sock, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>);</span><br><span class="line">	<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[BUFLEN];</span><br><span class="line">	<span class="hljs-keyword">while</span> (!finish)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> len = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Input the message(end by EOF, Ctrl+Z in Windows) :\n"</span>); !finish &amp;&amp; gets(buf + len);)</span><br><span class="line">			buf[len += <span class="hljs-built_in">strlen</span>(buf + len)] = <span class="hljs-string">'\r'</span>, buf[++len] = <span class="hljs-string">'\n'</span>, buf[++len] = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">int</span> c = send(sock, buf, len, <span class="hljs-number">0</span>);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!c)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send connect closed.\n"</span>), finish = <span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send Error:\n%d\n"</span>, GetLastError());</span><br><span class="line">	&#125;</span><br><span class="line">	CloseHandle(h);</span><br><span class="line">	closesocket(sock);</span><br><span class="line">	freeaddrinfo(host);</span><br><span class="line">	WSACleanup();</span><br><span class="line">	getch();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h3><p>看完HTTP协议的课件后完成以下实验：</p>
-<h4 id="从学院网站（sdcs-sysu-edu-cn）找一网页下载。"><a href="#从学院网站（sdcs-sysu-edu-cn）找一网页下载。" class="headerlink" title="从学院网站（sdcs.sysu.edu.cn）找一网页下载。"></a>从学院网站（sdcs.sysu.edu.cn）找一网页下载。</h4><p>下载一个<a href="http://sdcs.sysu.edu.cn/content/2564" target="_blank" rel="noopener">老师的个人主页</a>。</p>
-<p>http请求：</p>
-<figure class="highlight http hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">GET</span> <span class="hljs-string">/content/2564.html</span> HTTP/1.1</span><br><span class="line"><span class="hljs-attribute">Host</span>: sdcs.sysu.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p>http响应：<br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-1.jpg" alt><br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-2.jpg" alt></p>
-<h4 id="从学院网站（sdcs-sysu-edu-cn）找一图片下载。"><a href="#从学院网站（sdcs-sysu-edu-cn）找一图片下载。" class="headerlink" title="从学院网站（sdcs.sysu.edu.cn）找一图片下载。"></a>从学院网站（sdcs.sysu.edu.cn）找一图片下载。</h4><p>天河二号镇楼。<br><img src="http://sdcs.sysu.edu.cn/sites/sdcs.live1.dpcms8.sysu.edu.cn/files/styles/slideshow/public/slideshow/frontpic2.jpg" alt><br>http请求：</p>
-<figure class="highlight http hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">GET</span> <span class="hljs-string">/sites/sdcs.live1.dpcms8.sysu.edu.cn/files/styles/slideshow/public/slideshow/frontpic2.jpg</span> HTTP/1.1</span><br><span class="line"><span class="hljs-attribute">Host</span>: sdcs.sysu.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p>http响应：<br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-3.jpg" alt></p>
-<h4 id="在http请求的头部行中加入If-Modified-Since-Fri-16-Jan-2019-13-22-17-GMT从学院网站下载-2-的图片。"><a href="#在http请求的头部行中加入If-Modified-Since-Fri-16-Jan-2019-13-22-17-GMT从学院网站下载-2-的图片。" class="headerlink" title="在http请求的头部行中加入If-Modified-Since: Fri, 16 Jan 2019 13:22:17 GMT从学院网站下载(2)的图片。"></a>在http请求的头部行中加入<code>If-Modified-Since: Fri, 16 Jan 2019 13:22:17 GMT</code>从学院网站下载(2)的图片。</h4><p>http请求：</p>
-<figure class="highlight http hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">GET</span> <span class="hljs-string">/sites/sdcs.live1.dpcms8.sysu.edu.cn/files/styles/slideshow/public/slideshow/frontpic2.jpg</span> HTTP/1.1</span><br><span class="line"><span class="hljs-attribute">If-Modified-Since</span>: Fri, 16 Jan 2019 13:22:17 GMT</span><br><span class="line"><span class="hljs-attribute">Host</span>: sdcs.sysu.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p>http响应：<br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-4.jpg" alt></p>
-<h4 id="用流水线方式实现前面（1）（2），即把它们的请求拷贝到一起后发送出去（可能太长，第一部分可以只有看到末尾）。"><a href="#用流水线方式实现前面（1）（2），即把它们的请求拷贝到一起后发送出去（可能太长，第一部分可以只有看到末尾）。" class="headerlink" title="用流水线方式实现前面（1）（2），即把它们的请求拷贝到一起后发送出去（可能太长，第一部分可以只有看到末尾）。"></a>用流水线方式实现前面（1）（2），即把它们的请求拷贝到一起后发送出去（可能太长，第一部分可以只有看到末尾）。</h4><p>http请求：</p>
-<figure class="highlight http hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">GET</span> <span class="hljs-string">/content/2564.html</span> HTTP/1.1</span><br><span class="line"><span class="hljs-attribute">Host</span>: sdcs.sysu.edu.cn</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">GET</span> <span class="hljs-string">/sites/sdcs.live1.dpcms8.sysu.edu.cn/files/styles/slideshow/public/slideshow/frontpic2.jpg</span> HTTP/1.1</span><br><span class="line"><span class="hljs-attribute">Host</span>: sdcs.sysu.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p>http响应：<br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-5.jpg" alt><br><img src="/2019/04/11/2019-03-31-应用层实验/image/2019-04-01-6.jpg" alt></p>
-<h3 id="FTP协议"><a href="#FTP协议" class="headerlink" title="FTP协议"></a>FTP协议</h3><p>看完FTP协议的课件后完成以下实验（测试服务器上的目录结构和文件见“参考资料”）：<br>FTP服务器：IP地址为172.18.187.10，端口号为 21 （用户名：abc，密码：123666）</p>
-<h4 id="上传用学号命名的一个文本文件-学号-txt"><a href="#上传用学号命名的一个文本文件-学号-txt" class="headerlink" title="上传用学号命名的一个文本文件(学号.txt)"></a>上传用学号命名的一个文本文件(学号.txt)</h4><p>控制连接的请求响应信息：</p>
-<p>数据连接的截屏：</p>
-<h4 id="查看当前目录内容-太多则选择一些-，并标注出-1-中自己上传的文件"><a href="#查看当前目录内容-太多则选择一些-，并标注出-1-中自己上传的文件" class="headerlink" title="查看当前目录内容(太多则选择一些)，并标注出(1)中自己上传的文件"></a>查看当前目录内容(太多则选择一些)，并标注出(1)中自己上传的文件</h4><pre><code>控制连接的请求响应信息：
-
-数据连接的截屏：</code></pre><h4 id="下载-1-中自己上传的文本文件"><a href="#下载-1-中自己上传的文本文件" class="headerlink" title="下载(1)中自己上传的文本文件"></a>下载(1)中自己上传的文本文件</h4><pre><code>控制连接的请求响应信息：
-
-数据连接的截屏：</code></pre><h4 id="下载-ebook下的一个二进制文件-例如，-pdf文件"><a href="#下载-ebook下的一个二进制文件-例如，-pdf文件" class="headerlink" title="下载/ebook下的一个二进制文件(例如，.pdf文件)"></a>下载/ebook下的一个二进制文件(例如，.pdf文件)</h4><p>控制连接的请求响应信息：</p>
-<p>数据连接的截屏：</p>
-<h4 id="采用断点续传下载一个-text下的一个文本文件的一部分"><a href="#采用断点续传下载一个-text下的一个文本文件的一部分" class="headerlink" title="采用断点续传下载一个/text下的一个文本文件的一部分"></a>采用断点续传下载一个/text下的一个文本文件的一部分</h4><p>控制连接的请求响应信息：</p>
-<p>数据连接的截屏：</p>
-<h4 id="编写一个程序（聊天程序的客户端），用FTP协议下载指定文件（选做）"><a href="#编写一个程序（聊天程序的客户端），用FTP协议下载指定文件（选做）" class="headerlink" title="编写一个程序（聊天程序的客户端），用FTP协议下载指定文件（选做）"></a>编写一个程序（聊天程序的客户端），用FTP协议下载指定文件（选做）</h4><p>参考运行截屏：</p>
-<p>参考字符串函数：<br>strchr();<br>strrchr();<br>sprintf(buf, “retr %s\r\n”, filename);<br>sscanf(st, “%d,%d,%d,%d,%d,%d”, &amp;ip1, &amp;ip2, &amp;ip3, &amp;ip4, &amp;port1, &amp;port2);</p>
-<p>参考自编函数：<br>SOCKET dataConn() { … }   建立数据连接<br>unsigned __stdcall myrecv(void *p){…}   接收服务器的消息（线程函数）<br>void sendmsg(SOCKET sock, char *msg){ … } 发送控制消息<br>int saveFile(SOCKET sock, char * fileName) { … } 通过数据连接接收数据并保存为文件<br>参考程序：ftpDownload.exe<br>源代码：</p>
-<p>运行截屏：</p>
-<h3 id="SMTP协议"><a href="#SMTP协议" class="headerlink" title="SMTP协议"></a>SMTP协议</h3><p>邮箱<a href="mailto:zsusender3@sina.com" target="_blank" rel="noopener">zsusender3@sina.com</a>的用户名zsusender3，密码：123456Aa<br>看完SMTP协议的课件后做以下实验：</p>
-<h4 id="通过zsusender3-sina-com发一封没有附件的邮件到你的邮箱。注意更改时间为当前时间。"><a href="#通过zsusender3-sina-com发一封没有附件的邮件到你的邮箱。注意更改时间为当前时间。" class="headerlink" title="通过zsusender3@sina.com发一封没有附件的邮件到你的邮箱。注意更改时间为当前时间。"></a>通过<a href="mailto:zsusender3@sina.com" target="_blank" rel="noopener">zsusender3@sina.com</a>发一封没有附件的邮件到你的邮箱。注意更改时间为当前时间。</h4><p>请求和响应信息：<br>老师的邮箱因为被太多人发了邮件所以被封了…</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">HELO zsusender3</span><br><span class="line">AUTH LOGIN</span><br><span class="line">enN1c2VuZGVyMw==</span><br><span class="line">MTIzNDU2QWE=</span><br><span class="line">MAIL FROM:&lt;zsusender3@sina.com&gt;</span><br><span class="line">RCPT TO:&lt;wu.kan@qq.com&gt;</span><br><span class="line">data</span><br><span class="line">Date:Tue, 25 Mar 2019 14:24:01 +0800</span><br><span class="line">From: &quot;zsusender3&quot; &lt;zsusender3@sina.com&gt;</span><br><span class="line">To: &quot;WuK&quot;&lt;wu.kan@qq.com&gt;</span><br><span class="line">Subject: SDCS 17 isszym</span><br><span class="line"></span><br><span class="line">This is a SDCS message in MIME format. Hello! SDCS 17 from isszym</span><br><span class="line">.</span><br><span class="line"></span><br><span class="line">QUIT</span><br></pre></td></tr></table></figure>
-
-<h4 id="通过zsusender3-sina-com发一封带附件-二进制文件-的邮件-MIME-txt-到你的邮箱。参考课件“MIME-pdf”和观看MIME的视频。"><a href="#通过zsusender3-sina-com发一封带附件-二进制文件-的邮件-MIME-txt-到你的邮箱。参考课件“MIME-pdf”和观看MIME的视频。" class="headerlink" title="通过zsusender3@sina.com发一封带附件(二进制文件)的邮件(MIME.txt)到你的邮箱。参考课件“MIME.pdf”和观看MIME的视频。"></a>通过<a href="mailto:zsusender3@sina.com" target="_blank" rel="noopener">zsusender3@sina.com</a>发一封带附件(二进制文件)的邮件(MIME.txt)到你的邮箱。参考课件“MIME.pdf”和观看MIME的视频。</h4><p>请求和响应信息：</p>
-<h4 id="通过zsusender3-sina-com发送另一个带附件的邮件给自己。可以先给你自己发一封带附件的邮件-再通过查看源码截取该响应报文的一部分，参见MIME-txt。"><a href="#通过zsusender3-sina-com发送另一个带附件的邮件给自己。可以先给你自己发一封带附件的邮件-再通过查看源码截取该响应报文的一部分，参见MIME-txt。" class="headerlink" title="通过zsusender3@sina.com发送另一个带附件的邮件给自己。可以先给你自己发一封带附件的邮件,再通过查看源码截取该响应报文的一部分，参见MIME.txt。"></a>通过<a href="mailto:zsusender3@sina.com" target="_blank" rel="noopener">zsusender3@sina.com</a>发送另一个带附件的邮件给自己。可以先给你自己发一封带附件的邮件,再通过查看源码截取该响应报文的一部分，参见MIME.txt。</h4><h4 id="选做-从你的邮箱发一份邮件到同学的邮箱。QQ邮箱见【注意事项】。"><a href="#选做-从你的邮箱发一份邮件到同学的邮箱。QQ邮箱见【注意事项】。" class="headerlink" title="(选做)从你的邮箱发一份邮件到同学的邮箱。QQ邮箱见【注意事项】。"></a>(选做)从你的邮箱发一份邮件到同学的邮箱。QQ邮箱见【注意事项】。</h4><p>请求和响应信息：</p>
-<h3 id="POP3协议"><a href="#POP3协议" class="headerlink" title="POP3协议"></a>POP3协议</h3><p>邮箱<a href="mailto:zsureceiver3@sina.com" target="_blank" rel="noopener">zsureceiver3@sina.com</a>的用户名zsureceiver3，密码：123456Aa<br>看完POP3协议的课件后做以下实验：</p>
-<h4 id="查看zsureceiver3-sina-com中每个邮件大小。"><a href="#查看zsureceiver3-sina-com中每个邮件大小。" class="headerlink" title="查看zsureceiver3@sina.com中每个邮件大小。"></a>查看<a href="mailto:zsureceiver3@sina.com" target="_blank" rel="noopener">zsureceiver3@sina.com</a>中每个邮件大小。</h4><p>请求和响应信息：</p>
-<h4 id="取回zsureceiver3-sina-com最后一封邮件的邮件唯一标识符。"><a href="#取回zsureceiver3-sina-com最后一封邮件的邮件唯一标识符。" class="headerlink" title="取回zsureceiver3@sina.com最后一封邮件的邮件唯一标识符。"></a>取回<a href="mailto:zsureceiver3@sina.com" target="_blank" rel="noopener">zsureceiver3@sina.com</a>最后一封邮件的邮件唯一标识符。</h4><p>请求和响应信息：</p>
-<h4 id="取回zsureceiver3-sina-com最后一封邮件。"><a href="#取回zsureceiver3-sina-com最后一封邮件。" class="headerlink" title="取回zsureceiver3@sina.com最后一封邮件。"></a>取回<a href="mailto:zsureceiver3@sina.com" target="_blank" rel="noopener">zsureceiver3@sina.com</a>最后一封邮件。</h4><p>请求和响应信息：</p>
-<h4 id="取回三-1-中发到你邮箱的邮件。QQ邮件见【注意事项】。"><a href="#取回三-1-中发到你邮箱的邮件。QQ邮件见【注意事项】。" class="headerlink" title="取回三(1)中发到你邮箱的邮件。QQ邮件见【注意事项】。"></a>取回三(1)中发到你邮箱的邮件。QQ邮件见【注意事项】。</h4><p>请求和响应信息：</p>
-<h2 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h2>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.398Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 478 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-29-计算机网络第四章 介质控制子层/">计算机网络 第四章 介质控制子层</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="生成树协议-Spanning-Tree-Protocol"><a href="#生成树协议-Spanning-Tree-Protocol" class="headerlink" title="生成树协议(Spanning Tree Protocol)"></a>生成树协议(Spanning Tree Protocol)</h1><ul>
-<li>网桥只在根端口和指定端口之间转发帧</li>
-<li>指定端口：指定网桥上与网段连接的端口</li>
-<li>指定网桥：网段上离根最近的网桥</li>
-<li>如果到根网桥的最短路径有多条，可以采用最短路径上的下一网桥ID和下一个端口ID用于打破平衡（取更小的）</li>
-</ul>
-<h1 id="虚拟局域网（Virtual-LAN-VLAN）"><a href="#虚拟局域网（Virtual-LAN-VLAN）" class="headerlink" title="虚拟局域网（Virtual LAN,VLAN）"></a>虚拟局域网（Virtual LAN,VLAN）</h1><p>如果网桥只在具有相同颜色的端口(Port) 之间转发帧，就会把原来的局域网分割成多个相互隔离的局域网，称为虚拟局域网(Virtual LAN,VLAN)。所谓的颜色其实就是VLAN ID，是由管理员为每个端口配置的，具有相同的VLAN ID的端口处于同一个VLAN，端口的默认VLAN为VLAN 1。</p>
-<p>一个VLAN的帧只能转发到属于同一个VLAN的端口或者干道端口。<br>只有发往干道端口的帧才需要加上VLAN ID。<br>从干道收到的帧中如果没有VLAN ID，则认为是本征VLAN(Native VLAN)，默认为VLAN 1。<br>发往干道的Native VLAN的帧不加VLAN ID。</p>
-<p>CST, PVST+ and MSTP</p>
-<ul>
-<li>IEEE 802.1Q中定义了由所有VLAN共享一棵树的公共生成树 (Common Spanning Tree，CST) 。</li>
-<li>具有思科专利的PVST(Per-VLAN Spanning Tree)协议为每个VLAN配置一 颗生成树。由于 PVST 只能用于ISL，思科又定义了同时可用于IEEE 802.1Q的PVST+标准。思科的设备现在默认使用PVST+。</li>
-<li>多生成树MSTP (Multiple Spanning Tree Protocol)起初单独由IEEE 802.1s定义，后来并入IEEE 802.1Q-2005。它是RSTP的一个扩展，并可 以把VLAN分组，每个VLAN组使用一颗生成树。</li>
-<li>BID：PRIORITY(4b)+VLAN ID(12b)+MAC addr(6B) PRIORITY(4b):0,4096,… ,32768(default),…, 61440</li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.397Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    19 分钟 读完 (大约 2780 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-11-Echo实验/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>Echo实验</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>掌握套节字的基本使用方法</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://www.cnblogs.com/hgwang/p/6074038.html" target="_blank" rel="noopener">https://www.cnblogs.com/hgwang/p/6074038.html</a>  （套接字）</li>
-<li><a href="https://www.jb51.net/article/37410.htm" target="_blank" rel="noopener">https://www.jb51.net/article/37410.htm</a>  （字符串）</li>
-<li><a href="https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view=vs-2017" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/c/c-runtime-library/stream-i-o?view=vs-2017</a>  （字符串）</li>
-<li><a href="https://docs.microsoft.com/en-us/c/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/c/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s</a>   （字符串）</li>
-<li><a href="http://www.runoob.com/cprogramming/" target="_blank" rel="noopener">http://www.runoob.com/cprogramming/</a>  （字符串）</li>
-</ul>
-<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><ul>
-<li>Windows + VS 2012  <a href="http://172.18.187.9/netdisk/default.aspx?vm=17net" target="_blank" rel="noopener">http://172.18.187.9/netdisk/default.aspx?vm=17net</a></li>
-<li>对于VS2015和VS2017默认使用安全周期检查，如果不关闭VS的安全周期检查，很多字符串函数都不能用。</li>
-<li>Linux + gcc</li>
-</ul>
-<p>这里我使用的环境是Windows 10 + VSCode + gcc version 8.1.0 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project)</p>
-<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><h2 id="编写TCP-Echo增强程序"><a href="#编写TCP-Echo增强程序" class="headerlink" title="编写TCP Echo增强程序"></a>编写TCP Echo增强程序</h2><h3 id="实验要求："><a href="#实验要求：" class="headerlink" title="实验要求："></a>实验要求：</h3><p>服务器把客户端发送来的任何消息都返回给客户端，返回的消息前面要加上服务器的当前时间。客户端把返回的消息显示出来。客户端每输入一条消息就建立TCP连接，并把消息发送给服务器，在收到服务器回应后关闭连接。在这一基础上，服务器在收到客户端的消息时显示服务器的当前时间、客户端的IP地址、客户端的端口号和客户端发来的信息，并把它们一并返回给客户端。客户端在发送消息后把服务器发回给它的消息显示出来。要求服务器直接从accept()的参数fsin中得到客户端的IP地址和端口号。服务器获取IP地址后要求直接使用s_un_b的四个分量得到IP地址，不能使用函数inet_ntoa()转换IP地址。</p>
-<h3 id="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。"><a href="#只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。" class="headerlink" title="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。"></a>只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因。</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-1.png" alt><br>如图，退出了服务器程序后再运行客户端程序，得到了10057的报错。</p>
-<h3 id="服务器如何可以退出循环？"><a href="#服务器如何可以退出循环？" class="headerlink" title="服务器如何可以退出循环？"></a>服务器如何可以退出循环？</h3><p>kbhit()在执行时,检测是否有按键按下,有按下返回非0值，没有按下则返回0，是非阻塞函数；因此，预期在监听的过程中将服务器程序从后台激活并按下键盘按键即可退出循环。</p>
-<p>然而，在实际运行中这样是失效的，正是因为他是非阻塞函数，而下面收发信息却是阻塞的。因此退出循环只有我们在命令行中手动按Ctrl+C了。</p>
-<h3 id="截屏（ctrl-alt-PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）"><a href="#截屏（ctrl-alt-PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）" class="headerlink" title="截屏（ctrl+alt+PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）"></a>截屏（ctrl+alt+PrintScreen）服务器和客户端的运行结果（注明客户端和服务器）</h3><p>客户端：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-2.png" alt><br>服务器：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-3.png" alt></p>
-<h3 id="服务器的全部源代码（或自选主要代码）"><a href="#服务器的全部源代码（或自选主要代码）" class="headerlink" title="服务器的全部源代码（或自选主要代码）"></a>服务器的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">//使用winsock 2.2 library</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span>   <span class="hljs-comment">// argc: 命令行参数个数，例如：C:\&gt; TCPServer 8080 argc=2 argv[0]=“TCPServer", argv[1]="8080"</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">fsin</span>;</span> <span class="hljs-comment">// the from address of a client</span></span><br><span class="line">	SOCKET msock, ssock;	 <span class="hljs-comment">// master &amp; slave sockets</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>							   <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> alen;										   <span class="hljs-comment">// from-address length</span></span><br><span class="line">	<span class="hljs-keyword">char</span> pts[BUFLEN + <span class="hljs-number">1</span>];							   <span class="hljs-comment">// pointer to time string</span></span><br><span class="line">	<span class="hljs-keyword">time_t</span> now;										   <span class="hljs-comment">// current time</span></span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);					   <span class="hljs-comment">// 加载winsock library，WSVERS为请求版本，wsadata返回系统实际支持的最高版本</span></span><br><span class="line">	msock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP); <span class="hljs-comment">// 创建套接字。 参数：因特网协议簇(family)，字节流，TCP协议号。 返回：要监听套接字的描述符或INVALID_SOCKET</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));					   <span class="hljs-comment">//从&amp;sin开始的长度为sizeof(sin)的内存清0 , sin为一个地址结构</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;						   <span class="hljs-comment">//因特网地址簇(INET-Internet)</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = INADDR_ANY;				   <span class="hljs-comment">//监听所有(接口的)IP地址(32位)，// 0.0.0.0</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service));	  <span class="hljs-comment">//监听的端口号(16位) 。atoi--把ascii转化为int，htons—主机序到网络序</span></span><br><span class="line">	bind(msock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 通过sin把要监听的IP地址和端口号绑定到套接字上</span></span><br><span class="line">	listen(msock, <span class="hljs-number">5</span>);								   <span class="hljs-comment">// 建立长度为5的连接请求队列，并开始监听是否有连接请求到来，来了则放入队列</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Server Start to listen.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">while</span> (!_kbhit()) <span class="hljs-comment">// 检测是否有按键 (什么时候执行？)</span></span><br><span class="line">	&#123;</span><br><span class="line">		alen = <span class="hljs-keyword">sizeof</span>(struct sockaddr);</span><br><span class="line">		ssock = accept(msock, (struct sockaddr *)&amp;fsin, &amp;alen); <span class="hljs-comment">// accept：如果有新的连接请求，返回连接套接字，否则，被阻塞，fsin包含客户端IP地址和端口号</span></span><br><span class="line">		time(&amp;now);												<span class="hljs-comment">// 取得系统时间</span></span><br><span class="line">		<span class="hljs-keyword">int</span> cnt = <span class="hljs-built_in">sprintf</span>(pts, <span class="hljs-string">"Accept Time:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%s"</span></span><br><span class="line">							   <span class="hljs-string">"sin_port:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%u\n"</span></span><br><span class="line">							   <span class="hljs-string">"sin_addr:\n"</span></span><br><span class="line">							   <span class="hljs-string">"%d.%d.%d.%d\n"</span></span><br><span class="line">							   <span class="hljs-string">"Receive Message:\n"</span>,</span><br><span class="line">						  ctime(&amp;now),</span><br><span class="line">						  fsin.sin_port,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b1,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b2,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b3,</span><br><span class="line">						  fsin.sin_addr.S_un.S_un_b.s_b4); <span class="hljs-comment">// 把时间转换为字符串</span></span><br><span class="line">		<span class="hljs-keyword">int</span> cc = recv(ssock, pts + cnt, BUFLEN - cnt, <span class="hljs-number">0</span>);</span><br><span class="line">		pts[cnt + cc] = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n%s\n"</span>, pts);</span><br><span class="line">		send(ssock, pts, cnt + cc, <span class="hljs-number">0</span>);</span><br><span class="line">		closesocket(ssock); <span class="hljs-comment">//  关闭连接套接字</span></span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(msock);</span><br><span class="line">	WSACleanup();</span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="客户端的全部源代码（或自选主要代码）"><a href="#客户端的全部源代码（或自选主要代码）" class="headerlink" title="客户端的全部源代码（或自选主要代码）"></a>客户端的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>)</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>;			   <span class="hljs-comment">// server IP to connect，127.0.0.1指本机</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;			   <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>				   <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>], msg[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;						   <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;								   <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);</span><br><span class="line">	sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));				  <span class="hljs-comment">// sin的内存清0</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;					  <span class="hljs-comment">// 因特网地址簇</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = inet_addr(host);		  <span class="hljs-comment">// 服务器IP地址(32位)</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service)); <span class="hljs-comment">// 服务器端口号(16位)</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send the Message:\n"</span>);</span><br><span class="line">	gets(msg);</span><br><span class="line">	<span class="hljs-keyword">int</span> ret = connect(sock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 连接到服务器.无错时，返回0， // 否则，返回SOCKET_ERROR ，可以调用 //    函数WSAGetLastError取得错误代码</span></span><br><span class="line">	cc = send(sock, msg, <span class="hljs-built_in">strlen</span>(msg), <span class="hljs-number">0</span>);						   <span class="hljs-comment">//把缓冲区pts的数据发送出去，len为要发送的字节数， // 返回值：(&gt;0) 实际发送的字节数(≤len), (=0) 对方正常关闭， //    （=SOCKET_ERROR) 出错，用函数WSAGetLastError取错误码。</span></span><br><span class="line">	cc = recv(sock, buf, BUFLEN, <span class="hljs-number">0</span>);							   <span class="hljs-comment">// BUFLEN为缓冲区buf的长度。 // 返回值：接收的字符数(&gt;0)、对方已关闭(=0) 或连接出错(&lt;0)</span></span><br><span class="line">	<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error:\n%d.\n"</span>, GetLastError());</span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Server closed.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc &gt; <span class="hljs-number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		buf[cc] = <span class="hljs-string">'\0'</span>;		   <span class="hljs-comment">//  ensure null-termination</span></span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n%s\n"</span>, buf); <span class="hljs-comment">// 显示所接收的字符串</span></span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock); <span class="hljs-comment">// 关闭套接字</span></span><br><span class="line">	WSACleanup();	  <span class="hljs-comment">//  卸载winsock library</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="编写UDP-Echo增强程序"><a href="#编写UDP-Echo增强程序" class="headerlink" title="编写UDP Echo增强程序"></a>编写UDP Echo增强程序</h2><h3 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h3><p>修改UDP例程，完成Echo功能，即当客户端发来消息时，服务器显示出服务器的当前时间、客户端的IP、客户端的端口号和客户发来的信息，并把它们一并发回给客户端，客户端然后把它们显示出来。<br>服务器可以直接从recvfrom()的参数from中得到客户端的IP地址和端口号，并且服务器用sendto()发回给客户端消息时可以直接用该参数from作为参数toAddr。可以使用inet_ntoa()转换客户端IP地址。<br>客户端程序的recvfrom()可以直接使用原来sendto使用的sock。该sock已经绑定了客户端的IP地址和端口号，客户端可以直接用来接收数据。</p>
-<h3 id="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因"><a href="#只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因" class="headerlink" title="只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因"></a>只运行客户端程序而不运行服务器程序会出现什么错误，截屏并说明原因</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-4.png" alt><br>如图，在发送时没有报错，但是试图从服务器获得信息时获得了10054的报错。</p>
-<h3 id="截屏服务器和客户端的运行结果（注明客户端和服务器）"><a href="#截屏服务器和客户端的运行结果（注明客户端和服务器）" class="headerlink" title="截屏服务器和客户端的运行结果（注明客户端和服务器）"></a>截屏服务器和客户端的运行结果（注明客户端和服务器）</h3><p><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-5.png" alt><br>服务器：<br><img src="/2019/04/11/2019-03-11-Echo实验/image/2019-03-11-6.png" alt></p>
-<h3 id="服务器的全部源代码（或自选主要代码）-1"><a href="#服务器的全部源代码（或自选主要代码）-1" class="headerlink" title="服务器的全部源代码（或自选主要代码）"></a>服务器的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;conio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000				   <span class="hljs-comment">// 缓冲区大小</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 2)	  <span class="hljs-comment">// 指明版本2.2</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">// 加载winsock 2.2 Llibrary</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>; <span class="hljs-comment">// server IP Address to connect</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;  <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span>	<span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">from</span>;</span>   <span class="hljs-comment">// sender address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> fromsize = <span class="hljs-keyword">sizeof</span>(from);</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>], pts[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;						   <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;								   <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);					 <span class="hljs-comment">// 加载winsock library，WSVERS为请求版本,wsadata返回系统实际支持的最高版本。</span></span><br><span class="line">	sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP); <span class="hljs-comment">// 创建UDP套接字, 参数：因特网协议簇(family)，数据报套接字，UDP协议号， 返回：要监听套接字的描述符或INVALID_SOCKET</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET;</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = INADDR_ANY;				  <span class="hljs-comment">// 绑定(监听)所有的接口。</span></span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons((u_short)atoi(service));	 <span class="hljs-comment">// 绑定指定接口。atoi--把ascii转化为int，htons -- 主机序(host)转化为网络序(network), 为short类型。</span></span><br><span class="line">	bind(sock, (struct sockaddr *)&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>)); <span class="hljs-comment">// 绑定本地端口号（和本地IP地址)</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"UDPServer Start.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">while</span> (!_kbhit())</span><br><span class="line">	&#123;																	   <span class="hljs-comment">//检测是否有按键</span></span><br><span class="line">		cc = recvfrom(sock, buf, BUFLEN, <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, &amp;fromsize); <span class="hljs-comment">//接收客户数据。返回结果：cc为接收的字符数，from中将包含客户IP地址和端口号。</span></span><br><span class="line">		<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"recvfrom() failed; %d\n"</span>, WSAGetLastError());</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			buf[cc] = <span class="hljs-number">0</span>;</span><br><span class="line">			<span class="hljs-keyword">time_t</span> now;</span><br><span class="line">			time(&amp;now); <span class="hljs-comment">// 取得系统时间</span></span><br><span class="line">			<span class="hljs-built_in">sprintf</span>(pts,</span><br><span class="line">					<span class="hljs-string">"Accept Time:\n"</span></span><br><span class="line">					<span class="hljs-string">"%s"</span></span><br><span class="line">					<span class="hljs-string">"sin_port:\n"</span></span><br><span class="line">					<span class="hljs-string">"%u\n"</span></span><br><span class="line">					<span class="hljs-string">"sin_addr:\n"</span></span><br><span class="line">					<span class="hljs-string">"%d.%d.%d.%d\n"</span></span><br><span class="line">					<span class="hljs-string">"Receive Message:\n"</span></span><br><span class="line">					<span class="hljs-string">"%s\n"</span>,</span><br><span class="line">					ctime(&amp;now),</span><br><span class="line">					from.sin_port,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b1,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b2,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b3,</span><br><span class="line">					from.sin_addr.S_un.S_un_b.s_b4,</span><br><span class="line">					buf);</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, pts);</span><br><span class="line">			cc = sendto(sock, pts, <span class="hljs-built_in">strlen</span>(pts), <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, fromsize);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock);</span><br><span class="line">	WSACleanup(); <span class="hljs-comment">// 卸载某版本的DLL</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="客户端的全部源代码（或自选主要代码）-1"><a href="#客户端的全部源代码（或自选主要代码）-1" class="headerlink" title="客户端的全部源代码（或自选主要代码）"></a>客户端的全部源代码（或自选主要代码）</h3><figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000				   <span class="hljs-comment">// 缓冲区大小</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 2)	  <span class="hljs-comment">// 指明版本2.2</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">// 加载winsock 2.2 Llibrary</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">int</span> argc, <span class="hljs-keyword">char</span> *argv[])</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> host[] = <span class="hljs-string">"127.0.0.1"</span>;		 <span class="hljs-comment">// server IP to connect</span></span><br><span class="line">	<span class="hljs-keyword">char</span> service[] = <span class="hljs-string">"50500"</span>;		 <span class="hljs-comment">// server port to connect</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">toAddr</span>, <span class="hljs-title">from</span>;</span> <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-keyword">int</span> fromsize = <span class="hljs-keyword">sizeof</span>(from);</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN + <span class="hljs-number">1</span>]; <span class="hljs-comment">// buffer for one line of text</span></span><br><span class="line">	SOCKET sock;		  <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> cc;				  <span class="hljs-comment">// recv character count</span></span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata); <span class="hljs-comment">// 启动某版本Socket的DLL</span></span><br><span class="line">	sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP);</span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;toAddr, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(toAddr));</span><br><span class="line">	toAddr.sin_family = AF_INET;</span><br><span class="line">	toAddr.sin_port = htons((u_short)atoi(service)); <span class="hljs-comment">//atoi：把ascii转化为int. htons：主机序(host)转化为网络序(network), s--short</span></span><br><span class="line">	toAddr.sin_addr.s_addr = inet_addr(host);		 <span class="hljs-comment">//如果host为域名，需要先用函数gethostbyname把域名转化为IP地址</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send the Message:\n"</span>);</span><br><span class="line">	gets(buf);</span><br><span class="line">	cc = sendto(sock, buf, <span class="hljs-built_in">strlen</span>(buf), <span class="hljs-number">0</span>, (SOCKADDR *)&amp;toAddr, <span class="hljs-keyword">sizeof</span>(toAddr));</span><br><span class="line">	<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Error:\n%d\n"</span>, WSAGetLastError());</span><br><span class="line">	<span class="hljs-keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		cc = recvfrom(sock, buf, BUFLEN, <span class="hljs-number">0</span>, (SOCKADDR *)&amp;from, &amp;fromsize);</span><br><span class="line">		<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Receive Error:\n%d\n"</span>, WSAGetLastError());</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf);</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(sock);</span><br><span class="line">	WSACleanup(); <span class="hljs-comment">// 卸载某版本的DLL</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h1><p>在Windows下使用gcc编译，需要加编译指令-lwsock32来引入套接字的库，于是写了如下脚本帮助编译：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc TCPServer.c -o TCPServer -lwsock32</span><br><span class="line">gcc TCPClient.c -o TCPClient -lwsock32</span><br></pre></td></tr></table></figure>
-
-<p>节省了不少时间。</p>
-<p>服务器对收到的消息进行处理这里使用了sprintf这个函数，感觉相比别的方法简化了很多代码。</p>
-<p>想当然的认为服务器程序只需要按下键盘就会退出，说明一开始对阻塞的理解还不透彻啊。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.397Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    13 分钟 读完 (大约 1880 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-19-Chat实验/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>Chat实验</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>掌握套节字的多线程编程方法。</p>
-<h1 id="实验介绍"><a href="#实验介绍" class="headerlink" title="实验介绍"></a>实验介绍</h1><p>利用客户/服务器(Client/Sever或CS)模式实现一个多人聊天(群聊)程序。其功能是每个客户发送给服务器的消息都会传送给所有的客户端。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">服务器--Hello--&gt;A</span><br><span class="line">A==Hello==&gt;服务器</span><br><span class="line">服务器--Hello--&gt;B</span><br><span class="line">服务器--Hello--&gt;C</span><br><span class="line">服务器--Hello--&gt;D</span><br></pre></td></tr></table></figure>
-
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><a href="https://docs.microsoft.com/en-us/windows/desktop/WinSock/getting-started-with-winsock" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/windows/desktop/WinSock/getting-started-with-winsock</a> （套接字）</li>
-<li><a href="https://www.cnblogs.com/hgwang/p/6074038.html" target="_blank" rel="noopener">https://www.cnblogs.com/hgwang/p/6074038.html</a>  （套接字）</li>
-<li><a href="https://www.jb51.net/article/37410.htm" target="_blank" rel="noopener">https://www.jb51.net/article/37410.htm</a>  （字符串）</li>
-<li><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/stream-i-o?view=vs-2017" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/cpp/c-runtime-library/stream-i-o?view=vs-2017</a>  （字符串）</li>
-<li><a href="https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2017#s</a>   （字符串）</li>
-<li><a href="http://www.runoob.com/cprogramming/" target="_blank" rel="noopener">http://www.runoob.com/cprogramming/</a>  （字符串）</li>
-<li>例程“_beginthreadex”          （创建线程）</li>
-<li>例程“TCPServer和TCPClient”    （传送服务器时间）</li>
-<li>课件“套接字并发编程.PDF”</li>
-<li>Chat实验的课件</li>
-</ul>
-<h1 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h1><ul>
-<li>Windows + VS 2012<ul>
-<li>对于VS2015和VS2017默认使用安全周期检查，如果不关闭VS的安全周期检查，很多字符串函数都不能用。</li>
-</ul>
-</li>
-<li>Linux + gcc</li>
-</ul>
-<p>这里我使用的环境是Windows 10 + VSCode + gcc version 8.1.0 (x86_64-posix-sjlj-rev0, Built by MinGW-W64 project)</p>
-<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><p>先阅读课件“套接字并发编程.PDF”。重点是读懂课件中“chat并发编程(服务器)”和“chat并发编程(客户端)”的流程图。 然后，完成下面步骤（截屏要同时显示服务器和至少两个客户端）：</p>
-<ol>
-<li>编写多人聊天程序，要求客户端和服务器都采用多线程方式进行编程。每个客户端都采用TCP协议连接服务器并保持连接。服务器同时与所有客户端建立和保持连接。每个客户端输入的消息都会通过服务器转发给所有客户。</li>
-<li>服务器程序转发某个客户端发来的消息时都在消息前面加上该客户端的IP地址和端口号以及服务器的当前时间。要求服务器程序把转发的 消息也显示出来。</li>
-<li>新客户刚连接时服务器端把“enter”消息（包含客户端IP地址和端口号）发送给所有客户端。</li>
-<li>客户端输入exit时退出客户端程序（正常退出），或者客户端直接关闭窗口退出（异常退出），服务器都会把该客户leave的消息广播给所有客户。</li>
-</ol>
-<p>客户端程序：</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>)</span></span><br><span class="line"><span class="hljs-keyword">int</span> finish = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">unsigned</span> __<span class="hljs-function">stdcall <span class="hljs-title">recvMessage</span><span class="hljs-params">(SOCKET *p)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> buf[BUFLEN];;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> cc = recv(*p, buf, BUFLEN, <span class="hljs-number">0</span>); <span class="hljs-comment">// BUFLEN为缓冲区buf的长度，返回值：接收的字符数(&gt;0)、对方已关闭(=0) 或连接出错(&lt;0)</span></span><br><span class="line">		<span class="hljs-keyword">if</span> (finish)</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">if</span> (cc &gt; <span class="hljs-number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			buf[cc] = <span class="hljs-string">'\0'</span>;	<span class="hljs-comment">//  ensure null-termination</span></span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%s"</span>, buf); <span class="hljs-comment">// 显示所接收的字符串</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Recv Error:\n%d\n"</span>, GetLastError());</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Recv connect closed.\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">char</span> buf[BUFLEN];</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);</span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">sin</span>;</span> <span class="hljs-comment">// an Internet endpoint address</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;<span class="hljs-built_in">sin</span>, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_family = AF_INET; <span class="hljs-comment">// 因特网地址簇</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Input the IP address:\n"</span>);</span><br><span class="line">	gets(buf);</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_addr.s_addr = inet_addr(buf); <span class="hljs-comment">// 服务器IP地址(32位)</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Input the IP port:\n"</span>);</span><br><span class="line">	gets(buf);</span><br><span class="line">	<span class="hljs-built_in">sin</span>.sin_port = htons(atoi(buf));						 <span class="hljs-comment">// 服务器端口号(16位)</span></span><br><span class="line">	SOCKET sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP); <span class="hljs-comment">// socket descriptor</span></span><br><span class="line">	<span class="hljs-keyword">int</span> ret = connect(sock, &amp;<span class="hljs-built_in">sin</span>, <span class="hljs-keyword">sizeof</span>(<span class="hljs-built_in">sin</span>));				 <span class="hljs-comment">// 连接到服务器.无错时，返回0；否则，返回SOCKET_ERROR ，可以调用函数WSAGetLastError取得错误代码</span></span><br><span class="line">	HANDLE h = _beginthreadex(<span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, &amp;recvMessage, &amp;sock, <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>);</span><br><span class="line">	<span class="hljs-keyword">for</span> (;;)</span><br><span class="line">	&#123;</span><br><span class="line">		gets(buf);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">strcmp</span>(buf, <span class="hljs-string">"exit"</span>))</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		<span class="hljs-keyword">int</span> cc = send(sock, buf, <span class="hljs-built_in">strlen</span>(buf), <span class="hljs-number">0</span>); <span class="hljs-comment">//把缓冲区buf的数据发送出去，len为要发送的字节数，返回值：(&gt;0) 实际发送的字节数(≤len), (=0) 对方正常关闭，（=SOCKET_ERROR) 出错，用函数WSAGetLastError取错误码。</span></span><br><span class="line">		<span class="hljs-keyword">if</span> (cc == SOCKET_ERROR)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send Error:\n%d\n"</span>, GetLastError());</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (cc == <span class="hljs-number">0</span>)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Send connect closed.\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	finish = <span class="hljs-number">1</span>;</span><br><span class="line">	CloseHandle(h);</span><br><span class="line">	closesocket(sock); <span class="hljs-comment">// 关闭套接字</span></span><br><span class="line">	WSACleanup();	  <span class="hljs-comment">//  卸载winsock library</span></span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>服务器端程序：</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> BUFLEN 2000</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> WSVERS MAKEWORD(2, 0)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> comment(lib, <span class="hljs-meta-string">"ws2_32.lib"</span>) <span class="hljs-comment">//使用winsock 2.2 library</span></span></span><br><span class="line">SOCKET ssock[BUFLEN];			   <span class="hljs-comment">//master &amp; *p sockets</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">ssin</span>[<span class="hljs-title">BUFLEN</span>];</span></span><br><span class="line"><span class="hljs-keyword">int</span> sbadd[BUFLEN], ssock_size = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">unsigned</span> __<span class="hljs-function">stdcall <span class="hljs-title">server</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> msg[BUFLEN] = <span class="hljs-string">"Enter!"</span>, pts[BUFLEN];;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">time_t</span> now = time(<span class="hljs-literal">NULL</span>);</span><br><span class="line">		<span class="hljs-built_in">sprintf</span>(pts,</span><br><span class="line">				<span class="hljs-string">"ip: %d.%d.%d.%d port: %u\n"</span></span><br><span class="line">				<span class="hljs-string">"time: %s"</span></span><br><span class="line">				<span class="hljs-string">"message: %s\n"</span></span><br><span class="line">				<span class="hljs-string">"\n&gt;&gt;"</span>,</span><br><span class="line">				ssin[*p].sin_addr.S_un.S_un_b.s_b1,</span><br><span class="line">				ssin[*p].sin_addr.S_un.S_un_b.s_b2,</span><br><span class="line">				ssin[*p].sin_addr.S_un.S_un_b.s_b3,</span><br><span class="line">				ssin[*p].sin_addr.S_un.S_un_b.s_b4,</span><br><span class="line">				ssin[*p].sin_port,</span><br><span class="line">				ctime(&amp;now),</span><br><span class="line">				msg);</span><br><span class="line">		<span class="hljs-built_in">printf</span>(pts);</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; ssock_size; ++i)</span><br><span class="line">			send(ssock[i], pts, <span class="hljs-built_in">strlen</span>(pts), <span class="hljs-number">0</span>);</span><br><span class="line">		<span class="hljs-keyword">if</span> (!<span class="hljs-built_in">strcmp</span>(msg, <span class="hljs-string">"Leave!"</span>))</span><br><span class="line">			<span class="hljs-keyword">return</span> closesocket(ssock[*p]), <span class="hljs-number">0</span>; <span class="hljs-comment">//关闭连接套接字</span></span><br><span class="line">		<span class="hljs-keyword">int</span> cc = recv(ssock[*p], msg, BUFLEN, <span class="hljs-number">0</span>);</span><br><span class="line">		<span class="hljs-keyword">if</span> (cc &gt; <span class="hljs-number">0</span>)</span><br><span class="line">			msg[cc] = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			<span class="hljs-built_in">sprintf</span>(msg, <span class="hljs-string">"Leave!"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	WSADATA wsadata;</span><br><span class="line">	WSAStartup(WSVERS, &amp;wsadata);							  <span class="hljs-comment">//加载winsock library，WSVERS为请求版本，wsadata返回系统实际支持的最高版本</span></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">sockaddr_in</span> <span class="hljs-title">msin</span>;</span>								  <span class="hljs-comment">//an Internet endpoint addresss</span></span><br><span class="line">	<span class="hljs-built_in">memset</span>(&amp;msin, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(msin));							  <span class="hljs-comment">//从&amp;sin开始的长度为sizeof(sin)的内存清0 , sin为一个地址结构</span></span><br><span class="line">	msin.sin_family = AF_INET;								  <span class="hljs-comment">//因特网地址簇(INET-Internet)</span></span><br><span class="line">	msin.sin_addr.s_addr = INADDR_ANY;						  <span class="hljs-comment">//监听所有(接口的)IP地址(32位)，0.0.0.0</span></span><br><span class="line">	msin.sin_port = htons(atoi(<span class="hljs-string">"50500"</span>));					  <span class="hljs-comment">//监听的端口号(16位) 。atoi--把ascii转化为int，htons—主机序到网络序</span></span><br><span class="line">	SOCKET msock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP); <span class="hljs-comment">//创建套接字。参数：因特网协议簇(family)，字节流，TCP协议号。 返回：要监听套接字的描述符或INVALID_SOCKET</span></span><br><span class="line">	bind(msock, (struct sockaddr *)&amp;msin, <span class="hljs-keyword">sizeof</span>(msin));	  <span class="hljs-comment">//通过msin把要监听的IP地址和端口号绑定到套接字上</span></span><br><span class="line">	listen(msock, <span class="hljs-number">5</span>);										  <span class="hljs-comment">//建立长度为5的连接请求队列，并开始监听是否有连接请求到来，来了则放入队列</span></span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"Server Start to listen.\n"</span>);</span><br><span class="line">	<span class="hljs-keyword">while</span> (!_kbhit()) <span class="hljs-comment">//检测是否有按键 (什么时候执行？)</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> alen = <span class="hljs-keyword">sizeof</span>(struct sockaddr);												<span class="hljs-comment">//from-address length</span></span><br><span class="line">		ssock[ssock_size] = accept(msock, (struct sockaddr *)&amp;ssin[ssock_size], &amp;alen); <span class="hljs-comment">//accept：如果有新的连接请求，返回连接套接字，否则，被阻塞，ssin包含客户端IP地址和端口号</span></span><br><span class="line">		sbadd[ssock_size] = ssock_size;</span><br><span class="line">		_beginthreadex(<span class="hljs-literal">NULL</span>, <span class="hljs-number">0</span>, &amp;server, &amp;sbadd[ssock_size++], <span class="hljs-number">0</span>, <span class="hljs-literal">NULL</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	closesocket(msock);</span><br><span class="line">	WSACleanup();</span><br><span class="line">	system(<span class="hljs-string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行效果如下：<br><img src="/2019/04/11/2019-03-19-Chat实验/image/2019-03-19-1.jpg" alt></p>
-<p>测试一下客户端是否能够连上老师在校园网搭的服务器（172.18.187.9:50500）：<br>运行截屏（客户端）：<br><img src="/2019/04/11/2019-03-19-Chat实验/image/2019-03-19-2.jpg" alt></p>
-<p>和同学互测一下看看，作为服务器运行截屏：<br><img src="/2019/04/11/2019-03-19-Chat实验/image/2019-03-19-3.jpg" alt><br>作为客户端运行截屏：<br><img src="/2019/04/11/2019-03-19-Chat实验/image/2019-03-19-4.jpg" alt></p>
-<h1 id="实验体会"><a href="#实验体会" class="headerlink" title="实验体会"></a>实验体会</h1><ol>
-<li>在服务端的程序中，一开始传新连接的下标的指针到子线程的时候直接传了一个局部变量过去，结果在新开的线程里就会出错；原因是局部变量已经被析构。随后使用一个全局数组作为过渡。为什么是数组？因为假设只用一个变量进行过渡的话，在有多人同时连接，新开多个线程时可能该变量的变化早于新开线程的参数传递。</li>
-<li>在和同学测试时没有关掉本机防火墙，导致接收不到同学发来的消息。</li>
-<li>客户端输入exit下线时，如果不接受的线程不同时关闭的话会不断报错。于是额外用一个全局变量<code>finish</code>来中转，子线程在<code>finish</code>值变化的时候不再接受消息。</li>
-</ol>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.396Z">2019-04-11</time>
                 
                 <div class="level-item">
@@ -790,7 +450,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        102
+                        51
                     </p>
                 </div>
             </div>
@@ -800,7 +460,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        24
+                        11
                     </p>
                 </div>
             </div>
@@ -810,7 +470,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        38
+                        21
                     </p>
                 </div>
             </div>
@@ -874,7 +534,7 @@
                 <span class="level-item">ACM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">39</span>
+                <span class="level-item tag">10</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/ACM/Template/">
@@ -884,31 +544,7 @@
             <span class="level-end">
                 <span class="level-item tag">10</span>
             </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/ACM/算法竞赛入门经典训练指南/">
-            <span class="level-start">
-                <span class="level-item">算法竞赛入门经典训练指南</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/ACM/题解/">
-            <span class="level-start">
-                <span class="level-item">题解</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">18</span>
-            </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
                 <span class="level-item">Python</span>
@@ -930,7 +566,7 @@
                 <span class="level-item">函数程序设计实验</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
@@ -947,30 +583,6 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/小工具/">
-            <span class="level-start">
-                <span class="level-item">小工具</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/并行与分布式计算/">
-            <span class="level-start">
-                <span class="level-item">并行与分布式计算</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/操作系统/">
-            <span class="level-start">
-                <span class="level-item">操作系统</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/机器学习/">
@@ -994,15 +606,7 @@
                 <span class="level-item">程序设计</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/计算机组成原理/">
-            <span class="level-start">
-                <span class="level-item">计算机组成原理</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/计算机网络/">
@@ -1010,15 +614,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
-            <span class="level-start">
-                <span class="level-item">超级计算机原理与操作</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li>
             </ul>
@@ -1111,7 +707,7 @@
         
         <article class="media">
             
-            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
+            <a href="/2019/04/11/2019-03-06-计算机网络 第一章 概述/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1119,10 +715,10 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
-                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.396Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-06-计算机网络 第一章 概述/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
+                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
                     </p>
                 </div>
             </div>
@@ -1141,7 +737,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 12.5px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 17.5px;">ICPC模板</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 12.5px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 15px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1171,7 +767,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1182,7 +778,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1193,18 +789,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -1215,7 +800,7 @@
                     <span class="level-item">十二月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1226,7 +811,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1237,7 +822,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">12</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1259,7 +844,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1293,28 +878,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1365,13 +928,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/DP/">
-                        <span class="tag">DP</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Deepin/">
                         <span class="tag">Deepin</span>
                         <span class="tag is-grey">2</span>
@@ -1382,13 +938,6 @@
                     <a class="tags has-addons" href="/tags/ICPC模板/">
                         <span class="tag">ICPC模板</span>
                         <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/LCA/">
-                        <span class="tag">LCA</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1456,50 +1005,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/主席树/">
-                        <span class="tag">主席树</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二分/">
-                        <span class="tag">二分</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二维计算几何/">
-                        <span class="tag">二维计算几何</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/动态开点/">
-                        <span class="tag">动态开点</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/励志/">
                         <span class="tag">励志</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/可持久化/">
-                        <span class="tag">可持久化</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/扫描线/">
-                        <span class="tag">扫描线</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1512,41 +1019,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/数据结构/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数论/">
-                        <span class="tag">数论</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/无旋Treap/">
-                        <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最短路/">
-                        <span class="tag">最短路</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/树状数组/">
-                        <span class="tag">树状数组</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/环境配置/">
                         <span class="tag">环境配置</span>
                         <span class="tag is-grey">14</span>
@@ -1554,36 +1026,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/珂朵莉树/">
-                        <span class="tag">珂朵莉树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/系统配置/">
                         <span class="tag">系统配置</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/线段树/">
-                        <span class="tag">线段树</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/老司机树/">
-                        <span class="tag">老司机树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
-                        <span class="tag">莫比乌斯反演</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1670,7 +1114,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 12.5px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 17.5px;">ICPC模板</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 12.5px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 15px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1700,7 +1144,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1711,7 +1155,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1722,18 +1166,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -1744,7 +1177,7 @@
                     <span class="level-item">十二月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1755,7 +1188,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1766,7 +1199,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">12</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1788,7 +1221,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1822,28 +1255,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1894,13 +1305,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/DP/">
-                        <span class="tag">DP</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Deepin/">
                         <span class="tag">Deepin</span>
                         <span class="tag is-grey">2</span>
@@ -1911,13 +1315,6 @@
                     <a class="tags has-addons" href="/tags/ICPC模板/">
                         <span class="tag">ICPC模板</span>
                         <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/LCA/">
-                        <span class="tag">LCA</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1985,50 +1382,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/主席树/">
-                        <span class="tag">主席树</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二分/">
-                        <span class="tag">二分</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二维计算几何/">
-                        <span class="tag">二维计算几何</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/动态开点/">
-                        <span class="tag">动态开点</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/励志/">
                         <span class="tag">励志</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/可持久化/">
-                        <span class="tag">可持久化</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/扫描线/">
-                        <span class="tag">扫描线</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -2041,41 +1396,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/数据结构/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数论/">
-                        <span class="tag">数论</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/无旋Treap/">
-                        <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最短路/">
-                        <span class="tag">最短路</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/树状数组/">
-                        <span class="tag">树状数组</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/环境配置/">
                         <span class="tag">环境配置</span>
                         <span class="tag is-grey">14</span>
@@ -2083,36 +1403,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/珂朵莉树/">
-                        <span class="tag">珂朵莉树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/系统配置/">
                         <span class="tag">系统配置</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/线段树/">
-                        <span class="tag">线段树</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/老司机树/">
-                        <span class="tag">老司机树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
-                        <span class="tag">莫比乌斯反演</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>

@@ -294,53 +294,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-25T13:00:00.000Z">2018-11-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 分钟 读完 (大约 331 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/11/25/2018-11-25-检查信用卡号是否合法/">函数程序设计实验九：检查信用卡号是否合法</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">Have you ever wondered how websites validate your credit card number when you shop online? They don’t check a massive database of numbers, and they don’t use magic. In fact, most credit providers rely on a checksum formula for distinguishing valid numbers from random collection of digits (or typing mistakes).</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">In this lab, you will implement a validation algorithm for credit cards. The algorithm follows these steps:</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">•Double the value of every second digit beginning with the rightmost.</span></span><br><span class="line"><span class="hljs-comment">•Add the digits of the doubled values and the undoubled digits from the original number.</span></span><br><span class="line"><span class="hljs-comment">•Calculate the modulus of the sum divided by 10. </span></span><br><span class="line"><span class="hljs-comment">If the result equals 0, then the number is valid. Here is an example of the results of each step on the number 4012888888881881.</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">•In order to start with the rightmost digit, we produce a reversed list of digits. Then, we double every second digit. </span></span><br><span class="line"><span class="hljs-comment">Result: [1,16,8,2,8,16,8,16,8,16,8,16,2,2,0,8].</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">•We sum all of the digits of the resulting list above. Note that we must again split the elements of the list into their digits (e.g. 16 becomes [1, 6]).</span></span><br><span class="line"><span class="hljs-comment">Result: 90.</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">•Finally, we calculate the modulus of 90 over 10.</span></span><br><span class="line"><span class="hljs-comment">Result: 0. </span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">Since the final value is 0, we know that the above number is a valid credit card number. If we make a mistake in typing the credit card number and instead provide 4012888888881891, then the result of the last step is 2, proving that the number is invalid.</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-keyword">import</span> Data.Char</span><br><span class="line"><span class="hljs-keyword">import</span> System.IO</span><br><span class="line"><span class="hljs-keyword">import</span> Text.Printf</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">main</span>::<span class="hljs-type">IO</span>()</span><br><span class="line"><span class="hljs-title">main</span>= <span class="hljs-keyword">do</span></span><br><span class="line">    txt &lt;- readFile <span class="hljs-string">"cards200.txt"</span></span><br><span class="line">    <span class="hljs-keyword">let</span> (a,b)=cal (lines txt)</span><br><span class="line">    putStr (printf <span class="hljs-string">"%d %d\n"</span> a b)</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">cal</span>::[<span class="hljs-type">String</span>]-&gt;(<span class="hljs-type">Int</span>,<span class="hljs-type">Int</span>)</span><br><span class="line"><span class="hljs-title">cal</span> []=(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)</span><br><span class="line"><span class="hljs-title">cal</span> (x:xs)=</span><br><span class="line">    <span class="hljs-keyword">if</span> ((work (reverse x))==<span class="hljs-number">0</span>)</span><br><span class="line">        <span class="hljs-keyword">then</span> (a+<span class="hljs-number">1</span>,b)</span><br><span class="line">        <span class="hljs-keyword">else</span> (a,b+<span class="hljs-number">1</span>)</span><br><span class="line">    <span class="hljs-keyword">where</span> (a,b)=cal xs</span><br><span class="line"></span><br><span class="line"><span class="hljs-title">work</span>::<span class="hljs-type">String</span>-&gt;<span class="hljs-type">Int</span></span><br><span class="line"><span class="hljs-title">work</span> []=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-title">work</span> [x]=(ord x)-(ord '<span class="hljs-number">0</span>')</span><br><span class="line"><span class="hljs-title">work</span> (x1:x2:xs)=mod (((ord x1)-(ord '<span class="hljs-number">0</span>'))+<span class="hljs-number">2</span>*((ord x2)-(ord '<span class="hljs-number">0</span>'))+(work xs)) <span class="hljs-number">10</span></span><br></pre></td></tr></table></figure>
-
-<p>下面是<code>cards200.txt</code>的内容，运行代码得到答案<code>22 178</code>。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line">5206755864819202</span><br><span class="line">1379105492196115</span><br><span class="line">5409512986423649</span><br><span class="line">2705286724993610</span><br><span class="line">4590339523768086</span><br><span class="line">7227568698917515</span><br><span class="line">7017537213343686</span><br><span class="line">5441960412536408</span><br><span class="line">1985650308674803</span><br><span class="line">8930251924100163</span><br><span class="line">6223821112224859</span><br><span class="line">7265593269397063</span><br><span class="line">3873657458334911</span><br><span class="line">6913844637722625</span><br><span class="line">2580746846641936</span><br><span class="line">9050852716481811</span><br><span class="line">5612958052562645</span><br><span class="line">2663399291059011</span><br><span class="line">8310304087166965</span><br><span class="line">1151264385941225</span><br><span class="line">3037176896346992</span><br><span class="line">5604814434307028</span><br><span class="line">7419257683131694</span><br><span class="line">9503791528055374</span><br><span class="line">9773495582143088</span><br><span class="line">9448254169209493</span><br><span class="line">3286837130875257</span><br><span class="line">5007595642145928</span><br><span class="line">2516351799318459</span><br><span class="line">6337164871156274</span><br><span class="line">7865007097015627</span><br><span class="line">7372821206158307</span><br><span class="line">4403647737415034</span><br><span class="line">6954778118722210</span><br><span class="line">3133156447719746</span><br><span class="line">3997982917486623</span><br><span class="line">4197606313324053</span><br><span class="line">1728915124175897</span><br><span class="line">2307878742690360</span><br><span class="line">4074800821417823</span><br><span class="line">4923217108878892</span><br><span class="line">2771780062982413</span><br><span class="line">9712263452110514</span><br><span class="line">5650879658145762</span><br><span class="line">1070047600975341</span><br><span class="line">9318877123032305</span><br><span class="line">4885886478753273</span><br><span class="line">9221770746792896</span><br><span class="line">8671449317320096</span><br><span class="line">7368330615081774</span><br><span class="line">3445945555212665</span><br><span class="line">4853120512616008</span><br><span class="line">3482350040120767</span><br><span class="line">5323020530158064</span><br><span class="line">5127315771284171</span><br><span class="line">9729917795762335</span><br><span class="line">9740300357540071</span><br><span class="line">6725967401435715</span><br><span class="line">7441317791240209</span><br><span class="line">2454679651614971</span><br><span class="line">3757488578117189</span><br><span class="line">9257701133688982</span><br><span class="line">7943503683782367</span><br><span class="line">3604145491277744</span><br><span class="line">9692694573414683</span><br><span class="line">9077904010926086</span><br><span class="line">2254791611686848</span><br><span class="line">8027692968023945</span><br><span class="line">2387176678104505</span><br><span class="line">4961766440144563</span><br><span class="line">2361230366122325</span><br><span class="line">1526360654060322</span><br><span class="line">8532325537255486</span><br><span class="line">9231587386310271</span><br><span class="line">1050747991021243</span><br><span class="line">6668415865402539</span><br><span class="line">4230790983717850</span><br><span class="line">2435868087432919</span><br><span class="line">8731404774948976</span><br><span class="line">6371097759555152</span><br><span class="line">9088139380127694</span><br><span class="line">6967169793427582</span><br><span class="line">3323325291563746</span><br><span class="line">7007432325793545</span><br><span class="line">7089483373601483</span><br><span class="line">2430093874132130</span><br><span class="line">3040751512996411</span><br><span class="line">2693410760829446</span><br><span class="line">6969371237742025</span><br><span class="line">3942376263955089</span><br><span class="line">3957390287372100</span><br><span class="line">4862957622459158</span><br><span class="line">4786602026579134</span><br><span class="line">8450154277222308</span><br><span class="line">4035343388074620</span><br><span class="line">7498124220380695</span><br><span class="line">7192995180898233</span><br><span class="line">1131325310492906</span><br><span class="line">2766691510698965</span><br><span class="line">8095276139394176</span><br><span class="line">9966549280223171</span><br><span class="line">1411727368920347</span><br><span class="line">5814685899773800</span><br><span class="line">6518673629107513</span><br><span class="line">5311876803771658</span><br><span class="line">2116396666698721</span><br><span class="line">9584980921175563</span><br><span class="line">9370712578393090</span><br><span class="line">2623803399559228</span><br><span class="line">2554069289606635</span><br><span class="line">5837823785098656</span><br><span class="line">8549705982880789</span><br><span class="line">2321128508863864</span><br><span class="line">6842918893399230</span><br><span class="line">9035413026416668</span><br><span class="line">1654972532148536</span><br><span class="line">3495573138029854</span><br><span class="line">5817622134680768</span><br><span class="line">1994722602621796</span><br><span class="line">6443360793014405</span><br><span class="line">8773037480460291</span><br><span class="line">8046374745587669</span><br><span class="line">3055562327207629</span><br><span class="line">4558242953142855</span><br><span class="line">6321379289576506</span><br><span class="line">8971922515616254</span><br><span class="line">8221106232869586</span><br><span class="line">4826456615481474</span><br><span class="line">8785249860573600</span><br><span class="line">8536198896418796</span><br><span class="line">2546645020349068</span><br><span class="line">1880532328690795</span><br><span class="line">4119406265665946</span><br><span class="line">8114992846616615</span><br><span class="line">3932961417889762</span><br><span class="line">9702577117219397</span><br><span class="line">3740846640578505</span><br><span class="line">8411547908222939</span><br><span class="line">7042976242346668</span><br><span class="line">3588880107998642</span><br><span class="line">5280273948390678</span><br><span class="line">2196210961268405</span><br><span class="line">6383121641303595</span><br><span class="line">6715029217563466</span><br><span class="line">3931215413446217</span><br><span class="line">1923673735577072</span><br><span class="line">2571238980362941</span><br><span class="line">4484030303881053</span><br><span class="line">3072982904243882</span><br><span class="line">4172209610262246</span><br><span class="line">7154260346716014</span><br><span class="line">6879206404517582</span><br><span class="line">8712980866003596</span><br><span class="line">5109365647181395</span><br><span class="line">6763248796711187</span><br><span class="line">2186440548023804</span><br><span class="line">9875044991010591</span><br><span class="line">5678343677212736</span><br><span class="line">1102626697179283</span><br><span class="line">1699532544698937</span><br><span class="line">5360056499731896</span><br><span class="line">5071425690624400</span><br><span class="line">3433800222275108</span><br><span class="line">9530890376641214</span><br><span class="line">5657952597408996</span><br><span class="line">6519460026092261</span><br><span class="line">6842369154112005</span><br><span class="line">1039393918892464</span><br><span class="line">3166139313516959</span><br><span class="line">2032768426604030</span><br><span class="line">4697010054853566</span><br><span class="line">1513388324083947</span><br><span class="line">3391936421212877</span><br><span class="line">1817541281516339</span><br><span class="line">7486119192490819</span><br><span class="line">9880925640870413</span><br><span class="line">2178511677268005</span><br><span class="line">7101269239389344</span><br><span class="line">9660472023939684</span><br><span class="line">5714348578916462</span><br><span class="line">5549457487224650</span><br><span class="line">8018512530038654</span><br><span class="line">4462286733742177</span><br><span class="line">8962508293240515</span><br><span class="line">6295710317245944</span><br><span class="line">2246734149999346</span><br><span class="line">3802409610686262</span><br><span class="line">5193144313232365</span><br><span class="line">2038650110016923</span><br><span class="line">4814070532760728</span><br><span class="line">9898057381020684</span><br><span class="line">7925852131711347</span><br><span class="line">5937749020573882</span><br><span class="line">9956226752602246</span><br><span class="line">6791120971542523</span><br><span class="line">3308122545548043</span><br><span class="line">5862103172486367</span><br><span class="line">6250429168206121</span><br><span class="line">4306760688620767</span><br><span class="line">1863851343341223</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-14T03:30:00.000Z">2018-11-14</time>
                 
                 <div class="level-item">
@@ -473,50 +426,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-11-08T04:23:43.000Z">2018-11-08</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    几秒 读完 (大约 95 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2018/11/08/2018-11-08-打印购物小票/">函数程序设计实验五：打印购物小票</a>
-            
-        </h1>
-        <div class="content">
-            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> HaskellStore <span class="hljs-keyword">where</span></span><br><span class="line"><span class="hljs-keyword">import</span> Text.Printf</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Items</span>=[<span class="hljs-type">Item</span>]</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Item</span>=(<span class="hljs-type">Name</span>,<span class="hljs-type">Amount</span>,<span class="hljs-type">Price</span>)</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Name</span>=<span class="hljs-type">String</span></span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Amount</span>=<span class="hljs-type">Float</span></span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-type">Price</span>=<span class="hljs-type">Float</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-title">printItems</span>::<span class="hljs-type">Items</span>-&gt;<span class="hljs-type">IO</span>()</span><br><span class="line"><span class="hljs-title">printItems</span> its=putStr(printf <span class="hljs-string">"Name\tAmount\tPrice\tSum\n%sTotal\t\t\t%.2f\n"</span> (printItem its) (sumItem its))</span><br><span class="line">    <span class="hljs-keyword">where</span></span><br><span class="line">    printItem []=<span class="hljs-string">""</span></span><br><span class="line">    printItem ((n,a,p):xs)=printf <span class="hljs-string">"%s\t%.2f\t%.2f\t%.2f\n%s"</span> n a p (a*p) (printItem xs)</span><br><span class="line">    sumItem []=<span class="hljs-number">0</span></span><br><span class="line">    sumItem ((n,a,p):xs)=a*p+(sumItem xs)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">--测试代码</span></span><br><span class="line"><span class="hljs-comment">*HaskellStore&gt; printItems [("Apple",2.5,5.99),("Bread",2,3.5)]</span></span><br><span class="line"><span class="hljs-comment">Name    Amount  Price   Sum</span></span><br><span class="line"><span class="hljs-comment">Apple   2.50    5.99    14.97</span></span><br><span class="line"><span class="hljs-comment">Bread   2.00    3.50    7.00</span></span><br><span class="line"><span class="hljs-comment">Total                   21.97</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2018-11-08T04:23:30.000Z">2018-11-08</time>
                 
                 <div class="level-item">
@@ -599,25 +508,97 @@
 
 
 
-
+    <div class="card">
     
-<div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous is-invisible is-hidden-mobile">
-            <a class="is-flex-grow has-text-black-ter" href="/categories/函数程序设计实验/page/0/">上一页</a>
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-16T03:06:22.000Z">2018-10-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 405 个字)
+                </span>
+                
+                
+            </div>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/categories/函数程序设计实验/page/2/">下一页</a>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/16/2018-10-16-递归练习/">函数程序设计实验二：递归练习</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">module</span> HW <span class="hljs-keyword">where</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">1. 定义求两个非负整数最大公因子的函数：</span></span><br><span class="line"><span class="hljs-comment">mygcd ::Integer -&gt;Integer -&gt;Integer</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">mygcd</span> ::<span class="hljs-type">Integer</span> -&gt;<span class="hljs-type">Integer</span> -&gt;<span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">mygcd</span> a <span class="hljs-number">0</span>=a</span><br><span class="line"><span class="hljs-title">mygcd</span> a b=mygcd b (mod a b)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">2. 定义阶乘函数</span></span><br><span class="line"><span class="hljs-comment">fac :: Integer -&gt; Integer </span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">fac</span> :: <span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span> </span><br><span class="line"><span class="hljs-title">fac</span> <span class="hljs-number">0</span>=<span class="hljs-number">1</span></span><br><span class="line"><span class="hljs-title">fac</span> n=n* fac (n<span class="hljs-number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">3. 定义下列函数：</span></span><br><span class="line"><span class="hljs-comment">sumFacs :: Integer -&gt; Integer</span></span><br><span class="line"><span class="hljs-comment">使得sumFacs n = fac 0 + fac 1 + ... + fac n</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">sumFacs</span> :: <span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">sumFacs</span> <span class="hljs-number">0</span>=fac <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-title">sumFacs</span> n=fac n+sumFacs (n<span class="hljs-number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">4. 上述函数sumFacs可以对输入n返回和fac 0 + fac 1 + ... + fac n。</span></span><br><span class="line"><span class="hljs-comment">任意给定一个函数f, 一个非负整数n, 能否求出和f 0 + f 1 + ... + f n呢？</span></span><br><span class="line"><span class="hljs-comment">答案是肯定的。请您定义这样的函数：</span></span><br><span class="line"><span class="hljs-comment">sumFun :: (Integer -&gt; Integer) -&gt; Integer -&gt; Integer</span></span><br><span class="line"><span class="hljs-comment">使得sumFun f n = f 0 + f 1 + ... + f n</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">sumFun</span> :: (<span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span>) -&gt; <span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">sumFun</span> f <span class="hljs-number">0</span>=f <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-title">sumFun</span> f n=f n+sumFun f (n<span class="hljs-number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">5. 定义函数</span></span><br><span class="line"><span class="hljs-comment">maxFun :: (Integer -&gt; Integer) -&gt; Integer -&gt; Integer</span></span><br><span class="line"><span class="hljs-comment">使得maxFun f n 等于f 0 ， f 1 ， ... ， f n中的最大值。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">maxFun</span> :: (<span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span>) -&gt; <span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">maxFun</span> f <span class="hljs-number">0</span>=f <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-title">maxFun</span> f n=max (f n) (maxFun f n<span class="hljs-number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">6. 定义函数：</span></span><br><span class="line"><span class="hljs-comment">fib :: Integer -&gt;Integer</span></span><br><span class="line"><span class="hljs-comment">使得fib n 返回第n个斐波那契数，如fib 0  =0, fib 1 = 1, fib 2 = 1, fib 3 = 2, fib 4 = 5 ,...。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">fib</span> :: <span class="hljs-type">Integer</span> -&gt;<span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">fib</span> n=<span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">2</span>)<span class="hljs-keyword">then</span> n <span class="hljs-keyword">else</span> fib (n<span class="hljs-number">-1</span>)+fib(n<span class="hljs-number">-2</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">7. 利用我们可以利用下列迭代公式求2的近似平方根：</span></span><br><span class="line"><span class="hljs-comment"> xn+1 = (xn + 2/xn)/2</span></span><br><span class="line"><span class="hljs-comment">方法是从任意一个初值x0开始，如x0 = 1, x1 = (x0 +2/x0)/2 =1.5, x2 = (x1 + 2/x1)/2= 1.41667, ...</span></span><br><span class="line"><span class="hljs-comment">请定义一个函数</span></span><br><span class="line"><span class="hljs-comment">sqrt2 :: Float -&gt;Integer -&gt;Float</span></span><br><span class="line"><span class="hljs-comment">使得sqrt2 x0 n  等于第n个逼近值xn, 例如，sqrt2 1.0 0 = 1.0, sqrt2 1.0 1 = 1.5, sqrt2 1.0 2 = 1.41667, ...。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">sqrt2</span> :: <span class="hljs-type">Float</span> -&gt; <span class="hljs-type">Integer</span> -&gt; <span class="hljs-type">Float</span></span><br><span class="line"><span class="hljs-title">sqrt2</span> x0 <span class="hljs-number">0</span>=x0</span><br><span class="line"><span class="hljs-title">sqrt2</span> x0 n=(x + <span class="hljs-number">2</span>/x)/<span class="hljs-number">2</span> <span class="hljs-keyword">where</span> x=sqrt2 x0 (n<span class="hljs-number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">8. 完成解求一元二次方程根的函数。</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br><span class="line"><span class="hljs-title">roots</span>::(<span class="hljs-type">Float</span>,<span class="hljs-type">Float</span>,<span class="hljs-type">Float</span>)-&gt;(<span class="hljs-type">Float</span>,<span class="hljs-type">Float</span>)</span><br><span class="line"><span class="hljs-title">roots</span> (a,b,c)=((-b-sqrtDelta)/<span class="hljs-number">2</span>/a,(-b+sqrtDelta)/<span class="hljs-number">2</span>/a) <span class="hljs-keyword">where</span> sqrtDelta=sqrt (b*b<span class="hljs-number">-4</span>*a*c)</span><br></pre></td></tr></table></figure>
+
+
+
         </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link is-current" href="/categories/函数程序设计实验/">1</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/categories/函数程序设计实验/page/2/">2</a></li>
-            
-        </ul>
-    </nav>
+        
+        
+        
+    </div>
 </div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-16T02:49:46.000Z">2018-10-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/函数程序设计实验/">函数程序设计实验</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 360 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/16/2018-10-16-分式/">函数程序设计实验一：分式</a>
+            
+        </h1>
+        <div class="content">
+            <figure class="highlight haskell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">--import Test.QuickCheck</span></span><br><span class="line"><span class="hljs-keyword">module</span> MyFraction <span class="hljs-keyword">where</span></span><br><span class="line"><span class="hljs-type">Fraction</span>=(<span class="hljs-type">Integer</span>,<span class="hljs-type">Integer</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--分式化简</span></span><br><span class="line"><span class="hljs-title">ratreduction</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line"><span class="hljs-title">ratreduction</span>(x,y)=(div x g,div y g)<span class="hljs-keyword">where</span> g=gcd x y</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--加法</span></span><br><span class="line"><span class="hljs-title">ratplus</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line"><span class="hljs-title">ratplus</span>(a,b)(c,d)=ratreduction(a*d+b*c,b*d)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--减法，调用加法实现</span></span><br><span class="line"><span class="hljs-title">ratminus</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line"><span class="hljs-title">ratminus</span>(a,b)(c,d)=ratplus(a,b)(-c,d)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--乘法</span></span><br><span class="line"><span class="hljs-title">rattimes</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line"><span class="hljs-title">rattimes</span>(a,b)(c,d)=ratreduction(a*c,b*d)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--除法，调用乘法实现</span></span><br><span class="line"><span class="hljs-title">ratdiv</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line"><span class="hljs-title">ratdiv</span>(a,b)(c,d)=rattimes(a,b)(d,c)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--取整</span></span><br><span class="line"><span class="hljs-title">ratfloor</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Integer</span></span><br><span class="line"><span class="hljs-title">ratfloor</span>(a,b)=div a b</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--转成浮点</span></span><br><span class="line"><span class="hljs-title">ratfloat</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Float</span></span><br><span class="line"><span class="hljs-title">ratfloat</span>(a,b)=fromInteger a/fromInteger b</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--判断相等</span></span><br><span class="line"><span class="hljs-title">rateq</span>::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Bool</span></span><br><span class="line"><span class="hljs-title">rateq</span>(a,b)(c,d)=a*d==b*c</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--重载运算符</span></span><br><span class="line">(&lt;+&gt;)::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line">(a,b)&lt;+&gt;(c,d)=ratplus(a,b)(c,d) </span><br><span class="line"></span><br><span class="line">(&lt;-&gt;)::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line">(a,b)&lt;-&gt;(c,d)=ratminus(a,b)(c,d)</span><br><span class="line"></span><br><span class="line">(&lt;-*-&gt;)::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line">(a,b)&lt;-*-&gt;(c,d)=rattimes(a,b)(c,d)</span><br><span class="line"></span><br><span class="line">(&lt;/&gt;)::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span></span><br><span class="line">(a,b)&lt;/&gt;(c,d)=ratdiv(a,b)(c,d)</span><br><span class="line"></span><br><span class="line">(&lt;==&gt;)::<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Fraction</span>-&gt;<span class="hljs-type">Bool</span></span><br><span class="line">(a,b)&lt;==&gt;(c,d)=rateq(a,b)(c,d)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">--确定运算优先级</span></span><br><span class="line"><span class="hljs-keyword">infixl</span> <span class="hljs-number">6</span> &lt;-*-&gt;,&lt;/&gt;</span><br><span class="line"><span class="hljs-keyword">infixl</span> <span class="hljs-number">5</span> &lt;+&gt;,&lt;-&gt;</span><br><span class="line"><span class="hljs-keyword">infixl</span> <span class="hljs-number">4</span> &lt;==&gt;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">&#123;-</span></span><br><span class="line"><span class="hljs-comment">--检查任意分数+(0,1)之后仍然等于其本身</span></span><br><span class="line"><span class="hljs-comment">prop_ratplus_unit :: Fraction -&gt; Property</span></span><br><span class="line"><span class="hljs-comment">prop_ratplus_unit (a,b) = b &gt; 0 ==&gt;(a, b) &lt;+&gt; (0,1) &lt;==&gt; (a, b)</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">--检查任意分数加上相反数之后为0</span></span><br><span class="line"><span class="hljs-comment">prop_ratplus_inv :: Fraction -&gt; Property</span></span><br><span class="line"><span class="hljs-comment">prop_ratplus_inv (a,b) = b &gt; 0 ==&gt;(a, b) &lt;+&gt; (-a,b) &lt;==&gt; (0, 1)</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">--检查任意非零分数乘上倒数之后为1</span></span><br><span class="line"><span class="hljs-comment">prop_rattimes_inv :: Fraction -&gt; Property</span></span><br><span class="line"><span class="hljs-comment">prop_rattimes_inv (a,b) = a/=0&amp;&amp;b &gt; 0 ==&gt;(a, b) &lt;-*-&gt; (b,a) &lt;==&gt; (1, 1)</span></span><br><span class="line"><span class="hljs-comment"></span></span><br><span class="line"><span class="hljs-comment">-- 检查乘法分配律</span></span><br><span class="line"><span class="hljs-comment">prop_rattimes_plus_distr :: Fraction -&gt; Fraction -&gt; Fraction -&gt;Property</span></span><br><span class="line"><span class="hljs-comment">prop_rattimes_plus_distr (a,b) (c,d) (e,f) = b &gt; 0 &amp;&amp; d &gt; 0 &amp;&amp; f &gt; 0 ==&gt; (a,b) &lt;-*-&gt; ((c,d) &lt;+&gt; (e,f)) &lt;==&gt; ((a,b) &lt;-*-&gt; (c,d)) &lt;+&gt; ((a,b) &lt;-*-&gt; (e,f))</span></span><br><span class="line"><span class="hljs-comment">-&#125;</span></span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 </div>
                 
 
@@ -661,7 +642,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        102
+                        51
                     </p>
                 </div>
             </div>
@@ -671,7 +652,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        24
+                        11
                     </p>
                 </div>
             </div>
@@ -681,7 +662,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        38
+                        21
                     </p>
                 </div>
             </div>
@@ -745,7 +726,7 @@
                 <span class="level-item">ACM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">39</span>
+                <span class="level-item tag">10</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/ACM/Template/">
@@ -755,31 +736,7 @@
             <span class="level-end">
                 <span class="level-item tag">10</span>
             </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/ACM/算法竞赛入门经典训练指南/">
-            <span class="level-start">
-                <span class="level-item">算法竞赛入门经典训练指南</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/ACM/题解/">
-            <span class="level-start">
-                <span class="level-item">题解</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">18</span>
-            </span>
         </a></li></ul></li><li>
-        <a class="level is-marginless" href="/categories/Linux/">
-            <span class="level-start">
-                <span class="level-item">Linux</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
         <a class="level is-marginless" href="/categories/Python/">
             <span class="level-start">
                 <span class="level-item">Python</span>
@@ -801,7 +758,7 @@
                 <span class="level-item">函数程序设计实验</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">10</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
@@ -818,30 +775,6 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">3</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/小工具/">
-            <span class="level-start">
-                <span class="level-item">小工具</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/并行与分布式计算/">
-            <span class="level-start">
-                <span class="level-item">并行与分布式计算</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/操作系统/">
-            <span class="level-start">
-                <span class="level-item">操作系统</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/机器学习/">
@@ -865,15 +798,7 @@
                 <span class="level-item">程序设计</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/计算机组成原理/">
-            <span class="level-start">
-                <span class="level-item">计算机组成原理</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/计算机网络/">
@@ -881,15 +806,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
-            <span class="level-start">
-                <span class="level-item">超级计算机原理与操作</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li>
             </ul>
@@ -982,7 +899,7 @@
         
         <article class="media">
             
-            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
+            <a href="/2019/04/11/2019-03-06-计算机网络 第一章 概述/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -990,10 +907,10 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
-                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.396Z">2019-04-11</time></div>
+                    <a href="/2019/04/11/2019-03-06-计算机网络 第一章 概述/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
+                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
                     </p>
                 </div>
             </div>
@@ -1012,7 +929,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 12.5px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 17.5px;">ICPC模板</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 12.5px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 15px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1042,7 +959,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1053,7 +970,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1064,18 +981,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -1086,7 +992,7 @@
                     <span class="level-item">十二月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1097,7 +1003,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1108,7 +1014,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">12</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1130,7 +1036,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1164,28 +1070,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1236,13 +1120,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/DP/">
-                        <span class="tag">DP</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Deepin/">
                         <span class="tag">Deepin</span>
                         <span class="tag is-grey">2</span>
@@ -1253,13 +1130,6 @@
                     <a class="tags has-addons" href="/tags/ICPC模板/">
                         <span class="tag">ICPC模板</span>
                         <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/LCA/">
-                        <span class="tag">LCA</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1327,50 +1197,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/主席树/">
-                        <span class="tag">主席树</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二分/">
-                        <span class="tag">二分</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二维计算几何/">
-                        <span class="tag">二维计算几何</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/动态开点/">
-                        <span class="tag">动态开点</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/励志/">
                         <span class="tag">励志</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/可持久化/">
-                        <span class="tag">可持久化</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/扫描线/">
-                        <span class="tag">扫描线</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1383,41 +1211,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/数据结构/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数论/">
-                        <span class="tag">数论</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/无旋Treap/">
-                        <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最短路/">
-                        <span class="tag">最短路</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/树状数组/">
-                        <span class="tag">树状数组</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/环境配置/">
                         <span class="tag">环境配置</span>
                         <span class="tag is-grey">14</span>
@@ -1425,36 +1218,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/珂朵莉树/">
-                        <span class="tag">珂朵莉树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/系统配置/">
                         <span class="tag">系统配置</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/线段树/">
-                        <span class="tag">线段树</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/老司机树/">
-                        <span class="tag">老司机树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
-                        <span class="tag">莫比乌斯反演</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1541,7 +1306,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.67px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.33px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 11.67px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 13.33px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/可持久化/" style="font-size: 11.67px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 10px;">无旋Treap</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.67px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 16.67px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.67px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/Deepin/" style="font-size: 12.5px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 17.5px;">ICPC模板</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/Pycharm/" style="font-size: 12.5px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 15px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1571,7 +1336,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">15</span>
+                    <span class="level-item tag">1</span>
                 </span>
             </a>
         </li>
@@ -1582,7 +1347,7 @@
                     <span class="level-item">三月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1593,18 +1358,7 @@
                     <span class="level-item">二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">20</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">一月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">14</span>
                 </span>
             </a>
         </li>
@@ -1615,7 +1369,7 @@
                     <span class="level-item">十二月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">6</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1626,7 +1380,7 @@
                     <span class="level-item">十一月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">13</span>
+                    <span class="level-item tag">9</span>
                 </span>
             </a>
         </li>
@@ -1637,7 +1391,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">12</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1659,7 +1413,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">5</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1693,28 +1447,6 @@
                 </span>
                 <span class="level-end">
                     <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/12/">
-                <span class="level-start">
-                    <span class="level-item">十二月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">4</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2017/11/">
-                <span class="level-start">
-                    <span class="level-item">十一月 2017</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
@@ -1765,13 +1497,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/DP/">
-                        <span class="tag">DP</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/Deepin/">
                         <span class="tag">Deepin</span>
                         <span class="tag is-grey">2</span>
@@ -1782,13 +1507,6 @@
                     <a class="tags has-addons" href="/tags/ICPC模板/">
                         <span class="tag">ICPC模板</span>
                         <span class="tag is-grey">10</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/LCA/">
-                        <span class="tag">LCA</span>
-                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -1856,50 +1574,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/主席树/">
-                        <span class="tag">主席树</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二分/">
-                        <span class="tag">二分</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/二维计算几何/">
-                        <span class="tag">二维计算几何</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/动态开点/">
-                        <span class="tag">动态开点</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/励志/">
                         <span class="tag">励志</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/可持久化/">
-                        <span class="tag">可持久化</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/扫描线/">
-                        <span class="tag">扫描线</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -1912,41 +1588,6 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/数据结构/">
-                        <span class="tag">数据结构</span>
-                        <span class="tag is-grey">4</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/数论/">
-                        <span class="tag">数论</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/无旋Treap/">
-                        <span class="tag">无旋Treap</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/最短路/">
-                        <span class="tag">最短路</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/树状数组/">
-                        <span class="tag">树状数组</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/环境配置/">
                         <span class="tag">环境配置</span>
                         <span class="tag is-grey">14</span>
@@ -1954,36 +1595,8 @@
                 </div>
                 
                 <div class="control">
-                    <a class="tags has-addons" href="/tags/珂朵莉树/">
-                        <span class="tag">珂朵莉树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
                     <a class="tags has-addons" href="/tags/系统配置/">
                         <span class="tag">系统配置</span>
-                        <span class="tag is-grey">1</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/线段树/">
-                        <span class="tag">线段树</span>
-                        <span class="tag is-grey">5</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/老司机树/">
-                        <span class="tag">老司机树</span>
-                        <span class="tag is-grey">2</span>
-                    </a>
-                </div>
-                
-                <div class="control">
-                    <a class="tags has-addons" href="/tags/莫比乌斯反演/">
-                        <span class="tag">莫比乌斯反演</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
