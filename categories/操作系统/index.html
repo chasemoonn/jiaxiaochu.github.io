@@ -265,420 +265,6 @@ undefined
 
 
 
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.398Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    24 分钟 读完 (大约 3669 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>用汇编与C语言开发独立内核</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ul>
-<li>掌握TASM汇编语言与TURBO C语言汇合编程的方法。</li>
-<li>实现内核与引导程序分离，掌握软盘上引导操作系统方法。</li>
-<li>设计并实现一种简单的作业控制语言，建立具有较友好的控制命令的批处理原型操作系统，掌握操作系统提供用户界面和内部功能的实现方法。</li>
-</ul>
-<h1 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h1><ul>
-<li>将实验二的原型操作系统分离为引导程序和MYOS内核，由引导程序加载内核，用C和汇编实现操作系统内核</li>
-<li>扩展内核汇编代码，增加一些有用的输入输出函数，供C模块中调用</li>
-<li>提供用户程序返回内核的一种解决方案</li>
-<li>在内核的C模块中实现增加批处理能力<ul>
-<li>在磁盘上建立一个表，记录用户程序的存储安排</li>
-<li>可以在控制台命令查到用户程序的信息，如程序名、字节数、在磁盘映像文件中的位置等</li>
-<li>设计一种命令，命令中可加载多个用户程序，依次执行，并能在控制台发出命令</li>
-<li>在引导系统前，将一组命令存放在磁盘映像中，系统可以解释执行</li>
-</ul>
-</li>
-</ul>
-<h1 id="实验方案"><a href="#实验方案" class="headerlink" title="实验方案"></a>实验方案</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
-<li>Windows 10, 64-bit  (Build 17763) 10.0.17763</li>
-<li>Windows Subsystem for Linux [Ubuntu 18.04.2 LTS]：WSL是以软件的形式运行在Windows下的Linux子系统，是近些年微软推出来的新工具，可以在Windows系统上原生运行Linux。</li>
-<li>gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)：C语言程序编译器，Ubuntu自带。</li>
-<li>NASM version 2.13.02：汇编程序编译器，通过<code>sudo apt install nasm</code>安装在WSL上。</li>
-<li>Oracle VM VirtualBox 6.0.4 r128413 (Qt5.6.2)：轻量开源的虚拟机软件。</li>
-<li>VSCode - Insiders v1.33.0：好用的文本编辑器，有丰富的插件。</li>
-<li>hexdump for VSCode 1.7.2: VSCode中一个好用的十六进制显示插件。</li>
-<li>GNU Make 4.1：安装在Ubuntu下，一键编译并连接代码，生成最终的文件。</li>
-</ul>
-<p>大部分开发环境安装在WSL上，较之于双系统、虚拟机等其他开发方案，更加方便，也方便直接使用Linux下的一些指令。</p>
-<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><h4 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h4><p>所用机器型号为VAIO Z Flip 2016</p>
-<ul>
-<li>Intel(R) Core(TM) i7-6567U CPU @3.30GHZ 3.31GHz</li>
-<li>8.00GB RAM</li>
-</ul>
-<h4 id="虚拟机配置"><a href="#虚拟机配置" class="headerlink" title="虚拟机配置"></a>虚拟机配置</h4><ul>
-<li>处理器内核总数：1</li>
-<li>RAM：4MB</li>
-</ul>
-<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><p>这次实验完成内容的结构大致如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">引导程序--&gt;main</span><br><span class="line">用户==交互==&gt;C语言函数</span><br><span class="line">subgraph 汇编与C语言混合编译的内核</span><br><span class="line">main-.外部调用.-&gt; 汇编函数</span><br><span class="line">main.-&gt; C语言函数</span><br><span class="line">C语言函数-.内嵌.-&gt;汇编函数</span><br><span class="line">end</span><br><span class="line">subgraph 用户程序</span><br><span class="line">汇编函数--&gt; prg1</span><br><span class="line">汇编函数--&gt; prg2</span><br><span class="line">汇编函数--&gt; prg3</span><br><span class="line">汇编函数--&gt; prg4</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-
-<h3 id="引导程序"><a href="#引导程序" class="headerlink" title="引导程序"></a>引导程序</h3><p>在<a href="https://wu-kan.github.io/posts/操作系统/加载用户程序的监控程序" target="_blank" rel="noopener">上一个实验</a>里已经说得很清楚了，这里就不再提了，可以直接看代码。</p>
-<h3 id="汇编与C语言混合编译的内核"><a href="#汇编与C语言混合编译的内核" class="headerlink" title="汇编与C语言混合编译的内核"></a>汇编与C语言混合编译的内核</h3><p>这里的内核指的是汇编代码<code>kernel.asm</code>和C语言代码<code>kernel.c</code>混合编译而成的内核文件<code>kernel.bin</code>。</p>
-<h4 id="汇编部分kernel-asm"><a href="#汇编部分kernel-asm" class="headerlink" title="汇编部分kernel.asm"></a>汇编部分<code>kernel.asm</code></h4><p>内核的第一部分是汇编程序，设置软件中断，声明一个全局的<code>_loadProgram</code>函数用于加载用户程序，然后直接调用C程序中的<code>main</code>函数链接到C程序入口点。</p>
-<p>在汇编程序中调用C函数比较简单，在程序段头部添加<code>extern</code>标识符，然后在程序中直接<code>call</code>即可。</p>
-<p>这里由于不太想学古董级的<code>tasm</code>，使用<code>nasm</code>替代之。</p>
-<h4 id="C语言部分kernel-c"><a href="#C语言部分kernel-c" class="headerlink" title="C语言部分kernel.c"></a>C语言部分<code>kernel.c</code></h4><p>内核的主要部分，提供了shell命令行功能，用于实现用户和系统的交互。</p>
-<p>C语言也可以声明外部函数<code>extern _loadProgram</code>调用汇编函数。此外，C<br>语言还支持内嵌汇编代码，通过<code>asm volatile</code>声明，其中<code>volatile</code>标识符的作用是禁止编译器自动优化，具体的例子可以看我下面的代码。由于我用的编译器<code>gcc</code>默认的内嵌汇编语法是<code>AT&amp;T</code>，在编译时要添加<code>-masm=intel</code>换成 <code>nasm</code>的语法。</p>
-<p>虽然支持内嵌汇编，但是我还是不想整个C语言内核部分的代码都是这种鬼东西。因此，我只在<code>putchar</code>（向当前位置写一个字符，并移动光标到下一有效位置）、<code>getch</code>（无回显地读取一个字符）中使用了内嵌汇编，其余的屏幕IO操作都通过调用这两个函数实现。</p>
-<h4 id="混合编译link-ld"><a href="#混合编译link-ld" class="headerlink" title="混合编译link.ld"></a>混合编译<code>link.ld</code></h4><p>第一次搞这种东西着实想了很久…下面直接结合Makefile代码来解释。</p>
-<figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">kernel.bin: kernel.o kernel.obj</span></span><br><span class="line">	ld -m elf_i386 -N --oformat binary -Ttext 0x7e00 <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<p>用ld结合链接文件link.ld，将上述两个.o文件链接生成内核二进制文件kernel.bin。</p>
-<figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">kernel.o: kernel.c</span></span><br><span class="line">	gcc -march=i386 -m16 -mpreferred-stack-boundary=2 -ffreestanding -fno-PIE -masm=intel -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<p>把内核C语言部分编译。<code>-march=i386</code>使用i386指令集；<code>-m16</code>生成16位代码；<code>-mpreferred-stack-boundary=2</code>栈指针按照$2\times 2=4$字节对齐；<code>-ffreestanding</code>使输出程序能够独立运行；PIE能使程序像共享库一样在主存任何位置装载，这需要将程序编译成位置无关，并链接为ELF共享对象，这里用<code>-fno-PIE</code>关掉；<code>-masm=intel</code>使用<code>nasm</code>格式的内联汇编语法。</p>
-<figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kernel.obj : kernel.asm</span><br><span class="line">	nasm -felf <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<p>把内核汇编部分编译成ELF文件。</p>
-<h3 id="用户程序"><a href="#用户程序" class="headerlink" title="用户程序"></a>用户程序</h3><p>在C语言的内核代码中，用户程序的表这样建的，用一个结构体保存用户程序名、大小、运行指令、调用地址。</p>
-
-undefined
-
-
-<p>这里实现了一个任务栈用于批量加载用户程序。当单独执行某一程序时，main函数并不会直接执行任务，而是将待做任务压入一个栈中；每次循环调用main函数时会先检查任务栈有没有清空，如果未清空则优先弹栈并执行栈中的任务。这样做的优点是批处理无需单独拉出来考虑，接受任务序列时按照反顺序压栈即可。</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> task[MAX_BUF_LEN], task_size = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">if</span> (task_size)</span><br><span class="line">	<span class="hljs-keyword">return</span> _loadProgram(prg[task[--task_size]].address + PrgSectorOffset), main();</span><br></pre></td></tr></table></figure>
-
-<p>和<a href="https://wu-kan.github.io/posts/操作系统/加载用户程序的监控程序" target="_blank" rel="noopener">上一个实验</a>一样，用户程序调用<code>int20</code>中断用于检测是否有<code>Ctrl + C</code>并退出。不一样的是，这次是退回操作系统内核而非引导程序。</p>
-<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="实验代码"><a href="#实验代码" class="headerlink" title="实验代码"></a>实验代码</h2><h3 id="bootloader-asm"><a href="#bootloader-asm" class="headerlink" title="bootloader.asm"></a>bootloader.asm</h3><p>从键盘读取任意按键后进入操作系统内核。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">%macro print 5	; string, length, x, y, color</span><br><span class="line">	pusha</span><br><span class="line">	push ax</span><br><span class="line">	push bx</span><br><span class="line">	push cx</span><br><span class="line">	push dx</span><br><span class="line">	push bp</span><br><span class="line">	push ds</span><br><span class="line">	push es</span><br><span class="line">	mov ax, 0b800H</span><br><span class="line">	mov gs, ax</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov bp, %1</span><br><span class="line">	mov ax, ds</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov cx, %2</span><br><span class="line">	mov ax, 1301H</span><br><span class="line">	mov dh, %3</span><br><span class="line">	mov dl, %4</span><br><span class="line">	mov bx, %5</span><br><span class="line">	int 10H</span><br><span class="line">	pop es</span><br><span class="line">	pop ds</span><br><span class="line">	pop bp</span><br><span class="line">	pop dx</span><br><span class="line">	pop cx</span><br><span class="line">	pop bx</span><br><span class="line">	pop ax</span><br><span class="line">	popa</span><br><span class="line">%endmacro</span><br><span class="line">	bits 16</span><br><span class="line">	UserPrgOffset equ 7e00H</span><br><span class="line">	PrgSectorOffset equ 2</span><br><span class="line">	org 7c00H</span><br><span class="line">start:</span><br><span class="line">	print msg, 30, 0, 0, 07H</span><br><span class="line">	mov ah, 0</span><br><span class="line">	int 16H</span><br><span class="line">loadOS:</span><br><span class="line">	mov ax, 0</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov bx, UserPrgOffset</span><br><span class="line">	mov ah, 2</span><br><span class="line">	mov al, 17</span><br><span class="line">	mov dl, 0</span><br><span class="line">	mov dh, 0</span><br><span class="line">	mov ch, 0</span><br><span class="line">	mov cl, PrgSectorOffset</span><br><span class="line">	int 13H</span><br><span class="line">	call UserPrgOffset</span><br><span class="line">	jmp $</span><br><span class="line">datadef:</span><br><span class="line">	msg db &apos;Press any key to enter WuK-OS.&apos;</span><br></pre></td></tr></table></figure>
-
-<h3 id="kernel-asm"><a href="#kernel-asm" class="headerlink" title="kernel.asm"></a>kernel.asm</h3><p>操作系统内核的汇编部分代码，提供<code>int 20h</code>中断用于从用户程序中检测<code>Ctrl + C</code>并返回<code>main</code>函数，并提供<code>_loadProgram</code>函数用于加载用户程序。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">	bits 16</span><br><span class="line">	extern main</span><br><span class="line">	global _loadProgram</span><br><span class="line">	UserPrgOffset equ 0A100h</span><br><span class="line">_start:</span><br><span class="line">	mov ax, 0000h</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov ax, 20h</span><br><span class="line">	mov bx, 4</span><br><span class="line">	mul bx</span><br><span class="line">	mov si, ax</span><br><span class="line">	mov ax, _int20h</span><br><span class="line">	mov [es:si], ax</span><br><span class="line">	add si, 2</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov [es:si], ax</span><br><span class="line">	call main</span><br><span class="line">_end:</span><br><span class="line">	jmp $</span><br><span class="line">_loadProgram:</span><br><span class="line">	push ebp</span><br><span class="line">	mov ebp, esp</span><br><span class="line">	mov ecx, [ebp+8]</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov bx, UserPrgOffset</span><br><span class="line">	mov ah, 2</span><br><span class="line">	mov al, 1</span><br><span class="line">	mov dl, 0</span><br><span class="line">	mov dh, 1</span><br><span class="line">	mov ch, 0</span><br><span class="line">	int 13H</span><br><span class="line">	jmp UserPrgOffset</span><br><span class="line">	mov esp, ebp</span><br><span class="line">	pop ebp</span><br><span class="line">	ret</span><br><span class="line">_int20h:</span><br><span class="line">	mov ah, 01h</span><br><span class="line">	int 16h</span><br><span class="line">	jz _noclick</span><br><span class="line">	mov ah, 00h</span><br><span class="line">	int 16h</span><br><span class="line">	cmp ax, 2e03h ; 检测 Ctrl + C</span><br><span class="line">	jne _noclick</span><br><span class="line">	jmp main</span><br><span class="line">_noclick:</span><br><span class="line">	iret</span><br></pre></td></tr></table></figure>
-
-<h3 id="kerner-c"><a href="#kerner-c" class="headerlink" title="kerner.c"></a>kerner.c</h3><p>操作系统内核C语言部分的代码。</p>
-<p>这里遇到一个问题，所有的字符串常量都不能直接传进函数里去…在课程群里问了之后也有别的同学遇到了这个情况。调了快一天心力交猝之后选择向现实低头，把所有的字符串先存进一个变量里去。</p>
-
-undefined
-
-
-<h3 id="link-ld"><a href="#link-ld" class="headerlink" title="link.ld"></a>link.ld</h3><p>将<code>wukos.asm</code>和<code>kernel.c</code>两个文件编译出来的内容连接起来。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">OUTPUT_FORMAT(&quot;elf32-i386&quot;)</span><br><span class="line">ENTRY(_start)</span><br><span class="line">SECTIONS</span><br><span class="line">&#123;</span><br><span class="line">	. = 0x7E00;</span><br><span class="line">	.text ALIGN (0x00) : &#123;</span><br><span class="line">		*(.text);</span><br><span class="line">	&#125;</span><br><span class="line">	.rodata ALIGN (4) : &#123;</span><br><span class="line">		*(.rodata*);</span><br><span class="line">	&#125;</span><br><span class="line">	.data ALIGN (4) : &#123;</span><br><span class="line">		*(.data*);</span><br><span class="line">	&#125;</span><br><span class="line">	.bss ALIGN (4) : &#123;</span><br><span class="line">		*(COMMON);</span><br><span class="line">		*(.bss*);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="prg1-asm-prg4-asm"><a href="#prg1-asm-prg4-asm" class="headerlink" title="prg1.asm~prg4.asm"></a>prg1.asm~prg4.asm</h3><p>和<a href="https://wu-kan.github.io/posts/操作系统/加载用户程序的监控程序" target="_blank" rel="noopener">上一个实验</a>中的<code>a.asm</code>~<code>d.asm</code>完全相同，这里不再放出。</p>
-<h3 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h3><p>这次文件太多，只好手动写Makefile了…</p>
-<figure class="highlight makefile hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">BIN = bootloader.bin kernel.bin prg1.bin prg2.bin prg3.bin prg4.bin</span><br><span class="line">IMG = wukos.img</span><br><span class="line"><span class="hljs-section">all: clear <span class="hljs-variable">$(BIN)</span> <span class="hljs-variable">$(IMG)</span></span></span><br><span class="line"><span class="hljs-section">clear:</span></span><br><span class="line">	rm -f <span class="hljs-variable">$(BIN)</span> <span class="hljs-variable">$(IMG)</span></span><br><span class="line"><span class="hljs-section">kernel.bin: kernel.obj kernel.o</span></span><br><span class="line">	ld -m elf_i386 -N --oformat binary -Ttext 0x7e00 <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span></span><br><span class="line"><span class="hljs-section">kernel.o: kernel.c</span></span><br><span class="line">	gcc -march=i386 -m16 -mpreferred-stack-boundary=2 -ffreestanding -fno-PIE -masm=intel -c <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br><span class="line">kernel.obj : kernel.asm</span><br><span class="line">	nasm -felf <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br><span class="line"><span class="hljs-section">%.bin: %.asm</span></span><br><span class="line">	nasm -fbin <span class="hljs-variable">$&lt;</span> -o <span class="hljs-variable">$@</span></span><br><span class="line"><span class="hljs-section">%.img:</span></span><br><span class="line">	/sbin/mkfs.msdos -C <span class="hljs-variable">$@</span> 1440</span><br><span class="line">	dd if=bootloader.bin of=<span class="hljs-variable">$@</span> conv=notrunc</span><br><span class="line">	dd if=kernel.bin of=<span class="hljs-variable">$@</span> seek=1 conv=notrunc</span><br><span class="line">	dd if=prg1.bin of=<span class="hljs-variable">$@</span> seek=18 conv=notrunc</span><br><span class="line">	dd if=prg2.bin of=<span class="hljs-variable">$@</span> seek=19 conv=notrunc</span><br><span class="line">	dd if=prg3.bin of=<span class="hljs-variable">$@</span> seek=20 conv=notrunc</span><br><span class="line">	dd if=prg4.bin of=<span class="hljs-variable">$@</span> seek=21 conv=notrunc</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><h3 id="引导程序-1"><a href="#引导程序-1" class="headerlink" title="引导程序"></a>引导程序</h3><p>如图，启动后进入引导程序。<br><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-0.png" alt><br>按下键盘任意按键后进入下一步。</p>
-<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><p><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-1.png" alt><br>第一次进入系统时并没有完全清除屏幕上的提示信息，原因是我不希望自己写的内核过多地控制屏幕显示内容；取而代之的是，用户可以手动输入<code>clear</code>指令用于清除屏幕上的内容。</p>
-<h3 id="测试一些指令"><a href="#测试一些指令" class="headerlink" title="测试一些指令"></a>测试一些指令</h3><p><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-2.png" alt><br>这是依次键入一个空指令、一个<code>show</code>（不支持的指令）、一个<code>help</code>指令（用于提示所有可执行的命令）、一个<code>ls</code>指令（用于显示所用户程序和对应信息）后的运行界面。</p>
-<p>可以看到，我的内核完美的识别出了支持的指令并正确运行，对于空指令和不支持的指令也会有相应的提示。</p>
-<h3 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h3><p>由于运行单个程序和批处理的原理和实际效果是完全相同的，这里只放出运行批处理的过程了。</p>
-<p><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-3.png" alt><br>如图，这是运行<code>exec</code>指令后打开的第一个程序。做<a href="https://wu-kan.github.io/posts/操作系统/加载用户程序的监控程序" target="_blank" rel="noopener">上一个实验</a>时并没有在运行时清空屏幕，因此可以看到我的姓名是直接叠加在输出界面上的。</p>
-<p><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-4.png" alt><br>依次按Ctrl+C退出这个程序并进入下一个程序。运行完所有四个用户程序后效果如图所示。</p>
-<h3 id="清屏"><a href="#清屏" class="headerlink" title="清屏"></a>清屏</h3><p>前面说了，我不希望自己写的内核过多地自己控制屏幕显示，而是给用户提供一条指令用于清屏。输入<code>clear</code>指令后如图，瞬间舒服了。<br><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-5.png" alt></p>
-<h3 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h3><p><img src="/2019/04/11/2019-03-28-用汇编与C语言开发独立内核/image/2019-03-28-6.png" alt><br>如图，输入<code>exit</code>指令后退出系统内核，不再响应用户的输入。</p>
-<h1 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h1><p>这次实验出来后，朋友圈一片对这个实验的吐槽。究其原因，可能有以下几点：</p>
-<ul>
-<li>老师给的<code>tcc</code>+<code>tasm</code>方案过于老旧，很难有参考价值</li>
-<li><code>gcc</code>的编译参数很多，只好慢慢摸索出一个“看起来能用”的编译选项，内在机理还是没有完全搞懂（这也可能是没办法传字符串的原因之一）</li>
-<li>各种玄学错误，一下能运行一下又运行不了，莫名其妙的卡死，莫名其妙的执行用户程序</li>
-<li>单步调试时发现C编译出来的汇编和自己想的有时候完全不同，尝试关闭编译器优化<code>-O0</code>但是没有效果</li>
-</ul>
-<p>并且，虽然勉强做完了，但是还遗留下C内核程序没有办法直接向函数传递字符串常量的问题，希望可以在日后的学习过程中解决。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.397Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    14 分钟 读完 (大约 2116 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-18-加载用户程序的监控程序/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>加载用户程序的监控程序</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ul>
-<li>掌握常用的 BIOS 调用</li>
-<li>掌握 BIOS 编程</li>
-<li>掌握加载用户程序的方法</li>
-</ul>
-<h1 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h1><ul>
-<li>设计四个有输出的用户可执行程序，分别在屏幕1/4区域动态输出字符，如将用字符‘A’从屏幕左边某行位置45度角下斜射出，保持一个可观察的适当速度直线运动，碰到屏幕相应1/4区域的边后产生反射，改变方向运动，如此类推，不断运动；在此基础上，增加你的个性扩展，如同时控制两个运动的轨迹，或炫酷动态变色，个性画面，如此等等，自由不限。还要在屏幕某个区域特别的方式显示你的学号姓名等个人信息。</li>
-<li>修改参考原型代码，允许键盘输入，用于指定运行这四个有输出的用户可执行程序之一，要确保系统执行代码不超过512字节，以便放在引导扇区</li>
-<li>自行组织映像盘的空间存放四个用户可执行程序。</li>
-</ul>
-<h1 id="实验方案"><a href="#实验方案" class="headerlink" title="实验方案"></a>实验方案</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
-<li>Windows 10, 64-bit  (Build 17763) 10.0.17763</li>
-<li>Windows Subsystem for Linux [Ubuntu 18.04.2 LTS]：WSL是以软件的形式运行在Windows下的Linux子系统，是近些年微软推出来的新工具，可以在Windows系统上原生运行Linux。</li>
-<li>gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)：C语言程序编译器，Ubuntu自带。</li>
-<li>NASM version 2.13.02：汇编程序编译器，通过<code>sudo apt install nasm</code>安装在WSL上。</li>
-<li>Oracle VM VirtualBox 6.0.4 r128413 (Qt5.6.2)：轻量开源的虚拟机软件。</li>
-<li>VSCode - Insiders v1.33.0：好用的文本编辑器，有丰富的插件。</li>
-<li>hexdump for VSCode 1.7.2: VSCode中一个好用的十六进制显示插件。</li>
-</ul>
-<p>大部分开发环境安装在WSL上，较之于双系统、虚拟机等其他开发方案，更加方便，也方便直接使用Linux下的一些指令。</p>
-<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><h4 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h4><p>所用机器型号为VAIO Z Flip 2016</p>
-<ul>
-<li>Intel(R) Core(TM) i7-6567U CPU @3.30GHZ 3.31GHz</li>
-<li>8.00GB RAM</li>
-</ul>
-<h4 id="虚拟机配置"><a href="#虚拟机配置" class="headerlink" title="虚拟机配置"></a>虚拟机配置</h4><ul>
-<li>处理器内核总数：1</li>
-<li>RAM：4MB</li>
-</ul>
-<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><p>与<a href="https://wu-kan.github.io/操作系统/裸机控制权与引导程序" target="_blank" rel="noopener">前一个实验</a>差不多。</p>
-<ol>
-<li>虚拟软盘的第一个扇区用于存储主引导程序（即监控程序），需要保证最后两个字节为<code>55aa</code>。验证主引导程序有效后，跳转到<code>7c00h</code>开始执行。</li>
-<li>引导程序接受键盘输入，选择程序，随后从软盘加载指定程序扇区的内容到内存并跳转执行。</li>
-<li>中断标号<code>0x00</code>到<code>0x13</code>已经具有功能，<code>0x14</code>到<code>0x1f</code>为保留标号，<code>0x20</code>到<code>0xff</code>提供给用户自定义中断。因此定义<code>0x20h</code>号中断用于从用户程序返回监控程序。</li>
-<li>在用户程序的循环中需要加入软件中断<code>int 20h</code>，用于监测是否有键盘返回，如果有则返回监控程序，否则继续执行。</li>
-</ol>
-<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="a-asm"><a href="#a-asm" class="headerlink" title="a.asm"></a>a.asm</h2><p>本次实验要求写 4 个用户程序，分别是在屏幕的4个象限中弹来弹去。四个代码的程序几乎相同，只需要修改某些常量和变量的定义即可。这里只给出其中一个程序的代码。</p>
-<p>另外，本想直接用<a href="https://wu-kan.github.io/操作系统/裸机控制权与引导程序" target="_blank" rel="noopener">前一个实验</a>的<code>c.asm</code>，却发现老师只考虑了边反射的情况，没有考虑四个角反射的情况，这会导致显示的内容从角飞出，在屏幕中乱飞。于是再次重构这段代码，使得编译后大小仅137bytes：</p>
-<ul>
-<li>加载地址修改成<code>org 0A100h</code>，表明用户程序读入内存应从内存物理地址0A100h开始。</li>
-<li>重新修改横纵坐标的变化方式，改为根据运行周期自动变化。</li>
-<li>修改字符串显示方式，改为调用<code>int 10h</code>实现，并写了一个<code>%macro print</code>来简化这一过程（造轮子）,仍然支持根据行号自动变色。</li>
-<li>屏幕显示空出前两行，用于显示引导程序的提示信息。</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">%macro print 4	; string, length, x, y</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov bp, %1</span><br><span class="line">	mov ax, ds</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov cx, %2</span><br><span class="line">	mov ah, 13h</span><br><span class="line">	mov al, 00h</span><br><span class="line">	mov bh, 00h</span><br><span class="line">	mov bl, %3	; 根据行号自动变色</span><br><span class="line">	mov dh, %3</span><br><span class="line">	mov dl, %4</span><br><span class="line">	int 10h</span><br><span class="line">%endmacro</span><br><span class="line"></span><br><span class="line">	N equ 12	;显示区域高度</span><br><span class="line">	M equ 32	;显示区域宽度减去字符串长度</span><br><span class="line">	TOP equ 2	;显示区域上端点</span><br><span class="line">	LEFT equ 40	;显示区域左端点</span><br><span class="line">	LENGTH equ 8	;字符串的长度</span><br><span class="line">	DELAY equ 99999999</span><br><span class="line">	org 0A100h</span><br><span class="line">	mov ax,0B800h</span><br><span class="line">	mov gs,ax	; GS = 0xB800h，文本窗口显存起始地址</span><br><span class="line"></span><br><span class="line">myLoop:</span><br><span class="line">	dec dword[count]	; 递减计数变量</span><br><span class="line">	jnz myLoop	; &gt;0：跳转</span><br><span class="line">	mov dword[count], DELAY</span><br><span class="line"></span><br><span class="line">	mov word ax, [t]	; ax = t</span><br><span class="line">	mov word bx,2*N-2</span><br><span class="line">	xor dx, dx	; clear dx and prepare for division</span><br><span class="line">	div bx  ; dx = t mod (2N - 2)</span><br><span class="line">	cmp dx, N ; compare dx and n</span><br><span class="line">	jb xok  ; if (dx &lt; n) jump xok</span><br><span class="line">	sub bx, dx</span><br><span class="line">	mov dx, bx ; dx = 2n - 2 - dx</span><br><span class="line">xok:</span><br><span class="line">	mov word[x], dx</span><br><span class="line">	add word[x], TOP</span><br><span class="line"></span><br><span class="line">	mov word ax, [t]</span><br><span class="line">	mov word bx, 2*M-2</span><br><span class="line">	xor dx, dx</span><br><span class="line">	div bx</span><br><span class="line">	cmp dx, M</span><br><span class="line">	jb yok</span><br><span class="line">	sub bx, dx</span><br><span class="line">	mov dx, bx</span><br><span class="line">yok:</span><br><span class="line">	mov word [y],dx</span><br><span class="line">	add word [y],LEFT</span><br><span class="line"></span><br><span class="line">	inc word[t]</span><br><span class="line">	print message, LENGTH, [x], [y]</span><br><span class="line">	int 20h</span><br><span class="line">	jmp myLoop</span><br><span class="line">datadef:</span><br><span class="line">	count dd 1</span><br><span class="line">	t dw 0</span><br><span class="line">	x dw 1</span><br><span class="line">	y dw 0</span><br><span class="line">	message db &apos; wu-kan &apos;</span><br></pre></td></tr></table></figure>
-
-<h2 id="wukos-asm"><a href="#wukos-asm" class="headerlink" title="wukos.asm"></a>wukos.asm</h2><p>引导扇区的 bootloader，其功能有：</p>
-<ul>
-<li>显示正在运行的是哪一个程序，或是选择页面提示语。</li>
-<li>使用<code>int 13h</code>读取扇区，并把它放到内存合适的位置上。</li>
-<li>使用<code>int 16h</code>读取键盘输入，用于选择程序。</li>
-</ul>
-<p>这里遇到一个问题，就是直接使用上面自动变色的程序时没有显示。因前两行的x坐标恰好对应了颜色中的黑底黑字。因此修改显示颜色<code>mov bl, 07h</code>（黑底白字）即可。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">OffSetOfUserPrg equ 0A100h</span><br><span class="line">org  7c00h</span><br><span class="line">%macro print 4	; string, length, x, y</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov ds, ax</span><br><span class="line">	mov bp, %1</span><br><span class="line">	mov ax, ds</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov cx, %2</span><br><span class="line">	mov ah, 13h</span><br><span class="line">	mov al, 00h</span><br><span class="line">	mov bh, 00h</span><br><span class="line">	mov bl, 07h	; 黑底白字</span><br><span class="line">	mov dh, %3</span><br><span class="line">	mov dl, %4</span><br><span class="line">	int 10h</span><br><span class="line">%endmacro</span><br><span class="line"></span><br><span class="line">mov ax, 0000h</span><br><span class="line">mov es, ax</span><br><span class="line">mov ax, 20h</span><br><span class="line">mov bx, 4</span><br><span class="line">mul bx</span><br><span class="line">mov si, ax</span><br><span class="line">mov ax, _int20h</span><br><span class="line">mov [es:si], ax</span><br><span class="line">add si, 2</span><br><span class="line">mov ax, cs</span><br><span class="line">mov [es:si], ax</span><br><span class="line">begin:</span><br><span class="line">	call cls</span><br><span class="line">	print msg, msglen, 0, 0</span><br><span class="line">input:</span><br><span class="line">	mov ah, 0</span><br><span class="line">	int 16h</span><br><span class="line">	cmp al, &apos;1&apos;</span><br><span class="line">	jl input</span><br><span class="line">	cmp al, &apos;4&apos;</span><br><span class="line">	jg input</span><br><span class="line">	mov [sectorNum], al</span><br><span class="line">	call cls</span><br><span class="line">	print msg1, msglen1, 0, 0</span><br><span class="line">	print sectorNum, 1, 0, 16</span><br><span class="line"></span><br><span class="line">	mov cl, [sectorNum]</span><br><span class="line">	sub cl, &apos;0&apos;-1  ;从第二个扇区开始</span><br><span class="line">	mov ax, cs</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov ah, 2</span><br><span class="line">	mov al, 1</span><br><span class="line">	mov dl, 0</span><br><span class="line">	mov dh, 0</span><br><span class="line">	mov ch, 0</span><br><span class="line">	mov bx, OffSetOfUserPrg</span><br><span class="line">	int 13H</span><br><span class="line">	jmp OffSetOfUserPrg</span><br><span class="line">cls:</span><br><span class="line">	mov ax, 0B800h</span><br><span class="line">	mov es, ax</span><br><span class="line">	mov si, 0</span><br><span class="line">	mov cx, 80*25</span><br><span class="line">	mov dx, 0</span><br><span class="line">	clsLoop:</span><br><span class="line">		mov [es:si], dx</span><br><span class="line">		add si, 2</span><br><span class="line">	loop clsLoop</span><br><span class="line">	ret</span><br><span class="line">int20h:</span><br><span class="line">	mov ah, 01h</span><br><span class="line">	int 16h</span><br><span class="line">	jz noclick</span><br><span class="line">	mov ah, 00h</span><br><span class="line">	int 16h</span><br><span class="line">	cmp ax, 2e03h	; 检测Ctrl + C</span><br><span class="line">	jne noclick</span><br><span class="line">	jmp begin</span><br><span class="line">noclick:</span><br><span class="line">	iret</span><br><span class="line">datadef:</span><br><span class="line">	msg db &apos;Welcome to WuKOS, press 1~4 to run a program.&apos;</span><br><span class="line">	msglen equ ($-msg)</span><br><span class="line">	msg1 db &apos;This is program 0, press Ctrl + C to return.&apos;</span><br><span class="line">	msglen1 equ ($-msg1)</span><br><span class="line">	sectorNum db &apos;1&apos;</span><br></pre></td></tr></table></figure>
-
-<h2 id="编译烧盘"><a href="#编译烧盘" class="headerlink" title="编译烧盘"></a>编译烧盘</h2><p>在WSL终端下按顺序执行下述指令。主引导程序存储在虚拟软盘的第一个扇区，第一个用户程序存储在第二个扇区，第二个用户程序存储在第三个扇区，以此类推。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">nasm wukos.asm -o wukos.com</span><br><span class="line">nasm a.asm -o a.com</span><br><span class="line">nasm b.asm -o b.com</span><br><span class="line">nasm c.asm -o c.com</span><br><span class="line">nasm d.asm -o d.com</span><br><span class="line">/sbin/mkfs.msdos -C wukos.img 1440</span><br><span class="line">dd <span class="hljs-keyword">if</span>=wukos.com of=wukos.img conv=notrunc</span><br><span class="line">dd <span class="hljs-keyword">if</span>=a.com of=wukos.img seek=1 conv=notrunc</span><br><span class="line">dd <span class="hljs-keyword">if</span>=b.com of=wukos.img seek=2 conv=notrunc</span><br><span class="line">dd <span class="hljs-keyword">if</span>=c.com of=wukos.img seek=3 conv=notrunc</span><br><span class="line">dd <span class="hljs-keyword">if</span>=d.com of=wukos.img seek=4 conv=notrunc</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><h3 id="引导界面"><a href="#引导界面" class="headerlink" title="引导界面"></a>引导界面</h3><p><img src="/2019/04/11/2019-03-18-加载用户程序的监控程序/image/2019-03-18-0.png" alt></p>
-<h3 id="程序1"><a href="#程序1" class="headerlink" title="程序1"></a>程序1</h3><p><img src="/2019/04/11/2019-03-18-加载用户程序的监控程序/image/2019-03-18-1.png" alt><br>显示姓名。</p>
-<h3 id="程序2"><a href="#程序2" class="headerlink" title="程序2"></a>程序2</h3><p><img src="/2019/04/11/2019-03-18-加载用户程序的监控程序/image/2019-03-18-2.png" alt><br>显示学号。</p>
-<h3 id="程序3"><a href="#程序3" class="headerlink" title="程序3"></a>程序3</h3><p><img src="/2019/04/11/2019-03-18-加载用户程序的监控程序/image/2019-03-18-3.png" alt><br>显示邮箱。</p>
-<h3 id="程序4"><a href="#程序4" class="headerlink" title="程序4"></a>程序4</h3><p><img src="/2019/04/11/2019-03-18-加载用户程序的监控程序/image/2019-03-18-4.png" alt><br>显示博客。</p>
-<h1 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h1><p>重写了之前的代码，没有想到本来上次已经很小的290bytes还能压到更小的137bytes…</p>
-<p>还遇到了根据行号变色时第一行看不到输出的原因，仔细思考和查阅网上资料后发现00h用于表示不显示，在自动变色行号为0的时候就会导致看不到输出。</p>
-<p>现在对<code>org 7c00h</code>等语句有了更深的理解了。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-10T16:08:06.397Z">2019-04-11</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    25 分钟 读完 (大约 3684 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/11/2019-03-13-裸机控制权与引导程序/"></a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="实验题目"><a href="#实验题目" class="headerlink" title="实验题目"></a>实验题目</h1><p>裸机控制权与引导程序</p>
-<h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><ul>
-<li>掌握NASM的语法</li>
-<li>掌握用汇编器的用法</li>
-<li>掌握创建空白软盘镜像的方法</li>
-<li>掌握虚拟机的设置及使用方法</li>
-</ul>
-<h1 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h1><h2 id="搭建和应用实验环境"><a href="#搭建和应用实验环境" class="headerlink" title="搭建和应用实验环境"></a>搭建和应用实验环境</h2><p>虚拟机安装，生成一个基本配置的虚拟机XXXPC和多个1.44MB容量的虚拟软盘，将其中一个虚拟软盘用DOS格式化为DOS引导盘，用WinHex工具将其中一个虚拟软盘的首扇区填满你的个人信息。</p>
-<h2 id="接管裸机的控制权"><a href="#接管裸机的控制权" class="headerlink" title="接管裸机的控制权"></a>接管裸机的控制权</h2><p>设计IBM_PC的一个引导扇区程序，程序功能是：用字符‘A’从屏幕左边某行位置45度角下斜射出，保持一个可观察的适当速度直线运动，碰到屏幕的边后产生反射，改变方向运动，如此类推，不断运动；在此基础上，增加你的个性扩展，如同时控制两个运动的轨迹，或炫酷动态变色，个性画面，如此等等，自由不限。还要在屏幕某个区域特别的方式显示你的学号姓名等个人信息。将这个程序的机器码放进放进第三张虚拟软盘的首扇区，并用此软盘引导你的XXXPC，直到成功。</p>
-<h1 id="实验方案"><a href="#实验方案" class="headerlink" title="实验方案"></a>实验方案</h1><h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><h3 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h3><ul>
-<li>Windows 10, 64-bit  (Build 17763) 10.0.17763</li>
-<li>Windows Subsystem for Linux [Ubuntu 18.04.2 LTS]：WSL是以软件的形式运行在Windows下的Linux子系统，是近些年微软推出来的新工具，可以在Windows系统上原生运行Linux。</li>
-<li>gcc version 7.3.0 (Ubuntu 7.3.0-27ubuntu1~18.04)：C语言程序编译器，Ubuntu自带。</li>
-<li>NASM version 2.13.02：汇编程序编译器，通过<code>sudo apt install nasm</code>安装在WSL上。</li>
-<li>Oracle VM VirtualBox 6.0.4 r128413 (Qt5.6.2)：轻量开源的虚拟机软件。</li>
-<li>VSCode - Insiders v1.33.0：好用的文本编辑器，有丰富的插件。</li>
-<li>hexdump for VSCode 1.7.2: VSCode中一个好用的十六进制显示插件。</li>
-</ul>
-<p>这里，没有使用老师推荐的WinHex来打开十六进制，而是使用了VSCode下一个相对好用的插件来查看十六进制；同时，向软盘内填充信息可以直接敲代码解决。</p>
-<p>此外，大部分开发环境安装在WSL上，较之于双系统、虚拟机等其他开发方案，更加方便，也方便直接使用Linux下的一些指令。</p>
-<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><h4 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h4><p>所用机器型号为VAIO Z Flip 2016</p>
-<ul>
-<li>Intel(R) Core(TM) i7-6567U CPU @3.30GHZ 3.31GHz</li>
-<li>8.00GB RAM</li>
-</ul>
-<h4 id="虚拟机配置"><a href="#虚拟机配置" class="headerlink" title="虚拟机配置"></a>虚拟机配置</h4><ul>
-<li>处理器内核总数：1</li>
-<li>RAM：4MB</li>
-</ul>
-<h1 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h1><h2 id="搭建和应用实验环境-1"><a href="#搭建和应用实验环境-1" class="headerlink" title="搭建和应用实验环境"></a>搭建和应用实验环境</h2><h3 id="安装、配置虚拟机"><a href="#安装、配置虚拟机" class="headerlink" title="安装、配置虚拟机"></a>安装、配置虚拟机</h3><ol>
-<li>打开Oracle VM VirtualBox</li>
-<li>点新建，名称填“WuKPC”，并指定位置，类型选“Other”，版本选择“Other/Unknown”，点“下一步”</li>
-<li>内存选4MB</li>
-<li>选不添加虚拟硬盘</li>
-</ol>
-<h3 id="创建并格式化虚拟软盘"><a href="#创建并格式化虚拟软盘" class="headerlink" title="创建并格式化虚拟软盘"></a>创建并格式化虚拟软盘</h3><p>Linux上可以直接用如下的指令创建虚拟软盘，其中要注意的是1.44MB=1440KB。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sbin/mkfs.msdos -C a.img 1440</span><br></pre></td></tr></table></figure>
-
-<p>同目录下出现<code>a.img</code>，得到如下反馈</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat 4.1 (2017-01-24)</span><br></pre></td></tr></table></figure>
-
-<p>这说明生成的虚拟软盘已经自动格式化了。打开“设置”-“存储”-“添加软盘驱动器”-“完成”，然后在新生成的控制器中添加虚拟软驱，点“注册”，打开刚刚生成的“a.img”，并确认。现在开启虚拟机，发现虚拟机的屏幕上已经有了显示:</p>
-<p><img src="/2019/04/11/2019-03-13-裸机控制权与引导程序/image/2019-03-13-1.png" alt></p>
-<p>这说明虚拟软盘格式化成功。</p>
-<h3 id="填满个人信息"><a href="#填满个人信息" class="headerlink" title="填满个人信息"></a>填满个人信息</h3><p>使用hexdump for VSCode打开刚刚创建的<code>a.img</code>，发现其有着如下的结构（以下仅截取前三十四行）:</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">  Offset: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</span><br><span class="line">00000000: EB 3C 90 6D 6B 66 73 2E 66 61 74 00 02 01 01 00    k&lt;.mkfs.fat.....</span><br><span class="line">00000010: 02 E0 00 40 0B F0 09 00 12 00 02 00 00 00 00 00    .`.@.p..........</span><br><span class="line">00000020: 00 00 00 00 00 00 29 95 B1 98 3C 4E 4F 20 4E 41    ......).1.&lt;NO.NA</span><br><span class="line">00000030: 4D 45 20 20 20 20 46 41 54 31 32 20 20 20 0E 1F    ME....FAT12.....</span><br><span class="line">00000040: BE 5B 7C AC 22 C0 74 0B 56 B4 0E BB 07 00 CD 10    &gt;[|,&quot;@t.V4.;..M.</span><br><span class="line">00000050: 5E EB F0 32 E4 CD 16 CD 19 EB FE 54 68 69 73 20    ^kp2dM.M.k~This.</span><br><span class="line">00000060: 69 73 20 6E 6F 74 20 61 20 62 6F 6F 74 61 62 6C    is.not.a.bootabl</span><br><span class="line">00000070: 65 20 64 69 73 6B 2E 20 20 50 6C 65 61 73 65 20    e.disk...Please.</span><br><span class="line">00000080: 69 6E 73 65 72 74 20 61 20 62 6F 6F 74 61 62 6C    insert.a.bootabl</span><br><span class="line">00000090: 65 20 66 6C 6F 70 70 79 20 61 6E 64 0D 0A 70 72    e.floppy.and..pr</span><br><span class="line">000000a0: 65 73 73 20 61 6E 79 20 6B 65 79 20 74 6F 20 74    ess.any.key.to.t</span><br><span class="line">000000b0: 72 79 20 61 67 61 69 6E 20 2E 2E 2E 20 0D 0A 00    ry.again........</span><br><span class="line">000000c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000000d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000000e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000000f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000100: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000110: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000120: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000130: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000140: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000150: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000160: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000170: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">00000190: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001a0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001b0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001c0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00    ................</span><br><span class="line">000001f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 AA    ..............U*</span><br><span class="line">00000200: F0 FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00    p...............</span><br></pre></td></tr></table></figure>
-
-<p>要填满在第一个扇区除了引导区之外填满个人信息，只需要在<code>0x500B</code>~<code>0x1f00D</code>间填满个人信息即可。这里直接偷懒用一段C（<code>b.c</code>）解决：</p>
-<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">char</span> s[] = <span class="hljs-string">"17341163-wu-kan "</span>, b[<span class="hljs-number">1440</span> &lt;&lt; <span class="hljs-number">10</span>];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	fread(b, <span class="hljs-keyword">sizeof</span>(*b), <span class="hljs-keyword">sizeof</span>(b), fopen(<span class="hljs-string">"a.img"</span>, <span class="hljs-string">"rb+"</span>));</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">91</span>; i &lt; <span class="hljs-number">510</span>; ++i)</span><br><span class="line">		b[i] = s[i % (<span class="hljs-keyword">sizeof</span>(s) - <span class="hljs-number">1</span>)];</span><br><span class="line">	fwrite(b, <span class="hljs-keyword">sizeof</span>(*b), <span class="hljs-keyword">sizeof</span>(b), fopen(<span class="hljs-string">"b.img"</span>, <span class="hljs-string">"wb"</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>运行得到的<code>b.img</code>，其十六进制有着如下的结构（前三十四行），可以发现已经填充成功。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">  Offset: 00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</span><br><span class="line">00000000: EB 3C 90 6D 6B 66 73 2E 66 61 74 00 02 01 01 00    k&lt;.mkfs.fat.....</span><br><span class="line">00000010: 02 E0 00 40 0B F0 09 00 12 00 02 00 00 00 00 00    .`.@.p..........</span><br><span class="line">00000020: 00 00 00 00 00 00 29 B9 CA 4B BC 4E 4F 20 4E 41    ......)9JK&lt;NO.NA</span><br><span class="line">00000030: 4D 45 20 20 20 20 46 41 54 31 32 20 20 20 0E 1F    ME....FAT12.....</span><br><span class="line">00000040: BE 5B 7C AC 22 C0 74 0B 56 B4 0E BB 07 00 CD 10    &gt;[|,&quot;@t.V4.;..M.</span><br><span class="line">00000050: 5E EB F0 32 E4 CD 16 CD 19 EB FE 2D 6B 61 6E 20    ^kp2dM.M.k~-kan.</span><br><span class="line">00000060: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000070: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000080: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000090: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000a0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000b0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000c0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000d0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000e0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000000f0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000100: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000110: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000120: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000130: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000140: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000150: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000160: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000170: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000180: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">00000190: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001a0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001b0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001c0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001d0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001e0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 6E 20    17341163-wu-kan.</span><br><span class="line">000001f0: 31 37 33 34 31 31 36 33 2D 77 75 2D 6B 61 55 AA    17341163-wu-kaU*</span><br><span class="line">00000200: F0 FF FF 00 00 00 00 00 00 00 00 00 00 00 00 00    p...............</span><br></pre></td></tr></table></figure>
-
-<p>用虚拟机加载b.img，如下：</p>
-<p><img src="/2019/04/11/2019-03-13-裸机控制权与引导程序/image/2019-03-13-2.png" alt></p>
-<h2 id="接管裸机的控制权-1"><a href="#接管裸机的控制权-1" class="headerlink" title="接管裸机的控制权"></a>接管裸机的控制权</h2><p>老师给的代码（<code>stone.asm</code>）如下：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br></pre></td><td class="code"><pre><span class="line">; 程序源代码（stone.asm）</span><br><span class="line">; 本程序在文本方式显示器上从左边射出一个*号,以45度向右下运动，撞到边框后反射,如此类推.</span><br><span class="line">;  凌应标 2014/3</span><br><span class="line">;   MASM汇编格式</span><br><span class="line">     Dn_Rt equ 1                  ;D-Down,U-Up,R-right,L-Left</span><br><span class="line">     Up_Rt equ 2                  ;</span><br><span class="line">     Up_Lt equ 3                  ;</span><br><span class="line">     Dn_Lt equ 4                  ;</span><br><span class="line">     delay equ 50000					; 计时器延迟计数,用于控制画框的速度</span><br><span class="line">     ddelay equ 580					; 计时器延迟计数,用于控制画框的速度</span><br><span class="line">     .386</span><br><span class="line">     org 100h					; 程序加载到100h，可用于生成COM</span><br><span class="line">     ASSUME cs:code,ds:code</span><br><span class="line">code SEGMENT</span><br><span class="line">start:</span><br><span class="line">	;xor ax,ax					; AX = 0   程序加载到0000：100h才能正确执行</span><br><span class="line">      mov ax,cs</span><br><span class="line">	mov es,ax					; ES = 0</span><br><span class="line">	mov ds,ax					; DS = CS</span><br><span class="line">	mov es,ax					; ES = CS</span><br><span class="line">	mov ax,0B800h				; 文本窗口显存起始地址</span><br><span class="line">	mov gs,ax					; GS = B800h</span><br><span class="line">      mov byte[char],&apos;A&apos;</span><br><span class="line">loop1:</span><br><span class="line">	dec word[count]				; 递减计数变量</span><br><span class="line">	jnz loop1					; &gt;0：跳转;</span><br><span class="line">	mov word[count],delay</span><br><span class="line">	dec word[dcount]				; 递减计数变量</span><br><span class="line">      jnz loop1</span><br><span class="line">	mov word[count],delay</span><br><span class="line">	mov word[dcount],ddelay</span><br><span class="line"></span><br><span class="line">      mov al,1</span><br><span class="line">      cmp al,byte[rdul]</span><br><span class="line">	jz  DnRt</span><br><span class="line">      mov al,2</span><br><span class="line">      cmp al,byte[rdul]</span><br><span class="line">	jz  UpRt</span><br><span class="line">      mov al,3</span><br><span class="line">      cmp al,byte[rdul]</span><br><span class="line">	jz  UpLt</span><br><span class="line">      mov al,4</span><br><span class="line">      cmp al,byte[rdul]</span><br><span class="line">	jz  DnLt</span><br><span class="line">      jmp $</span><br><span class="line"></span><br><span class="line">DnRt:</span><br><span class="line">	inc word[x]</span><br><span class="line">	inc word[y]</span><br><span class="line">	mov bx,word[x]</span><br><span class="line">	mov ax,25</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  dr2ur</span><br><span class="line">	mov bx,word[y]</span><br><span class="line">	mov ax,80</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  dr2dl</span><br><span class="line">	jmp show</span><br><span class="line">dr2ur:</span><br><span class="line">      mov word[x],23</span><br><span class="line">      mov byte[rdul],Up_Rt</span><br><span class="line">      jmp show</span><br><span class="line">dr2dl:</span><br><span class="line">      mov word[y],78</span><br><span class="line">      mov byte[rdul],Dn_Lt</span><br><span class="line">      jmp show</span><br><span class="line"></span><br><span class="line">UpRt:</span><br><span class="line">	dec word[x]</span><br><span class="line">	inc word[y]</span><br><span class="line">	mov bx,word[y]</span><br><span class="line">	mov ax,80</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  ur2ul</span><br><span class="line">	mov bx,word[x]</span><br><span class="line">	mov ax,-1</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  ur2dr</span><br><span class="line">	jmp show</span><br><span class="line">ur2ul:</span><br><span class="line">      mov word[y],78</span><br><span class="line">      mov byte[rdul],Up_Lt</span><br><span class="line">      jmp show</span><br><span class="line">ur2dr:</span><br><span class="line">      mov word[x],1</span><br><span class="line">      mov byte[rdul],Dn_Rt</span><br><span class="line">      jmp show</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">UpLt:</span><br><span class="line">	dec word[x]</span><br><span class="line">	dec word[y]</span><br><span class="line">	mov bx,word[x]</span><br><span class="line">	mov ax,-1</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  ul2dl</span><br><span class="line">	mov bx,word[y]</span><br><span class="line">	mov ax,-1</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  ul2ur</span><br><span class="line">	jmp show</span><br><span class="line"></span><br><span class="line">ul2dl:</span><br><span class="line">      mov word[x],1</span><br><span class="line">      mov byte[rdul],Dn_Lt</span><br><span class="line">      jmp show</span><br><span class="line">ul2ur:</span><br><span class="line">      mov word[y],1</span><br><span class="line">      mov byte[rdul],Up_Rt</span><br><span class="line">      jmp show</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">DnLt:</span><br><span class="line">	inc word[x]</span><br><span class="line">	dec word[y]</span><br><span class="line">	mov bx,word[y]</span><br><span class="line">	mov ax,-1</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  dl2dr</span><br><span class="line">	mov bx,word[x]</span><br><span class="line">	mov ax,25</span><br><span class="line">	sub ax,bx</span><br><span class="line">      jz  dl2ul</span><br><span class="line">	jmp show</span><br><span class="line"></span><br><span class="line">dl2dr:</span><br><span class="line">      mov word[y],1</span><br><span class="line">      mov byte[rdul],Dn_Rt</span><br><span class="line">      jmp show</span><br><span class="line"></span><br><span class="line">dl2ul:</span><br><span class="line">      mov word[x],23</span><br><span class="line">      mov byte[rdul],Up_Lt</span><br><span class="line">      jmp show</span><br><span class="line"></span><br><span class="line">show:</span><br><span class="line">      xor ax,ax                 ; 计算显存地址</span><br><span class="line">      mov ax,word[x]</span><br><span class="line">	mov bx,80</span><br><span class="line">	mul bx</span><br><span class="line">	add ax,word[y]</span><br><span class="line">	mov bx,2</span><br><span class="line">	mul bx</span><br><span class="line">	mov bx,ax</span><br><span class="line">	mov ah,0Fh				;  0000：黑底、1111：亮白字（默认值为07h）</span><br><span class="line">	mov al,byte[char]			;  AL = 显示字符值（默认值为20h=空格符）</span><br><span class="line">	mov es:[bx],ax  		;  显示字符的ASCII码值</span><br><span class="line">	jmp loop1</span><br><span class="line"></span><br><span class="line">end:</span><br><span class="line">    jmp $                   ; 停止画框，无限循环</span><br><span class="line"></span><br><span class="line">datadef:</span><br><span class="line">    count dw delay</span><br><span class="line">    dcount dw ddelay</span><br><span class="line">    rdul db Dn_Rt         ; 向右下运动</span><br><span class="line">    x    dw 7</span><br><span class="line">    y    dw 0</span><br><span class="line">    char db &apos;A&apos;</span><br><span class="line">code ENDS</span><br><span class="line">     END start</span><br></pre></td></tr></table></figure>
-
-<p>在终端里敲下面的指令编译一下看看：</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nasm stone.asm -o stone.bin</span><br></pre></td></tr></table></figure>
-
-<p>报错了，一脸懵逼…</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">stone.asm:11: warning: label alone on a line without a colon might be in error [-w+orphan-labels]</span><br><span class="line">stone.asm:11: error: attempt to define a</span><br><span class="line">local label before any non-local labels</span><br><span class="line">stone.asm:13: error: parser: instruction</span><br><span class="line">expected</span><br><span class="line">stone.asm:14: warning: macro `SEGMENT&apos; exists, but not taking 0 parameters [-w+macro-params]</span><br><span class="line">stone.asm:14: error: parser: instruction</span><br><span class="line">expected</span><br><span class="line">stone.asm:162: error: symbol `code&apos; redefined</span><br><span class="line">stone.asm:162: error: parser: instruction expected</span><br><span class="line">stone.asm:163: error: parser: instruction expected</span><br></pre></td></tr></table></figure>
-
-<p>把上面这段东西放在Stack Overflow上搜一下看看，找到一个差不多的问题（见参考文献），仅有一个的回答是这样的；</p>
-<blockquote>
-<p>That assembly language is MASM, not NASM.</p>
-<p>For starters, NASM segments are defined differently.<br>Instead of</p>
-<blockquote>
-<p>Code    segment word public ‘CODE’</p>
-</blockquote>
-<p>we write</p>
-<blockquote>
-<p>.section text</p>
-</blockquote>
-<p>And that “ASSUME” declaration… You must have an ancient book. That is old, old MASM code. Brings back memories from the early 1980s for me!</p>
-<p>There are many differences between NASM and MASM, and your code needs quite a bit of work to port. If you want to port that MASM code to NASM, see MASM/NASM Differences or the NASM documentation or google “NASM vs MASM”</p>
-<p>TL;DR: you are writing MASM code, not NASM.</p>
-</blockquote>
-<p>就是说，老师给我们的是“from the early 1980s”的“MASM”代码而不是“NASM”。<br>干脆重构了老师的代码：</p>
-<ul>
-<li>又要显示学号，又要有弹跳的<code>a</code>，不如让学号跟着一起弹跳（<code>a</code>在我的姓名里有）。于是每次打印整个字符串，并设置弹跳的右边界为<code>WIDTH-LENGTH</code>。</li>
-<li>打印前有一句<code>mov ah,0Fh</code>，是用来设置输出字符串的颜色的（黑底白字），这里去掉它，这时输出字符的颜色就会随行号（<code>ah</code>中原来的值）来变化。</li>
-<li>原先老师用来实现延迟是使用了两层循环+两个<code>dw</code>变量，感觉没有必要，因此修改成单层循环+一个<code>dd</code>变量。</li>
-<li>几处“撞墙”检测的逻辑修改。原先的逻辑是<strong>假如当前下标出界，修改方向，并把下标调整到正常的位置</strong>。修改之后的逻辑是<strong>假如当前下标在边界上，改变方向</strong>。修改后的逻辑更加简洁有效。</li>
-<li>某些代码逻辑的优化，例如在进行运算时减少中间变量的过渡。这样可以减小生成代码的体积。</li>
-</ul>
-<p>重构的代码（<code>c.asm</code>）如下，编译生成的代码只有290bytes，可见这个重构还是很有效的。</p>
-<blockquote>
-<p>2019-03-19 update：这是直接从老师的代码中改来的代码，有一个BUG，就是字符运行到四个顶点的时候会从角上飞出，导致显示内容错乱；原因是老师只考虑了边反射没有考虑角反射。在<a href="https://wu-kan.github.io/操作系统/加载用户程序的监控程序" target="_blank" rel="noopener">下一个实验</a>里，我再次重构了这段代码，修复了这个BUG，并且大大减小了编译后的大小（137bytes）。</p>
-</blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">DNRT equ 1	; D-Down,U-Up,R-right,L-Left</span><br><span class="line">UPRT equ 2</span><br><span class="line">UPLT equ 3</span><br><span class="line">DNLT equ 4</span><br><span class="line">WIDTH equ 80</span><br><span class="line">HEIGHT equ 25</span><br><span class="line">LENGTH equ 17	; 字符串的长度</span><br><span class="line">org 7c00h</span><br><span class="line">section .data</span><br><span class="line">	count dd 1</span><br><span class="line">	x dw 0</span><br><span class="line">	y dw 0</span><br><span class="line">	rdul db DNRT	; 向右下运动</span><br><span class="line">	message db &apos; 17341163 wu-kan &apos;</span><br><span class="line">section .text</span><br><span class="line">	mov ax,0B800h</span><br><span class="line">	mov gs,ax	; GS = 0xB800h，文本窗口显存起始地址</span><br><span class="line">myLoop:</span><br><span class="line">	dec dword[count]	; 递减计数变量</span><br><span class="line">	jnz myLoop	; &gt;0：跳转;</span><br><span class="line">	mov dword[count],99999999</span><br><span class="line">	cmp byte[rdul],DNRT</span><br><span class="line">	jz  dnrt</span><br><span class="line">	cmp byte[rdul],UPRT</span><br><span class="line">	jz  uprt</span><br><span class="line">	cmp byte[rdul],UPLT</span><br><span class="line">	jz  uplt</span><br><span class="line">	cmp byte[rdul],DNLT</span><br><span class="line">	jz  dnlt</span><br><span class="line">dnrt:</span><br><span class="line">	inc word[x]</span><br><span class="line">	inc word[y]</span><br><span class="line">	mov ax,HEIGHT-1</span><br><span class="line">	sub ax,word[x]</span><br><span class="line">	jz  dr2ur</span><br><span class="line">	mov ax,WIDTH-LENGTH</span><br><span class="line">	sub ax,word[y]</span><br><span class="line">	jz  dr2dl</span><br><span class="line">	jmp show</span><br><span class="line">dr2ur:</span><br><span class="line">	mov byte[rdul],UPRT</span><br><span class="line">	jmp show</span><br><span class="line">dr2dl:</span><br><span class="line">	mov byte[rdul],DNLT</span><br><span class="line">	jmp show</span><br><span class="line">uprt:</span><br><span class="line">	dec word[x]</span><br><span class="line">	inc word[y]</span><br><span class="line">	mov ax,2</span><br><span class="line">	sub ax,word[x]</span><br><span class="line">	jz  ur2dr</span><br><span class="line">	mov ax,WIDTH-LENGTH</span><br><span class="line">	sub ax,word[y]</span><br><span class="line">	jz  ur2ul</span><br><span class="line">	jmp show</span><br><span class="line">ur2dr:</span><br><span class="line">	mov byte[rdul],DNRT</span><br><span class="line">	jmp show</span><br><span class="line">ur2ul:</span><br><span class="line">	mov byte[rdul],UPLT</span><br><span class="line">	jmp show</span><br><span class="line">uplt:</span><br><span class="line">	dec word[x]</span><br><span class="line">	dec word[y]</span><br><span class="line">	mov ax,2</span><br><span class="line">	sub ax,word[x]</span><br><span class="line">	jz  ul2dl</span><br><span class="line">	mov ax,1</span><br><span class="line">	sub ax,word[y]</span><br><span class="line">	jz  ul2ur</span><br><span class="line">	jmp show</span><br><span class="line">ul2dl:</span><br><span class="line">	mov byte[rdul],DNLT</span><br><span class="line">	jmp show</span><br><span class="line">ul2ur:</span><br><span class="line">	mov byte[rdul],UPRT</span><br><span class="line">	jmp show</span><br><span class="line">dnlt:</span><br><span class="line">	inc word[x]</span><br><span class="line">	dec word[y]</span><br><span class="line">	mov ax,HEIGHT-1</span><br><span class="line">	sub ax,word[x]</span><br><span class="line">	jz  dl2ul</span><br><span class="line">	mov ax,1</span><br><span class="line">	sub ax,word[y]</span><br><span class="line">	jz  dl2dr</span><br><span class="line">	jmp show</span><br><span class="line">dl2ul:</span><br><span class="line">	mov byte[rdul],UPLT</span><br><span class="line">	jmp show</span><br><span class="line">dl2dr:</span><br><span class="line">	mov byte[rdul],DNRT</span><br><span class="line">	jmp show</span><br><span class="line">show:</span><br><span class="line">	xor ax,ax</span><br><span class="line">	mov word ax,[x]</span><br><span class="line">	mov bx,WIDTH</span><br><span class="line">	mul bx</span><br><span class="line">	add word ax,[y]</span><br><span class="line">	mov bx,2</span><br><span class="line">	mul bx</span><br><span class="line">	mov bx,ax</span><br><span class="line">	mov si, message</span><br><span class="line">	mov cx, LENGTH</span><br><span class="line">	printStr:</span><br><span class="line">		mov byte al,[si]</span><br><span class="line">		mov [gs:bx],ax</span><br><span class="line">		inc si</span><br><span class="line">		inc bx</span><br><span class="line">		inc bx</span><br><span class="line">	loop printStr</span><br><span class="line">	jmp myLoop</span><br></pre></td></tr></table></figure>
-
-<p>在终端中依次执行下列指令，将上述汇编代码编译并写进新的软驱<code>c.img</code>。</p>
-<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nasm c.asm -o c.com</span><br><span class="line">/sbin/mkfs.msdos -C c.img 1440</span><br><span class="line">dd <span class="hljs-keyword">if</span>=c.com of=c.img bs=1440k conv=notrunc</span><br></pre></td></tr></table></figure>
-
-<p>用虚拟机打开<code>c.img</code>，运行结果如下：</p>
-<p><img src="/2019/04/11/2019-03-13-裸机控制权与引导程序/image/2019-03-13-3.png" alt></p>
-<h1 id="实验总结"><a href="#实验总结" class="headerlink" title="实验总结"></a>实验总结</h1><p>终于有空静下心来做操作系统实验。在第一次的实验过程中，我遇到了很多的问题，包括编译失败、在虚拟机上运行没有正确输出等。通过查找资料、自己动手尝试，检查究竟是哪里出问题，找到问题的根源。</p>
-<p>同时，也对老师提供的实验思路展开了一些自己的思考。例如：</p>
-<ol>
-<li>向软盘的第一个扇区内填充自己的个人信息，这里我直接使用一段C语言，用二进制打开生成的软盘文件进行操作，方便快捷。</li>
-<li>向软盘内写入自己的引导扇区程序，老师课上演示的方案是使用WinHex打开之后手动拷贝，并修改扇区尾部。但是，Linux下其实是有着自己的软盘拷贝指令的（见参考资料），使用这个指令简化了很多操作。</li>
-</ol>
-<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
-<li>于渊 著. 《Orange‘s：一个操作系统的实现》.  电子工业出版社，2009年6月</li>
-<li>陈渝、向勇编著. 《操作系统实验指导》.  清华大学出版社，2013年7月</li>
-<li>李忠著. 《 x86汇编语言-从实模式到保护模式》.电子工业出版社，2013年1月</li>
-<li><a href="https://stackoverflow.com/questions/11572307/nasm-error-parsing-instruction-expected" target="_blank" rel="noopener">assembly - NASM Error Parsing, Instruction Expected - Stack Overflow</a></li>
-<li><a href="http://www.runoob.com/linux/linux-comm-dd.html" target="_blank" rel="noopener">Linux dd命令 - 菜鸟教程</a></li>
-</ul>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -722,7 +308,7 @@ undefined
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        160
+                        139
                     </p>
                 </div>
             </div>
@@ -732,7 +318,7 @@ undefined
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        29
+                        27
                     </p>
                 </div>
             </div>
@@ -806,7 +392,7 @@ undefined
                 <span class="level-item">ACM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">84</span>
+                <span class="level-item tag">76</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/ACM/Template/">
@@ -830,7 +416,7 @@ undefined
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">50</span>
+                <span class="level-item tag">42</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
@@ -863,14 +449,6 @@ undefined
             </span>
             <span class="level-end">
                 <span class="level-item tag">12</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/博客搭建/">
-            <span class="level-start">
-                <span class="level-item">博客搭建</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
@@ -910,15 +488,7 @@ undefined
                 <span class="level-item">操作系统</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/数字电路与逻辑设计/">
-            <span class="level-start">
-                <span class="level-item">数字电路与逻辑设计</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/机器学习/">
@@ -950,7 +520,7 @@ undefined
                 <span class="level-item">计算机组成原理</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/计算机网络/">
@@ -958,7 +528,7 @@ undefined
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
@@ -966,7 +536,7 @@ undefined
                 <span class="level-item">超级计算机原理与操作</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -1059,7 +629,7 @@ undefined
         
         <article class="media">
             
-            <a href="/2019/04/11/2019-03-31-应用层实验/" class="media-left">
+            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1068,9 +638,9 @@ undefined
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
-                    <a href="/2019/04/11/2019-03-31-应用层实验/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
                     </p>
                 </div>
             </div>
@@ -1089,7 +659,7 @@ undefined
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1119,7 +689,7 @@ undefined
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1185,7 +755,7 @@ undefined
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1196,7 +766,7 @@ undefined
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1207,7 +777,7 @@ undefined
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1218,7 +788,7 @@ undefined
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1473,7 +1043,7 @@ undefined
                 <div class="control">
                     <a class="tags has-addons" href="/tags/单调队列/">
                         <span class="tag">单调队列</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1685,7 +1255,7 @@ undefined
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1715,7 +1285,7 @@ undefined
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1781,7 +1351,7 @@ undefined
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1792,7 +1362,7 @@ undefined
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1803,7 +1373,7 @@ undefined
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1814,7 +1384,7 @@ undefined
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2069,7 +1639,7 @@ undefined
                 <div class="control">
                     <a class="tags has-addons" href="/tags/单调队列/">
                         <span class="tag">单调队列</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 

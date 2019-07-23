@@ -156,70 +156,6 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-22T10:00:00.000Z">2019-01-22</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/ACM/题解/">题解</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分钟 读完 (大约 1002 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/01/22/2019-01-22-2018-2019 Russia Open High School Programming Contest/">2018-2019 Russia Open High School Programming Contest</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="Company-Merging"><a href="#Company-Merging" class="headerlink" title="Company Merging"></a><a href="https://vjudge.net/problem/CodeForces-1090A" target="_blank" rel="noopener">Company Merging</a></h1><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line">ll n, ma, ans, t;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>, &amp;n);</span><br><span class="line">	<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>, z; i &lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>, &amp;z);</span><br><span class="line">		ll ma2 = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>, x; j &lt; z; ++j)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>, &amp;x);</span><br><span class="line">			ma2 = max(ma2, x);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">if</span> (ma &lt; ma2)</span><br><span class="line">			ans += t * (ma2 - ma);</span><br><span class="line">		<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ma &gt; ma2)</span><br><span class="line">			ans += z * (ma - ma2);</span><br><span class="line">		ma = max(ma, ma2);</span><br><span class="line">		t += z;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld"</span>, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="LaTeX-Expert"><a href="#LaTeX-Expert" class="headerlink" title="LaTeX Expert"></a><a href="https://codeforces.com/problemset/problem/1090/B" target="_blank" rel="noopener">LaTeX Expert</a></h1><p>坑题，下面的引用可能会有多行。</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line">const string BEGIN("\\begin&#123;thebibliography&#125;&#123;99&#125;"), END("\\end&#123;thebibliography&#125;");</span><br><span class="line"><span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt; mp;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">string</span>&gt; text, bibitem;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">string</span> s; <span class="hljs-built_in">cin</span> &gt;&gt; s, s != BEGIN;)</span><br><span class="line">		<span class="hljs-keyword">if</span> (s.find(<span class="hljs-string">"\\cite&#123;"</span>) != s.npos)</span><br><span class="line">		&#123;</span><br><span class="line">			s = s.substr(s.find(<span class="hljs-string">'&#123;'</span>) + <span class="hljs-number">1</span>);</span><br><span class="line">			s.erase(s.find(<span class="hljs-string">'&#125;'</span>));</span><br><span class="line">			text.push_back(s);</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">string</span> s, t, *p = &amp;t; getline(<span class="hljs-built_in">cin</span>, s), s != END;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (s.find(<span class="hljs-string">"\\bibitem&#123;"</span>) != s.npos)</span><br><span class="line">		&#123;</span><br><span class="line">			s = s.substr(s.find(<span class="hljs-string">'&#123;'</span>) + <span class="hljs-number">1</span>);</span><br><span class="line">			t = s.substr(s.find(<span class="hljs-string">'&#125;'</span>) + <span class="hljs-number">1</span>);</span><br><span class="line">			s.erase(s.find(<span class="hljs-string">'&#125;'</span>));</span><br><span class="line">			bibitem.push_back(s);</span><br><span class="line">			p = &amp;mp[s];</span><br><span class="line">			*p = t;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			*p += <span class="hljs-string">'\n'</span> + s;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">if</span> (text == bibitem)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Correct"</span>, <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Incorrect\n"</span></span><br><span class="line">		 &lt;&lt; BEGIN &lt;&lt; <span class="hljs-string">'\n'</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; text.size(); ++i)</span><br><span class="line">		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"\\bibitem&#123;"</span> &lt;&lt; text[i] &lt;&lt; <span class="hljs-string">"&#125;"</span> &lt;&lt; mp[text[i]] &lt;&lt; <span class="hljs-string">"\n"</span>;</span><br><span class="line">	<span class="hljs-built_in">cout</span> &lt;&lt; END;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Similar-Arrays"><a href="#Similar-Arrays" class="headerlink" title="Similar Arrays"></a><a href="https://vjudge.net/problem/CodeForces-1090D" target="_blank" rel="noopener">Similar Arrays</a></h1><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">9</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> a[N], v[N * <span class="hljs-number">2</span>], nex[N * <span class="hljs-number">2</span>], g[N], d[N], tot, n, m, p[N];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	v[++tot] = y, nex[tot] = g[x], g[x] = tot, ++d[x];</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span> || n == <span class="hljs-number">2</span> &amp;&amp; m)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"NO"</span>), <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, x, y; i &lt; m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">		add(x, y);</span><br><span class="line">		add(y, x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">int</span> t1 = <span class="hljs-number">0</span>, t2 = <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="hljs-keyword">if</span> (d[i] != n - <span class="hljs-number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			t1 = i;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">				p[j] = <span class="hljs-number">0</span>;</span><br><span class="line">			p[i] = <span class="hljs-number">1</span>;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = g[i]; j; j = nex[j])</span><br><span class="line">				p[v[j]] = <span class="hljs-number">1</span>;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">				<span class="hljs-keyword">if</span> (!p[j])</span><br><span class="line">				&#123;</span><br><span class="line">					t2 = j;</span><br><span class="line">					<span class="hljs-keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			<span class="hljs-keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="hljs-keyword">if</span> (!t1)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"NO\n"</span>), <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"YES\n"</span>);</span><br><span class="line">	a[t1] = n;</span><br><span class="line">	a[t2] = n - <span class="hljs-number">1</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, t = <span class="hljs-number">0</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="hljs-keyword">if</span> (!a[i])</span><br><span class="line">			a[i] = ++t;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, a[i]);</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">	a[t1] = n - <span class="hljs-number">1</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, a[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Minimal-Product"><a href="#Minimal-Product" class="headerlink" title="Minimal Product"></a><a href="https://codeforces.com/problemset/problem/1090/I" target="_blank" rel="noopener">Minimal Product</a></h1><p>现场调到自闭的一题，该用<code>unsigned</code>的地方不能用<code>long long</code>代替。</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-keyword">const</span> ll INF = <span class="hljs-number">5e18</span>, N = <span class="hljs-number">1e7</span> + <span class="hljs-number">7</span>;</span><br><span class="line">ll l, r, a[N];</span><br><span class="line"><span class="hljs-keyword">unsigned</span> t, n, x, y, z, b[N];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%u"</span>, &amp;t); t--;)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%u%lld%lld%u%u%u%u%u"</span>, &amp;n, &amp;l, &amp;r, &amp;x, &amp;y, &amp;z, &amp;b[<span class="hljs-number">1</span>], &amp;b[<span class="hljs-number">2</span>]);</span><br><span class="line">		ll ans = INF, mi = INF, ma = -INF;</span><br><span class="line">		<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">2</span>)</span><br><span class="line">				b[i] = b[i - <span class="hljs-number">2</span>] * x + b[i - <span class="hljs-number">1</span>] * y + z;</span><br><span class="line">			a[i] = b[i] % (r - l + <span class="hljs-number">1</span>) + l;</span><br><span class="line">			<span class="hljs-keyword">if</span> (mi &lt; a[i])</span><br><span class="line">				ans = min(ans, mi * a[i]);</span><br><span class="line">			<span class="hljs-keyword">else</span></span><br><span class="line">				mi = a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">for</span> (ll i = n; i; --i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> (ma &gt; a[i])</span><br><span class="line">				ans = min(ans, ma * a[i]);</span><br><span class="line">			<span class="hljs-keyword">else</span></span><br><span class="line">				ma = a[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">if</span> (ans &lt; INF)</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"IMPOSSIBLE\n"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Right-Expansion-Of-The-Mind"><a href="#Right-Expansion-Of-The-Mind" class="headerlink" title="Right Expansion Of The Mind"></a><a href="https://codeforces.com/problemset/problem/1090/K" target="_blank" rel="noopener">Right Expansion Of The Mind</a></h1><p>感兴趣具有传递性。两个人感兴趣，当仅当：</p>
-<ul>
-<li>两人的<code>t</code>串具有相同的字符集</li>
-<li>对于两个人的<code>s</code>串，分别删去能够包含在<code>t</code>串字符集的最长后缀后相等。</li>
-</ul>
-<p>按照<code>a</code>~<code>z</code>是否出现分别对应二进制串中的每一位给<code>t</code>串的字符集编码，按这个编码给所有人分类，然后在每个分类里讨论分组情况即可。<code>map</code>套<code>map</code>套<code>vector</code>实现。疯了呀。</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e6</span> + <span class="hljs-number">9</span>;</span><br><span class="line"><span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-keyword">int</span>, <span class="hljs-built_in">unordered_map</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&gt; mp;</span><br><span class="line"><span class="hljs-keyword">char</span> s[N], t[N];</span><br><span class="line"><span class="hljs-keyword">int</span> n, m, ans;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%s%s"</span>, s, t);</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = m = <span class="hljs-number">0</span>; t[i]; ++i)</span><br><span class="line">			m |= <span class="hljs-number">1</span> &lt;&lt; t[i] - <span class="hljs-string">'a'</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-built_in">strlen</span>(s) - <span class="hljs-number">1</span>; ~i; --i)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-keyword">if</span> (m &amp; <span class="hljs-number">1</span> &lt;&lt; s[i] - <span class="hljs-string">'a'</span>)</span><br><span class="line">				s[i] = <span class="hljs-number">0</span>;</span><br><span class="line">			<span class="hljs-keyword">else</span></span><br><span class="line">				<span class="hljs-keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		mp[m][s].push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> mpi : mp)</span><br><span class="line">		ans += mpi.second.size();</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> mpi : mp)</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> mpii : mpi.second)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, mpii.second.size());</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> mpiii : mpii.second)</span><br><span class="line">				<span class="hljs-built_in">printf</span>(<span class="hljs-string">" %d"</span>, mpiii);</span><br><span class="line">			<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="Berland-University"><a href="#Berland-University" class="headerlink" title="Berland University"></a><a href="https://codeforces.com/problemset/problem/1090/L" target="_blank" rel="noopener">Berland University</a></h1><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">check</span><span class="hljs-params">(ll x, ll t1, ll t2, ll a, ll b, ll k)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-keyword">if</span> (a &gt; x)</span><br><span class="line">		a = x;</span><br><span class="line">	<span class="hljs-keyword">if</span> (b &gt; x)</span><br><span class="line">		b = x;</span><br><span class="line">	ll tt1 = t1 * a / x + t2 * b / x, tt2 = t1 * a % x + t2 * b % x;</span><br><span class="line">	<span class="hljs-keyword">if</span> (tt2 &gt;= x)</span><br><span class="line">		tt1++;</span><br><span class="line">	<span class="hljs-keyword">return</span> tt1 &gt;= k;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	ll t, n, a, b, k;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld%lld%lld%lld"</span>, &amp;t, &amp;n, &amp;a, &amp;b, &amp;k);</span><br><span class="line">	ll t1 = (n + <span class="hljs-number">1</span>) / <span class="hljs-number">2</span>, t2 = n / <span class="hljs-number">2</span>, l = <span class="hljs-number">1</span>, r = t, ans = <span class="hljs-number">0</span>;</span><br><span class="line">	<span class="hljs-keyword">while</span> (l &lt;= r)</span><br><span class="line">	&#123;</span><br><span class="line">		ll mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">if</span> (check(mid, t1, t2, a, b, k))</span><br><span class="line">		&#123;</span><br><span class="line">			ans = mid;</span><br><span class="line">			l = mid + <span class="hljs-number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-keyword">else</span></span><br><span class="line">			r = mid - <span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld"</span>, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h1 id="The-Pleasant-Walk"><a href="#The-Pleasant-Walk" class="headerlink" title="The Pleasant Walk"></a><a href="https://vjudge.net/problem/CodeForces-1090M" target="_blank" rel="noopener">The Pleasant Walk</a></h1><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e5</span> + <span class="hljs-number">7</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> n, m, ans, a[N];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;n, &amp;m);</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;a[i]);</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, t = <span class="hljs-number">0</span>; i &lt;= n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (t &amp;&amp; a[i] == a[i - <span class="hljs-number">1</span>])</span><br><span class="line">			t = <span class="hljs-number">0</span>;</span><br><span class="line">		ans = max(ans, ++t);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-01-21T10:00:00.000Z">2019-01-21</time>
                 
                 <div class="level-item">
@@ -691,6 +627,54 @@
 
 
 
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-21T16:52:29.000Z">2018-10-22</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/ACM/">ACM</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 分钟 读完 (大约 361 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/22/2018-10-22-CodeForces-896C/">Willem, Chtholly and Seniorious</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><a href="https://www.chtholly.ac.cn/" target="_blank" rel="noopener">中国珂学院</a></p>
+</blockquote>
+<p><a href="https://vjudge.net/problem/CodeForces-896C" target="_blank" rel="noopener">题目链接</a><br>珂朵莉树是一个可以维护区间x次方和查询的高效数据结构，原理十分暴力。</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mul(a,b,c) ((a)*(b)%(c))</span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-keyword">typedef</span> pair&lt;<span class="hljs-keyword">int</span>,ll&gt; pil;</span><br><span class="line"><span class="hljs-function">ll <span class="hljs-title">pow</span><span class="hljs-params">(ll a,ll b,ll m)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	ll r=<span class="hljs-number">1</span>;</span><br><span class="line">	<span class="hljs-keyword">for</span>(a%=m; b; a=mul(a,a,m),b&gt;&gt;=<span class="hljs-number">1</span>)</span><br><span class="line">		<span class="hljs-keyword">if</span>(b&amp;<span class="hljs-number">1</span>)r=mul(r,a,m);</span><br><span class="line">	<span class="hljs-keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ChthollyTree</span>:</span><span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>,pil&gt;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="hljs-function">iterator <span class="hljs-title">split</span><span class="hljs-params">(<span class="hljs-keyword">int</span> pos)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		iterator it=lower_bound(pos);</span><br><span class="line">		<span class="hljs-keyword">if</span>(it!=end()&amp;&amp;it-&gt;first==pos)<span class="hljs-keyword">return</span> it;</span><br><span class="line">		--it;</span><br><span class="line">		<span class="hljs-keyword">if</span>(pos&gt;it-&gt;second.first)<span class="hljs-keyword">return</span> end();</span><br><span class="line">		pair&lt;<span class="hljs-keyword">int</span>,pil&gt; p=*it;</span><br><span class="line">		erase(it);</span><br><span class="line">		insert(make_pair(p.first,pil(pos<span class="hljs-number">-1</span>,p.second.second)));</span><br><span class="line">		<span class="hljs-keyword">return</span> insert(make_pair(pos,p.second)).first;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,ll val)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-keyword">for</span>(iterator b=split(l),e=split(r+<span class="hljs-number">1</span>); b!=e; ++b)b-&gt;second.second+=val;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,ll val)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		erase(split(l),split(r+<span class="hljs-number">1</span>)),insert(make_pair(l,pil(r,val)));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">ll <span class="hljs-title">rank</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> k)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">vector</span>&lt;pair&lt;ll,<span class="hljs-keyword">int</span>&gt; &gt; v;</span><br><span class="line">		<span class="hljs-keyword">for</span>(iterator b=split(l),e=split(r+<span class="hljs-number">1</span>); b!=e; ++b)</span><br><span class="line">			v.push_back(make_pair(b-&gt;second.second,b-&gt;second.first-b-&gt;first+<span class="hljs-number">1</span>));</span><br><span class="line">		sort(v.begin(),v.end());</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;v.size(); ++i)</span><br><span class="line">			<span class="hljs-keyword">if</span>(k-=v[i].second,k&lt;=<span class="hljs-number">0</span>)<span class="hljs-keyword">return</span> v[i].first;</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-function">ll <span class="hljs-title">sum</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,ll ex,ll m)</span></span></span><br><span class="line"><span class="hljs-function">	</span>&#123;</span><br><span class="line">		ll res=<span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span>(iterator b=split(l),e=split(r+<span class="hljs-number">1</span>); b!=e; ++b)</span><br><span class="line">			res=(res+mul(b-&gt;second.first-b-&gt;first+<span class="hljs-number">1</span>,<span class="hljs-built_in">pow</span>(b-&gt;second.second,ex,m),m))%m;</span><br><span class="line">		<span class="hljs-keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; t;</span><br><span class="line">ll n,m,seed,vmax,M=<span class="hljs-number">1e9</span>+<span class="hljs-number">7</span>;</span><br><span class="line"><span class="hljs-function">ll <span class="hljs-title">rnd</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	ll ret=seed;</span><br><span class="line">	seed=(seed*<span class="hljs-number">7</span>+<span class="hljs-number">13</span>)%M;</span><br><span class="line">	<span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld%lld%lld"</span>,&amp;n,&amp;m,&amp;seed,&amp;vmax);</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i)</span><br><span class="line">		t.insert(make_pair(i,pil(i,rnd()%vmax+<span class="hljs-number">1</span>)));</span><br><span class="line">	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="hljs-keyword">int</span> op=rnd()%<span class="hljs-number">4</span>+<span class="hljs-number">1</span>,l=rnd()%n+<span class="hljs-number">1</span>,r=rnd()%n+<span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">if</span>(l&gt;r)swap(l,r);</span><br><span class="line">		ll x=rnd()%(op==<span class="hljs-number">3</span>?r-l+<span class="hljs-number">1</span>:vmax)+<span class="hljs-number">1</span>;</span><br><span class="line">		<span class="hljs-keyword">if</span>(op==<span class="hljs-number">1</span>)t.add(l,r,x);</span><br><span class="line">		<span class="hljs-keyword">if</span>(op==<span class="hljs-number">2</span>)t.<span class="hljs-built_in">set</span>(l,r,x);</span><br><span class="line">		<span class="hljs-keyword">if</span>(op==<span class="hljs-number">3</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,t.rank(l,r,x));</span><br><span class="line">		<span class="hljs-keyword">if</span>(op==<span class="hljs-number">4</span>)<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>,t.sum(l,r,x,rnd()%vmax+<span class="hljs-number">1</span>));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 
     
 <div class="card card-transparent">
@@ -715,7 +699,7 @@
             
             <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
             
-            <li><a class="pagination-link has-text-black-ter" href="/categories/ACM/page/9/">9</a></li>
+            <li><a class="pagination-link has-text-black-ter" href="/categories/ACM/page/8/">8</a></li>
             
         </ul>
     </nav>
@@ -763,7 +747,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        160
+                        139
                     </p>
                 </div>
             </div>
@@ -773,7 +757,7 @@
                         分类
                     </p>
                     <p class="title has-text-weight-normal">
-                        29
+                        27
                     </p>
                 </div>
             </div>
@@ -847,7 +831,7 @@
                 <span class="level-item">ACM</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">84</span>
+                <span class="level-item tag">76</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/ACM/Template/">
@@ -871,7 +855,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">50</span>
+                <span class="level-item tag">42</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/Linux/">
@@ -904,14 +888,6 @@
             </span>
             <span class="level-end">
                 <span class="level-item tag">12</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/博客搭建/">
-            <span class="level-start">
-                <span class="level-item">博客搭建</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/吴恩达机器学习笔记/">
@@ -951,15 +927,7 @@
                 <span class="level-item">操作系统</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
-            </span>
-        </a></li><li>
-        <a class="level is-marginless" href="/categories/数字电路与逻辑设计/">
-            <span class="level-start">
-                <span class="level-item">数字电路与逻辑设计</span>
-            </span>
-            <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">1</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/机器学习/">
@@ -991,7 +959,7 @@
                 <span class="level-item">计算机组成原理</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/计算机网络/">
@@ -999,7 +967,7 @@
                 <span class="level-item">计算机网络</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">8</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/超级计算机原理与操作/">
@@ -1007,7 +975,7 @@
                 <span class="level-item">超级计算机原理与操作</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -1100,7 +1068,7 @@
         
         <article class="media">
             
-            <a href="/2019/04/11/2019-03-31-应用层实验/" class="media-left">
+            <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt>
                 </p>
@@ -1109,9 +1077,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-10T16:08:06.399Z">2019-04-11</time></div>
-                    <a href="/2019/04/11/2019-03-31-应用层实验/" class="has-link-black-ter is-size-6"></a>
+                    <a href="/2019/04/11/2019-03-31-中断处理与系统调用/" class="has-link-black-ter is-size-6"></a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/计算机网络/">计算机网络</a>
+                        <a class="has-link-grey -link" href="/categories/操作系统/">操作系统</a>
                     </p>
                 </div>
             </div>
@@ -1130,7 +1098,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1160,7 +1128,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1226,7 +1194,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1237,7 +1205,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1248,7 +1216,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1259,7 +1227,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -1514,7 +1482,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/单调队列/">
                         <span class="tag">单调队列</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
@@ -1726,7 +1694,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 12.86px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
+        <a href="/tags/Anaconda/" style="font-size: 10px;">Anaconda</a> <a href="/tags/Bug/" style="font-size: 10px;">Bug</a> <a href="/tags/ChromeDriver/" style="font-size: 10px;">ChromeDriver</a> <a href="/tags/DP/" style="font-size: 10px;">DP</a> <a href="/tags/Deepin/" style="font-size: 11.43px;">Deepin</a> <a href="/tags/ICPC模板/" style="font-size: 18.57px;">ICPC模板</a> <a href="/tags/LCA/" style="font-size: 10px;">LCA</a> <a href="/tags/MongoDB数据库/" style="font-size: 10px;">MongoDB数据库</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/NTT/" style="font-size: 10px;">NTT</a> <a href="/tags/Pycharm/" style="font-size: 11.43px;">Pycharm</a> <a href="/tags/Python解释器的安装与配置/" style="font-size: 12.86px;">Python解释器的安装与配置</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/VMware/" style="font-size: 10px;">VMware</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/chromedriver/" style="font-size: 10px;">chromedriver</a> <a href="/tags/pymysql/" style="font-size: 10px;">pymysql</a> <a href="/tags/三维计算几何/" style="font-size: 12.86px;">三维计算几何</a> <a href="/tags/主席树/" style="font-size: 10px;">主席树</a> <a href="/tags/二分/" style="font-size: 10px;">二分</a> <a href="/tags/二维计算几何/" style="font-size: 10px;">二维计算几何</a> <a href="/tags/动态开点/" style="font-size: 10px;">动态开点</a> <a href="/tags/励志/" style="font-size: 10px;">励志</a> <a href="/tags/单调栈/" style="font-size: 10px;">单调栈</a> <a href="/tags/单调队列/" style="font-size: 11.43px;">单调队列</a> <a href="/tags/原根/" style="font-size: 10px;">原根</a> <a href="/tags/可持久化/" style="font-size: 11.43px;">可持久化</a> <a href="/tags/扫描线/" style="font-size: 10px;">扫描线</a> <a href="/tags/拓扑排序/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/数据结构/" style="font-size: 17.14px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11.43px;">数论</a> <a href="/tags/无旋Treap/" style="font-size: 14.29px;">无旋Treap</a> <a href="/tags/最大流/" style="font-size: 10px;">最大流</a> <a href="/tags/最短路/" style="font-size: 10px;">最短路</a> <a href="/tags/树状数组/" style="font-size: 10px;">树状数组</a> <a href="/tags/环境配置/" style="font-size: 20px;">环境配置</a> <a href="/tags/珂朵莉树/" style="font-size: 11.43px;">珂朵莉树</a> <a href="/tags/系统配置/" style="font-size: 10px;">系统配置</a> <a href="/tags/线段树/" style="font-size: 15.71px;">线段树</a> <a href="/tags/老司机树/" style="font-size: 11.43px;">老司机树</a> <a href="/tags/莫比乌斯反演/" style="font-size: 10px;">莫比乌斯反演</a> <a href="/tags/虚拟机/" style="font-size: 10px;">虚拟机</a> <a href="/tags/虚拟环境/" style="font-size: 10px;">虚拟环境</a> <a href="/tags/谷歌输入法/" style="font-size: 10px;">谷歌输入法</a>
     </div>
 </div>
 
@@ -1756,7 +1724,7 @@
                     <span class="level-item">四月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">22</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1822,7 +1790,7 @@
                     <span class="level-item">十月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">21</span>
+                    <span class="level-item tag">20</span>
                 </span>
             </a>
         </li>
@@ -1833,7 +1801,7 @@
                     <span class="level-item">九月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -1844,7 +1812,7 @@
                     <span class="level-item">八月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">19</span>
+                    <span class="level-item tag">15</span>
                 </span>
             </a>
         </li>
@@ -1855,7 +1823,7 @@
                     <span class="level-item">七月 2018</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -2110,7 +2078,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/单调队列/">
                         <span class="tag">单调队列</span>
-                        <span class="tag is-grey">3</span>
+                        <span class="tag is-grey">2</span>
                     </a>
                 </div>
                 
