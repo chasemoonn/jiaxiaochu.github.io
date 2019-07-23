@@ -280,7 +280,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2214 个字)
+                    15 分钟 读完 (大约 2215 个字)
                 </span>
                 
                 
@@ -294,120 +294,16 @@
         </h1>
         <div class="content">
             <h4 id="1、小整数对象池"><a href="#1、小整数对象池" class="headerlink" title="1、小整数对象池"></a>1、小整数对象池</h4><p>在程序中整数的使用非常的广泛，Python为了优化速度，使用了小整数对象池，避免为整数频繁申请和销毁内存的空间。<br>Python中对象小整数的定义是[-5,256]，这些整数的对象是提前建立好的，不会被垃圾回收。在一个Python的程序中，所有位于这个范围内的整数使用的都是同一个对象。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="hljs-number">1</span>]: a = <span class="hljs-number">-5</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">2</span>]: id(a)</span><br><span class="line">Out[<span class="hljs-number">2</span>]: <span class="hljs-number">10911520</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">3</span>]: b = <span class="hljs-number">-5</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">4</span>]: id(b)</span><br><span class="line">Out[<span class="hljs-number">4</span>]: <span class="hljs-number">10911520</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">5</span>]: c = <span class="hljs-number">256</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">6</span>]: id(c)</span><br><span class="line">Out[<span class="hljs-number">6</span>]: <span class="hljs-number">10919872</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">7</span>]: d = <span class="hljs-number">256</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">8</span>]: id(d)</span><br><span class="line">Out[<span class="hljs-number">8</span>]: <span class="hljs-number">10919872</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">9</span>]: e = <span class="hljs-number">257</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">10</span>]: id(e)</span><br><span class="line">Out[<span class="hljs-number">10</span>]: <span class="hljs-number">139826489334128</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">11</span>]: f = <span class="hljs-number">-6</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">12</span>]: id(f)</span><br><span class="line">Out[<span class="hljs-number">12</span>]: <span class="hljs-number">139826489334064</span></span><br></pre></td></tr></table></figure>
-
-<p>​    上面中，我们可以看到范围在[-5,256]之间的整数，包含-5和256，对象在内存中的地址是相同的，同理，单个字母也是这样。</p>
-<p>​    但是当定义两个相同的字符串时，引用计数为0,那么就会触发垃圾回收。</p>
-<h4 id="2、大整数对象池"><a href="#2、大整数对象池" class="headerlink" title="2、大整数对象池"></a>2、大整数对象池</h4><p>每一个大整数，均创建一个新的对象。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="hljs-number">14</span>]: a = <span class="hljs-number">1234</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">15</span>]: id(a)</span><br><span class="line">Out[<span class="hljs-number">15</span>]: <span class="hljs-number">139826489334576</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">16</span>]: b = <span class="hljs-number">1234</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">17</span>]: id(b)</span><br><span class="line">Out[<span class="hljs-number">17</span>]: <span class="hljs-number">139826489334640</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3、intern机制"><a href="#3、intern机制" class="headerlink" title="3、intern机制"></a>3、intern机制</h4><p>假如有好多个对象：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">a1 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a2 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a3 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a4 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a5 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a6 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a7 = <span class="hljs-string">"HelloWorld"</span></span><br><span class="line">a8 = <span class="hljs-string">"HelloWorld"</span></span><br></pre></td></tr></table></figure>
-
-<p>python会不会创建8个对象呢？会不会在内存中开辟8个内存 空间？<br>答案是不会的，想一下，如果我们写10000个对象，像上面那样，那岂不是会在内存中开辟10000个空间，那得占用多少的内存。所以在Python中有这样的一个机制—-&gt;<code>intern机制</code>，</p>
-<p>让他只占用一个“HelloWorld”所占的空间，靠引用计数去维护何时释放。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="hljs-number">19</span>]: a = <span class="hljs-string">'abcd'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">20</span>]: id(a)</span><br><span class="line">Out[<span class="hljs-number">20</span>]: <span class="hljs-number">139826471344368</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">21</span>]: b = <span class="hljs-string">'abcd'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">22</span>]: id(b)</span><br><span class="line">Out[<span class="hljs-number">22</span>]: <span class="hljs-number">139826471344368</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">23</span>]: c = b</span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">24</span>]: id(c)</span><br><span class="line">Out[<span class="hljs-number">24</span>]: <span class="hljs-number">139826471344368</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">25</span>]: <span class="hljs-keyword">del</span> a</span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">26</span>]: <span class="hljs-keyword">del</span> b</span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">27</span>]: id(c)</span><br><span class="line">Out[<span class="hljs-number">27</span>]: <span class="hljs-number">139826471344368</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><ul>
-<li><p>小整数[-5,256]共用内存，常驻内存。</p>
-</li>
-<li><p>单个字符公用内存，常驻内存</p>
-</li>
-<li><p>单个单词，不可修改，默认开启intern机制，公用内存，引用计数为0，则销毁</p>
-</li>
-<li><p>字符串(含有空格)，不可修改，没开启intern机制，不共用对象，引用计数为0，销毁</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="hljs-number">30</span>]: a = <span class="hljs-string">'hello world'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">31</span>]: b = <span class="hljs-string">'hello world'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">32</span>]: id(a)</span><br><span class="line">Out[<span class="hljs-number">32</span>]: <span class="hljs-number">139826489193264</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">33</span>]: id(b)</span><br><span class="line">Out[<span class="hljs-number">33</span>]: <span class="hljs-number">139826489192816</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">34</span>]: c = <span class="hljs-string">'helloworld'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">35</span>]: d = <span class="hljs-string">'helloworld'</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">36</span>]: id(c)</span><br><span class="line">Out[<span class="hljs-number">36</span>]: <span class="hljs-number">139826486896048</span></span><br><span class="line"></span><br><span class="line">In [<span class="hljs-number">37</span>]: id(d)</span><br><span class="line">Out[<span class="hljs-number">37</span>]: <span class="hljs-number">139826486896048</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>大整数不共用内存，引用计数为0，销毁</p>
-</li>
-<li><p>数值类型和字符串类型在Python中都是不可变的数据类型，这意味着你无法修改这个对象的值，每次对变量的修改，实际上是创建了一个新的对象。</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="hljs-number">39</span>]: a = <span class="hljs-number">110</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">40</span>]: id(a)</span><br><span class="line">  Out[<span class="hljs-number">40</span>]: <span class="hljs-number">10915200</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">41</span>]: a += <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">42</span>]: id(a)</span><br><span class="line">  Out[<span class="hljs-number">42</span>]: <span class="hljs-number">10915232</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">43</span>]: b = <span class="hljs-string">'hello'</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">44</span>]: id(b)</span><br><span class="line">  Out[<span class="hljs-number">44</span>]: <span class="hljs-number">139826471345768</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">45</span>]: b = <span class="hljs-string">'world'</span></span><br><span class="line"></span><br><span class="line">  In [<span class="hljs-number">46</span>]: id(b)</span><br><span class="line">  Out[<span class="hljs-number">46</span>]: <span class="hljs-number">139826471344368</span></span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h4 id="4、Garbage-collection-GC垃圾回收"><a href="#4、Garbage-collection-GC垃圾回收" class="headerlink" title="4、Garbage collection(GC垃圾回收)"></a>4、Garbage collection(GC垃圾回收)</h4><p>python采用的是引用计数机制为主，分代收集机制为辅的策略</p>
-<p>当引用计数为0时，该对象的生命就结束了</p>
-<ul>
-<li><p><strong>引用计数机制的优点：</strong></p>
-<ul>
-<li><p>简单</p>
-</li>
-<li><p>实时性：一旦没有引用，即引用计数为0，内存就直接释放了。不用像其他机制等到特定的时机，实时性还带来一个好处：处理回收内存的时间分摊到了平时</p>
-</li>
-</ul>
-</li>
-<li><p><strong>引用计数机制的缺点：</strong></p>
-<ul>
-<li><p>维护引用计数消耗资源</p>
-</li>
-<li><p>循环引用</p>
-</li>
-</ul>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = []</span><br><span class="line">list2 = []</span><br><span class="line">list1.append(list2)</span><br><span class="line">list2.append(list1)</span><br></pre></td></tr></table></figure>
-
-<p>list1与list2相互引用，如果不存在其他对象对它们的引用，list1与list2的引用计数也仍然为1，所占用的内存永远无法被回收，这将是致命的。对于如今的强大硬件，缺点1尚可接受，但是循环引用导致内存泄露，注定python还将引入新的回收机制。(分代收集)</p>
-<p>GC系统所承担的工作远比”垃圾回收”多得多。实际上，它们负责三个重要任务：</p>
-<ul>
-<li><code>为新生成的对象分配内存</code></li>
-<li><code>识别哪些垃圾对象</code></li>
-<li><code>从垃圾对象那回收内存</code></li>
-</ul>
-</li>
-</ul>
-<h4 id="5、垃圾回收机制"><a href="#5、垃圾回收机制" class="headerlink" title="5、垃圾回收机制"></a>5、垃圾回收机制</h4><ul>
-<li><p>1、导致引用计数+1的情况</p>
-<ul>
-<li>对象被创建，如：a = 10</li>
-<li>对象被引用，如：b = a</li>
-<li>对象被作为参数，传递到一个函数中，如：func(a)</li>
-<li>对象作为一个元素，存储在容器中，如：list = [a, a]</li>
-</ul>
-</li>
-<li><p>2、导致引用计数-1的情况：</p>
-<ul>
-<li>对象的别名被显示销毁，如：del a</li>
-<li>对象的别名被赋予新的对象，如：a = 20</li>
-<li>一个对象离开他的作用域， 如函数f执行完毕时，func函数中的局部变量(全局变量不会)</li>
-<li>对象所在的容器被销毁，或从容器中删除对象</li>
-</ul>
-</li>
-<li><p>3、查看一个对象的引用计数</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line">a = <span class="hljs-string">"hello world"</span></span><br><span class="line">sys.getrefcount(a)</span><br></pre></td></tr></table></figure>
-
-<p>可以查看a对象的应用计数，但是比正常计数大1，因为在调用函数的时候传入a，这会让a的引用计数+1</p>
-</li>
-</ul>
-<h4 id="6、循环引用导致内存泄露"><a href="#6、循环引用导致内存泄露" class="headerlink" title="6、循环引用导致内存泄露"></a><strong>6、</strong>循环引用导致内存泄露</h4><p>​    内存泄露：</p>
-<p>​    申请了某些内存，但是忘记了释放，那么这就造成了内存的浪费，久而久之内存就不够用了.                                </p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> gc</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassA</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        print(<span class="hljs-string">'object born,id:%s'</span>%str(id(self)))</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span><br><span class="line">        c1 = ClassA()</span><br><span class="line">        c2 = ClassA()</span><br><span class="line">        c1.t = c2</span><br><span class="line">        c2.t = c1</span><br><span class="line">        <span class="hljs-keyword">del</span> c1</span><br><span class="line">        <span class="hljs-keyword">del</span> c2</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#python默认是开启垃圾回收的，可以通过下面代码来将其关闭</span></span><br><span class="line">gc.disable()</span><br><span class="line"></span><br><span class="line">f2()</span><br></pre></td></tr></table></figure>
-
-<p>​    执行f2()，进程占用的内存会不断增大。        </p>
-<ul>
-<li>创建了c1，c2后这两块内存的引用计数都是1，执行<code>c1.t=c2</code>和<code>c2.t=c1</code>后，这两块内存的引用计数变成2.</li>
-<li>在del c1后，引用计数变为1，由于不是为0，所以c1对象不会被销毁;同理，c2对象的引用数也是1。</li>
-<li>python默认是开启垃圾回收功能的，但是由于以上程序已经将其关闭，因此导致垃圾回收器都不会回收它们，所以就会导致内存泄露。</li>
-</ul>
-<h4 id="7、垃圾回收"><a href="#7、垃圾回收" class="headerlink" title="7、垃圾回收"></a><strong>7、垃圾回收</strong></h4><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassA</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">        print(<span class="hljs-string">'object born,id:%s'</span>%str(id(self)))</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f2</span><span class="hljs-params">()</span>:</span></span><br><span class="line">    <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span><br><span class="line">        c1 = ClassA()</span><br><span class="line">        c2 = ClassA()</span><br><span class="line">        c1.t = c2</span><br><span class="line">        c2.t = c1</span><br><span class="line">        <span class="hljs-keyword">del</span> c1</span><br><span class="line">        <span class="hljs-keyword">del</span> c2</span><br><span class="line">        gc.collect()<span class="hljs-comment">#手动调用垃圾回收功能，这样在自动垃圾回收被关闭的情况下，也会进行回收</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">#python默认是开启垃圾回收的，可以通过下面代码来将其关闭</span></span><br><span class="line">gc.disable()</span><br><span class="line"></span><br><span class="line">f2()</span><br></pre></td></tr></table></figure>
-
-<p>​    <strong>有三种情况会触发垃圾回收</strong></p>
-<ul>
-<li>当gc模块的计数器达到阀值的时候，自动回收垃圾</li>
-<li>调用gc.collect()，手动回收垃圾</li>
-<li>程序退出的时候，python解释器来回收垃圾</li>
-</ul>
-<h4 id="8、gc模块的自动垃圾回收触发机制"><a href="#8、gc模块的自动垃圾回收触发机制" class="headerlink" title="8、gc模块的自动垃圾回收触发机制"></a>8、gc模块的自动垃圾回收触发机制</h4><p>在Python中，采用分代收集的方法。把对象分为三代，一开始，对象在创建的时候，放在一代中，如果在一次一代的垃圾检查中，改对象存活下来，就会被放到二代中，同理在一次二代的垃圾检查中，该对象存活下来，就会被放到三代中。</p>
-<p>gc模块里面会有一个长度为3的列表的计数器，可以通过gc.get_count()获取。</p>
-<p>例如<code>(488,3,0)</code>，其中488是指距离上一次一代垃圾检查，Python分配内存的数目减去释放内存的数目，注意是内存分配，而不是引用计数的增加。例如：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">print</span> gc.get_count() <span class="hljs-comment"># (590, 8, 0)</span></span><br><span class="line">a = ClassA()</span><br><span class="line"><span class="hljs-keyword">print</span> gc.get_count() <span class="hljs-comment"># (591, 8, 0)</span></span><br><span class="line"><span class="hljs-keyword">del</span> a</span><br><span class="line"><span class="hljs-keyword">print</span> gc.get_count() <span class="hljs-comment"># (590, 8, 0)</span></span><br></pre></td></tr></table></figure>
-
-<p><code>3</code>是指距离上一次二代垃圾检查，一代垃圾检查的次数，同理，<code>0</code>是指距离上一次三代垃圾检查，二代垃圾检查的次数。</p>
-<p>gc模快有一个自动垃圾回收的<code>阀值</code>，即通过gc.get_threshold函数获取到的长度为3的元组，例如(700,10,10)，每一次计数器的增加，gc模块就会检查增加后的计数是否达到阀值的数目，如果是，就会执行对应的代数的垃圾检查，然后重置计数器。</p>
-<p>例如，假设阀值是(700,10,10)：</p>
-<blockquote>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; 当计数器从(<span class="hljs-number">699</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>)增加到(<span class="hljs-number">700</span>,<span class="hljs-number">3</span>,<span class="hljs-number">0</span>)，gc模块就会执行gc.collect(<span class="hljs-number">0</span>),即检查一代对象的垃圾，并重置计数器为(<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>)</span><br><span class="line">&gt; 当计数器从(<span class="hljs-number">699</span>,<span class="hljs-number">9</span>,<span class="hljs-number">0</span>)增加到(<span class="hljs-number">700</span>,<span class="hljs-number">9</span>,<span class="hljs-number">0</span>)，gc模块就会执行gc.collect(<span class="hljs-number">1</span>),即检查一、二代对象的垃圾，并重置计数器为(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)</span><br><span class="line">&gt; 当计数器从(<span class="hljs-number">699</span>,<span class="hljs-number">9</span>,<span class="hljs-number">9</span>)增加到(<span class="hljs-number">700</span>,<span class="hljs-number">9</span>,<span class="hljs-number">9</span>)，gc模块就会执行gc.collect(<span class="hljs-number">2</span>),即检查一、二、三代对象的垃圾，并重置计数器为(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure></blockquote>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/14/2017-11-17-垃圾回收/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
