@@ -332,7 +332,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1040 个字)
+                    7 分钟 读完 (大约 1041 个字)
                 </span>
                 
                 
@@ -354,40 +354,17 @@
 <li><p>得到股票的历史交易记录</p>
 <blockquote>
 <p>股票的历史交易记录是可以在网易财经中直接下载excel表的，地址(<a href="http://quotes.money.163.com/trade/lsjysj_603088.html#06f01)这是某一股票的历史交易记录详情，我们可以在页面中找到下载的链接地址。" target="_blank" rel="noopener">http://quotes.money.163.com/trade/lsjysj_603088.html#06f01)这是某一股票的历史交易记录详情，我们可以在页面中找到下载的链接地址。</a></p>
-</blockquote>
-</li>
-</ul>
-<h4 id="代码撸起来"><a href="#代码撸起来" class="headerlink" title="代码撸起来"></a><strong>代码撸起来</strong></h4><ul>
-<li><p>首先我们需要在东方财富网中获取到股票的代码，在(<a href="http://quote.eastmoney.com/stocklist.html)页面中我们可以看到股票代码，我们可以利用xpath结合正则表达式将这些股票代码获取到" target="_blank" rel="noopener">http://quote.eastmoney.com/stocklist.html)页面中我们可以看到股票代码，我们可以利用xpath结合正则表达式将这些股票代码获取到</a></p>
-<p><img src="http://img.blog.csdn.net/20170827212234257?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvUHl0aG9uQ29kZVo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="-----------图1"></p>
-</li>
-<li><p>获取股票代码列表的代码：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StockCode</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">		self.start_url = <span class="hljs-string">"http://quote.eastmoney.com/stocklist.html#sh"</span></span><br><span class="line">		self.headers = &#123;</span><br><span class="line">			<span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">":Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_url</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">		<span class="hljs-comment"># 发起请求，获取响应</span></span><br><span class="line">		response = requests.get(self.start_url, headers=self.headers)</span><br><span class="line">		<span class="hljs-keyword">if</span> response.status_code == <span class="hljs-number">200</span>:</span><br><span class="line">			<span class="hljs-keyword">return</span> etree.HTML(response.content)</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_code_list</span><span class="hljs-params">(self, response)</span>:</span></span><br><span class="line">		<span class="hljs-comment"># 得到股票代码的列表</span></span><br><span class="line">		node_list = response.xpath(<span class="hljs-string">'//*[@id="quotesearch"]/ul[1]/li'</span>)</span><br><span class="line">		code_list = []</span><br><span class="line">		<span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> node_list:</span><br><span class="line">			<span class="hljs-keyword">try</span>:</span><br><span class="line">				code = re.match(<span class="hljs-string">r'.*?\((\d+)\)'</span>, etree.tostring(node).decode()).group(<span class="hljs-number">1</span>)</span><br><span class="line">				<span class="hljs-keyword">print</span> code</span><br><span class="line">				code_list.append(code)</span><br><span class="line">			<span class="hljs-keyword">except</span>:</span><br><span class="line">				<span class="hljs-keyword">continue</span></span><br><span class="line">		<span class="hljs-keyword">return</span> code_list</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">		html = self.parse_url()</span><br><span class="line">		<span class="hljs-keyword">return</span> self.get_code_list(html)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>分析网易财经中历史交易记录下载页面获取到下载的链接。</p>
-<ul>
-<li><p>使用谷歌浏览器检查工具，切换到network，在我们在点击下载的时候可以得到请求接口：</p>
-<p><img src="http://img.blog.csdn.net/20170827212254684?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvUHl0aG9uQ29kZVo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="-----------图2"></p>
-<p><img src="http://img.blog.csdn.net/20170827212310375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvUHl0aG9uQ29kZVo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="-----------图3"></p>
-</li>
-<li><p>上图中，我们分析到，在点击下载时的url地址，需要传递的参数就是我们的股票代码和下载的起始时间和结束的时间，以及fields后面跟着的一堆参数值，在这里需要注意的是请求的url中股票代码前还多了一位是0。那么我们在爬取的时候，就需要理由xpath来提取页面中要下载数据的起始时间和结束时间，然后将在东方财富网中获取到的股票代码和url进行拼接，拼接成我们想要请求的下载连接。</p>
-</li>
-</ul>
-</li>
-<li><p>下载历史交易记录的代码</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Download_HistoryStock</span><span class="hljs-params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span><span class="hljs-params">(self, code)</span>:</span></span><br><span class="line">		self.code = code</span><br><span class="line">		self.start_url = <span class="hljs-string">"http://quotes.money.163.com/trade/lsjysj_"</span> + self.code + <span class="hljs-string">".html"</span></span><br><span class="line">		<span class="hljs-keyword">print</span> self.start_url</span><br><span class="line">		self.headers = &#123;</span><br><span class="line">			<span class="hljs-string">"User-Agent"</span>: <span class="hljs-string">":Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">parse_url</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line"></span><br><span class="line">		response = requests.get(self.start_url)</span><br><span class="line">		<span class="hljs-keyword">print</span> response.status_code</span><br><span class="line">		<span class="hljs-keyword">if</span> response.status_code == <span class="hljs-number">200</span>:</span><br><span class="line">			<span class="hljs-keyword">return</span> etree.HTML(response.content)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-literal">False</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_date</span><span class="hljs-params">(self, response)</span>:</span></span><br><span class="line">		<span class="hljs-comment"># 得到开始和结束的日期</span></span><br><span class="line">		start_date = <span class="hljs-string">''</span>.join(response.xpath(<span class="hljs-string">'//input[@name="date_start_type"]/@value'</span>)[<span class="hljs-number">0</span>].split(<span class="hljs-string">'-'</span>))</span><br><span class="line">		end_date = <span class="hljs-string">''</span>.join(response.xpath(<span class="hljs-string">'//input[@name="date_end_type"]/@value'</span>)[<span class="hljs-number">0</span>].split(<span class="hljs-string">'-'</span>))</span><br><span class="line">		<span class="hljs-keyword">return</span> start_date,end_date</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">download</span><span class="hljs-params">(self, start_date, end_date)</span>:</span></span><br><span class="line">		download_url = <span class="hljs-string">"http://quotes.money.163.com/service/chddata.html?code=0"</span>+self.code+<span class="hljs-string">"&amp;start="</span>+start_date+<span class="hljs-string">"&amp;end="</span>+end_date+<span class="hljs-string">"&amp;fields=TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP"</span></span><br><span class="line">		data = requests.get(download_url)</span><br><span class="line">		f = open(self.code + <span class="hljs-string">'.csv'</span>, <span class="hljs-string">'wb'</span>)</span><br><span class="line"></span><br><span class="line">		<span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> data.iter_content(chunk_size=<span class="hljs-number">10000</span>):</span><br><span class="line">			<span class="hljs-keyword">if</span> chunk:</span><br><span class="line">				f.write(chunk)</span><br><span class="line">		<span class="hljs-keyword">print</span> <span class="hljs-string">'股票---'</span>,self.code,<span class="hljs-string">'历史数据正在下载'</span></span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(self)</span>:</span></span><br><span class="line">		<span class="hljs-keyword">try</span>:</span><br><span class="line">			html = self.parse_url()</span><br><span class="line">			start_date,end_date = self.get_date(html)</span><br><span class="line">			self.download(start_date, end_date)</span><br><span class="line">		<span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:</span><br><span class="line">			<span class="hljs-keyword">print</span> e</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行项目，开始下载数据：</p>
-<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:</span><br><span class="line">	code = StockCode()</span><br><span class="line">	code_list = code.run()</span><br><span class="line"></span><br><span class="line">	<span class="hljs-keyword">for</span> temp_code <span class="hljs-keyword">in</span> code_list:</span><br><span class="line">		time.sleep(<span class="hljs-number">1</span>)</span><br><span class="line">		download = Download_HistoryStock(temp_code)</span><br><span class="line">		download.run()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>下载数据的时候发现，获取到的股票代码2-5开头的都下载不到历史的交易记录，但是从6开始，是可以下载了，下面是下载来的数据效果：</p>
-<p><img src="http://img.blog.csdn.net/20170827212336188?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvUHl0aG9uQ29kZVo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="-------------与"></p>
-<p><img src="http://img.blog.csdn.net/20170827212352700?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvUHl0aG9uQ29kZVo=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="---------------1111"></p>
-</li>
-</ul>
-
+</blockquote></li></ul>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/07/14/2017-08-14-爬取网易财经中股票的历史交易数据/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -416,7 +393,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分钟 读完 (大约 1079 个字)
+                    7 分钟 读完 (大约 1080 个字)
                 </span>
                 
                 
@@ -441,55 +418,17 @@
 <ul>
 <li>单向(simplex)</li>
 <li>半双工(half duplex)</li>
-<li>全双工(full duplex)</li>
-</ul>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">共享介质(shared medium), 广播, 碰撞(collision)</span><br></pre></td></tr></table></figure>
-
-<p>多路访问网络 (multiple access network)</p>
-<ul>
-<li>单播(unicast)</li>
-<li>多播(multicast)</li>
-<li>广播(broadcast)</li>
-</ul>
-<h2 id="间接连接的网络"><a href="#间接连接的网络" class="headerlink" title="间接连接的网络"></a>间接连接的网络</h2><ul>
-<li>中间节点、路由器(router)</li>
-<li>包(packet)</li>
-<li>存储转发(store-and-forward)</li>
-<li>路由选择(routing)</li>
-<li>路由(route)</li>
-<li>目的地(destination),下一跳(next hop)</li>
-<li>路由表(routing table)</li>
-</ul>
-<h2 id="网络互连"><a href="#网络互连" class="headerlink" title="网络互连"></a>网络互连</h2><p>用路由器(或网关)连接起来构成的网络称为互连网络(internetwork 或internet)。因特网 (Internet) 是一种互连网络。</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">路由器---网络1</span><br><span class="line">路由器---网络2</span><br><span class="line">路由器---网络3</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>系统域网(System Area Network, SAN)</li>
-<li>局域网(Local Area Network, LAN)</li>
-<li>城域网(Metropolitan Area Network, MAN)</li>
-<li>广域网(Wide Area Network, WAN)</li>
-</ul>
-<p>局域网（LAN）：一般限定在较小的区域内（小于10km的范围），通常采用有线的方法连接起来。<br>城域网（MAN）：规模局限在一座城市的范围内。<br>广域网（WAN）：网络跨越国界、洲界，甚至遍及全球范围。<br>个人区域网（PAN）：一般指家庭一台或多台电脑所使用的网络<br>无线局域网（WLAN）：是指通过无线设备建立的，给支持无线通信的设备使用的，比如无线网卡，或手机上的WIFI。</p>
-<h1 id="什么是因特网？"><a href="#什么是因特网？" class="headerlink" title="什么是因特网？"></a>什么是因特网？</h1><p>ISP ( Internet Service Provider) – 因特网服务提供商</p>
-<ul>
-<li>终端系统(end system)：主机<ul>
-<li>运行网络应用程序 (例如，浏览器)</li>
-</ul>
-</li>
-<li>通信链路(communication link)<ul>
-<li>光纤, 铜线, 无线电, 卫星</li>
-<li>传输速率=带宽</li>
-</ul>
-</li>
-<li>路由器(router)</li>
-</ul>
-<h1 id="因特网体系结构"><a href="#因特网体系结构" class="headerlink" title="因特网体系结构"></a>因特网体系结构</h1><h2 id="网络提供的服务"><a href="#网络提供的服务" class="headerlink" title="网络提供的服务"></a>网络提供的服务</h2><p>数据链路层一般都提供3种基本服务，即无确认的无连接服务、有确认的无连接服务、有确认 的面向连接的服务。</p>
-<p>（1）无确认的无连接服务 无确认的无连接服务是源机器向目的机器发送独立的帧，而目的机器对收到的帧不作确认。<br>如果由于线路上的噪声而造成帧丢失，数据链路层不作努力去恢复它，恢复工作留给上层去完成。<br>这类服务适用于误码率很低的情况，也适用于像语音之类的实时传输，实时传输情况下有时数据延误比数据损坏影响更严重。<br>大多数局域网在数据链路层都使用无确认的无连接服务。</p>
-<p>（2）有确认的无连接服务 这种服务仍然不建立连接，但是所发送的每一帧都进行单独确认。<br>以这种方式，发送方就会知道帧是否正确地到达。如果在某个确定的时间间隔内，帧没有到达，就必须重新发此帧。</p>
-<p>（3）有确认的面向连接的服务 采用这种服务，源机器和目的机器在传递任何数据之前，先建立一条连接。<br>在这条连接上所发送的每一帧都被编上号，数据链路层保证所发送的每一帧都确实已收到。<br>而且，它保证每帧只收到一次，所有的帧都是按正确顺序收到的。面向连接的服务为网络进程间提供了可靠地传送比特流的服务。</p>
-<h1 id="开放系统互连参考模型"><a href="#开放系统互连参考模型" class="headerlink" title="开放系统互连参考模型"></a>开放系统互连参考模型</h1><h1 id="网络性能分析"><a href="#网络性能分析" class="headerlink" title="网络性能分析"></a>网络性能分析</h1>
+<li>全双工(full duplex)</li></ul>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/04/11/2019-03-06-计算机网络 第一章 概述/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
